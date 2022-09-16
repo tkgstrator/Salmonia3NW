@@ -10,7 +10,7 @@ import RealmSwift
 import SplatNet3
 
 final class RealmCoopResult: Object, Identifiable {
-    @Persisted var id: String
+    @Persisted(primaryKey: true) var id: String
     @Persisted var rule: SplatNet2.Rule?
     @Persisted var salmonId: Int?
     @Persisted var gradePoint: Int?
@@ -28,8 +28,8 @@ final class RealmCoopResult: Object, Identifiable {
     @Persisted var jobScore: Int?
     @Persisted var kumaPoint: Int?
     @Persisted var jobBonus: Int?
-//    @Persisted var waves: List<RealmCoopWave>
-//    @Persisted var players: List<RealmCoopPlayer>
+    @Persisted var waves: List<RealmCoopWave>
+    @Persisted var players: List<RealmCoopPlayer>
 
     convenience init(from result: SplatNet2.Result) {
         self.init()
@@ -50,6 +50,10 @@ final class RealmCoopResult: Object, Identifiable {
         self.jobScore = result.jobScore
         self.kumaPoint = result.kumaPoint
         self.jobBonus = result.jobBonus
+
+        let players: [SplatNet2.PlayerResult] = [result.myResult] + result.otherResults
+        self.waves.append(objectsIn: result.waveDetails.map({ RealmCoopWave(from: $0) }))
+        self.players.append(objectsIn: players.map({ RealmCoopPlayer(from: $0) }))
     }
 }
 

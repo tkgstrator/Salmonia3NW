@@ -10,9 +10,6 @@ import SplatNet3
 
 struct WeaponsView: View {
     var body: some View {
-        NavigationView(content: {
-            
-        })
         ScrollView(content: {
             LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40, maximum: 80)), count: 10), content: {
                 ForEach(WeaponType.allCases, id: \.self) { weapon in

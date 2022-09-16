@@ -18,16 +18,19 @@ struct ContentView: View {
                 .tabItem {
                     Label("Weapons", systemImage: "sparkles")
                 }
+                .tag(0)
             SchedulesView()
                 .badge("?")
                 .tabItem {
                     Label("Schedules", systemImage: "calendar")
                 }
+                .tag(1)
             UserView()
                 .badge("New")
                 .tabItem {
                     Label("Me", image: "Tabs/Me")
                 }
+                .tag(2)
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
