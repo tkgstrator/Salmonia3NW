@@ -25,4 +25,13 @@ class RealmCoopSchedule: Object, Identifiable {
         self.rareWeapon = nil
         self.id = weaponList.hash &+ stageId.hashValue &+ rule.hashValue
     }
+
+    convenience init(dummy: Bool = true) {
+        self.init()
+        self.stageId = StageType.Shakespiral
+        self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))
+        self.rule = SplatNet2.Rule.REGULAR
+        self.rareWeapon = nil
+        self.id = 0
+    }
 }

@@ -16,22 +16,27 @@ struct ResultView: View {
         HStack(content: {
             switch result.isClear {
             case true:
+                let foregroundColor: Color = Color(hex: "")
                 Text("Clear")
                     .frame(width: 60, height: nil, alignment: .center)
                     .font(systemName: .Splatfont, size: fontSize)
+                    .foregroundColor(.green)
             case false:
                 Text("Defeat")
                     .frame(width: 60, height: nil, alignment: .center)
                     .font(systemName: .Splatfont, size: fontSize)
+                    .foregroundColor(.orange)
             }
             VStack(alignment: .leading, spacing: nil, content: {
                 HStack(spacing: nil, content: {
                     if let gradeId = result.grade, let gradeType = GradeType(id: gradeId) {
                         Text(gradeType.localizedText)
+                            .lineLimit(1)
                             .font(systemName: .Splatfont, size: fontSize)
                     }
                     if let gradePoint = result.gradePoint {
                         Text("\(gradePoint)")
+                            .lineLimit(1)
                             .font(systemName: .Splatfont, size: fontSize)
                     }
                     if let gradePoint = result.gradePoint {
@@ -39,10 +44,11 @@ struct ResultView: View {
                             switch gradePoint == 999 {
                             case true:
                                 Text("→")
-                                    .font(systemName: .Splatfont, size: fontSize)
+                                    .font(systemName: .Splatfont, size: 18)
                             case false:
                                 Text("↑")
-                                    .font(systemName: .Splatfont, size: fontSize)
+                                    .font(systemName: .Splatfont, size: 18)
+                                    .foregroundColor(.yellow)
                             }
                         }
 
@@ -50,10 +56,11 @@ struct ResultView: View {
                             switch result.waves.count == 3 {
                             case true:
                                 Text("→")
-                                    .font(systemName: .Splatfont, size: 15.5)
+                                    .font(systemName: .Splatfont, size: 18)
                             case false:
                                 Text("↓")
-                                    .font(systemName: .Splatfont, size: 15.5)
+                                    .font(systemName: .Splatfont, size: 18)
+                                    .foregroundColor(.gray)
                             }
                         }
                     }

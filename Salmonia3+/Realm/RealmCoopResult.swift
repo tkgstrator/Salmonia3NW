@@ -83,9 +83,8 @@ final class RealmCoopResult: Object, Identifiable {
         self.jobBonus = 999
         self.bossCounts.append(objectsIn: Array(repeating: 99, count: 15))
         self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
-        self.waves.append(objectsIn: Array(repeating: RealmCoopWave(), count: 4))
-        self.players.append(objectsIn: Array(repeating: RealmCoopPlayer(), count: 4))
-        self.schedule.stageId = StageType.Shakespiral
+        self.waves.append(objectsIn: [0, 1, 2, 3].map({ RealmCoopWave(dummy: true, id: $0) }) )
+        self.players.append(objectsIn: [0, 1, 2, 3].map({ RealmCoopPlayer(dummy: true, id: $0) }))
     }
 }
 

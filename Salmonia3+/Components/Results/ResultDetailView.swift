@@ -8,13 +8,47 @@
 import SwiftUI
 
 struct ResultDetailView: View {
+    let result: RealmCoopResult
+    let schedule: RealmCoopSchedule
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView(content: {
+            GeometryReader(content: { geometry in
+                VStack(content: {
+                    ResultHeader(schedule: schedule)
+                        .scaledToFill()
+                    LazyVGrid(
+                        columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil), count: result.waves.count),
+                        alignment: .center,
+                        spacing: 0,
+                        content: {
+                            ForEach(result.waves, id: \.self) { wave in
+                                ResultWave(wave: wave)
+                            }
+                        })
+                    LazyVGrid(
+                        columns: Array(repeating: .init(.flexible(), spacing: nil), count: 1),
+                        alignment: .center,
+                        spacing: nil,
+                        content: {
+                            ForEach(result.players, id: \.self) { player in
+                                ResultPlayer(result: player)
+                                    .frame(maxWidth: 400)
+                            }
+                        })
+                })
+            })
+        })
+        .navigationTitle("リザルト詳細")
     }
 }
 
 struct ResultDetailView_Previews: PreviewProvider {
+    static private let result: RealmCoopResult = RealmCoopResult(dummy: true)
+    static private let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
+
     static var previews: some View {
-        ResultDetailView()
+        ResultDetailView(result: result, schedule: schedule)
+            .previewLayout(.fixed(width: 390, height: 844))
     }
 }

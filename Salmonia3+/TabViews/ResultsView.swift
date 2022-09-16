@@ -12,13 +12,18 @@ struct ResultsView: View {
     @ObservedResults(RealmCoopResult.self, sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)) var results
 
     var body: some View {
-        List(content: {
-            ForEach(results) { result in
-                ResultView(result: result)
-            }
+        NavigationView(content: {
+            List(content: {
+                ForEach(results) { result in
+                    NavigationLink(destination: ResultDetailView(result: result, schedule: result.schedule), label: {
+                        ResultView(result: result)
+                    })
+                }
+            })
+            .listStyle(.plain)
+            .navigationTitle("リザルト")
         })
-        .listStyle(.plain)
-        .navigationTitle("リザルト")
+        .navigationViewStyle(.split)
     }
 }
 

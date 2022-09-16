@@ -19,6 +19,7 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted var ikuraNum: Int
     @Persisted var goldenIkuraAssistNum: Int
     @Persisted var specialId: SpecialType
+    @Persisted var bossKillCountsTotal: Int
     @Persisted var bossKillCounts: List<Int>
     @Persisted var specialCounts: List<Int>
     @Persisted var weaponList: List<WeaponType>
@@ -37,6 +38,24 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.specialCounts.append(objectsIn: result.specialCounts)
         self.weaponList.append(objectsIn: result.weaponList)
         self.bossKillCounts.append(objectsIn: result.bossKillCounts)
+        self.bossKillCountsTotal = result.bossKillCountsTotal
+    }
+
+    convenience init(dummy: Bool = true, id: Int = 1) {
+        self.init()
+        self.id = "\(id)"
+        self.pid = "0000000000000000"
+        self.name = "Player\(id)"
+        self.goldenIkuraNum = 999
+        self.ikuraNum = 9999
+        self.deadCount = 99
+        self.helpCount = 99
+        self.goldenIkuraAssistNum = 999
+        self.specialId = SpecialType.SpUltraShot
+        self.specialCounts.append(objectsIn: Array(repeating: 1, count: 3))
+        self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 3))
+        self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
+        self.bossKillCountsTotal = 99
     }
 }
 

@@ -14,6 +14,11 @@ enum IkuraType: Int, CaseIterable, Codable {
     case Golden = 1
 }
 
+enum StatusType: Int, CaseIterable, Codable {
+    case Rescue = 0
+    case Death  = 1
+}
+
 extension Image {
     init(bundle: WeaponType) {
         let rawValue: Int = bundle.id ?? 0
@@ -35,6 +40,10 @@ extension Image {
 
     init(bundle: IkuraType) {
         self.init("IkuraType/\(bundle.rawValue)", bundle: .main)
+    }
+
+    init(bundle: StatusType) {
+        self.init("StatusType/\(bundle.rawValue)", bundle: .main)
     }
 
     init(bundle: SakelienType) {
