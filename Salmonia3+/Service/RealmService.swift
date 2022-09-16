@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import SplatNet3
 
 class RealmService {
     public static let shared = RealmService()
@@ -37,13 +38,43 @@ class RealmService {
         realm.objects(type)
     }
 
-    func save<T: Object>(_ objects: T) {
-        if realm.isInWriteTransaction {
-            realm.add(objects, update: .modified)
-        } else {
-            realm.beginWrite()
-            realm.add(objects, update: .modified)
-            try? realm.commitWrite()
+    /// リザルト一件書き込み
+    func save(_ result: SplatNet2.Result) {
+        // スケジュール情報を取得, なければ作成する
+        let schedule: RealmCoopSchedule = {
+            if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
+                $0.stageId == result.schedule.stage &&
+                Array($0.weaponList) == result.schedule.weaponLists &&
+                $0.rule == result.rule
+            }) {
+                return schedule
+            }
+
+            let schedule: RealmCoopSchedule = RealmCoopSchedule(from: result)
+            if realm.isInWriteTransaction {
+                realm.add(schedule, update: .modified)
+            } else {
+                realm.beginWrite()
+                realm.add(schedule, update: .modified)
+                try? realm.commitWrite()
+            }
+
+            return schedule
+        }()
+
+        // リザルト存在チェック(Listへのappendではプライマリーキー制約が判定されないので)
+        if realm.object(ofType: RealmCoopResult.self, forPrimaryKey: result.id) == nil {
+            // リザルト作成
+            let object: RealmCoopResult = RealmCoopResult(from: result)
+
+            // リザルト書き込み
+            if realm.isInWriteTransaction {
+                schedule.results.append(object)
+            } else {
+                realm.beginWrite()
+                schedule.results.append(object)
+                try? realm.commitWrite()
+            }
         }
     }
 

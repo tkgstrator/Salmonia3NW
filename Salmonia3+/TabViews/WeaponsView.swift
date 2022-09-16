@@ -13,20 +13,12 @@ struct WeaponsView: View {
         ScrollView(content: {
             LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40, maximum: 80)), count: 10), content: {
                 ForEach(WeaponType.allCases, id: \.self) { weapon in
-                    Image(weaponType: weapon)
+                    Image(bundle: weapon)
                         .resizable()
                         .scaledToFit()
                 }
             })
         })
-    }
-}
-
-extension Image {
-    init(weaponType: WeaponType) {
-        let rawValue: Int = weaponType.id ?? 0
-
-        self.init("WeaponType/\(rawValue)", bundle: .main)
     }
 }
 

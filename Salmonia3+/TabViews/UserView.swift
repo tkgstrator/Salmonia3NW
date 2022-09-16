@@ -11,7 +11,7 @@ import RealmSwift
 
 struct UserView: View {
     @State private var isPresented: Bool = false
-    @ObservedResults(RealmCoopResult.self) var results
+    @ObservedResults(RealmCoopResult.self, sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)) var results
     private let session: Session = Session()
 
     var body: some View {
@@ -24,8 +24,18 @@ struct UserView: View {
                         Text("ログイン")
                     })
                     .authorize(isPresented: $isPresented, session: session)
+                    HStack(content: {
+                        switch session.account {
+                        case .none:
+                            Text("未ログイン")
+                        case .some(_):
+                            Text("ログイン済")
+                        }
+                    })
                 }, header: {
                     Text("イカリング3")
+                }, footer: {
+                    Text("テスト版のためログイン後再起動が必要になります、多分")
                 })
                 Section(content: {
                     Button(action: {
@@ -47,9 +57,10 @@ struct UserView: View {
             .navigationTitle("ユーザー")
             List(content: {
                 ForEach(results) { result in
-                    Text(result.id)
+                    ResultView(result: result)
                 }
             })
+            .listStyle(.plain)
             .navigationTitle("リザルト")
         })
         .navigationViewStyle(.split)
@@ -65,11 +76,9 @@ class Session: SplatNet3 {
     }
 
     override func getCoopResult(id: String) async throws -> SplatNet2.Result {
-        print("Get Result", id)
         let result: SplatNet2.Result =  try await super.getCoopResult(id: id)
-        dump(result)
         DispatchQueue.main.async(execute: {
-            RealmService.shared.save(RealmCoopResult(from: result))
+            RealmService.shared.save(result)
         })
         return result
     }

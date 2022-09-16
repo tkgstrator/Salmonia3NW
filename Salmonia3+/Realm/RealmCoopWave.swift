@@ -11,8 +11,8 @@ import SplatNet3
 
 final class RealmCoopWave: Object, Identifiable {
     @Persisted var id: Int
-    @Persisted var waterLevel: Int
-    @Persisted var eventType: Int
+    @Persisted(indexed: true) var waterLevel: Int
+    @Persisted(indexed: true) var eventType: Int
     @Persisted var goldenIkuraNum: Int?
     @Persisted var quotaNum: Int?
     @Persisted var goldenIkuraPopNum: Int
