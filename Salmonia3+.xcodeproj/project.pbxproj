@@ -16,6 +16,7 @@
 		101AACD928B77C760030B56C /* Salmonia3+UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACD828B77C760030B56C /* Salmonia3+UITestsLaunchTests.swift */; };
 		10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10320C6028D40A3100666F09 /* SplatNet3 */; };
 		10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6328D40D0A00666F09 /* RealmCoopResult.swift */; };
+		10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6528D4131200666F09 /* RealmCoopWave.swift */; };
 		10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A18B28B7A51D0075563F /* WeaponsView.swift */; };
 		10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19128B7A7130075563F /* GoogleMobileAds */; };
 		10A6A19428B7A71E0075563F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19328B7A71E0075563F /* Realm */; };
@@ -53,6 +54,7 @@
 		101AACD628B77C760030B56C /* Salmonia3+UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salmonia3+UITests.swift"; sourceTree = "<group>"; };
 		101AACD828B77C760030B56C /* Salmonia3+UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salmonia3+UITestsLaunchTests.swift"; sourceTree = "<group>"; };
 		10320C6328D40D0A00666F09 /* RealmCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
+		10320C6528D4131200666F09 /* RealmCoopWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopWave.swift; sourceTree = "<group>"; };
 		10A6A18428B7A3D60075563F /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
 		10A6A18B28B7A51D0075563F /* WeaponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponsView.swift; sourceTree = "<group>"; };
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				10320C6328D40D0A00666F09 /* RealmCoopResult.swift */,
+				10320C6528D4131200666F09 /* RealmCoopWave.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				101AACBE28B77C750030B56C /* ContentView.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
+				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				10A6A19828B7AC1B0075563F /* UserView.swift in Sources */,
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
 			);
