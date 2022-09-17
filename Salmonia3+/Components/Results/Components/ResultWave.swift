@@ -17,7 +17,7 @@ struct ResultWave: View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 124
             VStack(alignment: .center, spacing: 0, content: {
-                Text("Wave \(wave.id + 1)")
+                Text("Wave \(wave.id)")
                     .font(systemName: .Splatfont2, size: 17 * scale)
                     .frame(height: 25 * scale, alignment: .center)
                     .foregroundColor(.black)
@@ -57,7 +57,7 @@ struct ResultWave: View {
             .padding(.vertical, 16 * scale)
             .overlay(WaterLevel().fill(Color.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
         })
-        .background(Rectangle().fill(backgroundColor))
+        .background(RoundedRectangle(cornerRadius: 6).fill(backgroundColor))
         .mask(Hanger().scaledToFill())
         .aspectRatio(124/180, contentMode: .fit)
     }

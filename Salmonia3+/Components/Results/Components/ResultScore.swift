@@ -15,11 +15,9 @@ struct ResultScore: View {
         GeometryReader(content: { geometry in
             HStack(alignment: .center, spacing: 0, content: {
                 ResultScore_1(result: result, geometry: geometry)
-//                Divider()
                 ResultScore_2(result: result, geometry: geometry)
             })
         })
-        .padding(.horizontal, 8)
         .aspectRatio(400/70, contentMode: .fit)
     }
 }

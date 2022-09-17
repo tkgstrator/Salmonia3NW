@@ -16,6 +16,7 @@ final class RealmCoopWave: Object, Identifiable {
     @Persisted var goldenIkuraNum: Int?
     @Persisted var quotaNum: Int?
     @Persisted var goldenIkuraPopNum: Int
+    @Persisted(originProperty: "waves") private var link: LinkingObjects<RealmCoopResult>
 
     convenience init(from result: SplatNet2.WaveResult) {
         self.init()
@@ -35,6 +36,16 @@ final class RealmCoopWave: Object, Identifiable {
         self.goldenIkuraNum = 999
         self.goldenIkuraPopNum = 999
         self.quotaNum = 35
+    }
+}
+
+extension RealmCoopWave {
+    var result: RealmCoopResult {
+        self.link.first!
+    }
+
+    var specialUsage: [SpecialType] {
+        result.specialUsage[self.id - 1]
     }
 }
 

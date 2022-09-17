@@ -14,17 +14,21 @@ struct ResultDetailView: View {
     var body: some View {
         ScrollView(showsIndicators: false, content: {
             VStack(content: {
-                ResultHeader(schedule: schedule)
+                ResultHeader(result: result)
                     .scaledToFill()
                 ResultScore(result: result)
                     .scaledToFill()
+                    .padding(.horizontal, 4)
                 LazyVGrid(
-                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil), count: result.waves.count),
+                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil, alignment: .top), count: result.waves.count),
                     alignment: .center,
                     spacing: 0,
                     content: {
                         ForEach(result.waves, id: \.self) { wave in
-                            ResultWave(wave: wave)
+                            VStack(content: {
+                                ResultWave(wave: wave)
+                                ResultSpecial(result: wave)
+                            })
                         }
                     })
                 LazyVGrid(
@@ -35,12 +39,15 @@ struct ResultDetailView: View {
                         ForEach(result.players, id: \.self) { player in
                             ResultPlayer(result: player)
                                 .frame(maxWidth: 400)
+                                .padding(.horizontal, 4)
                         }
                     })
                 ResultSakelien(result: result)
+                    .padding(.horizontal, 4)
             })
         })
         .navigationTitle("リザルト詳細")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

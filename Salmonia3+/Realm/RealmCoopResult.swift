@@ -76,7 +76,7 @@ final class RealmCoopResult: Object, Identifiable {
         self.ikuraNum = 9999
         self.goldenIkuraNum = 999
         self.goldenIkuraAssistNum = 999
-        self.dangerRate = 2.0
+        self.dangerRate = 3.33
         self.jobRate = 9.99
         self.jobScore = 999
         self.kumaPoint = 9999
@@ -91,7 +91,19 @@ final class RealmCoopResult: Object, Identifiable {
 
 extension RealmCoopResult {
     var schedule: RealmCoopSchedule {
-        self.link.first!
+        self.link.first ?? RealmCoopSchedule(dummy: true)
+    }
+
+    var specialUsage: [[SpecialType]] {
+        let usages: [(SpecialType, [Int])] = Array(zip(players.map({ $0.specialId }), players.map({ Array($0.specialCounts) })))
+        var specialUsage: [[SpecialType]] = Array(repeating: [], count: waves.count)
+
+        for usage in usages {
+            for (index, count) in usage.1.enumerated() {
+                specialUsage[index].append(contentsOf: Array(repeating: usage.0, count: count))
+            }
+        }
+        return specialUsage.map({ $0.sorted(by: { $0.rawValue < $1.rawValue })})
     }
 }
 

@@ -30,6 +30,7 @@
 		100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877028D504C3007FCF3C /* ResultSakelien.swift */; };
 		100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877228D506F3007FCF3C /* ResultStatus.swift */; };
 		100E877528D59261007FCF3C /* ResultScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877428D59261007FCF3C /* ResultScore.swift */; };
+		100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877628D5B687007FCF3C /* ResultSpecial.swift */; };
 		101AACBC28B77C750030B56C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBB28B77C750030B56C /* mainApp.swift */; };
 		101AACBE28B77C750030B56C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBD28B77C750030B56C /* ContentView.swift */; };
 		101AACC028B77C760030B56C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101AACBF28B77C760030B56C /* Assets.xcassets */; };
@@ -105,6 +106,7 @@
 		100E877028D504C3007FCF3C /* ResultSakelien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSakelien.swift; sourceTree = "<group>"; };
 		100E877228D506F3007FCF3C /* ResultStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatus.swift; sourceTree = "<group>"; };
 		100E877428D59261007FCF3C /* ResultScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScore.swift; sourceTree = "<group>"; };
+		100E877628D5B687007FCF3C /* ResultSpecial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSpecial.swift; sourceTree = "<group>"; };
 		101AACB828B77C750030B56C /* Salmonia3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101AACBB28B77C750030B56C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		101AACBD28B77C750030B56C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				100E877028D504C3007FCF3C /* ResultSakelien.swift */,
 				100E877228D506F3007FCF3C /* ResultStatus.swift */,
 				100E877428D59261007FCF3C /* ResultScore.swift */,
+				100E877628D5B687007FCF3C /* ResultSpecial.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
+				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
 				101AACBE28B77C750030B56C /* ContentView.swift in Sources */,
