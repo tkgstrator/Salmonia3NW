@@ -12,31 +12,30 @@ struct ResultDetailView: View {
     let schedule: RealmCoopSchedule
 
     var body: some View {
-        ScrollView(content: {
-            GeometryReader(content: { geometry in
-                VStack(content: {
-                    ResultHeader(schedule: schedule)
-                        .scaledToFill()
-                    LazyVGrid(
-                        columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil), count: result.waves.count),
-                        alignment: .center,
-                        spacing: 0,
-                        content: {
-                            ForEach(result.waves, id: \.self) { wave in
-                                ResultWave(wave: wave)
-                            }
-                        })
-                    LazyVGrid(
-                        columns: Array(repeating: .init(.flexible(), spacing: nil), count: 1),
-                        alignment: .center,
-                        spacing: nil,
-                        content: {
-                            ForEach(result.players, id: \.self) { player in
-                                ResultPlayer(result: player)
-                                    .frame(maxWidth: 400)
-                            }
-                        })
-                })
+        ScrollView(showsIndicators: false, content: {
+            VStack(content: {
+                ResultHeader(schedule: schedule)
+                    .scaledToFill()
+                LazyVGrid(
+                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil), count: result.waves.count),
+                    alignment: .center,
+                    spacing: 0,
+                    content: {
+                        ForEach(result.waves, id: \.self) { wave in
+                            ResultWave(wave: wave)
+                        }
+                    })
+                LazyVGrid(
+                    columns: Array(repeating: .init(.flexible(), spacing: nil), count: 1),
+                    alignment: .center,
+                    spacing: nil,
+                    content: {
+                        ForEach(result.players, id: \.self) { player in
+                            ResultPlayer(result: player)
+                                .frame(maxWidth: 400)
+                        }
+                    })
+                ResultSakelien(result: result)
             })
         })
         .navigationTitle("リザルト詳細")

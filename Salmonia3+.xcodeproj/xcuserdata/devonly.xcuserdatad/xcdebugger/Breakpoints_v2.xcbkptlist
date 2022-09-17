@@ -116,5 +116,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../SplatNet/Sources/SplatNet3/ViewModifier.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "body(content:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2 - 745d8f9fa4e07309"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; BetterSafariView.WebAuthenticationSession in SplatNet3.Authorize.body(content: SwiftUI._ViewModifier_Content&lt;SplatNet3.Authorize&gt;) -&gt; some"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/ViewModifier.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "516">
+               </Location>
+               <Location
+                  uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2 - 2757dba9e9d3910e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; BetterSafariView.WebAuthenticationSession in SplatNet3.Authorize.body(content: SwiftUI._ViewModifier_Content&lt;SplatNet3.Authorize&gt;) -&gt; some"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/ViewModifier.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "224">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

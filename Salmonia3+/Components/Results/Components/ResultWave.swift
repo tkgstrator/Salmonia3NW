@@ -28,6 +28,11 @@ struct ResultWave: View {
                             .font(systemName: .Splatfont2, size: 25 * scale)
                             .frame(height: 36.5 * scale, alignment: .center)
                             .foregroundColor(.white)
+                    } else {
+                        Text(SakelienType.SakelienGiant.localizedText)
+                            .font(systemName: .Splatfont2, size: 25 * scale)
+                            .frame(height: 36.5 * scale, alignment: .center)
+                            .foregroundColor(.red)
                     }
                 })
                 .padding(.top, 2 * scale)

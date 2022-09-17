@@ -6,15 +6,60 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct ResultSakelien: View {
+    let bossCounts: [[Int]]
+
+    init(result: RealmCoopResult) {
+        if let bossKillCounts = result.players.first?.bossKillCounts {
+            self.bossCounts = [result.bossKillCounts, bossKillCounts, result.bossCounts].transposed()
+            return
+        }
+        self.bossCounts = Array(repeating: [99, 99, 99], count: 15)
+    }
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: nil, content: {
+            ForEach(bossCounts.indices, id: \.self) { index in
+                let bossCount: [Int] = bossCounts[index]
+                let sakelienType: SakelienType = SakelienType.allCases[index]
+                if bossCount[2] != 0 {
+                    HStack(content: {
+                        Image(bundle: sakelienType)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40, height: 40, alignment: .center)
+                            .background(Circle().fill(Color.primary).opacity(0.9))
+                        Text(sakelienType.localizedText)
+                            .font(systemName: .Splatfont2, size: 18)
+                            .frame(height: 16, alignment: .center)
+                        Spacer()
+                        HStack(alignment: .lastTextBaseline, spacing: 0, content: {
+                            Text(String(format: "%02d", bossCount[0]))
+                                .frame(width: 30)
+                            Text(String(format: "(%02d)", bossCount[1]))
+                                .frame(width: 30)
+                                .font(systemName: .Splatfont2, size: 14)
+                            Text(String(format: "/%02d", bossCount[2]))
+                                .frame(width: 40)
+                        })
+                        .font(systemName: .Splatfont2, size: 18)
+                        .frame(height: 16, alignment: .center)
+                    })
+                    if index != bossCounts.count {
+                        Divider()
+                    }
+                }
+            }
+        })
     }
 }
 
 struct ResultSakelien_Previews: PreviewProvider {
+    static let result: RealmCoopResult = RealmCoopResult()
     static var previews: some View {
-        ResultSakelien()
+        ResultSakelien(result: result)
+            .previewLayout(.fixed(width: 400, height: 900))
     }
 }
