@@ -22,6 +22,7 @@ struct ResultsView: View {
             })
             .listStyle(.plain)
             .navigationTitle("リザルト")
+            .navigationBarTitleDisplayMode(.inline)
         })
         .navigationViewStyle(.split)
     }

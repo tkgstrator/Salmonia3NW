@@ -116,7 +116,9 @@ private struct ResultScore_1: View {
                         .frame(width: 28 * scale)
                     }
                 }
+                Spacer()
             })
+            .frame(width: width, height: 20 * scale)
         })
         .frame(width: width, height: height, alignment: .center)
         .aspectRatio(200/70, contentMode: .fit)
