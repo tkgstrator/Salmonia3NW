@@ -14,7 +14,7 @@ final class RealmCoopResult: Object, Identifiable {
     @Persisted(indexed: true) var rule: SplatNet2.Rule?
     @Persisted var salmonId: Int?
     @Persisted var gradePoint: Int?
-    @Persisted var grade: Int?
+    @Persisted var grade: GradeType?
     @Persisted var isClear: Bool
     @Persisted var failureWave: Int?
     @Persisted var isBossDefeated: Bool?
@@ -41,7 +41,7 @@ final class RealmCoopResult: Object, Identifiable {
         self.id = result.id
         self.rule = result.rule
         self.gradePoint = result.gradePoint
-        self.grade = result.grade?.id
+        self.grade = result.grade
         self.failureWave = result.jobResult.failureWave
         self.isClear = result.jobResult.isClear
         self.isBossDefeated = result.jobResult.isBossDefeated
@@ -68,8 +68,8 @@ final class RealmCoopResult: Object, Identifiable {
         self.init()
         self.id = "00000000000000000000000000000000"
         self.rule = .REGULAR
-        self.gradePoint = 999
-        self.grade = 8
+        self.gradePoint = 400
+        self.grade = GradeType.Eggsecutive_VP
         self.failureWave = nil
         self.isClear = true
         self.isBossDefeated = true
@@ -77,10 +77,11 @@ final class RealmCoopResult: Object, Identifiable {
         self.goldenIkuraNum = 999
         self.goldenIkuraAssistNum = 999
         self.dangerRate = 2.0
-        self.jobRate = 999
+        self.jobRate = 9.99
         self.jobScore = 999
         self.kumaPoint = 9999
         self.jobBonus = 999
+        self.scale.append(objectsIn: [99, 99, 99])
         self.bossCounts.append(objectsIn: Array(repeating: 99, count: 15))
         self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
         self.waves.append(objectsIn: [0, 1, 2, 3].map({ RealmCoopWave(dummy: true, id: $0) }) )
@@ -92,6 +93,14 @@ extension RealmCoopResult {
     var schedule: RealmCoopSchedule {
         self.link.first!
     }
+}
+
+extension GradeType: RawRepresentable, PersistableEnum {
+    public init?(rawValue: Int) {
+        self.init(id: rawValue)
+    }
+
+    public var rawValue: Int { self.id! }
 }
 
 extension SplatNet2.Rule: PersistableEnum {}

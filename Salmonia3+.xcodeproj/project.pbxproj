@@ -29,6 +29,7 @@
 		100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E876C28D4FE13007FCF3C /* ResultEgg.swift */; };
 		100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877028D504C3007FCF3C /* ResultSakelien.swift */; };
 		100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877228D506F3007FCF3C /* ResultStatus.swift */; };
+		100E877528D59261007FCF3C /* ResultScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877428D59261007FCF3C /* ResultScore.swift */; };
 		101AACBC28B77C750030B56C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBB28B77C750030B56C /* mainApp.swift */; };
 		101AACBE28B77C750030B56C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBD28B77C750030B56C /* ContentView.swift */; };
 		101AACC028B77C760030B56C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101AACBF28B77C760030B56C /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		100E876C28D4FE13007FCF3C /* ResultEgg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultEgg.swift; sourceTree = "<group>"; };
 		100E877028D504C3007FCF3C /* ResultSakelien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSakelien.swift; sourceTree = "<group>"; };
 		100E877228D506F3007FCF3C /* ResultStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatus.swift; sourceTree = "<group>"; };
+		100E877428D59261007FCF3C /* ResultScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScore.swift; sourceTree = "<group>"; };
 		101AACB828B77C750030B56C /* Salmonia3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101AACBB28B77C750030B56C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		101AACBD28B77C750030B56C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				100E876C28D4FE13007FCF3C /* ResultEgg.swift */,
 				100E877028D504C3007FCF3C /* ResultSakelien.swift */,
 				100E877228D506F3007FCF3C /* ResultStatus.swift */,
+				100E877428D59261007FCF3C /* ResultScore.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				100E876B28D4FC62007FCF3C /* ResultDefeated.swift in Sources */,
+				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,

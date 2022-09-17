@@ -16,6 +16,8 @@ struct ResultDetailView: View {
             VStack(content: {
                 ResultHeader(schedule: schedule)
                     .scaledToFill()
+                ResultScore(result: result)
+                    .scaledToFill()
                 LazyVGrid(
                     columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil), count: result.waves.count),
                     alignment: .center,

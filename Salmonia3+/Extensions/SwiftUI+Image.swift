@@ -20,6 +20,10 @@ enum StatusType: Int, CaseIterable, Codable {
 }
 
 extension Image {
+    init(bundle: ScaleType) {
+        self.init("ScaleType/\(bundle.rawValue)", bundle: .main)
+    }
+
     init(bundle: WeaponType) {
         let rawValue: Int = bundle.id ?? 0
 

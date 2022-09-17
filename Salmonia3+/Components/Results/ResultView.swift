@@ -29,7 +29,7 @@ struct ResultView: View {
             }
             VStack(alignment: .leading, spacing: nil, content: {
                 HStack(spacing: nil, content: {
-                    if let gradeId = result.grade, let gradeType = GradeType(id: gradeId) {
+                    if let gradeType = result.grade {
                         Text(gradeType.localizedText)
                             .lineLimit(1)
                             .font(systemName: .Splatfont, size: fontSize)
