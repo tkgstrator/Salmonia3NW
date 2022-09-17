@@ -19,6 +19,7 @@ struct ResultDetailView: View {
                 ResultScore(result: result)
                     .scaledToFill()
                     .padding(.horizontal, 4)
+                    .frame(maxWidth: 540)
                 LazyVGrid(
                     columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil, alignment: .top), count: result.waves.count),
                     alignment: .center,
@@ -43,6 +44,7 @@ struct ResultDetailView: View {
                         }
                     })
                 ResultSakelien(result: result)
+                    .frame(maxWidth: 540)
                     .padding(.horizontal, 4)
             })
         })
