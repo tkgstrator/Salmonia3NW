@@ -13,83 +13,61 @@ struct ResultView: View {
     let fontSize: CGFloat = 14
 
     var body: some View {
-        HStack(content: {
-            switch result.isClear {
-            case true:
-                let foregroundColor: Color = Color(hex: "")
-                Text("Clear")
-                    .frame(width: 60, height: nil, alignment: .center)
-                    .font(systemName: .Splatfont, size: fontSize)
-                    .foregroundColor(.green)
-            case false:
-                Text("Defeat")
-                    .frame(width: 60, height: nil, alignment: .center)
-                    .font(systemName: .Splatfont, size: fontSize)
-                    .foregroundColor(.orange)
-            }
-            VStack(alignment: .leading, spacing: nil, content: {
-                HStack(spacing: nil, content: {
-                    if let gradeType = result.grade {
-                        Text(gradeType.localizedText)
-                            .lineLimit(1)
-                            .font(systemName: .Splatfont, size: fontSize)
-                    }
-                    if let gradePoint = result.gradePoint {
-                        Text("\(gradePoint)")
-                            .lineLimit(1)
-                            .font(systemName: .Splatfont, size: fontSize)
-                    }
-                    if let gradePoint = result.gradePoint {
-                        if result.isClear {
-                            switch gradePoint == 999 {
-                            case true:
-                                Text("→")
-                                    .font(systemName: .Splatfont, size: 18)
-                            case false:
+        GeometryReader(content: { geometry in
+            let scale: CGFloat = min(1.0, geometry.height / 80)
+            VStack(alignment: .leading, spacing: 0, content: {
+                HStack(alignment: .center, spacing: 0, content: {
+                    let title: String = result.isClear ? "Clear!" : "Defeat"
+                    Text(title)
+                        .font(systemName: .Splatfont, size: 20 * scale)
+                        .foregroundColor(result.isClear ? .green : .orange)
+                        .frame(height: 20 * scale)
+                    Spacer()
+                    ResultEgg(
+                        ikuraNum: result.ikuraNum,
+                        goldenIkuraNum: result.goldenIkuraNum,
+                        goldenIkuraAssistNum: result.goldenIkuraAssistNum)
+                })
+                .frame(height: 30 * scale)
+                HStack(alignment: .center, spacing: nil, content: {
+                    if let grade = result.grade, let gradePoint = result.gradePoint {
+                        Group(content: {
+                            Text(grade.localizedText)
+                            Text("\(gradePoint)")
+                        })
+                        Group(content: {
+                            if result.isClear && gradePoint != 999 {
                                 Text("↑")
-                                    .font(systemName: .Splatfont, size: 18)
-                                    .foregroundColor(.yellow)
+                                    .foregroundColor(.orange)
                             }
-                        }
-
-                        if !result.isClear {
-                            switch result.waves.count == 3 {
-                            case true:
+                            if result.isClear && gradePoint == 999 {
                                 Text("→")
-                                    .font(systemName: .Splatfont, size: 18)
-                            case false:
+                            }
+                            if !result.isClear && result.waves.count == 3 {
+                                Text("→")
+                            }
+                            if !result.isClear && result.waves.count != 3 {
                                 Text("↓")
-                                    .font(systemName: .Splatfont, size: 18)
                                     .foregroundColor(.gray)
                             }
+                        })
+                        Spacer()
+                        if result.waves.count == 4 {
+                            Image("SakelienType/99", bundle: .main)
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.orange)
+                                .padding(4 * scale)
                         }
                     }
                 })
+                .font(systemName: .Splatfont, size: 18 * scale)
+                .frame(height: 50 * scale)
             })
-            Spacer()
-            VStack(alignment: .leading, content: {
-                HStack(content: {
-                    Image(bundle: IkuraType.Golden)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: nil, height: 20, alignment: .leading)
-                    Spacer()
-                    Text("x\(result.goldenIkuraNum)")
-                        .frame(height: 20)
-                })
-                HStack(content: {
-                    Image(bundle: IkuraType.Power)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: nil, height: 20, alignment: .leading)
-                    Spacer()
-                    Text("x\(result.ikuraNum)")
-                        .frame(height: 20)
-                })
-            })
-            .frame(width: 80, height: nil, alignment: .trailing)
-            .font(systemName: .Splatfont2, size: 16)
         })
+        .frame(minHeight: 80)
+//        .aspectRatio(400/80, contentMode: .fit)
     }
 }
 
@@ -97,7 +75,10 @@ struct ResultView_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static var previews: some View {
         ResultView(result: result)
-            .previewLayout(.fixed(width: 400, height: 100))
+            .previewLayout(.fixed(width: 400, height: 80))
+            .preferredColorScheme(.dark)
+        ResultView(result: result)
+            .previewLayout(.fixed(width: 200, height: 40))
             .preferredColorScheme(.dark)
     }
 }

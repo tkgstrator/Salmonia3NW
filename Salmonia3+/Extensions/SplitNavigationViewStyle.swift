@@ -18,6 +18,8 @@ public struct SplitNavigationViewStyle: NavigationViewStyle {
     struct ControllerModifier: ViewModifier {
         struct ControllerView: UIViewControllerRepresentable {
             class ViewController: UIViewController {
+                override func viewDidLoad() {
+                }
 
                 override func viewWillAppear(_ animated: Bool) {
                     super.viewWillAppear(animated)

@@ -6,10 +6,38 @@
 //
 
 import SwiftUI
+import RealmSwift
+import SplatNet3
 
 struct SchedulesView: View {
+    @ObservedResults(
+        RealmCoopSchedule.self,
+        filter: NSPredicate(format: "rule = %@", SplatNet2.Rule.REGULAR.rawValue)
+        //        sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
+    ) var schedules
+    @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView(content: {
+            List(content: {
+                TypePicker<SplatNet2.Rule>(selection: $selection)
+                ForEach(schedules) { schedule in
+                    NavigationLinker(destination: {
+                        ResultsView(results: schedule.results)
+                    }, label: {
+                        ScheduleView(schedule: schedule)
+                            .badge(schedule.results.count)
+                    })
+                }
+            })
+            .navigationTitle("スケジュール")
+            .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: selection, perform: { newValue in
+                $schedules.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+            })
+            .listStyle(.plain)
+        })
+        .navigationViewStyle(.split)
     }
 }
 

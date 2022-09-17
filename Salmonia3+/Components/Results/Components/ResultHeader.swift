@@ -44,7 +44,7 @@ struct ResultHeader: View {
                             if let smellMeter = result.smellMeter {
                                 return 1 - (CGFloat(smellMeter) / 5)
                             }
-                            return 0
+                            return 1
                         }()
                         Rectangle()
                             .fill(.black)

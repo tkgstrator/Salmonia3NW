@@ -7,14 +7,15 @@
 
 import SwiftUI
 import SplatNet3
+import RealmSwift
 
 struct ContentView: View {
     @State private var selection: Int = 0
 
     var body: some View {
         TabView(selection: $selection, content: {
-            ResultsView()
-                .badge(50)
+            ResultsWithScheduleView()
+            .badge(50)
                 .tabItem {
                     Label("Results", systemImage: "sparkles")
                 }

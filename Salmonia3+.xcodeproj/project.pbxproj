@@ -31,6 +31,11 @@
 		100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877228D506F3007FCF3C /* ResultStatus.swift */; };
 		100E877528D59261007FCF3C /* ResultScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877428D59261007FCF3C /* ResultScore.swift */; };
 		100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877628D5B687007FCF3C /* ResultSpecial.swift */; };
+		100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877828D5F2D9007FCF3C /* NavigationLinker.swift */; };
+		100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877A28D5F4EF007FCF3C /* TypePicker.swift */; };
+		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
+		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
+		1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B47B28D665BF002BD1F0 /* Introspect */; };
 		101AACBC28B77C750030B56C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBB28B77C750030B56C /* mainApp.swift */; };
 		101AACBE28B77C750030B56C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBD28B77C750030B56C /* ContentView.swift */; };
 		101AACC028B77C760030B56C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101AACBF28B77C760030B56C /* Assets.xcassets */; };
@@ -107,6 +112,10 @@
 		100E877228D506F3007FCF3C /* ResultStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStatus.swift; sourceTree = "<group>"; };
 		100E877428D59261007FCF3C /* ResultScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScore.swift; sourceTree = "<group>"; };
 		100E877628D5B687007FCF3C /* ResultSpecial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSpecial.swift; sourceTree = "<group>"; };
+		100E877828D5F2D9007FCF3C /* NavigationLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinker.swift; sourceTree = "<group>"; };
+		100E877A28D5F4EF007FCF3C /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
+		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
+		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		101AACB828B77C750030B56C /* Salmonia3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101AACBB28B77C750030B56C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		101AACBD28B77C750030B56C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +144,7 @@
 			files = (
 				10A6A19628B7A7200075563F /* RealmSwift in Frameworks */,
 				10A6A19428B7A71E0075563F /* Realm in Frameworks */,
+				1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */,
 				10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */,
 				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
 			);
@@ -160,8 +170,10 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
+				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -217,6 +229,15 @@
 				100E876428D4E92D007FCF3C /* Salmon.swift */,
 			);
 			path = Shape;
+			sourceTree = "<group>";
+		};
+		1018B47528D603CB002BD1F0 /* Schedules */ = {
+			isa = PBXGroup;
+			children = (
+				1018B47828D604C8002BD1F0 /* ScheduleView.swift */,
+				1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */,
+			);
+			path = Schedules;
 			sourceTree = "<group>";
 		};
 		101AACAF28B77C750030B56C = {
@@ -305,6 +326,7 @@
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
 				100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */,
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
+				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,6 +386,7 @@
 				10A6A19328B7A71E0075563F /* Realm */,
 				10A6A19528B7A7200075563F /* RealmSwift */,
 				10320C6028D40A3100666F09 /* SplatNet3 */,
+				1018B47B28D665BF002BD1F0 /* Introspect */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -452,6 +475,7 @@
 			packageReferences = (
 				10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 				10A6A17B28B78AD20075563F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -504,12 +528,16 @@
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
+				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
+				1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
+				1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */,
 				101AACBE28B77C750030B56C /* ContentView.swift in Sources */,
 				100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				100E876B28D4FC62007FCF3C /* ResultDefeated.swift in Sources */,
+				100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
@@ -884,6 +912,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
@@ -903,6 +939,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1018B47B28D665BF002BD1F0 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		10320C6028D40A3100666F09 /* SplatNet3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SplatNet3;
