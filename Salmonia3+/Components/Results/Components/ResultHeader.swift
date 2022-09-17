@@ -11,6 +11,7 @@ import SplatNet3
 import CryptoKit
 
 struct ResultHeader: View {
+    @State private var scale: CGFloat = 1.0
     let schedule: RealmCoopSchedule
     let result: RealmCoopResult
 
@@ -31,7 +32,6 @@ struct ResultHeader: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            let scale: CGFloat = geometry.height / 75
             let width: CGFloat = geometry.width
             let height: CGFloat = geometry.height
             ZStack(content: {
@@ -85,6 +85,12 @@ struct ResultHeader: View {
                     .frame(width: geometry.width * 0.6)
                     .background(RoundedRectangle(cornerRadius: 40 * scale).fill(Color.black.opacity(0.8)))
                 })
+            })
+            .onChange(of: geometry.size.height, perform: { newValue in
+                scale = min(1.5, newValue / 75)
+            })
+            .onAppear(perform: {
+                scale = min(1.5, geometry.size.height / 75)
             })
         })
         .aspectRatio(400/75, contentMode: .fit)
