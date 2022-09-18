@@ -14,12 +14,12 @@ struct ResultView: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            let scale: CGFloat = min(1.0, geometry.height / 80)
+            let scale: CGFloat = min(1.0, geometry.height / 60)
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 0, content: {
                     let title: String = result.isClear ? "Clear!" : "Defeat"
                     Text(title)
-                        .font(systemName: .Splatfont, size: 20 * scale)
+                        .font(systemName: .Splatfont, size: 16 * scale)
                         .foregroundColor(result.isClear ? .green : .orange)
                         .frame(height: 20 * scale)
                     Spacer()
@@ -62,11 +62,11 @@ struct ResultView: View {
                         }
                     }
                 })
-                .font(systemName: .Splatfont, size: 18 * scale)
-                .frame(height: 50 * scale)
+                .font(systemName: .Splatfont, size: 16 * scale)
+                .frame(height: 30 * scale)
             })
         })
-        .frame(minHeight: 80)
+        .frame(minHeight: 60)
 //        .aspectRatio(400/80, contentMode: .fit)
     }
 }

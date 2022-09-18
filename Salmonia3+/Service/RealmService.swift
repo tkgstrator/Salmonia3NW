@@ -25,9 +25,13 @@ class RealmService {
         do {
             self.realm = try Realm()
         } catch (let error) {
-            print(error)
             self.realm = try! Realm(configuration: config)
         }
+    }
+
+    /// 最も新しいリザルトIDを取得する
+    func getLatestResultId() -> String? {
+        realm.objects(RealmCoopResult.self).max(by: { $0.playTime < $1.playTime })?.id
     }
     
     func object<T: Object>(ofType type: T.Type, forPrimaryKey key: String?) -> T? {
@@ -36,6 +40,11 @@ class RealmService {
 
     func objects<T: Object>(ofType type: T.Type) -> RealmSwift.Results<T> {
         realm.objects(type)
+    }
+
+    /// リザルト複数書き込み(ただし、そんなに速くない)
+    func save(_ results: [SplatNet2.Result]) {
+        _ = results.map({ save($0) })
     }
 
     /// リザルト一件書き込み

@@ -20,12 +20,12 @@ struct ContentView: View {
                     Label("Results", systemImage: "sparkles")
                 }
                 .tag(0)
-            WeaponsView()
-                .badge(WeaponType.allCases.count)
-                .tabItem {
-                    Label("Weapons", systemImage: "sparkles")
-                }
-                .tag(1)
+//            WeaponsView()
+//                .badge(WeaponType.allCases.count)
+//                .tabItem {
+//                    Label("Weapons", systemImage: "sparkles")
+//                }
+//                .tag(1)
             SchedulesView()
                 .badge("?")
                 .tabItem {

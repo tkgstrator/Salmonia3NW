@@ -38,22 +38,6 @@ struct UserView: View {
                 }, footer: {
                     Text("テスト版のためログイン後再起動が必要になります、多分")
                 })
-                Section(content: {
-                    Button(action: {
-                        Task {
-                            do {
-                                try await session.getCoopResults()
-                            } catch (let error) {
-                                print(error)
-                            }
-                        }
-                    }, label: {
-                        Text("リザルト取得")
-                    })
-                    LabeledContent(title: "リザルト件数", value: "\(results.count)")
-                }, header: {
-                    Text("デバッグ")
-                })
             })
             .navigationTitle("ユーザー")
             List(content: {

@@ -41,6 +41,7 @@ struct ResultsWithScheduleView: View {
     ) var results
 
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+    @StateObject var session: Session = Session()
 
     var body: some View {
         NavigationView(content: {
@@ -52,6 +53,11 @@ struct ResultsWithScheduleView: View {
                     }, label: {
                         ResultView(result: result)
                     })
+                }
+            })
+            .refreshable(action: {
+                Task {
+                    try await session.getCoopResultIds()
                 }
             })
             .onChange(of: selection, perform: { newValue in

@@ -13,7 +13,8 @@ import SwiftUI
 class Session: SplatNet3, ObservableObject {
     @Published var loginProgress: [LoginProgress] = []
     @Published var isPopuped: Bool = false
-    
+    @Published var resultCounts: Int = 0
+
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
         if loginProgress.isEmpty || loginProgress.count >= 8 {
             isPopuped = true
@@ -47,19 +48,32 @@ class Session: SplatNet3, ObservableObject {
         }
     }
 
-    override func getCoopResults() async throws -> [SplatNet2.Result] {
-        let summary: CoopSummary.Response = try await getCoopSummary()
-        let ids: [String] = summary.data.coopResult.historyGroups.nodes.flatMap({ node in node.historyDetails.nodes.map({ $0.id }) })
-        let results: [SplatNet2.Result] = try await ids.asyncMap({ try await getCoopResult(id: $0) })
-        return results
+    /// リザルトを取得して書き込みする
+    func getCoopResults() async throws {
+        let resultId: String? = RealmService.shared.getLatestResultId()
+        let resultIds: [String] = try await getCoopResultIds(resultId: resultId)
+
+        // 新規リザルトがなければ何もしない
+        if resultIds.isEmpty {
+            return
+        }
+        // リザルト取得を開始する
+        self.resultCounts = resultIds.count
+        let results: [SplatNet2.Result] = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
+        DispatchQueue.main.async(execute: {
+            RealmService.shared.save(results)
+        })
     }
 
+    override func getCoopResultIds(resultId: String? = nil) async throws -> [String] {
+        let ids: [String] = try await super.getCoopResultIds(resultId: resultId)
+        print(ids.count)
+        return ids
+    }
+
+    @discardableResult
     override func getCoopResult(id: String) async throws -> SplatNet2.Result {
-        let result: SplatNet2.Result =  try await super.getCoopResult(id: id)
-        DispatchQueue.main.async(execute: {
-            RealmService.shared.save(result)
-        })
-        return result
+        return try await super.getCoopResult(id: id)
     }
 }
 
