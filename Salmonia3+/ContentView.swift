@@ -19,21 +19,21 @@ struct ContentView: View {
                 .withGoogleMobileAds()
                 .badge(50)
                 .tabItem {
-                    Label("Results", systemImage: "sparkles")
+                    Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
                 }
                 .tag(0)
             SchedulesView()
                 .withGoogleMobileAds()
                 .badge("?")
                 .tabItem {
-                    Label("Schedules", systemImage: "calendar")
+                    Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
                 }
                 .tag(2)
             UserView()
                 .withGoogleMobileAds()
                 .badge("New")
                 .tabItem {
-                    Label("Me", image: "Tabs/Me")
+                    Label("TAB_USER".sha256Hash, image: "Tabs/Me")
                 }
                 .tag(3)
         })

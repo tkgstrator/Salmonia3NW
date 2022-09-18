@@ -16,13 +16,13 @@ enum IconType: String, CaseIterable {
     var localizedText: String {
         switch self {
         case .Gear:
-            return NSLocalizedString("TITLE_GEAR", comment: "")
+            return NSLocalizedString("TITLE_SETTING".sha256Hash, comment: "")
         case .Review:
-            return NSLocalizedString("TITLE_REVIEW", comment: "")
+            return NSLocalizedString("TITLE_REVIEW".sha256Hash, comment: "")
         case .Theme:
-            return NSLocalizedString("TITLE_THEME", comment: "")
+            return NSLocalizedString("TITLE_THEME".sha256Hash, comment: "")
         case .Trash:
-            return NSLocalizedString("TITLE_TRASH", comment: "")
+            return NSLocalizedString("TITLE_TRASH".sha256Hash, comment: "")
         }
     }
 }
@@ -46,7 +46,7 @@ struct IconButton: View {
                 .background(Color.blue)
                 .clipShape(NSOCircle())
             Text(icon.localizedText)
-                .font(systemName: .Splatfont, size: 18)
+                .font(systemName: .Splatfont, size: 16)
                 .frame(height: 16)
         })
     }
@@ -81,7 +81,7 @@ struct IconView<Content: View>: View {
                 .background(Color.blue)
                 .clipShape(NSOCircle())
             Text(icon.localizedText)
-                .font(systemName: .Splatfont, size: 18)
+                .font(systemName: .Splatfont, size: 16)
                 .frame(height: 16)
         })
     }

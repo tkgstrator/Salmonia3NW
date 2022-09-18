@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Salmonia3+
+
+  Created by devonly on 2022/09/18.
+  
+*/
+
+"NSUserTrackingUsageDescription" = "最適な広告を表示するためにトラッキングすることを許可します";

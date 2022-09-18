@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Salmonia3+
+
+  Created by devonly on 2022/09/18.
+  
+*/
+
+NSUserTrackingUsageDescription = "Your data will be used to deliver personalized ads to you";

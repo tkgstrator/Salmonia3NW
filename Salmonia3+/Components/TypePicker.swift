@@ -17,7 +17,7 @@ struct TypePicker<T: AllCaseable>: View {
     var body: some View {
         Picker(selection: $selection, content: {
             ForEach(T.allCases) { rule in
-                Text(rule.rawValue)
+                Text(localizedText: rule.rawValue)
                     .tag(rule)
             }
         }, label: {

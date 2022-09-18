@@ -20,7 +20,7 @@ struct ResultDefeated: View {
     var body: some View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 172
-            Text("オオモノシャケをたおした数 x\(bossKillCountsTotal)")
+            Text("BOSS_SALMONIDS_DEFEATED_\(bossKillCountsTotal)")
                 .font(systemName: .Splatfont2, size: 11 * scale)
                 .foregroundColor(foregroundColor)
                 .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)

@@ -30,7 +30,7 @@ struct ResultsView: View {
             }
         })
         .listStyle(.plain)
-        .navigationTitle("リザルト")
+        .navigationTitle(Text(localizedText: "TAB_RESULTS"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -44,7 +44,7 @@ private struct ResultsEmpty: View {
             Text("↓")
                 .font(systemName: .Splatfont, size: 34)
                 .position(x: geometry.center.x, y: 80 + value)
-            Text("PULL_TO_REFRESH")
+            Text(localizedText: "PULL_TO_REFRESH")
                 .font(systemName: .Splatfont, size: 28)
                 .position(x: geometry.center.x, y: 180)
         })
@@ -87,7 +87,7 @@ struct ResultsWithScheduleView: View {
                 $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
             })
             .listStyle(.plain)
-            .navigationTitle("リザルト")
+            .navigationTitle(Text(localizedText: "TAB_RESULTS"))
             .navigationBarTitleDisplayMode(.inline)
         })
         .popup(isPresented: $session.isLoading, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {

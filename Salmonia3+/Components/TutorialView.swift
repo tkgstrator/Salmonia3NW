@@ -23,7 +23,7 @@ struct TutorialView: View {
             Tutorial(
                 selection: $selection,
                 title: NSLocalizedString("TITLE_TRACKING", comment: ""),
-                description: NSLocalizedString("NSUserTrackingUsageDescription", comment: "")
+                description: NSLocalizedString("DESC_TRACKING_USAGE_DATA", comment: "")
             )
             .authorize()
             .transition(.fade)
@@ -92,19 +92,22 @@ private struct TutorialSignIn: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            Text("TITLE_SIGN_IN")
+            Text(localizedText: "TITLE_SIGN_IN")
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .font(Font.system(size: 24))
+                .multilineTextAlignment(.center)
                 .position(x: geometry.center.x, y: 100)
-            Text("DESC_SIGN_IN")
+            Text(localizedText: "DESC_SIGN_IN")
                 .foregroundColor(.white)
                 .font(Font.system(size: 14))
+                .multilineTextAlignment(.center)
+                .frame(width: 300, height: nil, alignment: .center)
                 .position(x: geometry.center.x, y: 160)
             Button(action: {
                 isPresented.toggle()
             }, label: {
-                Text("Sign in")
+                Text(localizedText: "BUTTON_SIGN_IN")
                     .fontWeight(.bold)
                     .frame(width: 300, height: 50, alignment: .center)
                     .foregroundColor(Color(hex: "FF7500"))
@@ -137,26 +140,29 @@ private struct Tutorial: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            Text(title)
+            Text(localizedText: title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .font(Font.system(size: 24))
+                .font(Font.system(size: 26))
+                .multilineTextAlignment(.center)
                 .position(x: geometry.center.x, y: 100)
-            Text(description)
+            Text(localizedText: description)
                 .foregroundColor(.white)
                 .font(Font.system(size: 14))
                 .position(x: geometry.center.x, y: 160)
+                .multilineTextAlignment(.center)
+                .frame(width: 300, height: nil, alignment: .center)
             Button(action: {
                 withAnimation(.easeInOut(duration: 1)) {
                     selection += 1
                 }
             }, label: {
-                Text("Next")
+                Text(localizedText: "BUTTON_NEXT")
                     .fontWeight(.bold)
-                    .frame(width: 300, height: 50, alignment: .center)
+                    .frame(width: 300, height: 60, alignment: .center)
                     .foregroundColor(Color(hex: "FF7500"))
                     .background(.white)
-                    .cornerRadius(25)
+                    .cornerRadius(30)
             })
             .position(x: geometry.center.x, y: geometry.height - 100)
         })

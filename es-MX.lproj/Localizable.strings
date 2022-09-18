@@ -5,3 +5,42 @@
   Created by devonly on 2022/09/16.
   
 */
+
+// Common
+"8403d930596c8e573e1d358604765fb1b0dfd78b737a20d55c67ab47866b5fa0" = "Next";
+
+// Welcome
+"5c996b507f1273101de418ce99062986360b35ff124a8af939baff3384c37e2f" = "Welcome to Salmonia3+";
+"c9de0848d13757c5f0b82833c7bab19c06df6d21bc69fd67abfe73743dd89245" = "Enhance your online play experience with the Salmonia3+!";
+
+
+// Tracking
+"505befc57e1792cce58cfbe0bfc15416c627829e41d5d2fe88c164ab1da6297b" = "About Tracking Usage Data";
+"f0a0ceb1feac173186ab87bab5aedd5ec4fe73ef67dd87aed95e6ac84eca3600" = "If you select Allow, the application collect data, including via cookies, and will send it to the Google Analytics Service server in order to optimize content, products and services.";
+
+// Sign in
+"873128a11f83cc4e3d4216f4202377abe82c88965f09d64c48a2339137911f33" = "Sign in";
+"c0355c36f90958f2fa127d7a35d785f99181eb174a41374a1ffa5e10e67460c2" = "Sign in with your Nintendo Account";
+"b4daaeb65b4967cb05685f241e6f545c5d88b635e1f8b67545294a1ac38bfaca" = "Your Nintendo Account must be linked to a Nintendo Switch console";
+
+// Pull to refresh
+"835ab570d9dacb5a2ca323d4251d043ac3411c3c620f9500b32ae70a025c377d" = "Pull to refresh";
+
+//NSUserTrackingUsageDescription
+
+"f08c81d915aa77e020e43d26ca3ec45a0144bbb6f11fea969511eceeba864fd6" = "Settings";
+"de5d0dd59b0c5e04db223784cb688b242de1610caff25a636b38429d46023b86" = "Review";
+"ec7a071a5a49046c1cd0738c352cf46ead546f6d443e0b56227948b7cbb97895" = "Theme";
+"ea23beb23a4dc2ecb34b9e368a2c289ae0f2e707fd2cdd18b6b0f8e0903e42f4" = "Erase";
+
+// Toggle
+"5678c0deebdd242e038fa15360ee099a4ab2e60c5871962a414ef0440a17d5f6" = "Private";
+"d20ff06c02c80c4123b4cc04144c1a7568f535cdfbb2c8318e433af454bf36b5" = "Regular";
+
+
+"8d08ef2fca8d52ce93d6ac76f214669629538c5b72be8bddb8da0d5b10f28de0" = "Results";
+"683f9780ff10850170a9c57f08ef56303b6489e072494e954d117bceab5740eb" = "Schedule";
+"faba32fc72c1062e3c55887c7dd8258c6ef15e4a4ba356191bea673dd7fe0219" = "User";
+
+// Boss defeated counts
+"BOSS_SALMONIDS_DEFEATED_%lld" = "Boss Salmonids defeated x%lld";

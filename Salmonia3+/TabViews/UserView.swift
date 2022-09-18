@@ -50,7 +50,7 @@ struct UserView: View {
                     })
                 })
             })
-            .navigationTitle("ユーザー")
+            .navigationTitle(Text(localizedText: "TAB_USER"))
             .navigationBarTitleDisplayMode(.inline)
         })
         .navigationViewStyle(.split)

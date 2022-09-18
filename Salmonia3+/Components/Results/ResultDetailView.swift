@@ -48,7 +48,7 @@ struct ResultDetailView: View {
                     .padding(.horizontal, 4)
             })
         })
-        .navigationTitle("リザルト詳細")
+        .navigationTitle(Text(localizedText: "TAB_SCHEDULE"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

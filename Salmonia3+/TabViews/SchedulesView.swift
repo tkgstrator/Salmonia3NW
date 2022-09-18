@@ -30,7 +30,7 @@ struct SchedulesView: View {
                     })
                 }
             })
-            .navigationTitle("スケジュール")
+            .navigationTitle(Text(localizedText: "TAB_SCHEDULE"))
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: selection, perform: { newValue in
                 $schedules.filter = NSPredicate(format: "rule = %@", selection.rawValue)
