@@ -57,7 +57,7 @@ struct ResultsWithScheduleView: View {
             })
             .refreshable(action: {
                 Task {
-                    try await session.getCoopResultIds()
+                    try await session.getCoopResults()
                 }
             })
             .onChange(of: selection, perform: { newValue in
@@ -66,6 +66,9 @@ struct ResultsWithScheduleView: View {
             .listStyle(.plain)
             .navigationTitle("リザルト")
             .navigationBarTitleDisplayMode(.inline)
+        })
+        .popup(isPresented: $session.isLoading, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
+            ResultLoadingView(session: session)
         })
         .navigationViewStyle(.split)
     }

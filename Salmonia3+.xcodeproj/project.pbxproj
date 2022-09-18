@@ -41,6 +41,11 @@
 		1018B48828D6CC06002BD1F0 /* loading_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1018B48728D6CC06002BD1F0 /* loading_3.png */; };
 		1018B48A28D6CC0E002BD1F0 /* loading_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1018B48928D6CC0E002BD1F0 /* loading_2.png */; };
 		1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */; };
+		1018B48F28D6E607002BD1F0 /* ResultLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */; };
+		1018B49128D6F50B002BD1F0 /* 11921510.png in Resources */ = {isa = PBXBuildFile; fileRef = 1018B49028D6F50B002BD1F0 /* 11921510.png */; };
+		1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B49328D6FB82002BD1F0 /* IconView.swift */; };
+		1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B49528D6FD2B002BD1F0 /* TutorialView.swift */; };
+		1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */; };
 		101AACBC28B77C750030B56C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBB28B77C750030B56C /* mainApp.swift */; };
 		101AACBE28B77C750030B56C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBD28B77C750030B56C /* ContentView.swift */; };
 		101AACC028B77C760030B56C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101AACBF28B77C760030B56C /* Assets.xcassets */; };
@@ -125,6 +130,11 @@
 		1018B48728D6CC06002BD1F0 /* loading_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_3.png; sourceTree = "<group>"; };
 		1018B48928D6CC0E002BD1F0 /* loading_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_2.png; sourceTree = "<group>"; };
 		1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultLoadingView.swift; sourceTree = "<group>"; };
+		1018B49028D6F50B002BD1F0 /* 11921510.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11921510.png; sourceTree = "<group>"; };
+		1018B49328D6FB82002BD1F0 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		1018B49528D6FD2B002BD1F0 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAds.swift; sourceTree = "<group>"; };
 		101AACB828B77C750030B56C /* Salmonia3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101AACBB28B77C750030B56C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		101AACBD28B77C750030B56C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,11 +190,14 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1018B49228D6FB42002BD1F0 /* Icons */,
 				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
 				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
 				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
+				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
+				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -195,6 +208,7 @@
 				100E875128D4B90E007FCF3C /* Components */,
 				100E873428D47DD1007FCF3C /* ResultView.swift */,
 				100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */,
+				1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -255,10 +269,19 @@
 		1018B48B28D6CC13002BD1F0 /* APNG */ = {
 			isa = PBXGroup;
 			children = (
+				1018B49028D6F50B002BD1F0 /* 11921510.png */,
 				1018B48928D6CC0E002BD1F0 /* loading_2.png */,
 				1018B48728D6CC06002BD1F0 /* loading_3.png */,
 			);
 			path = APNG;
+			sourceTree = "<group>";
+		};
+		1018B49228D6FB42002BD1F0 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				1018B49328D6FB82002BD1F0 /* IconView.swift */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		101AACAF28B77C750030B56C = {
@@ -520,6 +543,7 @@
 				100E873E28D4A73C007FCF3C /* Localizable.strings in Resources */,
 				101AACC328B77C760030B56C /* Preview Assets.xcassets in Resources */,
 				1018B48828D6CC06002BD1F0 /* loading_3.png in Resources */,
+				1018B49128D6F50B002BD1F0 /* 11921510.png in Resources */,
 				101AACC028B77C760030B56C /* Assets.xcassets in Resources */,
 				1018B48A28D6CC0E002BD1F0 /* loading_2.png in Resources */,
 				100E873928D4A509007FCF3C /* Splatfont1.ttf in Resources */,
@@ -564,6 +588,7 @@
 				100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				100E876B28D4FC62007FCF3C /* ResultDefeated.swift in Sources */,
+				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
 				100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
@@ -575,10 +600,13 @@
 				100E875C28D4D7EA007FCF3C /* SwiftUI+Color.swift in Sources */,
 				100E875628D4BD9E007FCF3C /* SwiftUI+Image.swift in Sources */,
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
+				1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */,
 				100E875328D4B91A007FCF3C /* ResultHeader.swift in Sources */,
 				100E875028D4B8F8007FCF3C /* ResultDetailView.swift in Sources */,
 				100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */,
+				1018B48F28D6E607002BD1F0 /* ResultLoadingView.swift in Sources */,
 				100E875F28D4E47B007FCF3C /* Hanger.swift in Sources */,
+				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
@@ -771,11 +799,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Salmonia3--Info.plist";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSUserTrackingUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -803,11 +831,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Salmonia3--Info.plist";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSUserTrackingUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
