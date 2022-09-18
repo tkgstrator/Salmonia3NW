@@ -16,16 +16,42 @@ struct UserView: View {
     @StateObject var session: Session = Session()
     @State private var isPresented: Bool = false
     @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         NavigationView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40, maximum: 60)), count: 3), content: {
-                Button(action: {
-                    isFirstLaunch.toggle()
-                }, label: {
-                    Text("Sign out")
+            ScrollView(content: {
+                GeometryReader(content: { geometry in
+                    LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: device == .pad ? 5 : 3), spacing: 16, content: {
+                        ForEach(IconType.allCases, id: \.rawValue) { iconType in
+                            switch iconType {
+                            case .Trash:
+                                IconButton(icon: iconType, execute: {
+                                    RealmService.shared.deleteAll()
+                                })
+                                .frame(maxWidth: 84)
+                            case .Theme:
+                                IconView(icon: iconType, destination: {
+                                    EmptyView()
+                                })
+                                .frame(maxWidth: 84)
+                            case .Review:
+                                IconView(icon: iconType, destination: {
+                                    EmptyView()
+                                })
+                                .frame(maxWidth: 84)
+                            case .Gear:
+                                IconView(icon: iconType, destination: {
+                                    EmptyView()
+                                })
+                                .frame(maxWidth: 84)
+                            }
+                        }
+                    })
                 })
             })
+            .navigationTitle("ユーザー")
+            .navigationBarTitleDisplayMode(.inline)
         })
         .navigationViewStyle(.split)
         .popup(isPresented: $session.isPopuped, view: {

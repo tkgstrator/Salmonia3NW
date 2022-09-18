@@ -18,9 +18,18 @@ class Session: SplatNet3, ObservableObject {
     @Published var resultCountsNum: Int = 0
 
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
-        if loginProgress.isEmpty || loginProgress.count >= 8 {
-            isPopuped = true
+        // リクエストが貯まっていた場合は削除する
+        if loginProgress.count >= 8 {
+            loginProgress.removeAll()
+            isPopuped = false
         }
+
+        // 何もなければ最初のリクエスト
+        if loginProgress.isEmpty {
+            // ポップアップ表示する
+            isPopuped.toggle()
+        }
+
         // 進行具合に合わせて追加する
         let progress: LoginProgress = LoginProgress(path: request.path)
         loginProgress.append(progress)
@@ -75,11 +84,11 @@ class Session: SplatNet3, ObservableObject {
         self.resultCountsNum = resultIds.count
 
         // リザルト取得を開始する
-        let results: [SplatNet2.Result] = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
+        _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
+
         // ローディングを終了する
-        self.isLoading.toggle()
-        DispatchQueue.main.async(execute: {
-            RealmService.shared.save(results)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            self.isLoading.toggle()
         })
     }
 
@@ -111,8 +120,14 @@ class Session: SplatNet3, ObservableObject {
     override func getCoopResult(id: String) async throws -> SplatNet2.Result {
         // リザルトを一件取得するごとにカウントアップする
         resultCounts += 1
-        print(resultCounts, resultCountsNum)
-        return try await super.getCoopResult(id: id)
+
+        let result: SplatNet2.Result = try await super.getCoopResult(id: id)
+
+        // リザルト書き込みをする
+        DispatchQueue.main.async(execute: {
+            RealmService.shared.save(result)
+        })
+        return result
     }
 }
 

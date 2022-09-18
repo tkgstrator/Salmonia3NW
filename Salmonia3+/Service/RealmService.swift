@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 import SplatNet3
+import SwiftUI
 
 class RealmService {
     public static let shared = RealmService()
@@ -15,6 +16,7 @@ class RealmService {
     internal var realm: Realm
 
     private let schemeVersion: UInt64 = 0
+    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = false
 
     init() {
         let config = Realm.Configuration(
@@ -26,6 +28,17 @@ class RealmService {
             self.realm = try Realm()
         } catch (let error) {
             self.realm = try! Realm(configuration: config)
+        }
+    }
+
+    func deleteAll() {
+        isFirstLaunch.toggle()
+        if realm.isInWriteTransaction {
+            realm.deleteAll()
+        } else {
+            try? realm.write({
+                realm.deleteAll()
+            })
         }
     }
 
