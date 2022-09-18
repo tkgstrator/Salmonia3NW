@@ -8,11 +8,12 @@
 import SwiftUI
 import SplatNet3
 import RealmSwift
+import PopupView
 
 struct UserView: View {
-    @State private var isPresented: Bool = false
     @ObservedResults(RealmCoopResult.self, sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)) var results
-    private let session: Session = Session()
+    @StateObject var session: Session = Session()
+    @State private var isPresented: Bool = false
 
     var body: some View {
         NavigationView(content: {
@@ -64,26 +65,11 @@ struct UserView: View {
             .navigationTitle("リザルト")
         })
         .navigationViewStyle(.split)
-    }
-}
-
-class Session: SplatNet3 {
-    override func getCoopResults() async throws -> [SplatNet2.Result] {
-        let summary: CoopSummary.Response = try await getCoopSummary()
-        let ids: [String] = summary.data.coopResult.historyGroups.nodes.flatMap({ node in node.historyDetails.nodes.map({ $0.id }) })
-        let results: [SplatNet2.Result] = try await ids.asyncMap({ try await getCoopResult(id: $0) })
-        return results
-    }
-
-    override func getCoopResult(id: String) async throws -> SplatNet2.Result {
-        let result: SplatNet2.Result =  try await super.getCoopResult(id: id)
-        DispatchQueue.main.async(execute: {
-            RealmService.shared.save(result)
+        .popup(isPresented: $session.isPopuped, view: {
+            LoadingView(session: session)
         })
-        return result
     }
 }
-
 
 struct LabeledContent: View {
     let title: String

@@ -36,6 +36,11 @@
 		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
 		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
 		1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B47B28D665BF002BD1F0 /* Introspect */; };
+		1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B48228D6B78A002BD1F0 /* Sesison.swift */; };
+		1018B48628D6C83C002BD1F0 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B48528D6C83C002BD1F0 /* SDWebImageSwiftUI */; };
+		1018B48828D6CC06002BD1F0 /* loading_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1018B48728D6CC06002BD1F0 /* loading_3.png */; };
+		1018B48A28D6CC0E002BD1F0 /* loading_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1018B48928D6CC0E002BD1F0 /* loading_2.png */; };
+		1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */; };
 		101AACBC28B77C750030B56C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBB28B77C750030B56C /* mainApp.swift */; };
 		101AACBE28B77C750030B56C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101AACBD28B77C750030B56C /* ContentView.swift */; };
 		101AACC028B77C760030B56C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101AACBF28B77C760030B56C /* Assets.xcassets */; };
@@ -116,6 +121,10 @@
 		100E877A28D5F4EF007FCF3C /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
 		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
 		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		1018B48228D6B78A002BD1F0 /* Sesison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sesison.swift; sourceTree = "<group>"; };
+		1018B48728D6CC06002BD1F0 /* loading_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_3.png; sourceTree = "<group>"; };
+		1018B48928D6CC0E002BD1F0 /* loading_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_2.png; sourceTree = "<group>"; };
+		1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		101AACB828B77C750030B56C /* Salmonia3.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia3.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101AACBB28B77C750030B56C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
 		101AACBD28B77C750030B56C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1018B48628D6C83C002BD1F0 /* SDWebImageSwiftUI in Frameworks */,
 				10A6A19628B7A7200075563F /* RealmSwift in Frameworks */,
 				10A6A19428B7A71E0075563F /* Realm in Frameworks */,
 				1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */,
@@ -174,6 +184,7 @@
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
 				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
+				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -191,6 +202,7 @@
 		100E873628D4A4DF007FCF3C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1018B48B28D6CC13002BD1F0 /* APNG */,
 				100E873728D4A509007FCF3C /* Splatfont1.ttf */,
 				100E873828D4A509007FCF3C /* Splatfont2.ttf */,
 			);
@@ -238,6 +250,15 @@
 				1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */,
 			);
 			path = Schedules;
+			sourceTree = "<group>";
+		};
+		1018B48B28D6CC13002BD1F0 /* APNG */ = {
+			isa = PBXGroup;
+			children = (
+				1018B48928D6CC0E002BD1F0 /* loading_2.png */,
+				1018B48728D6CC06002BD1F0 /* loading_3.png */,
+			);
+			path = APNG;
 			sourceTree = "<group>";
 		};
 		101AACAF28B77C750030B56C = {
@@ -335,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				10320C6D28D4244200666F09 /* RealmService.swift */,
+				1018B48228D6B78A002BD1F0 /* Sesison.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -387,6 +409,7 @@
 				10A6A19528B7A7200075563F /* RealmSwift */,
 				10320C6028D40A3100666F09 /* SplatNet3 */,
 				1018B47B28D665BF002BD1F0 /* Introspect */,
+				1018B48528D6C83C002BD1F0 /* SDWebImageSwiftUI */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -476,6 +499,7 @@
 				10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 				10A6A17B28B78AD20075563F /* XCRemoteSwiftPackageReference "realm-swift" */,
 				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -495,7 +519,9 @@
 			files = (
 				100E873E28D4A73C007FCF3C /* Localizable.strings in Resources */,
 				101AACC328B77C760030B56C /* Preview Assets.xcassets in Resources */,
+				1018B48828D6CC06002BD1F0 /* loading_3.png in Resources */,
 				101AACC028B77C760030B56C /* Assets.xcassets in Resources */,
+				1018B48A28D6CC0E002BD1F0 /* loading_2.png in Resources */,
 				100E873928D4A509007FCF3C /* Splatfont1.ttf in Resources */,
 				100E873A28D4A509007FCF3C /* Splatfont2.ttf in Resources */,
 			);
@@ -527,6 +553,7 @@
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
+				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
@@ -553,6 +580,7 @@
 				100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */,
 				100E875F28D4E47B007FCF3C /* Hanger.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
+				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
 				100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */,
@@ -920,6 +948,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
@@ -943,6 +979,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		1018B48528D6C83C002BD1F0 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		10320C6028D40A3100666F09 /* SplatNet3 */ = {
 			isa = XCSwiftPackageProductDependency;

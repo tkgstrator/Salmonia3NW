@@ -7,161 +7,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9711F431-F66C-45F9-A343-C626E0BA1A89"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../SplatNet/Sources/SplatNet3/Enum/GradeType.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "init?(id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "14084F18-11FB-4C2C-A982-F1FAA1D87B37"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Salmonia3+/TabViews/UserView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "getCoopResult(id:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CD3DC1AC-4BCA-4128-A779-D022687EE64B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../SplatNet/Sources/SplatNet3/Enum/GradeType.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "init?(id:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CD3DC1AC-4BCA-4128-A779-D022687EE64B - 4b72ae7ba2289bd8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SplatNet3.GradeType.init(id: Swift.Optional&lt;Swift.Int&gt;) -&gt; Swift.Optional&lt;SplatNet3.GradeType&gt;"
-                  moduleName = "Salmonia3.1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/Enum/GradeType.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "CD3DC1AC-4BCA-4128-A779-D022687EE64B - 4b72ae7ba2289bd8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SplatNet3.GradeType.init(id: Swift.Optional&lt;Swift.Int&gt;) -&gt; Swift.Optional&lt;SplatNet3.GradeType&gt;"
-                  moduleName = "Salmonia3.1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/Enum/GradeType.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "74E30470-6125-4E41-8018-2875FA10E118"
+            uuid = "C4611525-0468-4853-83B8-779D05974B9D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Salmonia3+/Service/RealmService.swift"
+            filePath = "../SplatNet/Sources/Common/Enum/FailureResponse.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "save(_:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "init(error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "42FFB4A6-0633-4E04-94BE-5A69B96C4394"
+            uuid = "1FAF3301-F66A-4286-B9A8-AF88B272F1C5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Salmonia3+/Service/RealmService.swift"
+            filePath = "../SplatNet/Sources/SplatNet3/LoginService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "save(_:)"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "authorize(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2"
-            shouldBeEnabled = "Yes"
+            uuid = "C65AB454-C708-4784-A386-F07E2446FE6C"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../SplatNet/Sources/SplatNet3/ViewModifier.swift"
+            filePath = "Salmonia3+/Service/Sesison.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "body(content:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2 - 745d8f9fa4e07309"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; BetterSafariView.WebAuthenticationSession in SplatNet3.Authorize.body(content: SwiftUI._ViewModifier_Content&lt;SplatNet3.Authorize&gt;) -&gt; some"
-                  moduleName = "Salmonia3.1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/ViewModifier.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "516">
-               </Location>
-               <Location
-                  uuid = "5429C861-71F9-4934-B645-EBEA0FB844E2 - 2757dba9e9d3910e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (Swift.Optional&lt;Foundation.URL&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; BetterSafariView.WebAuthenticationSession in SplatNet3.Authorize.body(content: SwiftUI._ViewModifier_Content&lt;SplatNet3.Authorize&gt;) -&gt; some"
-                  moduleName = "Salmonia3.1"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/devonly/Developer/SplatNet/Sources/SplatNet3/ViewModifier.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "224">
-               </Location>
-            </Locations>
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "authorize(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E325C778-3BF6-47BE-9E39-FB4955951EBE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Service/Sesison.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "authorize(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7DA9631-767D-4D5D-A336-9D9FF1AD6831"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Service/Sesison.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "authorize(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AA91DAC-02A5-4393-B12E-F3761C6F3D5F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Service/Sesison.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "authorize(_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

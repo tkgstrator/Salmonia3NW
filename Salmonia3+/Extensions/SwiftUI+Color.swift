@@ -22,4 +22,6 @@ extension Color {
     public init(hex: String, alpha: CGFloat = 1.0) {
         self.init(UIColor(hex: hex, alpha: alpha))
     }
+
+    static let themeColor: Color = Color("SPThemeColor", bundle: .main)
 }
