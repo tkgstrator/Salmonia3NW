@@ -91,9 +91,8 @@ class Session: SplatNet3, ObservableObject {
         let resultId: String? = RealmService.shared.getLatestResultId()
 
         #if DEBUG
-        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
-        print(resultIds)
-//        let resultIds: [String] = try await getCoopResultIds(resultId: nil)
+//        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
+        let resultIds: [String] = try await getCoopResultIds(resultId: nil)
         #else
         let resultIds: [String] = try await getCoopResultIds(resultId: resultId)
         #endif

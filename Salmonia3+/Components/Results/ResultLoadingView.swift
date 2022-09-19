@@ -60,6 +60,12 @@ struct ResultLoadingView: View {
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
         .background(Color.themeColor.cornerRadius(12))
         .padding(.horizontal, 40)
+        .onAppear(perform: {
+            UIApplication.shared.isIdleTimerDisabled = true
+        })
+        .onDisappear(perform: {
+            UIApplication.shared.isIdleTimerDisabled = false
+        })
     }
 }
 
