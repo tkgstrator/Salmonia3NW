@@ -40,3 +40,7 @@
 // Boss defeated counts
 "BOSS_SALMONIDS_DEFEATED_%lld" = "オオモノシャケをたおした数 x%lld";
 
+// Water Level
+"55d434662f0976490d8791b3242c1494022602b4e026a4d4804c8a880862bb3e" = "干潮";
+"b9710c77af3bb946ed2990c09104a20bd7b98a3852dd95e09a0647edc5693733" = "通常";
+"9d6ff8f3cf2247c1dd604c97f52c8d92320d6290922491b1410ae2563a576a16" = "満潮";

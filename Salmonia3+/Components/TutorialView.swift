@@ -119,7 +119,7 @@ private struct TutorialSignIn: View {
                 LoadingView(session: session)
             })
             .authorize(isPresented: $isPresented, session: session, onDismiss: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                     isFirstLaunch.toggle()
                 })
             })

@@ -82,7 +82,7 @@ struct ResultHeader: View {
                         Text(String(format: "%.0f%%", result.dangerRate * 100))
                             .font(systemName: .Splatfont, size: 18 * scale)
                     })
-                    .frame(width: geometry.width * 0.6)
+                    .frame(width: min(360, geometry.width * 0.6))
                     .background(RoundedRectangle(cornerRadius: 40 * scale).fill(Color.black.opacity(0.8)))
                 })
             })

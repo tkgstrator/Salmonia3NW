@@ -10,30 +10,55 @@ import RealmSwift
 import SplatNet3
 
 final class RealmCoopResult: Object, Identifiable {
+    /// 固有ID
     @Persisted(primaryKey: true) var id: String
+    /// ルール
     @Persisted(indexed: true) var rule: SplatNet2.Rule?
+    /// Salmon Stats用のID
     @Persisted var salmonId: Int?
+    /// 評価レート
     @Persisted var gradePoint: Int?
+    /// 評価
     @Persisted var grade: GradeType?
+    /// クリアしたかどうか
     @Persisted var isClear: Bool
+    /// 失敗したWAVE
     @Persisted var failureWave: Int?
+    /// オカシラシャケをたおしたかどうか
     @Persisted var isBossDefeated: Bool?
+    /// 獲得イクラ数
     @Persisted var ikuraNum: Int
+    /// 合計納品金イクラ数
     @Persisted var goldenIkuraNum: Int
+    /// 合計アシスト金イクラ数
     @Persisted var goldenIkuraAssistNum: Int
+    /// オオモノ出現数
     @Persisted var bossCounts: List<Int>
+    /// オオモノ討伐数
     @Persisted var bossKillCounts: List<Int>
+    /// キケン度
     @Persisted var dangerRate: Double
+    /// バイトレート
     @Persisted var jobRate: Double?
+    /// バイトスコア
     @Persisted var jobScore: Int?
+    /// クマサンポイント
     @Persisted var kumaPoint: Int?
+    /// バイトボーナス
     @Persisted var jobBonus: Int?
+    /// バイトボーナス
     @Persisted var smellMeter: Int?
+    /// WAVE内容
     @Persisted var waves: List<RealmCoopWave>
+    /// プレイヤー
     @Persisted var players: List<RealmCoopPlayer>
+    /// ウロコ枚数
     @Persisted var scale: List<Int?>
+    /// 遊んだ時間
     @Persisted var playTime: Date
-    #warning("これでちゃんとバックリンクできてたっけ")
+    /// シナリオコード(将来的に利用される)
+    @Persisted var scenarioCode: String?
+    /// スケジュールへのバックリンク
     @Persisted(originProperty: "results") private var link: LinkingObjects<RealmCoopSchedule>
 
     convenience init(from result: SplatNet2.Result) {

@@ -17,9 +17,31 @@ class Session: SplatNet3, ObservableObject {
     @Published var resultCounts: Int = 0
     @Published var resultCountsNum: Int = 0
 
+    override func request(_ request: WebVersion) async throws -> WebVersion.Response {
+        // 進行具合に合わせて追加する
+        let progress: LoginProgress = LoginProgress(path: request.path)
+        loginProgress.append(progress)
+
+        do {
+            let response: WebVersion.Response = try await super.request(request)
+            // 成功したので状態を更新
+            if !loginProgress.isEmpty {
+                loginProgress[loginProgress.count - 1].progressType = .success
+            }
+            return response
+        } catch(let error) {
+            // 失敗したので状態を更新
+            if !loginProgress.isEmpty {
+                loginProgress[loginProgress.count - 1].progressType = .failure
+            }
+            throw error
+        }
+    }
+
+    /// 認証用のバグ
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
         // リクエストが貯まっていた場合は削除する
-        if loginProgress.count >= 8 {
+        if loginProgress.count >= 9 {
             loginProgress.removeAll()
             isPopuped = false
         }
@@ -35,8 +57,8 @@ class Session: SplatNet3, ObservableObject {
         loginProgress.append(progress)
 
         // 多い場合は削除する
-        if loginProgress.count >= 8 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+        if loginProgress.count >= 9 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 self.loginProgress.removeAll()
                 self.isPopuped = false
             })
@@ -69,14 +91,18 @@ class Session: SplatNet3, ObservableObject {
         let resultId: String? = RealmService.shared.getLatestResultId()
 
         #if DEBUG
-        let resultIds: [String] = try await getCoopResultIds(resultId: nil)
+        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
+        print(resultIds)
+//        let resultIds: [String] = try await getCoopResultIds(resultId: nil)
         #else
         let resultIds: [String] = try await getCoopResultIds(resultId: resultId)
         #endif
 
-        // 新規リザルトがなければ何もしない
+        // 新規リザルトがなければ何もせず閉じる
         if resultIds.isEmpty {
-            self.isLoading.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.isLoading.toggle()
+            })
             return
         }
         
@@ -92,7 +118,11 @@ class Session: SplatNet3, ObservableObject {
         })
     }
 
+    /// 概要取得
     override func getCoopSummary() async throws -> CoopSummary.Response {
+        // 一度削除
+        loginProgress.removeAll()
+        // GraphQL用のデータを作成
         let progress: LoginProgress = LoginProgress(path: "/api/graphql")
         loginProgress.append(progress)
 
@@ -111,6 +141,7 @@ class Session: SplatNet3, ObservableObject {
         }
     }
 
+    /// リザルトのID取得
     override func getCoopResultIds(resultId: String? = nil) async throws -> [String] {
         let ids: [String] = try await super.getCoopResultIds(resultId: resultId)
         return ids
@@ -133,9 +164,13 @@ class Session: SplatNet3, ObservableObject {
 
 struct LoginProgress: Identifiable {
     init(path: String) {
-        self.path = path
-            .replacingOccurrences(of: "connect/1.0.0/", with: "")
-            .replacingOccurrences(of: "?id=1234806557", with: "")
+        if path == "static/js/main.cf1388fb.js" {
+            self.path = "api/web_version"
+        } else {
+            self.path = path
+                .replacingOccurrences(of: "connect/1.0.0/", with: "")
+                .replacingOccurrences(of: "?id=1234806557", with: "")
+        }
     }
 
     enum ProgressType: Int {

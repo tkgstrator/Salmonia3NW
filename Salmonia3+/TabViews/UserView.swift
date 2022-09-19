@@ -22,7 +22,7 @@ struct UserView: View {
         NavigationView(content: {
             ScrollView(content: {
                 GeometryReader(content: { geometry in
-                    LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: device == .pad ? 5 : 3), spacing: 16, content: {
+                    LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
                         ForEach(IconType.allCases, id: \.rawValue) { iconType in
                             switch iconType {
                             case .Trash:

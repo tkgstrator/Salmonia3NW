@@ -36,9 +36,13 @@ class RealmService {
         if realm.isInWriteTransaction {
             realm.deleteAll()
         } else {
-            try? realm.write({
-                realm.deleteAll()
-            })
+            do {
+                try realm.write({
+                    realm.deleteAll()
+                })
+            } catch(let error) {
+                print(error)
+            }
         }
     }
 
