@@ -111,15 +111,27 @@ private struct TutorialSignIn: View {
                 .scaledToFit()
                 .frame(width: 140, alignment: .center)
                 .position(geometry.center)
-            Button(action: {
-                isPresented.toggle()
-            }, label: {
-                Text(localizedText: "BUTTON_SIGN_IN")
-                    .fontWeight(.bold)
-                    .frame(width: 300, height: 50, alignment: .center)
-                    .foregroundColor(SPColor.Theme.SPOrange)
-                    .background(.white)
-                    .cornerRadius(25)
+            VStack(content: {
+                Button(action: {
+                    isFirstLaunch.toggle()
+                }, label: {
+                    Text("デバッグの強制エラー対策")
+                        .fontWeight(.bold)
+                        .frame(width: 300, height: 60, alignment: .center)
+                        .foregroundColor(SPColor.Theme.SPOrange)
+                        .background(.white)
+                        .cornerRadius(30)
+                })
+                Button(action: {
+                    isPresented.toggle()
+                }, label: {
+                    Text(localizedText: "BUTTON_SIGN_IN")
+                        .fontWeight(.bold)
+                        .frame(width: 300, height: 60, alignment: .center)
+                        .foregroundColor(SPColor.Theme.SPOrange)
+                        .background(.white)
+                        .cornerRadius(30)
+                })
             })
             .disabled(session.isPopuped)
             .position(x: geometry.center.x, y: geometry.height - 100)

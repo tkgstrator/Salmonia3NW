@@ -21,7 +21,7 @@ struct ResultLoadingView: View {
                         .frame(width: 60, height: 24, alignment: .center)
                         .foregroundColor(progress.color)
                         .overlay(Text(progress.apiType.rawValue))
-                    Text(progress.path)
+                    Text(progress.path.rawValue)
                         .frame(width: 220, height: nil, alignment: .leading)
                         .lineLimit(1)
                     switch progress.progressType {

@@ -46,7 +46,7 @@ struct UserView: View {
                                 .frame(maxWidth: 84)
                             case .Gear:
                                 IconView(icon: iconType, destination: {
-                                    EmptyView()
+                                    DebugView()
                                 })
                                 .frame(maxWidth: 84)
                             }

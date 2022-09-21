@@ -13,18 +13,41 @@ import SwiftUI
 class Session: SplatNet3, ObservableObject {
     @Published var loginProgress: [LoginProgress] = [] {
         willSet {
-            isPopuped = !newValue.isEmpty
+            if !newValue.isEmpty {
+                isPopuped = !newValue.isEmpty
+            }
         }
     }
+    /// ログイン時に使うパラメータ
     @Published var isPopuped: Bool = false
-    @Published var isLoading: Bool = false
+    /// リザルト取得時に使うパラメータ
+    @Published var isLoading: Bool = false {
+        willSet {
+            // 値が切り替わったときに全削除
+            loginProgress.removeAll()
+        }
+    }
+    /// 取得中のリザルトの数
     @Published var resultCounts: Int = 0
+    /// 取得すべきリザルトの数
     @Published var resultCountsNum: Int = 0
-    @Published private var downloadTask: Task<(), Error>?
+    /// エラーテスト
+    @AppStorage("IS_DEBUG_ERROR_SESSION") var lists: [Bool] = Array(repeating: false, count: SPEndpoint.allCases.count)
+    /// リザルト強制取得
+    @AppStorage("IS_DEBUG_FORCE_FETCH") var isForceFetch: Bool = false
 
     /// エラーログをクラウドに保存するように初期化
     override init() {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
+    }
+
+    /// ポップアップを閉じるだけの処理
+    private func dismiss() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
+            self.loginProgress.removeAll()
+            self.isPopuped = false
+            self.isLoading = false
+        })
     }
 
     /// WebVersionリクエスト
@@ -33,25 +56,38 @@ class Session: SplatNet3, ObservableObject {
         loginProgress.append(LoginProgress(request))
 
         do {
+            if lists[.WEB_VERSION] {
+                throw Failure.API(error: NXError.API.content)
+            }
             let response: WebVersion.Response = try await super.request(request)
             loginProgress.success()
             return response
         } catch(let error) {
             loginProgress.failure()
+            dismiss()
             throw error
         }
     }
 
     /// 認証用リクエスト
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
-        loginProgress.append(LoginProgress(request))
+        let progress: LoginProgress = LoginProgress(request)
+        loginProgress.append(progress)
 
         do {
+            if lists[progress.path] {
+                throw Failure.API(error: NXError.API.content)
+            }
             let response: T.ResponseType = try await super.authorize(request)
             loginProgress.success()
+            /// 最後のやつなら閉じる
+            if progress.path == .BULLET_TOKEN {
+                dismiss()
+            }
             return response
         } catch (let error) {
             loginProgress.failure()
+            dismiss()
             throw error
         }
     }
@@ -63,19 +99,20 @@ class Session: SplatNet3, ObservableObject {
         self.resultCounts = 0
         self.resultCountsNum = 0
 
+        /// 最新のバイトID取得
         let resultId: String? = RealmService.shared.getLatestResultId()
 
-#if DEBUG
-        //        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
-        let resultIds: [String] = try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })
-#else
-        let resultIds: [String] = try await getCoopResultIds(resultId: resultId).sorted(by: { $0.playTime < $1.playTime })
-#endif
+        let resultIds: [String] = try await {
+            if isForceFetch {
+                return try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })
+            }
+            return try await getCoopResultIds(resultId: resultId).sorted(by: { $0.playTime < $1.playTime })
+        }()
 
         // 新規リザルトがなければ何もせず閉じる
         if resultIds.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.isLoading.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                self.isLoading = false
             })
             return
         }
@@ -83,21 +120,23 @@ class Session: SplatNet3, ObservableObject {
         // リザルト取得を開始する
         self.resultCountsNum = resultIds.count
 
-        // リザルト取得を開始する
-        _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
-
-        // ローディングを終了する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-            self.isLoading = false
-        })
+        do {
+            loginProgress.append(LoginProgress(.COOP_RESULT))
+            // リザルト取得を開始する
+            _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
+            loginProgress.success()
+            dismiss()
+        } catch(let error) {
+            loginProgress.failure()
+            dismiss()
+            throw error
+        }
     }
 
     /// 概要取得
     override func getCoopSummary() async throws -> CoopSummary.Response {
-        // 一度削除
-        loginProgress.removeAll()
         // GraphQL用のデータを作成
-        loginProgress.append(LoginProgress("/api/graphql"))
+        loginProgress.append(LoginProgress(.COOP_SUMMARY))
 
         do {
             let summary: CoopSummary.Response = try await super.getCoopSummary()
@@ -105,6 +144,7 @@ class Session: SplatNet3, ObservableObject {
             return summary
         } catch(let error) {
             loginProgress.failure()
+            dismiss()
             throw error
         }
     }
@@ -122,6 +162,7 @@ class Session: SplatNet3, ObservableObject {
 
         do {
             let result: SplatNet2.Result = try await super.getCoopResult(id: id)
+
             // リザルト書き込みをする
             DispatchQueue.main.async(execute: {
                 RealmService.shared.save(result)
@@ -129,116 +170,17 @@ class Session: SplatNet3, ObservableObject {
             return result
         } catch(let error) {
             loginProgress.failure()
+            dismiss()
             throw error
         }
     }
 }
 
-extension Array where Element == LoginProgress {
-    func removeAll() {
-
-    }
-
-    mutating func success() {
-        /// 最後のリクエストをSUCCESSにする
-        if let _ = self.last {
-            self[self.count - 1].progressType = .SUCCESS
+private extension Array where Element == Bool {
+    subscript(_ request: SPEndpoint) -> Bool {
+        if let index: Int = SPEndpoint.allCases.firstIndex(of: request) {
+            return self[index]
         }
-    }
-
-    mutating func failure() {
-        /// 最後のリクエストをFAILUREにする
-        if let _ = self.last {
-            self[self.count - 1].progressType = .FAILURE
-            /// このままでは消えないので消えるようにする
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
-                self.removeAll()
-            })
-        }
-    }
-}
-
-struct LoginProgress: Identifiable {
-    /// イニシャライザ
-    init<T: RequestType>(_ request: T) {
-        // 冗長なパスがあるので短くする
-        let path: String = request.path
-            .replacingOccurrences(of: "connect/1.0.0/", with: "")
-            .replacingOccurrences(of: "?id=1234806557", with: "")
-
-        // バージョン取得のやつは更に冗長なので修正
-        self.path = {
-            if path == "static/js/main.cf1388fb.js" {
-                return "api/web_version"
-            }
-            return path
-        }()
-    }
-
-    init(_ path: String) {
-        self.path = path
-
-    }
-
-    /// 進行度を表すEnum
-    enum ProgressType: Int {
-        case PROGRESS   = 0
-        case SUCCESS    = 1
-        case FAILURE    = 2
-    }
-
-    /// API種別を表すEnum
-    enum APIType: String, CaseIterable {
-        case nso    = "NSO"
-        case app    = "APP"
-        case api    = "API"
-        case imink  = "IMINK"
-    }
-
-    let path: String
-
-    /// 進行具合(PROGRESS/SUCCESS/FAILURE)
-    /// デフォルトは進行中
-    var progressType: ProgressType = .PROGRESS
-
-    /// Identifiable
-    var id: String { path }
-
-    /// 背景色
-    var color: Color {
-        switch apiType {
-        case .nso:
-            return SPColor.Theme.SPGreen
-        case .app:
-            return SPColor.Theme.SPRed
-        case .api:
-            return SPColor.Theme.SPBlue
-        case .imink:
-            return SPColor.Theme.SPPink
-        }
-    }
-
-    /// APIの種類を返す(NSO/APP/API)
-    var apiType: APIType {
-        switch path {
-        case "api/graphql":
-            return .api
-        case "api/bullet_tokens":
-            return .app
-        case "f":
-            return .imink
-        case "v2/Game/GetWebServiceToken":
-            return .app
-        case "v3/Account/Login":
-            return .app
-        case "api/token":
-            return .nso
-        case "lookup":
-            return .api
-        case "api/session_token":
-            return .nso
-        default:
-            return .api
-        }
+        return false
     }
 }
