@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "mask.4f8b04761862e1abae58.svg",
       "idiom" : "universal"
     }
   ],
@@ -9,6 +10,7 @@
     "version" : 1
   },
   "properties" : {
-    "localizable" : true
+    "compression-type" : "lossless",
+    "preserves-vector-representation" : true
   }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SplatNet3
 import SDWebImageSwiftUI
 
 struct LoadingView: View {
@@ -18,7 +19,7 @@ struct LoadingView: View {
                     RoundedRectangle(cornerRadius: 4)
                         .frame(width: 60, height: 24, alignment: .center)
                         .foregroundColor(progress.color)
-                        .overlay(Text(progress.apiType.rawValue))
+                        .overlay(Text(progress.apiType.rawValue).foregroundColor(.white))
                     Text(progress.path)
                         .frame(width: 220, height: nil, alignment: .leading)
                         .lineLimit(1)
@@ -43,7 +44,7 @@ struct LoadingView: View {
             }
         })
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
-        .background(Color.themeColor.cornerRadius(12))
+        .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
     }
 }

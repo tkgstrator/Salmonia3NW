@@ -32,7 +32,6 @@ class RealmService {
     }
 
     func deleteAll() {
-        isFirstLaunch.toggle()
         if realm.isInWriteTransaction {
             realm.deleteAll()
         } else {
@@ -48,7 +47,7 @@ class RealmService {
 
     /// 最も新しいリザルトIDを取得する
     func getLatestResultId() -> String? {
-        realm.objects(RealmCoopResult.self).max(by: { $0.playTime < $1.playTime })?.id
+        return realm.objects(RealmCoopResult.self).max(by: { $0.playTime < $1.playTime })?.id
     }
     
     func object<T: Object>(ofType type: T.Type, forPrimaryKey key: String?) -> T? {

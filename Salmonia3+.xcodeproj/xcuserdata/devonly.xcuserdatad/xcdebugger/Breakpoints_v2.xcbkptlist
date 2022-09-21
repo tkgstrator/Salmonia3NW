@@ -7,49 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "187ED205-602A-45CB-8D0A-5FB23BCC9E9E"
+            uuid = "D4F90D43-FAA0-4F48-AE16-7499AC8CAD56"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Salmonia3+/Service/Sesison.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "authorize(_:)"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "getCoopResults()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5BDC3820-CF39-4856-9874-1B225D0E51D2"
+            uuid = "439C0FC1-3079-4076-B44E-B64B3A3CFAA4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Salmonia3+/Components/Results/ResultLoadingView.swift"
+            filePath = "Salmonia3+/Service/Sesison.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "getCoopResults()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "26349721-FAEC-4D12-8F9D-3942CB87074C"
+            uuid = "5D1DED07-E85D-4939-B581-4365959B1FE4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Salmonia3+/Components/Results/ResultLoadingView.swift"
+            filePath = "Salmonia3+/Service/Sesison.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "getCoopResults()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47BFF44B-66E5-49BB-A3A6-B26036159CD3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Service/Sesison.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "getCoopSummary()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

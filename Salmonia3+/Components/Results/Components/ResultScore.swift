@@ -72,7 +72,7 @@ private struct ResultScore_1: View {
         let scale: CGFloat = geometry.width * 0.5 / 200
         let width: CGFloat = geometry.width * 0.5
         let height: CGFloat = geometry.width / 200 * 70 * 0.5
-        let foregrondColor: Color = Color(hex: "FF7500")
+
         VStack(alignment: .leading, spacing: nil, content: {
             if let grade = result.grade, let gradePoint = result.gradePoint {
                 HStack(spacing: nil, content: {
@@ -91,7 +91,7 @@ private struct ResultScore_1: View {
                         .fill(Color.primary.opacity(0.3))
                         .frame(width: (width - 10 * scale), height: 8 * scale, alignment: .center)
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(foregrondColor)
+                        .fill(SPColor.Theme.SPOrange)
                         .frame(width: (width - 10 * scale) * CGFloat(gradePoint) / maxValue, height: 8 * scale, alignment: .center)
                 })
             }
@@ -129,9 +129,9 @@ struct ResultScore_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
-        ResultDetailView(result: result, schedule: schedule)
-            .previewLayout(.fixed(width: 400, height: 800))
-            .preferredColorScheme(.dark)
+//        ResultDetailView(result: result, schedule: schedule)
+//            .previewLayout(.fixed(width: 400, height: 800))
+//            .preferredColorScheme(.dark)
         ResultScore(result: result)
             .previewLayout(.fixed(width: 400, height: 70))
             .preferredColorScheme(.dark)

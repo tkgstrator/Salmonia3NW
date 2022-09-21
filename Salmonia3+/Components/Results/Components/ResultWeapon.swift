@@ -13,14 +13,14 @@ struct ResultWeapon: View {
     let weaponList: [WeaponType]
     let specialWeapon: SpecialType
 
-    init(weaponList: RealmSwift.List<WeaponType>, specialWeapon: SpecialType) {
+    init(weaponList: RealmSwift.List<WeaponType>, specialWeapon: SpecialType?) {
         self.weaponList = Array(weaponList)
-        self.specialWeapon = specialWeapon
+        self.specialWeapon = specialWeapon ?? .SpUltraShot
     }
 
-    init(weaponList: [WeaponType], specialWeapon: SpecialType) {
+    init(weaponList: [WeaponType], specialWeapon: SpecialType?) {
         self.weaponList = weaponList
-        self.specialWeapon = specialWeapon
+        self.specialWeapon = specialWeapon ?? .SpUltraShot
     }
 
     var body: some View {

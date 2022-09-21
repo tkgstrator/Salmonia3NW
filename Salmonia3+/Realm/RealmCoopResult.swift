@@ -120,7 +120,7 @@ extension RealmCoopResult {
     }
 
     var specialUsage: [[SpecialType]] {
-        let usages: [(SpecialType, [Int])] = Array(zip(players.map({ $0.specialId }), players.map({ Array($0.specialCounts) })))
+        let usages: [(SpecialType, [Int])] = Array(zip(players.compactMap({ $0.specialId }), players.map({ Array($0.specialCounts) })))
         var specialUsage: [[SpecialType]] = Array(repeating: [], count: waves.count)
 
         for usage in usages {

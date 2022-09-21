@@ -24,7 +24,7 @@ struct TypePicker<T: AllCaseable>: View {
         })
         .pickerStyle(.segmented)
         .introspectSegmentedControl(customize: { controller in
-            controller.selectedSegmentTintColor = UIColor(hex: "FF7500")
+            controller.selectedSegmentTintColor = UIColor(SPColor.Theme.SPOrange)
             controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .selected)
             controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .normal)
         })

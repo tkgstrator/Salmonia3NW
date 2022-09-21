@@ -16,6 +16,7 @@ class Session: SplatNet3, ObservableObject {
     @Published var isLoading: Bool = false
     @Published var resultCounts: Int = 0
     @Published var resultCountsNum: Int = 0
+    @Published private var downloadTask: Task<(), Error>?
 
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
@@ -46,6 +47,12 @@ class Session: SplatNet3, ObservableObject {
             isPopuped = false
         }
 
+        // 先頭のリクエストがNSOで\ない場合は削除する
+        if let progress = loginProgress.first, progress.apiType != .nso  {
+            loginProgress.removeAll()
+            isPopuped = false
+        }
+
         // 何もなければ最初のリクエスト
         if loginProgress.isEmpty {
             // ポップアップ表示する
@@ -59,7 +66,7 @@ class Session: SplatNet3, ObservableObject {
         // 多い場合は削除する
         if loginProgress.count >= 9 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.loginProgress.removeAll()
+                self.loginProgress.removeAll(where: { $0.path != "api/graphql"})
                 self.isPopuped = false
             })
         }
@@ -81,21 +88,26 @@ class Session: SplatNet3, ObservableObject {
         }
     }
 
+    func cancel() {
+        self.downloadTask?.cancel()
+        self.isLoading = false
+    }
+
     /// リザルトを取得して書き込みする
     func getCoopResults() async throws {
         // ローディングを開始する
         self.isLoading.toggle()
         self.resultCounts = 0
         self.resultCountsNum = 0
-        
+
         let resultId: String? = RealmService.shared.getLatestResultId()
 
-        #if DEBUG
-//        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
-        let resultIds: [String] = try await getCoopResultIds(resultId: nil)
-        #else
-        let resultIds: [String] = try await getCoopResultIds(resultId: resultId)
-        #endif
+#if DEBUG
+        //        let resultIds: [String] = (try await getCoopResultIds(resultId: resultId)).sorted(by: { $0.playTime < $1.playTime })
+        let resultIds: [String] = try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })
+#else
+        let resultIds: [String] = try await getCoopResultIds(resultId: resultId).sorted(by: { $0.playTime < $1.playTime })
+#endif
 
         // 新規リザルトがなければ何もせず閉じる
         if resultIds.isEmpty {
@@ -104,7 +116,7 @@ class Session: SplatNet3, ObservableObject {
             })
             return
         }
-        
+
         // リザルト取得を開始する
         self.resultCountsNum = resultIds.count
 
@@ -112,8 +124,8 @@ class Session: SplatNet3, ObservableObject {
         _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
 
         // ローディングを終了する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-            self.isLoading.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+            self.isLoading = false
         })
     }
 
@@ -151,13 +163,21 @@ class Session: SplatNet3, ObservableObject {
         // リザルトを一件取得するごとにカウントアップする
         resultCounts += 1
 
-        let result: SplatNet2.Result = try await super.getCoopResult(id: id)
+        do {
+            let result: SplatNet2.Result = try await super.getCoopResult(id: id)
 
-        // リザルト書き込みをする
-        DispatchQueue.main.async(execute: {
-            RealmService.shared.save(result)
-        })
-        return result
+            // リザルト書き込みをする
+            DispatchQueue.main.async(execute: {
+                RealmService.shared.save(result)
+            })
+            return result
+        } catch(let error) {
+            // 失敗したので状態を更新
+            if !loginProgress.isEmpty {
+                loginProgress[loginProgress.count - 1].progressType = .failure
+            }
+            throw error
+        }
     }
 }
 

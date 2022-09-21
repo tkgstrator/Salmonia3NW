@@ -29,6 +29,9 @@ struct ResultsView: View {
                 try await session.getCoopResults()
             }
         })
+        .onDisappear(perform: {
+            session.cancel()
+        })
         .listStyle(.plain)
         .navigationTitle(Text(localizedText: "TAB_RESULTS"))
         .navigationBarTitleDisplayMode(.inline)
@@ -82,6 +85,8 @@ struct ResultsWithScheduleView: View {
                 Task {
                     try await session.getCoopResults()
                 }
+            })
+            .onDisappear(perform: {
             })
             .onChange(of: selection, perform: { newValue in
                 $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)

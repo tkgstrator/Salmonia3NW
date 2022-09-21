@@ -9,6 +9,8 @@ import SwiftUI
 import Introspect
 import AppTrackingTransparency
 import GoogleMobileAds
+import SplatNet3
+import SDWebImageSwiftUI
 
 struct TutorialView: View {
     @State private var selection: Int = 0
@@ -32,7 +34,7 @@ struct TutorialView: View {
                 .tag(2)
         })
         .tabViewStyle(.page(indexDisplayMode: .always))
-        .background(Color(hex: "FF7500"))
+        .background(SPColor.Theme.SPOrange.ignoresSafeArea())
     }
 }
 
@@ -104,13 +106,18 @@ private struct TutorialSignIn: View {
                 .multilineTextAlignment(.center)
                 .frame(width: 300, height: nil, alignment: .center)
                 .position(x: geometry.center.x, y: 160)
+            WebImage(url: URL(string: "https://www.nintendo.co.jp/character/splatoon/images_en/common/loader_ika.gif"))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 140, alignment: .center)
+                .position(geometry.center)
             Button(action: {
                 isPresented.toggle()
             }, label: {
                 Text(localizedText: "BUTTON_SIGN_IN")
                     .fontWeight(.bold)
                     .frame(width: 300, height: 50, alignment: .center)
-                    .foregroundColor(Color(hex: "FF7500"))
+                    .foregroundColor(SPColor.Theme.SPOrange)
                     .background(.white)
                     .cornerRadius(25)
             })
@@ -152,6 +159,11 @@ private struct Tutorial: View {
                 .position(x: geometry.center.x, y: 160)
                 .multilineTextAlignment(.center)
                 .frame(width: 300, height: nil, alignment: .center)
+            WebImage(url: URL(string: "https://www.nintendo.co.jp/character/splatoon/images_en/common/loader_ika.gif"))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 140, alignment: .center)
+                .position(geometry.center)
             Button(action: {
                 withAnimation(.easeInOut(duration: 1)) {
                     selection += 1
@@ -160,7 +172,7 @@ private struct Tutorial: View {
                 Text(localizedText: "BUTTON_NEXT")
                     .fontWeight(.bold)
                     .frame(width: 300, height: 60, alignment: .center)
-                    .foregroundColor(Color(hex: "FF7500"))
+                    .foregroundColor(SPColor.Theme.SPOrange)
                     .background(.white)
                     .cornerRadius(30)
             })

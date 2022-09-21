@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import SplatNet3
 
 struct ResultLoadingView: View {
     @StateObject var session: Session
@@ -64,7 +65,7 @@ struct ResultLoadingView: View {
             .padding()
         })
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
-        .background(Color.themeColor.cornerRadius(12))
+        .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
         .onAppear(perform: {
             UIApplication.shared.isIdleTimerDisabled = true

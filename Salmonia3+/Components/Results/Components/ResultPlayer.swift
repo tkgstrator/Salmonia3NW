@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct ResultPlayer: View {
     let result: RealmCoopPlayer
-    let foregroundColor = Color(hex: "FF7500")
-
 
     var body: some View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 356
             ZStack(alignment: .bottom, content: {
                 Salmon()
-                    .fill(foregroundColor)
+                    .fill(SPColor.Theme.SPOrange)
                 HStack(alignment: .bottom, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
                         Text(result.name)

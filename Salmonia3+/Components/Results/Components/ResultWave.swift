@@ -10,8 +10,6 @@ import SplatNet3
 
 struct ResultWave: View {
     let wave: RealmCoopWave
-    let foregroundColor: Color = Color(hex: "#2A270B")
-    let backgroundColor: Color = Color(hex: "E5F100")
 
     var body: some View {
         GeometryReader(content: { geometry in
@@ -22,7 +20,7 @@ struct ResultWave: View {
                     .frame(height: 25 * scale, alignment: .center)
                     .foregroundColor(.black)
                 ZStack(content: {
-                    Rectangle().fill(foregroundColor)
+                    Rectangle().fill(SPColor.Theme.SPDark)
                     if let goldenIkuraNum = wave.goldenIkuraNum, let quotaNum = wave.quotaNum {
                         Text("\(goldenIkuraNum)/\(quotaNum)")
                             .font(systemName: .Splatfont2, size: 25 * scale)
@@ -57,7 +55,7 @@ struct ResultWave: View {
             .padding(.vertical, 16 * scale)
             .overlay(WaterLevel().fill(Color.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
         })
-        .background(RoundedRectangle(cornerRadius: 6).fill(backgroundColor))
+        .background(RoundedRectangle(cornerRadius: 6).fill(SPColor.Theme.SPYellow))
         .mask(Hanger().scaledToFill())
         .aspectRatio(124/180, contentMode: .fit)
     }

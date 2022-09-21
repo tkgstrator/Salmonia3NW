@@ -8,10 +8,10 @@
 
 import SwiftUI
 import RealmSwift
+import SplatNet3
 
 struct ResultDefeated: View {
     let bossKillCountsTotal: Int
-    private let foregroundColor = Color(hex: "E5F100")
 
     init(bossKillCountsTotal: Int) {
         self.bossKillCountsTotal = bossKillCountsTotal
@@ -22,7 +22,7 @@ struct ResultDefeated: View {
             let scale: CGFloat = geometry.width / 172
             Text("BOSS_SALMONIDS_DEFEATED_\(bossKillCountsTotal)")
                 .font(systemName: .Splatfont2, size: 11 * scale)
-                .foregroundColor(foregroundColor)
+                .foregroundColor(SPColor.Theme.SPYellow)
                 .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)
                 .position(geometry.center)
         })

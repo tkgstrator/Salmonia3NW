@@ -10,13 +10,15 @@ import SplatNet3
 import RealmSwift
 import PopupView
 import SDWebImageSwiftUI
+import StoreKit
 
 struct UserView: View {
     @ObservedResults(RealmCoopResult.self, sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)) var results
     @StateObject var session: Session = Session()
     @State private var isPresented: Bool = false
     @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
-    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
+    @AppStorage("PREFERRED_COLOR_SCHEME") var preferredColorScheme: Bool = true
+//    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         NavigationView(content: {
@@ -26,18 +28,20 @@ struct UserView: View {
                         ForEach(IconType.allCases, id: \.rawValue) { iconType in
                             switch iconType {
                             case .Trash:
-                                IconButton(icon: iconType, execute: {
-                                    RealmService.shared.deleteAll()
+                                IconView(icon: iconType, destination: {
+                                    DeleteConfirmView()
                                 })
                                 .frame(maxWidth: 84)
                             case .Theme:
-                                IconView(icon: iconType, destination: {
-                                    EmptyView()
+                                IconButton(icon: iconType, execute: {
+                                    preferredColorScheme.toggle()
                                 })
                                 .frame(maxWidth: 84)
                             case .Review:
-                                IconView(icon: iconType, destination: {
-                                    EmptyView()
+                                IconButton(icon: iconType, execute: {
+                                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                                        SKStoreReviewController.requestReview(in: scene)
+                                    }
                                 })
                                 .frame(maxWidth: 84)
                             case .Gear:
@@ -76,5 +80,9 @@ struct LabeledContent: View {
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
         UserView()
+            .previewLayout(.fixed(width: 400, height: 300))
+        UserView()
+            .previewLayout(.fixed(width: 400, height: 300))
+            .preferredColorScheme(.dark)
     }
 }
