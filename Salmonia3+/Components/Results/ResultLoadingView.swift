@@ -25,16 +25,16 @@ struct ResultLoadingView: View {
                         .frame(width: 220, height: nil, alignment: .leading)
                         .lineLimit(1)
                     switch progress.progressType {
-                    case .progress:
+                    case .PROGRESS:
                         ProgressView()
                             .frame(width: 24, height: 24, alignment: .center)
-                    case .failure:
+                    case .FAILURE:
                         Image(systemName: "xmark.circle")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24, alignment: .center)
                             .foregroundColor(.red)
-                    case .success:
+                    case .SUCCESS:
                         Image(systemName: "checkmark.circle")
                             .resizable()
                             .scaledToFit()

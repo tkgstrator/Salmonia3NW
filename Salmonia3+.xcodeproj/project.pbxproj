@@ -336,8 +336,8 @@
 				10A6A18828B7A4F80075563F /* TabViews */,
 				101AACBB28B77C750030B56C /* mainApp.swift */,
 				101AACBD28B77C750030B56C /* ContentView.swift */,
-				101AACBF28B77C760030B56C /* Assets.xcassets */,
 				1018B4AC28DAC394002BD1F0 /* Secrets.swift */,
+				101AACBF28B77C760030B56C /* Assets.xcassets */,
 				101AACC128B77C760030B56C /* Preview Content */,
 			);
 			path = "Salmonia3+";
@@ -437,6 +437,8 @@
 			buildConfigurationList = 101AACDC28B77C760030B56C /* Build configuration list for PBXNativeTarget "Salmonia3+" */;
 			buildPhases = (
 				101AACB428B77C750030B56C /* Sources */,
+				1018B4AE28DAC548002BD1F0 /* SwiftLint */,
+				1018B4AF28DAC56A002BD1F0 /* Secrets */,
 				101AACB528B77C750030B56C /* Frameworks */,
 				101AACB628B77C750030B56C /* Resources */,
 			);
@@ -586,6 +588,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1018B4AE28DAC548002BD1F0 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# cd ${PROJECT_DIR}/..\n# env -i /bin/sh -c \"source /etc/profile && swift run swiftlint --fix\"\n# env -i /bin/sh -c \"source /etc/profile && swift run swiftlint\"\n";
+		};
+		1018B4AF28DAC56A002BD1F0 /* Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Secrets;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nFILE=`find ${SRCROOT} -name Secrets.swift`\nRESULTS=($(grep -n '\"\"' $FILE | sed -e 's/:.*//g'))\n\nfor RESULT in ${RESULTS[@]}\ndo\n  echo \"$FILE:$RESULT:0: warning: 環境変数がセットされていません\"\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		101AACB428B77C750030B56C /* Sources */ = {

@@ -121,6 +121,7 @@ private struct TutorialSignIn: View {
                     .background(.white)
                     .cornerRadius(25)
             })
+            .disabled(session.isPopuped)
             .position(x: geometry.center.x, y: geometry.height - 100)
             .popup(isPresented: $session.isPopuped, view: {
                 LoadingView(session: session)

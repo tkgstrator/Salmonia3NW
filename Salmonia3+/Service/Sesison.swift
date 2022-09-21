@@ -11,86 +11,49 @@ import Common
 import SwiftUI
 
 class Session: SplatNet3, ObservableObject {
-    @Published var loginProgress: [LoginProgress] = []
+    @Published var loginProgress: [LoginProgress] = [] {
+        willSet {
+            isPopuped = !newValue.isEmpty
+        }
+    }
     @Published var isPopuped: Bool = false
     @Published var isLoading: Bool = false
     @Published var resultCounts: Int = 0
     @Published var resultCountsNum: Int = 0
     @Published private var downloadTask: Task<(), Error>?
 
+    /// エラーログをクラウドに保存するように初期化
+    override init() {
+        super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
+    }
+
+    /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
-        let progress: LoginProgress = LoginProgress(path: request.path)
-        loginProgress.append(progress)
+        loginProgress.append(LoginProgress(request))
 
         do {
             let response: WebVersion.Response = try await super.request(request)
-            // 成功したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .success
-            }
+            loginProgress.success()
             return response
         } catch(let error) {
-            // 失敗したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .failure
-            }
+            loginProgress.failure()
             throw error
         }
     }
 
-    /// 認証用のバグ
+    /// 認証用リクエスト
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
-        // リクエストが貯まっていた場合は削除する
-        if loginProgress.count >= 9 {
-            loginProgress.removeAll()
-            isPopuped = false
-        }
+        loginProgress.append(LoginProgress(request))
 
-        // 先頭のリクエストがNSOで\ない場合は削除する
-        if let progress = loginProgress.first, progress.apiType != .nso  {
-            loginProgress.removeAll()
-            isPopuped = false
-        }
-
-        // 何もなければ最初のリクエスト
-        if loginProgress.isEmpty {
-            // ポップアップ表示する
-            isPopuped.toggle()
-        }
-
-        // 進行具合に合わせて追加する
-        let progress: LoginProgress = LoginProgress(path: request.path)
-        loginProgress.append(progress)
-
-        // 多い場合は削除する
-        if loginProgress.count >= 9 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.loginProgress.removeAll(where: { $0.path != "api/graphql"})
-                self.isPopuped = false
-            })
-        }
-
-        // 通信待ち状態
         do {
             let response: T.ResponseType = try await super.authorize(request)
-            // 成功したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .success
-            }
+            loginProgress.success()
             return response
         } catch (let error) {
-            // 失敗したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .failure
-            }
+            loginProgress.failure()
             throw error
         }
-    }
-
-    func cancel() {
-        self.downloadTask?.cancel()
-        self.isLoading = false
     }
 
     /// リザルトを取得して書き込みする
@@ -134,20 +97,14 @@ class Session: SplatNet3, ObservableObject {
         // 一度削除
         loginProgress.removeAll()
         // GraphQL用のデータを作成
-        let progress: LoginProgress = LoginProgress(path: "/api/graphql")
-        loginProgress.append(progress)
+        loginProgress.append(LoginProgress("/api/graphql"))
 
         do {
             let summary: CoopSummary.Response = try await super.getCoopSummary()
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .success
-            }
+            loginProgress.success()
             return summary
         } catch(let error) {
-            // 失敗したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .failure
-            }
+            loginProgress.failure()
             throw error
         }
     }
@@ -165,39 +122,72 @@ class Session: SplatNet3, ObservableObject {
 
         do {
             let result: SplatNet2.Result = try await super.getCoopResult(id: id)
-
             // リザルト書き込みをする
             DispatchQueue.main.async(execute: {
                 RealmService.shared.save(result)
             })
             return result
         } catch(let error) {
-            // 失敗したので状態を更新
-            if !loginProgress.isEmpty {
-                loginProgress[loginProgress.count - 1].progressType = .failure
-            }
+            loginProgress.failure()
             throw error
         }
     }
 }
 
-struct LoginProgress: Identifiable {
-    init(path: String) {
-        if path == "static/js/main.cf1388fb.js" {
-            self.path = "api/web_version"
-        } else {
-            self.path = path
-                .replacingOccurrences(of: "connect/1.0.0/", with: "")
-                .replacingOccurrences(of: "?id=1234806557", with: "")
+extension Array where Element == LoginProgress {
+    func removeAll() {
+
+    }
+
+    mutating func success() {
+        /// 最後のリクエストをSUCCESSにする
+        if let _ = self.last {
+            self[self.count - 1].progressType = .SUCCESS
         }
     }
 
-    enum ProgressType: Int {
-        case progress   = 0
-        case success    = 1
-        case failure    = 2
+    mutating func failure() {
+        /// 最後のリクエストをFAILUREにする
+        if let _ = self.last {
+            self[self.count - 1].progressType = .FAILURE
+            /// このままでは消えないので消えるようにする
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
+                self.removeAll()
+            })
+        }
+    }
+}
+
+struct LoginProgress: Identifiable {
+    /// イニシャライザ
+    init<T: RequestType>(_ request: T) {
+        // 冗長なパスがあるので短くする
+        let path: String = request.path
+            .replacingOccurrences(of: "connect/1.0.0/", with: "")
+            .replacingOccurrences(of: "?id=1234806557", with: "")
+
+        // バージョン取得のやつは更に冗長なので修正
+        self.path = {
+            if path == "static/js/main.cf1388fb.js" {
+                return "api/web_version"
+            }
+            return path
+        }()
     }
 
+    init(_ path: String) {
+        self.path = path
+
+    }
+
+    /// 進行度を表すEnum
+    enum ProgressType: Int {
+        case PROGRESS   = 0
+        case SUCCESS    = 1
+        case FAILURE    = 2
+    }
+
+    /// API種別を表すEnum
     enum APIType: String, CaseIterable {
         case nso    = "NSO"
         case app    = "APP"
@@ -206,21 +196,29 @@ struct LoginProgress: Identifiable {
     }
 
     let path: String
-    var progressType: ProgressType = .progress
+
+    /// 進行具合(PROGRESS/SUCCESS/FAILURE)
+    /// デフォルトは進行中
+    var progressType: ProgressType = .PROGRESS
+
+    /// Identifiable
     var id: String { path }
+
+    /// 背景色
     var color: Color {
         switch apiType {
         case .nso:
-            return Color(hex: "1ACE3B")
+            return SPColor.Theme.SPGreen
         case .app:
-            return Color(hex: "D33826")
+            return SPColor.Theme.SPRed
         case .api:
-            return Color(hex: "BC08F5")
+            return SPColor.Theme.SPBlue
         case .imink:
-            return Color(hex: "FF318E")
+            return SPColor.Theme.SPPink
         }
-   }
+    }
 
+    /// APIの種類を返す(NSO/APP/API)
     var apiType: APIType {
         switch path {
         case "api/graphql":
