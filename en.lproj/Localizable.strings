@@ -52,5 +52,6 @@
 "ebb43f710c69fff395348619c805a411418671dc25d5824e8d15601d0ea24eef" = "Results";
 "035adfaeefa299ce18de94be886466cef6b55a18b5c934c7cf2c1f9a1499313f" = "Accounts";
 
-"bfdbade57125c71998504700c6ac737901f5262ffd9ad38eeaf18dde6d834359" = "This operation cannot be undone";
+"bfdbade57125c71998504700c6ac737901f5262ffd9ad38eeaf18dde6d834359" = "Warning!";
 "c2d503a40c447f8c6de31af5c6a26b37a54d9bbfea784d0eb1a2686b039d0284" = "Confirm";
+"36edc3fec2e81a0e15c9476678d68de7c7a6441a3ccb893b0892babff1ff731c" = "This operation cannot be undone.";

@@ -383,13 +383,13 @@
 		10320C6928D41B7700666F09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
 				100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */,
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
-				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 				1018B49B28D73352002BD1F0 /* SwiftUI+Text.swift */,
+				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
+				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

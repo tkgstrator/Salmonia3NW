@@ -58,14 +58,18 @@ private struct NSOButton<Title: View>: View {
                 title()
                     .lineLimit(1)
                     .font(systemName: .Splatfont, size: 16)
+                    .frame(height: 16)
             })
         })
+        .buttonStyle(.plain)
         .alert(Text(localizedText: "TITLE_CONFIRM_DANGER"), isPresented: $isPresented) {
             Button(role: .destructive, action: {
                 action()
             }, label: {
                 Text(localizedText: "TITLE_DANGER_OK")
             })
+        } message: {
+            Text(localizedText: "DESC_DANGER_ERASE")
         }
     }
 }

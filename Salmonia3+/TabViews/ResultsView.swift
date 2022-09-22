@@ -10,9 +10,13 @@ import RealmSwift
 import SplatNet3
 
 struct ResultsView: View {
-    let results: RealmSwift.List<RealmCoopResult>
+    let results: RealmSwift.Results<RealmCoopResult>
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
     @StateObject var session: Session = Session()
+
+    init(results: RealmSwift.List<RealmCoopResult>) {
+        self.results = results.sorted(byKeyPath: "playTime", ascending: false)
+    }
 
     var body: some View {
         List(content: {
