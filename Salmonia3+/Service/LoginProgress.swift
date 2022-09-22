@@ -75,9 +75,9 @@ struct LoginProgress: Identifiable {
     /// APIの種類を返す(NSO/APP/API)
     var apiType: APIType {
         switch path {
-        case .COOP_SUMMARY, .COOP_RESULT, .VERSION, .WEB_VERSION:
+        case .COOP_SUMMARY, .COOP_RESULT, .VERSION:
             return .api
-        case .SPLATOON_ACCESS_TOKEN, .SPLATOON_TOKEN:
+        case .SPLATOON_ACCESS_TOKEN, .SPLATOON_TOKEN, .BULLET_TOKEN, .WEB_VERSION:
             return .app
         case .F:
             return .imink

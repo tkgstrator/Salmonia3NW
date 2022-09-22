@@ -11,7 +11,6 @@ import SplatNet3
 
 struct ResultLoadingView: View {
     @StateObject var session: Session
-    let baseURL: URL? = URL(unsafeString: "https://cdn.discordapp.com/attachments/883143492623278100/998164048266928198/animated.png")
 
     var body: some View {
         VStack(content: {
@@ -51,7 +50,7 @@ struct ResultLoadingView: View {
                     .stroke(.pink, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 VStack(alignment: .center, spacing: 0, content: {
-                    WebImage(url: baseURL, isAnimating: .constant(true))
+                    WebImage(loading: .SPLATNET2)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 60, height: 60, alignment: .center)
