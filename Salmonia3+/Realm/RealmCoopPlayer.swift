@@ -22,6 +22,8 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted var bossKillCountsTotal: Int
     @Persisted var bossKillCounts: List<Int>
     @Persisted var specialCounts: List<Int>
+    @Persisted var badges: List<BadgeType?>
+    @Persisted var background: NamePlateType?
     @Persisted var weaponList: List<WeaponType>
 
     convenience init(from result: SplatNet2.PlayerResult) {
@@ -39,6 +41,8 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.weaponList.append(objectsIn: result.weaponList)
         self.bossKillCounts.append(objectsIn: result.bossKillCounts)
         self.bossKillCountsTotal = result.bossKillCountsTotal
+        self.background = result.nameplate.background.id
+        self.badges.append(objectsIn: result.nameplate.badges)
     }
 
     convenience init(dummy: Bool = true, id: Int = 1) {
@@ -58,6 +62,10 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.bossKillCountsTotal = 99
     }
 }
+
+extension BadgeType: PersistableEnum {}
+
+extension NamePlateType: PersistableEnum {}
 
 extension SpecialType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {

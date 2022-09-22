@@ -15,7 +15,6 @@
 		100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E874D28D4AC66007FCF3C /* ResultsView.swift */; };
 		100E875028D4B8F8007FCF3C /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */; };
 		100E875328D4B91A007FCF3C /* ResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E875228D4B91A007FCF3C /* ResultHeader.swift */; };
-		100E875628D4BD9E007FCF3C /* SwiftUI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E875528D4BD9E007FCF3C /* SwiftUI+Image.swift */; };
 		100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */; };
 		100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E875928D4D4DB007FCF3C /* ResultWave.swift */; };
 		100E875C28D4D7EA007FCF3C /* SwiftUI+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */; };
@@ -113,7 +112,6 @@
 		100E874D28D4AC66007FCF3C /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 		100E875228D4B91A007FCF3C /* ResultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHeader.swift; sourceTree = "<group>"; };
-		100E875528D4BD9E007FCF3C /* SwiftUI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Image.swift"; sourceTree = "<group>"; };
 		100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View.swift"; sourceTree = "<group>"; };
 		100E875928D4D4DB007FCF3C /* ResultWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWave.swift; sourceTree = "<group>"; };
 		100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Color.swift"; sourceTree = "<group>"; };
@@ -392,7 +390,6 @@
 			children = (
 				100E875428D4BD90007FCF3C /* Images */,
 				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
-				100E875528D4BD9E007FCF3C /* SwiftUI+Image.swift */,
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
 				100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */,
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
@@ -670,7 +667,6 @@
 				100E876728D4EB5C007FCF3C /* ResultWeapon.swift in Sources */,
 				100E875C28D4D7EA007FCF3C /* SwiftUI+Color.swift in Sources */,
 				1018B4B128DB0371002BD1F0 /* DebugView.swift in Sources */,
-				100E875628D4BD9E007FCF3C /* SwiftUI+Image.swift in Sources */,
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
 				1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */,
 				1018B49C28D73352002BD1F0 /* SwiftUI+Text.swift in Sources */,

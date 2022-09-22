@@ -6,4 +6,5 @@
   
 */
 
+CFBundleDisplayName = "Salmonia3+";
 NSUserTrackingUsageDescription = "Your data will be used to deliver personalized ads to you";

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct ResultEgg: View {
     let ikuraNum: Int
