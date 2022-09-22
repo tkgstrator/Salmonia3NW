@@ -68,6 +68,8 @@
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
+		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
+		10A0ACB228DCAA5E008B332A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB128DCAA5E008B332A /* SettingView.swift */; };
 		10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A18B28B7A51D0075563F /* WeaponsView.swift */; };
 		10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19128B7A7130075563F /* GoogleMobileAds */; };
 		10A6A19428B7A71E0075563F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19328B7A71E0075563F /* Realm */; };
@@ -169,6 +171,8 @@
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
+		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		10A0ACB128DCAA5E008B332A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		10A6A18428B7A3D60075563F /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
 		10A6A18B28B7A51D0075563F /* WeaponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponsView.swift; sourceTree = "<group>"; };
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
 				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
 				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
+				10A0ACB128DCAA5E008B332A /* SettingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
 				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
+				10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
+				10A0ACB228DCAA5E008B332A /* SettingView.swift in Sources */,
 				1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */,
 				1018B49A28D71B64002BD1F0 /* NSOCircle.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
@@ -669,6 +676,7 @@
 				100E875328D4B91A007FCF3C /* ResultHeader.swift in Sources */,
 				1018B4B328DB121C002BD1F0 /* AppStorage.swift in Sources */,
 				100E875028D4B8F8007FCF3C /* ResultDetailView.swift in Sources */,
+				10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */,
 				100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */,
 				105757B428DB22A200833B95 /* LoginProgress.swift in Sources */,
 				1018B4A728D87B05002BD1F0 /* DeleteConfirmView.swift in Sources */,

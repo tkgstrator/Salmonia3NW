@@ -11,7 +11,8 @@ enum IconType: String, CaseIterable {
     case Gear       = "gear"
     case Review     = "pencil.and.outline"
     case Theme      = "circle.lefthalf.filled"
-    case Trash      = "trash"
+    case Trash      = "trash.circle"
+    case Debug      = "info.circle"
 
     var localizedText: String {
         switch self {
@@ -23,6 +24,8 @@ enum IconType: String, CaseIterable {
             return NSLocalizedString("TITLE_THEME".sha256Hash, comment: "")
         case .Trash:
             return NSLocalizedString("TITLE_TRASH".sha256Hash, comment: "")
+        case .Debug:
+            return NSLocalizedString("TITLE_DEBUG".sha256Hash, comment: "")
         }
     }
 }

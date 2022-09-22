@@ -9,17 +9,25 @@ import SwiftUI
 import SplatNet3
 
 struct ResultPlayer: View {
+    @AppStorage("IS_USE_NAMEPLATE") var isUseNamePlate: Bool = false
+    @Environment(\.isNameVisible) var isNameVisible: Bool
     let result: RealmCoopPlayer
 
     var body: some View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 356
             ZStack(alignment: .bottom, content: {
-                Salmon()
-                    .fill(SPColor.Theme.SPOrange)
+                if let background = result.background, isUseNamePlate {
+                    Image(bundle: background)
+                        .resizable()
+                        .clipShape(Salmon())
+                } else {
+                    Salmon()
+                        .fill(SPColor.Theme.SPOrange)
+                }
                 HStack(alignment: .bottom, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
-                        Text(result.name)
+                        Text(isNameVisible ? result.name : "-")
                             .font(systemName: .Splatfont2, size: 17 * scale)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)

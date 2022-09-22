@@ -18,13 +18,24 @@ struct UserView: View {
     @State private var isPresented: Bool = false
     @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
     @AppStorage("PREFERRED_COLOR_SCHEME") var preferredColorScheme: Bool = true
-//    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         NavigationView(content: {
             ScrollView(content: {
                 GeometryReader(content: { geometry in
                     LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
+                        if let account = session.account {
+                            VStack(alignment: .center, spacing: nil, content: {
+                                WebImage(url: account.thumbnailURL)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(NSOCircle())
+                                Text(account.nickname)
+                                    .font(systemName: .Splatfont, size: 16)
+                                    .frame(height: 16)
+                            })
+                                .frame(maxWidth: 84)
+                        }
                         ForEach(IconType.allCases, id: \.rawValue) { iconType in
                             switch iconType {
                             case .Trash:
@@ -45,6 +56,11 @@ struct UserView: View {
                                 })
                                 .frame(maxWidth: 84)
                             case .Gear:
+                                IconView(icon: iconType, destination: {
+                                    SettingView()
+                                })
+                                .frame(maxWidth: 84)
+                            case .Debug:
                                 IconView(icon: iconType, destination: {
                                     DebugView()
                                 })
