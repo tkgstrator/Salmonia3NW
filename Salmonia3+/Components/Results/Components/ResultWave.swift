@@ -36,18 +36,18 @@ struct ResultWave: View {
                 .padding(.top, 2 * scale)
                 .frame(height: 36.5 * scale, alignment: .center)
                 Text(wave.waterLevel.localizedText)
-                    .font(systemName: .Splatfont2, size: 14 * scale)
+                    .font(systemName: .Splatfont2, size: 16 * scale)
                     .foregroundColor(.black)
                     .padding(.top, 8 * scale)
                 Text(wave.eventType.localizedText)
-                    .font(systemName: .Splatfont2, size: 14 * scale)
+                    .font(systemName: .Splatfont2, size: 16 * scale)
                     .foregroundColor(.black)
                 HStack(spacing: nil, content: {
                     Image(bundle: .Golden)
                         .resizable()
                         .frame(width: 20 * scale, height: 20 * scale, alignment: .center)
                     Text("x\(wave.goldenIkuraPopNum)")
-                        .font(systemName: .Splatfont2, size: 14 * scale)
+                        .font(systemName: .Splatfont2, size: 16 * scale)
                         .foregroundColor(.gray)
                 })
             })
@@ -77,8 +77,12 @@ private extension WaterType {
 struct CoopWave_Previews: PreviewProvider {
     static let wave: RealmCoopWave = RealmCoopWave(dummy: true)
     static var previews: some View {
-        ResultWave(wave: wave)
-            .previewLayout(.fixed(width: 400, height: 200))
-            .preferredColorScheme(.dark)
+        LazyVGrid(columns: Array(repeating: .init(), count: 4), content: {
+            ForEach([0, 1, 2, 3].indices, id: \.self) { index in
+                ResultWave(wave: wave)
+            }
+        })
+        .previewLayout(.fixed(width: 460, height: 250))
+        .preferredColorScheme(.dark)
     }
 }

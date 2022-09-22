@@ -32,7 +32,7 @@ final class RealmCoopWave: Object, Identifiable {
         self.init()
         self.id = id
         self.waterLevel = WaterType.Middle_Tide
-        self.eventType = EventType.Goldie_Seeking
+        self.eventType = EventType.Water_Levels
         self.goldenIkuraNum = 999
         self.goldenIkuraPopNum = 999
         self.quotaNum = 35

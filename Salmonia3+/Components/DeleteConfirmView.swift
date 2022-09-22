@@ -9,6 +9,7 @@ import SwiftUI
 import SplatNet3
 
 struct DeleteConfirmView: View {
+    @StateObject var session: Session = Session()
     @State private var isPresented: Bool = false
     @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = false
 
@@ -16,6 +17,7 @@ struct DeleteConfirmView: View {
         ScrollView(content: {
             LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40), spacing: nil, alignment: .center), count: 2), content: {
                 NSOButton(action: {
+                    try? session.removeAll()
                     isFirstLaunch.toggle()
                 }, title: {
                     Text(localizedText: "TITLE_ACCOUNT")
