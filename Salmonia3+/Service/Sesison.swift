@@ -30,7 +30,7 @@ class Session: SplatNet3, ObservableObject {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
 
-    /// ポップアップを閉じるだけの処理
+    /// スタックを全削除
     private func dismiss() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
             self.loginProgress.removeAll()

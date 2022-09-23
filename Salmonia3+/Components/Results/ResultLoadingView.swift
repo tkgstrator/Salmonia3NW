@@ -12,7 +12,9 @@ import SplatNet3
 struct ResultLoadingView: View {
     @StateObject var session: Session = Session()
     @Environment(\.isModalPopuped) var isModalPopuped
+    @Environment(\.dismiss) var dismiss
 
+    /// <#Description#>
     var body: some View {
         VStack(content: {
             ForEach(session.loginProgress) { progress in
@@ -71,12 +73,19 @@ struct ResultLoadingView: View {
             // スリープモードにならないようにする
             UIApplication.shared.isIdleTimerDisabled = true
             Task {
-                // リザルト取得後にモーダルを閉じる
-                try await session.getCoopResults()
+                do {
+                    // リザルト取得後にモーダルを閉じる
+                    try await session.getCoopResults()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        isModalPopuped.wrappedValue = false
+                    })
+                } catch(let error) {
+                    print(error.localizedDescription)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        isModalPopuped.wrappedValue = false
+                    })
+                }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                isModalPopuped.wrappedValue = false
-            })
         })
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除

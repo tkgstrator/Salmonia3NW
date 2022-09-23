@@ -137,14 +137,21 @@ private struct TutorialSignIn: View {
                 })
             })
             .position(x: geometry.center.x, y: geometry.height - 100)
-            .authorize(isPresented: $isPresented, session: session, onPresent: {
-                isModalPopuped.toggle()
-            },onDismiss: {
-                // ログイン終了したらチュートリアルを非表示にする
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    isFirstLaunch.wrappedValue.toggle()
+            .authorize(
+                isPresented: $isPresented,
+                session: session,
+                onPresent: {
+                    isModalPopuped.toggle()
+                },
+                onDismiss: {
+                    // ログイン終了したらチュートリアルを非表示にする
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        isFirstLaunch.wrappedValue.toggle()
+                    })
+                },
+                onFailure: {
+                    isModalPopuped.toggle()
                 })
-            })
             .popup(isPresented: $isModalPopuped, view: {
                 LoadingView(session: session)
             })
@@ -159,15 +166,25 @@ private struct TutorialSignIn: View {
                     .background(.white)
                     .cornerRadius(30)
             })
-            .disabled(session.isPopuped)
+            .disabled(isModalPopuped)
             .position(x: geometry.center.x, y: geometry.height - 100)
-            .popup(isPresented: $session.isPopuped, view: {
-                LoadingView(session: session)
-            })
-            .authorize(isPresented: $isPresented, session: session, onDismiss: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    isFirstLaunch.wrappedValue.toggle()
+            .authorize(
+                isPresented: $isPresented,
+                session: session,
+                onPresent: {
+                    isModalPopuped.toggle()
+                },
+                onDismiss: {
+                    // ログイン終了したらチュートリアルを非表示にする
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        isFirstLaunch.wrappedValue.toggle()
+                    })
+                },
+                onFailure: {
+                    isModalPopuped.toggle()
                 })
+            .popup(isPresented: $isModalPopuped, view: {
+                LoadingView(session: session)
             })
             #endif
         })
