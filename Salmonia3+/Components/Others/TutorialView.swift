@@ -92,7 +92,8 @@ private struct TutorialSignIn: View {
     @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
     @StateObject var session: Session = Session()
     @State private var isPresented: Bool = false
-    
+    @State private var isModalPopuped: Bool = false
+
     var body: some View {
         GeometryReader(content: { geometry in
             Text(localizedText: "TITLE_SIGN_IN")
@@ -135,15 +136,17 @@ private struct TutorialSignIn: View {
                         .cornerRadius(30)
                 })
             })
-            .disabled(session.isPopuped)
             .position(x: geometry.center.x, y: geometry.height - 100)
-            .popup(isPresented: $session.isPopuped, view: {
-                LoadingView(session: session)
-            })
-            .authorize(isPresented: $isPresented, session: session, onDismiss: {
+            .authorize(isPresented: $isPresented, session: session, onPresent: {
+                isModalPopuped.toggle()
+            },onDismiss: {
+                // ログイン終了したらチュートリアルを非表示にする
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                     isFirstLaunch.wrappedValue.toggle()
                 })
+            })
+            .popup(isPresented: $isModalPopuped, view: {
+                LoadingView(session: session)
             })
             #else
             Button(action: {

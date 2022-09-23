@@ -73,10 +73,10 @@ struct ResultLoadingView: View {
             Task {
                 // リザルト取得後にモーダルを閉じる
                 try await session.getCoopResults()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    isModalPopuped.wrappedValue.toggle()
-                })
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                isModalPopuped.wrappedValue = false
+            })
         })
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除

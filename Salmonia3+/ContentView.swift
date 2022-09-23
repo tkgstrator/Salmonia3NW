@@ -43,15 +43,13 @@ struct ContentView: View {
         .accentColor(.orange)
         .tabViewStyle(.automatic)
         .overlay(isModalPopuped ? AnyView(Color.black.opacity(0.3).ignoresSafeArea()) : AnyView(EmptyView()))
-        .popup(isPresented: $isModalPopuped, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
+        .popup(isPresented: $isModalPopuped, autohideIn: 60, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
             ResultLoadingView()
                 .environment(\.isModalPopuped, $isModalPopuped)
         })
-        .onChange(of: isModalPopuped, perform: { newValue in
-            print(newValue)
-        })
         .fullScreenCover(isPresented: isFirstLaunch , content: {
             TutorialView()
+                .environment(\.isModalPopuped, $isModalPopuped)
         })
     }
 }

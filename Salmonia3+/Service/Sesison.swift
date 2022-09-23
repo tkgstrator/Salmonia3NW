@@ -11,15 +11,7 @@ import Common
 import SwiftUI
 
 class Session: SplatNet3, ObservableObject {
-    @Published var loginProgress: [LoginProgress] = [] {
-        willSet {
-            if !newValue.isEmpty {
-                isPopuped = !newValue.isEmpty
-            }
-        }
-    }
-    /// ログイン時に使うパラメータ
-    @Published var isPopuped: Bool = false
+    @Published var loginProgress: [LoginProgress] = []
     /// 取得中のリザルトの数
     @Published var resultCounts: Int = 0
     /// 取得すべきリザルトの数
@@ -42,7 +34,6 @@ class Session: SplatNet3, ObservableObject {
     private func dismiss() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
             self.loginProgress.removeAll()
-            self.isPopuped = false
         })
     }
 
@@ -111,7 +102,7 @@ class Session: SplatNet3, ObservableObject {
             return
         }
 
-        // リザルト取得を開始する
+        // 取得すべきリザルトの数
         self.resultCountsNum = resultIds.count
 
         do {

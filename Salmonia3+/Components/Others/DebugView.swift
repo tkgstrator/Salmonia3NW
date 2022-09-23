@@ -67,7 +67,6 @@ struct DebugView: View {
                 }, label: {
                     Text("ログインテスト")
                 })
-                .disabled(session.isPopuped)
                 .authorize(isPresented: $isPresented, session: session)
             }, header: {
                 Text("エラーテスト")
@@ -93,9 +92,6 @@ struct DebugView: View {
             if lists.count < SPEndpoint.allCases.count {
                 lists = Array(repeating: false, count: SPEndpoint.allCases.count)
             }
-        })
-        .popup(isPresented: $session.isPopuped, view: {
-            LoadingView(session: session)
         })
         .navigationTitle(Text("デバッグ"))
         .navigationBarTitleDisplayMode(.inline)
