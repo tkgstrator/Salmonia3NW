@@ -21,7 +21,7 @@ struct SchedulesView: View {
         NavigationView(content: {
             List(content: {
                 TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(schedules) { schedule in
+                ForEach(schedules.reversed()) { schedule in
                     NavigationLinker(destination: {
                         ResultsView(results: schedule.results)
                     }, label: {

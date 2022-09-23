@@ -11,6 +11,7 @@ import AppTrackingTransparency
 import GoogleMobileAds
 import SplatNet3
 import SDWebImageSwiftUI
+import PopupView
 
 struct TutorialView: View {
     @State private var selection: Int = 0
@@ -88,10 +89,10 @@ private extension View {
 }
 
 private struct TutorialSignIn: View {
+    @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
     @StateObject var session: Session = Session()
     @State private var isPresented: Bool = false
-    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
-
+    
     var body: some View {
         GeometryReader(content: { geometry in
             Text(localizedText: "TITLE_SIGN_IN")
@@ -111,9 +112,10 @@ private struct TutorialSignIn: View {
                 .scaledToFit()
                 .frame(width: 140, alignment: .center)
                 .position(geometry.center)
+            #if DEBUG
             VStack(content: {
                 Button(action: {
-                    isFirstLaunch.toggle()
+                    isFirstLaunch.wrappedValue.toggle()
                 }, label: {
                     Text("デバッグの強制エラー対策")
                         .fontWeight(.bold)
@@ -140,9 +142,31 @@ private struct TutorialSignIn: View {
             })
             .authorize(isPresented: $isPresented, session: session, onDismiss: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    isFirstLaunch.toggle()
+                    isFirstLaunch.wrappedValue.toggle()
                 })
             })
+            #else
+            Button(action: {
+                isPresented.toggle()
+            }, label: {
+                Text(localizedText: "BUTTON_SIGN_IN")
+                    .fontWeight(.bold)
+                    .frame(width: 300, height: 60, alignment: .center)
+                    .foregroundColor(SPColor.Theme.SPOrange)
+                    .background(.white)
+                    .cornerRadius(30)
+            })
+            .disabled(session.isPopuped)
+            .position(x: geometry.center.x, y: geometry.height - 100)
+            .popup(isPresented: $session.isPopuped, view: {
+                LoadingView(session: session)
+            })
+            .authorize(isPresented: $isPresented, session: session, onDismiss: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    isFirstLaunch.wrappedValue.toggle()
+                })
+            })
+            #endif
         })
     }
 }

@@ -16,7 +16,6 @@ class RealmService {
     internal var realm: Realm
 
     private let schemeVersion: UInt64 = 0
-    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = false
 
     init() {
         let config = Realm.Configuration(

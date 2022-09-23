@@ -17,14 +17,8 @@ struct ResultPlayer: View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 356
             ZStack(alignment: .bottom, content: {
-                if let background = result.background, isUseNamePlate {
-                    Image(bundle: background)
-                        .resizable()
-                        .clipShape(Salmon())
-                } else {
-                    Salmon()
-                        .fill(SPColor.Theme.SPOrange)
-                }
+                Salmon()
+                    .fill(SPColor.Theme.SPOrange)
                 HStack(alignment: .bottom, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
                         Text(isNameVisible ? result.name : "-")

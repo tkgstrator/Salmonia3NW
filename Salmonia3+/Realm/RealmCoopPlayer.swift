@@ -23,7 +23,7 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted var bossKillCounts: List<Int>
     @Persisted var specialCounts: List<Int>
     @Persisted var badges: List<BadgeType?>
-    @Persisted var background: NamePlateType?
+    @Persisted var background: NamePlateType
     @Persisted var weaponList: List<WeaponType>
 
     convenience init(from result: SplatNet2.PlayerResult) {
@@ -60,6 +60,8 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 3))
         self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
         self.bossKillCountsTotal = 99
+        self.background = NamePlateType.Npl_Tutorial00
+        self.badges.append(objectsIn: Array(repeating: nil, count: 3))
     }
 }
 

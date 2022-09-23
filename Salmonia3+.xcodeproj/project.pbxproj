@@ -69,7 +69,10 @@
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
-		10A0ACB228DCAA5E008B332A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB128DCAA5E008B332A /* SettingView.swift */; };
+		10A0ACB628DD42A4008B332A /* IconList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB528DD42A4008B332A /* IconList.swift */; };
+		10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB728DD4EE0008B332A /* IconToggle.swift */; };
+		10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB928DD627F008B332A /* ThemeView.swift */; };
+		10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACBB28DD681B008B332A /* Configuration.swift */; };
 		10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A18B28B7A51D0075563F /* WeaponsView.swift */; };
 		10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19128B7A7130075563F /* GoogleMobileAds */; };
 		10A6A19428B7A71E0075563F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19328B7A71E0075563F /* Realm */; };
@@ -172,7 +175,10 @@
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
-		10A0ACB128DCAA5E008B332A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		10A0ACB528DD42A4008B332A /* IconList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconList.swift; sourceTree = "<group>"; };
+		10A0ACB728DD4EE0008B332A /* IconToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconToggle.swift; sourceTree = "<group>"; };
+		10A0ACB928DD627F008B332A /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		10A0ACBB28DD681B008B332A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		10A6A18428B7A3D60075563F /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
 		10A6A18B28B7A51D0075563F /* WeaponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponsView.swift; sourceTree = "<group>"; };
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
@@ -213,18 +219,11 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10A0ACBD28DD808D008B332A /* Others */,
 				1018B49228D6FB42002BD1F0 /* Icons */,
 				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
-				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
-				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
-				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
-				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
-				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
-				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
-				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
-				10A0ACB128DCAA5E008B332A /* SettingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -302,6 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				1018B49328D6FB82002BD1F0 /* IconView.swift */,
+				10A0ACB528DD42A4008B332A /* IconList.swift */,
+				10A0ACB728DD4EE0008B332A /* IconToggle.swift */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -388,6 +389,7 @@
 		10320C6928D41B7700666F09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
 				100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */,
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
@@ -406,8 +408,23 @@
 				1018B48228D6B78A002BD1F0 /* Sesison.swift */,
 				10320C6D28D4244200666F09 /* RealmService.swift */,
 				105757B328DB22A200833B95 /* LoginProgress.swift */,
+				10A0ACBB28DD681B008B332A /* Configuration.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		10A0ACBD28DD808D008B332A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
+				10A0ACB928DD627F008B332A /* ThemeView.swift */,
+				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
+				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
+				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
+				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
+				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		10A6A18328B7A3D60075563F /* Packages */ = {
@@ -641,6 +658,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A6A19A28B7AC240075563F /* SchedulesView.swift in Sources */,
+				10A0ACB628DD42A4008B332A /* IconList.swift in Sources */,
+				10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */,
 				100E876328D4E8EF007FCF3C /* ResultPlayer.swift in Sources */,
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
@@ -649,7 +668,6 @@
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
-				10A0ACB228DCAA5E008B332A /* SettingView.swift in Sources */,
 				1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */,
 				1018B49A28D71B64002BD1F0 /* NSOCircle.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
@@ -686,6 +704,8 @@
 				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
+				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
+				10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
 				1018B4AD28DAC394002BD1F0 /* Secrets.swift in Sources */,
@@ -880,12 +900,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Salmonia3--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Salmonia3+";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSUserTrackingUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -902,7 +923,7 @@
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -913,12 +934,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Salmonia3--Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Salmonia3+";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSUserTrackingUsageDescription;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -935,7 +957,7 @@
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

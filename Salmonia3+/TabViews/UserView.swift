@@ -8,65 +8,24 @@
 import SwiftUI
 import SplatNet3
 import RealmSwift
-import PopupView
-import SDWebImageSwiftUI
-import StoreKit
 
 struct UserView: View {
-    @ObservedResults(RealmCoopResult.self, sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)) var results
-    @StateObject var session: Session = Session()
-    @State private var isPresented: Bool = false
-    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
-    @AppStorage("PREFERRED_COLOR_SCHEME") var preferredColorScheme: Bool = true
 
     var body: some View {
         NavigationView(content: {
             ScrollView(content: {
                 GeometryReader(content: { geometry in
                     LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
-                        if let account = session.account {
-                            VStack(alignment: .center, spacing: nil, content: {
-                                WebImage(url: account.thumbnailURL)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .clipShape(NSOCircle())
-                                Text(account.nickname)
-                                    .font(systemName: .Splatfont, size: 16)
-                                    .frame(height: 16)
-                            })
-                                .frame(maxWidth: 84)
-                        }
-                        ForEach(IconType.allCases, id: \.rawValue) { iconType in
-                            switch iconType {
-                            case .Trash:
-                                IconView(icon: iconType, destination: {
-                                    DeleteConfirmView()
-                                })
-                                .frame(maxWidth: 84)
-                            case .Theme:
-                                IconButton(icon: iconType, execute: {
-                                    preferredColorScheme.toggle()
-                                })
-                                .frame(maxWidth: 84)
-                            case .Review:
-                                IconButton(icon: iconType, execute: {
-                                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                                        SKStoreReviewController.requestReview(in: scene)
-                                    }
-                                })
-                                .frame(maxWidth: 84)
-                            case .Gear:
-                                IconView(icon: iconType, destination: {
-                                    SettingView()
-                                })
-                                .frame(maxWidth: 84)
-                            case .Debug:
-                                IconView(icon: iconType, destination: {
-                                    DebugView()
-                                })
-                                .frame(maxWidth: 84)
-                            }
-                        }
+                        IconList.NSO()
+                        IconList.Review()
+                        IconList.Appearance()
+                        IconList.Setting()
+                        IconList.Debug()
+                        #if DEBUG
+                        IconList.Status()
+                        IconList.Chart()
+                        IconList.Friends()
+                        #endif
                     })
                 })
             })
@@ -74,22 +33,6 @@ struct UserView: View {
             .navigationBarTitleDisplayMode(.inline)
         })
         .navigationViewStyle(.split)
-        .popup(isPresented: $session.isPopuped, view: {
-            LoadingView(session: session)
-        })
-    }
-}
-
-struct LabeledContent: View {
-    let title: String
-    let value: String
-
-    var body: some View {
-        HStack(content: {
-            Text(title)
-            Spacer()
-            Text(value)
-        })
     }
 }
 

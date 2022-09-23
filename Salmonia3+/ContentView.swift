@@ -8,9 +8,11 @@
 import SwiftUI
 import SplatNet3
 import RealmSwift
+import PopupView
 
 struct ContentView: View {
-    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+    @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
+    @State private var isModalPopuped: Bool = false
     @State private var selection: Int = 0
 
     var body: some View {
@@ -22,6 +24,7 @@ struct ContentView: View {
                     Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
                 }
                 .tag(0)
+                .environment(\.isModalPopuped, $isModalPopuped)
             SchedulesView()
                 .withGoogleMobileAds()
                 .badge("?")
@@ -33,13 +36,21 @@ struct ContentView: View {
                 .withGoogleMobileAds()
                 .badge("New")
                 .tabItem {
-                    Label("TAB_USER".sha256Hash, image: "Tabs/Me")
+                    Label("TAB_USER".sha256Hash, image: "TabType/Me")
                 }
                 .tag(3)
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
-        .fullScreenCover(isPresented: $isFirstLaunch, content: {
+        .overlay(isModalPopuped ? AnyView(Color.black.opacity(0.3).ignoresSafeArea()) : AnyView(EmptyView()))
+        .popup(isPresented: $isModalPopuped, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
+            ResultLoadingView()
+                .environment(\.isModalPopuped, $isModalPopuped)
+        })
+        .onChange(of: isModalPopuped, perform: { newValue in
+            print(newValue)
+        })
+        .fullScreenCover(isPresented: isFirstLaunch , content: {
             TutorialView()
         })
     }

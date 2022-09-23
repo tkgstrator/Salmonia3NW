@@ -12,7 +12,6 @@ import SplatNet3
 struct ResultsView: View {
     let results: RealmSwift.Results<RealmCoopResult>
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
-    @StateObject var session: Session = Session()
 
     init(results: RealmSwift.List<RealmCoopResult>) {
         self.results = results.sorted(byKeyPath: "playTime", ascending: false)
@@ -26,11 +25,6 @@ struct ResultsView: View {
                 }, label: {
                     ResultView(result: result)
                 })
-            }
-        })
-        .refreshable(action: {
-            Task {
-                try await session.getCoopResults()
             }
         })
         .listStyle(.plain)
@@ -67,7 +61,8 @@ struct ResultsWithScheduleView: View {
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
-    @StateObject var session: Session = Session()
+    // ロード画面を表示する
+    @Environment(\.isModalPopuped) var isModalPopuped
 
     var body: some View {
         NavigationView(content: {
@@ -82,22 +77,15 @@ struct ResultsWithScheduleView: View {
                 }
             })
             .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
-            .refreshable(action: {
-                Task {
-                    try await session.getCoopResults()
-                }
-            })
-            .onDisappear(perform: {
-            })
             .onChange(of: selection, perform: { newValue in
                 $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+            })
+            .refreshable(action: {
+                isModalPopuped.wrappedValue.toggle()
             })
             .listStyle(.plain)
             .navigationTitle(Text(localizedText: "TAB_RESULTS"))
             .navigationBarTitleDisplayMode(.inline)
-        })
-        .popup(isPresented: $session.isLoading, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
-            ResultLoadingView(session: session)
         })
         .navigationViewStyle(.split)
     }

@@ -6,102 +6,108 @@
 //
 
 import SwiftUI
+import SplatNet3
 
-enum IconType: String, CaseIterable {
-    case Gear       = "gear"
-    case Review     = "pencil.and.outline"
-    case Theme      = "circle.lefthalf.filled"
-    case Trash      = "trash.circle"
-    case Debug      = "info.circle"
+struct NSOLikeButtonStyle: ButtonStyle {
+    let foregroundColor: Color
 
-    var localizedText: String {
-        switch self {
-        case .Gear:
-            return NSLocalizedString("TITLE_SETTING".sha256Hash, comment: "")
-        case .Review:
-            return NSLocalizedString("TITLE_REVIEW".sha256Hash, comment: "")
-        case .Theme:
-            return NSLocalizedString("TITLE_THEME".sha256Hash, comment: "")
-        case .Trash:
-            return NSLocalizedString("TITLE_TRASH".sha256Hash, comment: "")
-        case .Debug:
-            return NSLocalizedString("TITLE_DEBUG".sha256Hash, comment: "")
-        }
+    init(foregroundColor: Color = SPColor.Theme.SPPink) {
+        self.foregroundColor = foregroundColor
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        ZStack(alignment: .leading, content: {
+            foregroundColor
+            configuration.label
+                .padding(8)
+        })
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .opacity(configuration.isPressed ? 0.8 : 1.0)
     }
 }
 
-struct IconButton: View {
-    let icon: IconType
-    let execute: (() -> Void)
+extension ButtonStyle where Self == NSOLikeButtonStyle {
+    /// ニンテンドースイッチオンライン風のボタンを表示します
+    internal static var nso: NSOLikeButtonStyle { NSOLikeButtonStyle() }
+}
 
-    init(icon: IconType, execute: @escaping () -> Void) {
-        self.icon = icon
-        self.execute = execute
+struct NSOCircleActionModifier: ViewModifier {
+    let action: () -> Void
+    let localizedText: String
+
+    init(localizedText: String, action: @escaping () -> Void) {
+        self.action = action
+        self.localizedText = localizedText.sha256Hash
     }
-
-    var label: some View {
-        VStack(alignment: .center, spacing: nil, content: {
-            Image(systemName: icon.rawValue)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .padding(14)
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .clipShape(NSOCircle())
-            Text(icon.localizedText)
-                .font(systemName: .Splatfont, size: 16)
-                .frame(height: 16)
-        })
-    }
-
-    var body: some View {
+    func body(content: Content) -> some View {
         Button(action: {
-            execute()
+            action()
         }, label: {
-            label
+            VStack(spacing: nil, content: {
+                NSOCircle()
+                    .scaledToFit()
+                    .foregroundColor(SPColor.Theme.SPOrange)
+                    .overlay(content.padding(4))
+                Text(localizedText)
+                    .font(systemName: .Splatfont, size: 16)
+                    .frame(height: 16)
+                    .foregroundColor(.primary)
+            })
         })
-        .buttonStyle(.plain)
+        .frame(maxWidth: 100)
     }
 }
 
-struct IconView<Content: View>: View {
+struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
+    @State private var isPresented: Bool = false
 
-    let icon: IconType
-    let content: (() -> Content)
+    let destination: () -> T
+    let localizedText: String
 
-    init(icon: IconType, destination: @escaping (() -> Content)) {
-        self.icon = icon
-        self.content = destination
+    init(localizedText: String, destination: @escaping () -> T) {
+        self.destination = destination
+        self.localizedText = localizedText.sha256Hash
     }
 
-    var label: some View {
-        VStack(alignment: .center, spacing: nil, content: {
-            Image(systemName: icon.rawValue)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .padding(14)
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .clipShape(NSOCircle())
-            Text(icon.localizedText)
-                .font(systemName: .Splatfont, size: 16)
-                .frame(height: 16)
-        })
-    }
-
-    var body: some View {
-        NavigationLink(destination: {
-            content()
+    func body(content: Content) -> some View {
+        NavigationLink(isActive: $isPresented, destination: {
+            destination()
         }, label: {
-            label
+            Button(action: {
+                isPresented.toggle()
+            }, label: {
+                VStack(spacing: nil, content: {
+                    NSOCircle()
+                        .scaledToFit()
+                        .foregroundColor(SPColor.Theme.SPOrange)
+                        .overlay(content.padding(4))
+                    Text(localizedText)
+                        .font(systemName: .Splatfont, size: 16)
+                        .frame(height: 16)
+                        .foregroundColor(.primary)
+                })
+            })
         })
-        .buttonStyle(.plain)
+        .frame(maxWidth: 100)
     }
 }
 
-//struct IconView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IconView(icon: .Review)
-//            .previewLayout(.fixed(width: 120, height: 120))
-//    }
-//}
+extension View {
+    func navigationCircleButton<T: View>(localizedText: String, destination: @escaping () -> T) -> some View {
+        self.modifier(NSOCircleNavigationLinkModifier(localizedText: localizedText, destination: destination))
+    }
+
+    func actionCircleButton(localizedText: String, action: @escaping () -> Void) -> some View {
+        self.modifier(NSOCircleActionModifier(localizedText: localizedText, action: action))
+    }
+}
+
+struct IconView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserView()
+            .previewLayout(.fixed(width: 400, height: 300))
+            .preferredColorScheme(.dark)
+        UserView()
+            .previewLayout(.fixed(width: 400, height: 300))
+    }
+}

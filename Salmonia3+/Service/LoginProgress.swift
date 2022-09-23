@@ -91,16 +91,14 @@ struct LoginProgress: Identifiable {
 
 extension Array where Element == LoginProgress {
     mutating func success() {
-        /// 最後のリクエストをSUCCESSにする
-        if let _ = self.last {
-            self[self.count - 1].progressType = .SUCCESS
+        if let index: Int = self.lastIndex(where: { $0.progressType == .PROGRESS }) {
+            self[index].progressType = .SUCCESS
         }
     }
 
     mutating func failure() {
-        /// 最後のリクエストをFAILUREにする
-        if let _ = self.last {
-            self[self.count - 1].progressType = .FAILURE
+        if let index: Int = self.lastIndex(where: { $0.progressType == .PROGRESS }) {
+            self[index].progressType = .FAILURE
         }
     }
 }

@@ -20,13 +20,6 @@ class Session: SplatNet3, ObservableObject {
     }
     /// ログイン時に使うパラメータ
     @Published var isPopuped: Bool = false
-    /// リザルト取得時に使うパラメータ
-    @Published var isLoading: Bool = false {
-        willSet {
-            // 値が切り替わったときに全削除
-            loginProgress.removeAll()
-        }
-    }
     /// 取得中のリザルトの数
     @Published var resultCounts: Int = 0
     /// 取得すべきリザルトの数
@@ -35,6 +28,10 @@ class Session: SplatNet3, ObservableObject {
     @AppStorage("IS_DEBUG_ERROR_SESSION") var lists: [Bool] = Array(repeating: false, count: SPEndpoint.allCases.count)
     /// リザルト強制取得
     @AppStorage("IS_DEBUG_FORCE_FETCH") var isForceFetch: Bool = false
+    /// リザルトを書き込まない
+    @AppStorage("IS_DEBUG_DONOT_WRITE") var isWritable: Bool = false
+    /// 最大取得件数
+    @AppStorage("IS_DEBUG_MAX_FETCH_COUNTS") var maxFetchCounts: Double = 50
 
     /// エラーログをクラウドに保存するように初期化
     override init() {
@@ -46,7 +43,6 @@ class Session: SplatNet3, ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
             self.loginProgress.removeAll()
             self.isPopuped = false
-            self.isLoading = false
         })
     }
 
@@ -80,9 +76,11 @@ class Session: SplatNet3, ObservableObject {
             }
             let response: T.ResponseType = try await super.authorize(request)
             loginProgress.success()
-            /// 最後のやつなら閉じる
-            if progress.path == .BULLET_TOKEN {
-                dismiss()
+            /// 最初のリクエストと現在リクエストのチェック
+            if let first: LoginProgress = loginProgress.first {
+                if first.path != .COOP_SUMMARY && progress.path == .BULLET_TOKEN {
+                    dismiss()
+                }
             }
             return response
         } catch (let error) {
@@ -95,7 +93,6 @@ class Session: SplatNet3, ObservableObject {
     /// リザルトを取得して書き込みする
     func getCoopResults() async throws {
         // ローディングを開始する
-        self.isLoading.toggle()
         self.resultCounts = 0
         self.resultCountsNum = 0
 
@@ -104,16 +101,13 @@ class Session: SplatNet3, ObservableObject {
 
         let resultIds: [String] = try await {
             if isForceFetch {
-                return try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })
+                return Array((try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })).prefix(Int(maxFetchCounts)))
             }
             return try await getCoopResultIds(resultId: resultId).sorted(by: { $0.playTime < $1.playTime })
         }()
 
         // 新規リザルトがなければ何もせず閉じる
         if resultIds.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                self.isLoading = false
-            })
             return
         }
 
@@ -163,10 +157,12 @@ class Session: SplatNet3, ObservableObject {
         do {
             let result: SplatNet2.Result = try await super.getCoopResult(id: id)
 
-            // リザルト書き込みをする
-            DispatchQueue.main.async(execute: {
-                RealmService.shared.save(result)
-            })
+            if !isWritable {
+                // リザルト書き込みをする
+                DispatchQueue.main.async(execute: {
+                    RealmService.shared.save(result)
+                })
+            }
             return result
         } catch(let error) {
             loginProgress.failure()

@@ -10,7 +10,8 @@ import SDWebImageSwiftUI
 import SplatNet3
 
 struct ResultLoadingView: View {
-    @StateObject var session: Session
+    @StateObject var session: Session = Session()
+    @Environment(\.isModalPopuped) var isModalPopuped
 
     var body: some View {
         VStack(content: {
@@ -67,16 +68,27 @@ struct ResultLoadingView: View {
         .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
         .onAppear(perform: {
+            // スリープモードにならないようにする
             UIApplication.shared.isIdleTimerDisabled = true
+            Task {
+                // リザルト取得後にモーダルを閉じる
+                try await session.getCoopResults()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    isModalPopuped.wrappedValue.toggle()
+                })
+            }
         })
         .onDisappear(perform: {
+            // 処理が終わったのでスリープモード制限解除
             UIApplication.shared.isIdleTimerDisabled = false
         })
     }
 }
 
-//struct ResultLoadingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ResultLoadingView()
-//    }
-//}
+struct ResultLoadingView_Previews: PreviewProvider {
+    @StateObject static var session: Session = Session()
+    
+    static var previews: some View {
+        ResultLoadingView(session: session)
+    }
+}

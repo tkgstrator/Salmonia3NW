@@ -7,4 +7,4 @@
 */
 
 CFBundleDisplayName = "Salmonia3+";
-"NSUserTrackingUsageDescription" = "最適な広告を表示するためにトラッキングすることを許可します";
+NSUserTrackingUsageDescription = "最適な広告を表示するためにトラッキングすることを許可します";

@@ -11,12 +11,14 @@ import RealmSwift
 @main
 struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @AppStorage("PREFERRED_COLOR_SCHEME") var preferredColorScheme: Bool = true
+    @AppStorage("CONFIG_COLOR_SCHEME") var preferredColorScheme: Bool = true
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(preferredColorScheme ? .dark : .light)
+                .environment(\.isFirstLaunch, $isFirstLaunch)
         }
     }
 }
