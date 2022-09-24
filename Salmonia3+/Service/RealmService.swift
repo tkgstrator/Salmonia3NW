@@ -13,21 +13,24 @@ import SwiftUI
 class RealmService {
     public static let shared = RealmService()
     
-    internal var realm: Realm
+    internal var realm: Realm {
+        get {
+            let config = Realm.Configuration(
+                schemaVersion: schemeVersion,
+                deleteRealmIfMigrationNeeded: true
+            )
+            Realm.Configuration.defaultConfiguration = config
+            do {
+                return try Realm()
+            } catch (let error) {
+                return try! Realm(configuration: config)
+            }
+        }
+    }
 
     private let schemeVersion: UInt64 = 0
 
     init() {
-        let config = Realm.Configuration(
-            schemaVersion: schemeVersion,
-            deleteRealmIfMigrationNeeded: true
-            )
-        Realm.Configuration.defaultConfiguration = config
-        do {
-            self.realm = try Realm()
-        } catch (let error) {
-            self.realm = try! Realm(configuration: config)
-        }
     }
 
     func deleteAll() {

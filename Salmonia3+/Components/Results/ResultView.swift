@@ -53,12 +53,13 @@ struct ResultView: View {
                         })
                         Spacer()
                         if result.waves.count == 4 {
-                            Image("SakelienType/99", bundle: .main)
+                            Image(bundle: .SakelienGiant)
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
                                 .foregroundColor(.orange)
-                                .padding(4 * scale)
+                                .rotation3DEffect(.degrees(180), axis: (0, 1, 0))
+                                .padding(.trailing, 4 * scale)
                         }
                     }
                 })

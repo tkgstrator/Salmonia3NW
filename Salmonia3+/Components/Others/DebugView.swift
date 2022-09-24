@@ -65,11 +65,11 @@ struct DebugView: View {
                 Button(action: {
                     isPresented.toggle()
                 }, label: {
-                    Text("ログインテスト")
+                    Text("ログイン")
                 })
                 .authorize(isPresented: $isPresented, session: session)
             }, header: {
-                Text("エラーテスト")
+                Text("エラー")
             })
             Section(content: {
                 Toggle(isOn: $isForceFetch, label: {
@@ -85,7 +85,7 @@ struct DebugView: View {
                     Text("リザルトを書き込まない")
                 })
             }, header: {
-                Text("デバッグモード")
+                Text("追加コマンド")
             })
         })
         .onAppear(perform: {
@@ -93,7 +93,7 @@ struct DebugView: View {
                 lists = Array(repeating: false, count: SPEndpoint.allCases.count)
             }
         })
-        .navigationTitle(Text("デバッグ"))
+        .navigationTitle(Text("追加機能"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

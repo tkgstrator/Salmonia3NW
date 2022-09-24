@@ -40,17 +40,23 @@ class Session: SplatNet3, ObservableObject {
     /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
-        loginProgress.append(LoginProgress(request))
+        DispatchQueue.main.async(execute: { [self] in
+            loginProgress.append(LoginProgress(request))
+        })
 
         do {
             if lists[.WEB_VERSION] {
                 throw Failure.API(error: NXError.API.content)
             }
             let response: WebVersion.Response = try await super.request(request)
-            loginProgress.success()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.success()
+            })
             return response
         } catch(let error) {
-            loginProgress.failure()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.failure()
+            })
             dismiss()
             throw error
         }
@@ -59,14 +65,17 @@ class Session: SplatNet3, ObservableObject {
     /// 認証用リクエスト
     override func authorize<T>(_ request: T) async throws -> T.ResponseType where T : RequestType {
         let progress: LoginProgress = LoginProgress(request)
-        loginProgress.append(progress)
-
+        DispatchQueue.main.async(execute: { [self] in
+            loginProgress.append(progress)
+        })
         do {
             if lists[progress.path] {
                 throw Failure.API(error: NXError.API.content)
             }
             let response: T.ResponseType = try await super.authorize(request)
-            loginProgress.success()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.success()
+            })
             /// 最初のリクエストと現在リクエストのチェック
             if let first: LoginProgress = loginProgress.first {
                 if first.path != .COOP_SUMMARY && progress.path == .BULLET_TOKEN {
@@ -75,7 +84,9 @@ class Session: SplatNet3, ObservableObject {
             }
             return response
         } catch (let error) {
-            loginProgress.failure()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.failure()
+            })
             dismiss()
             throw error
         }
@@ -106,13 +117,19 @@ class Session: SplatNet3, ObservableObject {
         self.resultCountsNum = resultIds.count
 
         do {
-            loginProgress.append(LoginProgress(.COOP_RESULT))
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.append(LoginProgress(.COOP_RESULT))
+            })
             // リザルト取得を開始する
             _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
-            loginProgress.success()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.success()
+            })
             dismiss()
         } catch(let error) {
-            loginProgress.failure()
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.failure()
+            })
             dismiss()
             throw error
         }

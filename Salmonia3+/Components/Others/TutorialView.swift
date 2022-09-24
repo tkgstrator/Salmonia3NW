@@ -43,41 +43,39 @@ private struct NSTrackingConfirm: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onAppear(perform: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    let status = ATTrackingManager.trackingAuthorizationStatus
-                    switch status {
-                    case .notDetermined:
-                        print("Not determined")
-                        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                            switch status {
-                            case .notDetermined:
-                                break
-                            case .restricted:
-                                print("Restricted")
-                                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                            case .denied:
-                                print("Denied")
-                                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                            case .authorized:
-                                print("Authorized")
-                                GADMobileAds.sharedInstance().start(completionHandler: nil)
-                            @unknown default:
-                                fatalError()
-                            }
-                        })
-                    case .restricted:
-                        print("Restricted")
-                        GADMobileAds.sharedInstance().start(completionHandler: nil)
-                    case .denied:
-                        print("Denied")
-                        GADMobileAds.sharedInstance().start(completionHandler: nil)
-                    case .authorized:
-                        print("Authorized")
-                        GADMobileAds.sharedInstance().start(completionHandler: nil)
-                    @unknown default:
-                        fatalError()
-                    }
-                })
+                let status = ATTrackingManager.trackingAuthorizationStatus
+                switch status {
+                case .notDetermined:
+                    print("Not determined")
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                        switch status {
+                        case .notDetermined:
+                            break
+                        case .restricted:
+                            print("Restricted")
+                            GADMobileAds.sharedInstance().start(completionHandler: nil)
+                        case .denied:
+                            print("Denied")
+                            GADMobileAds.sharedInstance().start(completionHandler: nil)
+                        case .authorized:
+                            print("Authorized")
+                            GADMobileAds.sharedInstance().start(completionHandler: nil)
+                        @unknown default:
+                            fatalError()
+                        }
+                    })
+                case .restricted:
+                    print("Restricted")
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                case .denied:
+                    print("Denied")
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                case .authorized:
+                    print("Authorized")
+                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                @unknown default:
+                    fatalError()
+                }
             })
     }
 }

@@ -49,7 +49,7 @@ struct ResultLoadingView: View {
                 Circle()
                     .stroke(.gray, lineWidth: 10)
                 Circle()
-                    .trim(from: 0, to: session.resultCountsNum == 0 ? 0 : CGFloat(session.resultCounts) / CGFloat(session.resultCountsNum))
+//                    .trim(from: 0, to: session.resultCountsNum == 0 ? 0 : CGFloat(session.resultCounts) / CGFloat(session.resultCountsNum))
                     .stroke(.pink, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
                 VStack(alignment: .center, spacing: 0, content: {
@@ -57,10 +57,10 @@ struct ResultLoadingView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 60, height: 60, alignment: .center)
-                    Text("\(String(format: "%02d", session.resultCounts))/\(String(format: "%02d", session.resultCountsNum))")
-                        .animation(nil)
-                        .transition(.identity)
-                        .font(systemName: .Splatfont2, size: 18)
+//                    Text("\(String(format: "%02d", session.resultCounts))/\(String(format: "%02d", session.resultCountsNum))")
+//                        .animation(nil)
+//                        .transition(.identity)
+//                        .font(systemName: .Splatfont2, size: 18)
                 })
             })
             .frame(width: 120, height: 120, alignment: .center)
@@ -71,7 +71,7 @@ struct ResultLoadingView: View {
         .padding(.horizontal, 40)
         .onAppear(perform: {
             // スリープモードにならないようにする
-            UIApplication.shared.isIdleTimerDisabled = true
+//            UIApplication.shared.isIdleTimerDisabled = true
             Task {
                 do {
                     // リザルト取得後にモーダルを閉じる
@@ -89,7 +89,7 @@ struct ResultLoadingView: View {
         })
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除
-            UIApplication.shared.isIdleTimerDisabled = false
+//            UIApplication.shared.isIdleTimerDisabled = false
         })
     }
 }

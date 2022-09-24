@@ -77,6 +77,7 @@ struct IconToggle: View {
 struct IconToggleViewModifier: ViewModifier{
     /// ボタンが有効化どうか
     @Binding var isPresented: Bool
+    let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
@@ -85,6 +86,7 @@ struct IconToggleViewModifier: ViewModifier{
     func body(content: Content) -> some View {
         Button(action: {
             // ここで設定を切り替えてその値を保存する
+            generator.notificationOccurred(.success)
             isPresented.toggle()
             //  ただし、ボタンが有効化どうかはこのボタンが表示されたときに反映されないといけない
         }, label: {

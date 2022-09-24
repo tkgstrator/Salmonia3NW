@@ -20,11 +20,13 @@ struct UserView: View {
                         IconList.Review()
                         IconList.Appearance()
                         IconList.Setting()
+                        IconList.Privacy()
                         IconList.Debug()
                         #if DEBUG
                         IconList.Status()
                         IconList.Chart()
                         IconList.Friends()
+                        #else
                         #endif
                     })
                 })

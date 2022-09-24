@@ -25,19 +25,6 @@ struct mainApp: SwiftUI.App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let schemeVersion: UInt64 = 0
-        let config = Realm.Configuration(
-            schemaVersion: schemeVersion,
-            deleteRealmIfMigrationNeeded: true
-            )
-        Realm.Configuration.defaultConfiguration = config
-        do {
-            let _ =  try Realm()
-        } catch (let error) {
-            print(error)
-            let _ = try! Realm(configuration: config)
-        }
-
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
 
         return true

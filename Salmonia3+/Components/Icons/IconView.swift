@@ -34,13 +34,16 @@ extension ButtonStyle where Self == NSOLikeButtonStyle {
 struct NSOCircleActionModifier: ViewModifier {
     let action: () -> Void
     let localizedText: String
+    let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(localizedText: String, action: @escaping () -> Void) {
         self.action = action
         self.localizedText = localizedText.sha256Hash
     }
+
     func body(content: Content) -> some View {
         Button(action: {
+            generator.notificationOccurred(.success)
             action()
         }, label: {
             VStack(spacing: nil, content: {
@@ -63,6 +66,7 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
 
     let destination: () -> T
     let localizedText: String
+    let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(localizedText: String, destination: @escaping () -> T) {
         self.destination = destination
@@ -74,6 +78,7 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
             destination()
         }, label: {
             Button(action: {
+                generator.notificationOccurred(.success)
                 isPresented.toggle()
             }, label: {
                 VStack(spacing: nil, content: {

@@ -8,8 +8,11 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import StoreKit
+import BetterSafariView
 
 enum IconList {
+    static let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
+
     struct NSO: View {
         @StateObject var session: Session = Session()
         @State private var isPresented: Bool = false
@@ -17,6 +20,7 @@ enum IconList {
         var body: some View {
             if let account = session.account {
                 Button(action: {
+                    IconList.generator.notificationOccurred(.success)
                     isPresented.toggle()
                 }, label: {
                     VStack(alignment: .center, spacing: nil, content: {
@@ -40,6 +44,8 @@ enum IconList {
     }
 
     struct Debug: View {
+        @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
+
         var body: some View {
             Image(bundle: .Mission_Lv00)
                 .resizable()
@@ -49,10 +55,32 @@ enum IconList {
                     destination: {
                         DebugView()
                     })
+                .disabled(!isAppDeveloperMode)
+                .opacity(isAppDeveloperMode ? 1.0 : 0.0)
+        }
+    }
+
+    struct Privacy: View {
+        @State private var isPresented: Bool = false
+
+        var body: some View {
+            Image(bundle: .CatalogueLevel_Lv00)
+                .resizable()
+                .scaledToFit()
+                .actionCircleButton(
+                    localizedText: "TITLE_PRIVACY",
+                    action: {
+                        isPresented.toggle()
+                    })
+                .safariView(isPresented: $isPresented, content: {
+                    SafariView(url: URL(unsafeString: "https://documents.splatnet3.com"))
+                })
         }
     }
 
     struct Review: View {
+        @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
+
         var body: some View {
             Image(bundle: .WinCount_Tcl_Def_Lv00)
                 .resizable()
@@ -64,6 +92,13 @@ enum IconList {
                             SKStoreReviewController.requestReview(in: scene)
                         }
                     })
+                .simultaneousGesture(
+                    LongPressGesture(minimumDuration: 5, maximumDistance: 10).onEnded({ _ in
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            isAppDeveloperMode.toggle()
+                        }
+                    })
+                )
         }
     }
 
