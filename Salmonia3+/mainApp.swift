@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import FirebaseCore
 
 @main
 struct mainApp: SwiftUI.App {

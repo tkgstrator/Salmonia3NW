@@ -67,6 +67,9 @@
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
+		1076274228E301730034F9A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1076274128E301730034F9A4 /* GoogleService-Info.plist */; };
+		1076274528E301D40034F9A4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1076274428E301D40034F9A4 /* FirebaseAnalytics */; };
+		1076274728E301D40034F9A4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1076274628E301D40034F9A4 /* FirebaseAuth */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -174,6 +177,7 @@
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
+		1076274128E301730034F9A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -192,12 +196,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1076274528E301D40034F9A4 /* FirebaseAnalytics in Frameworks */,
 				1018B48628D6C83C002BD1F0 /* SDWebImageSwiftUI in Frameworks */,
 				10A6A19628B7A7200075563F /* RealmSwift in Frameworks */,
 				10A6A19428B7A71E0075563F /* Realm in Frameworks */,
 				1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */,
 				10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */,
 				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
+				1076274728E301D40034F9A4 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +317,7 @@
 		101AACAF28B77C750030B56C = {
 			isa = PBXGroup;
 			children = (
+				1076274128E301730034F9A4 /* GoogleService-Info.plist */,
 				1018B4A428D74635002BD1F0 /* InfoPlist.strings */,
 				100E874028D4A73C007FCF3C /* Localizable.strings */,
 				10A6A18328B7A3D60075563F /* Packages */,
@@ -481,6 +488,8 @@
 				10320C6028D40A3100666F09 /* SplatNet3 */,
 				1018B47B28D665BF002BD1F0 /* Introspect */,
 				1018B48528D6C83C002BD1F0 /* SDWebImageSwiftUI */,
+				1076274428E301D40034F9A4 /* FirebaseAnalytics */,
+				1076274628E301D40034F9A4 /* FirebaseAuth */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -571,6 +580,7 @@
 				10A6A17B28B78AD20075563F /* XCRemoteSwiftPackageReference "realm-swift" */,
 				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				1076274328E301D30034F9A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -595,6 +605,7 @@
 				101AACC028B77C760030B56C /* Assets.xcassets in Resources */,
 				1018B48A28D6CC0E002BD1F0 /* SPLATNET2.png in Resources */,
 				100E873928D4A509007FCF3C /* Splatfont1.ttf in Resources */,
+				1076274228E301730034F9A4 /* GoogleService-Info.plist in Resources */,
 				1018B4A228D74635002BD1F0 /* InfoPlist.strings in Resources */,
 				100E873A28D4A509007FCF3C /* Splatfont2.ttf in Resources */,
 			);
@@ -1099,6 +1110,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		1076274328E301D30034F9A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
@@ -1131,6 +1150,16 @@
 		10320C6028D40A3100666F09 /* SplatNet3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SplatNet3;
+		};
+		1076274428E301D40034F9A4 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1076274328E301D30034F9A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		1076274628E301D40034F9A4 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1076274328E301D30034F9A4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		10A6A19128B7A7130075563F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>326463476451-bnm2qb2ujs90bq0kschopfkr08ts7eun.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.326463476451-bnm2qb2ujs90bq0kschopfkr08ts7eun</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA-SWxJp76s1V1e2EopC0JQNMFep3KSyR4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>326463476451</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>work.tkgstrator.salmonia3plus</string>
+	<key>PROJECT_ID</key>
+	<string>salmonia3plus</string>
+	<key>STORAGE_BUCKET</key>
+	<string>salmonia3plus.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:326463476451:ios:1302c6354ee92d17c12bd6</string>
+</dict>
+</plist>
