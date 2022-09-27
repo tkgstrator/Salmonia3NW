@@ -13,6 +13,9 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted(primaryKey: true) var id: String
     @Persisted(indexed: true) var pid: String
     @Persisted var name: String
+    @Persisted var byname: String
+    @Persisted var nameId: String
+    @Persisted var isMyself: Bool
     @Persisted var deadCount: Int
     @Persisted var helpCount: Int
     @Persisted var goldenIkuraNum: Int
@@ -29,6 +32,9 @@ final class RealmCoopPlayer: Object, Identifiable {
     convenience init(from result: SplatNet2.PlayerResult) {
         self.init()
         self.id = result.id
+        self.byname = result.byname
+        self.nameId = result.nameId
+        self.isMyself = result.isMyself
         self.pid = result.id.capture(pattern: #"u-(\w*)$"#, group: 1)!
         self.name = result.name
         self.goldenIkuraNum = result.goldenIkuraNum
