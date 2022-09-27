@@ -26,7 +26,7 @@ struct SchedulesView: View {
                         ResultsView(results: schedule.results)
                     }, label: {
                         ScheduleView(schedule: schedule)
-                            .badge(schedule.results.count)
+//                            .badge(schedule.results.count)
                     })
                 }
             })

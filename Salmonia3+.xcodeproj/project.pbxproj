@@ -66,6 +66,7 @@
 		10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */; };
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
+		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -172,6 +173,7 @@
 		10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
+		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -234,7 +236,6 @@
 				100E875128D4B90E007FCF3C /* Components */,
 				100E873428D47DD1007FCF3C /* ResultView.swift */,
 				100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */,
-				1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -398,6 +399,7 @@
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
 				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
 				10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */,
+				1076273328DF7C520034F9A4 /* NSTrackingView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -416,13 +418,14 @@
 		10A0ACBD28DD808D008B332A /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
 				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
 				10A0ACB928DD627F008B332A /* ThemeView.swift */,
 				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
 				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
 				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
 				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
-				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
+				1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
+				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
@@ -900,7 +904,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -934,7 +938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1108,7 +1112,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
 				kind = exactVersion;
-				version = 10.29.0;
+				version = 10.30.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

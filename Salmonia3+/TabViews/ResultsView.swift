@@ -63,6 +63,7 @@ struct ResultsWithScheduleView: View {
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
     // ロード画面を表示する
     @Environment(\.isModalPopuped) var isModalPopuped
+    @StateObject var session: Session = Session()
 
     var body: some View {
         NavigationView(content: {
@@ -81,7 +82,9 @@ struct ResultsWithScheduleView: View {
                 $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
             })
             .refreshable(action: {
-                isModalPopuped.wrappedValue.toggle()
+                await session.dummy(action: {
+                    isModalPopuped.wrappedValue.toggle()
+                })
             })
             .listStyle(.plain)
             .navigationTitle(Text(localizedText: "TAB_RESULTS"))

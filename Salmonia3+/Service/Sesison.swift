@@ -29,14 +29,6 @@ class Session: SplatNet3, ObservableObject {
     override init() {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
-
-    /// スタックを全削除
-    private func dismiss() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [self] in
-            self.loginProgress.removeAll()
-        })
-    }
-
     /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
@@ -73,9 +65,7 @@ class Session: SplatNet3, ObservableObject {
                 throw Failure.API(error: NXError.API.content)
             }
             let response: T.ResponseType = try await super.authorize(request)
-            DispatchQueue.main.async(execute: { [self] in
-                loginProgress.success()
-            })
+            success()
             /// 最初のリクエストと現在リクエストのチェック
             if let first: LoginProgress = loginProgress.first {
                 if first.path != .COOP_SUMMARY && progress.path == .BULLET_TOKEN {
@@ -84,19 +74,25 @@ class Session: SplatNet3, ObservableObject {
             }
             return response
         } catch (let error) {
-            DispatchQueue.main.async(execute: { [self] in
-                loginProgress.failure()
-            })
-            dismiss()
+            failure()
             throw error
         }
+    }
+
+    func dummy(action: @escaping () -> Void) async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            action()
+            return
+        })
     }
 
     /// リザルトを取得して書き込みする
     func getCoopResults() async throws {
         // ローディングを開始する
-        self.resultCounts = 0
-        self.resultCountsNum = 0
+        DispatchQueue.main.async(execute: { [self] in
+            self.resultCounts = 0
+            self.resultCountsNum = 0
+        })
 
         /// 最新のバイトID取得
         let resultId: String? = RealmService.shared.getLatestResultId()
@@ -114,7 +110,9 @@ class Session: SplatNet3, ObservableObject {
         }
 
         // 取得すべきリザルトの数
-        self.resultCountsNum = resultIds.count
+        DispatchQueue.main.async(execute: {[self] in
+            self.resultCountsNum = resultIds.count
+        })
 
         do {
             DispatchQueue.main.async(execute: { [self] in
@@ -122,15 +120,10 @@ class Session: SplatNet3, ObservableObject {
             })
             // リザルト取得を開始する
             _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
-            DispatchQueue.main.async(execute: { [self] in
-                loginProgress.success()
-            })
+            success()
             dismiss()
         } catch(let error) {
-            DispatchQueue.main.async(execute: { [self] in
-                loginProgress.failure()
-            })
-            dismiss()
+            failure()
             throw error
         }
     }
@@ -138,15 +131,16 @@ class Session: SplatNet3, ObservableObject {
     /// 概要取得
     override func getCoopSummary() async throws -> CoopSummary.Response {
         // GraphQL用のデータを作成
-        loginProgress.append(LoginProgress(.COOP_SUMMARY))
+        DispatchQueue.main.async(execute: { [self] in
+            loginProgress.append(LoginProgress(.COOP_SUMMARY))
+        })
 
         do {
             let summary: CoopSummary.Response = try await super.getCoopSummary()
-            loginProgress.success()
+            success()
             return summary
         } catch(let error) {
-            loginProgress.failure()
-            dismiss()
+            failure()
             throw error
         }
     }
@@ -160,7 +154,9 @@ class Session: SplatNet3, ObservableObject {
     @discardableResult
     override func getCoopResult(id: String) async throws -> SplatNet2.Result {
         // リザルトを一件取得するごとにカウントアップする
-        resultCounts += 1
+        DispatchQueue.main.async(execute: { [self] in
+            resultCounts += 1
+        })
 
         do {
             let result: SplatNet2.Result = try await super.getCoopResult(id: id)
@@ -173,10 +169,30 @@ class Session: SplatNet3, ObservableObject {
             }
             return result
         } catch(let error) {
-            loginProgress.failure()
-            dismiss()
+            failure()
             throw error
         }
+    }
+
+    /// リクエスト失敗
+    func failure() {
+        DispatchQueue.main.async(execute: { [self] in
+            self.loginProgress.failure()
+        })
+    }
+
+    /// リクエスト成功
+    func success() {
+        DispatchQueue.main.async(execute: { [self] in
+            self.loginProgress.success()
+        })
+    }
+
+    /// スタックを全削除
+    private func dismiss() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            self.loginProgress.removeAll()
+        })
     }
 }
 

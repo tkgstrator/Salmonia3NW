@@ -11,45 +11,56 @@ import RealmSwift
 import PopupView
 
 struct ContentView: View {
-    @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
+    @StateObject var session: Session = Session()
+    /// 初回起動フラグ
+    @Environment(\.isFirstLaunch) var isFirstLaunch
+    /// 認証中フラグ
+    @Environment(\.isOAuthPresented) var isOAuthPresented
+    /// リザルト取得中フラグ
     @State private var isModalPopuped: Bool = false
+    /// 現在の表示中タブ取得
     @State private var selection: Int = 0
 
     var body: some View {
         TabView(selection: $selection, content: {
-//            ResultsWithScheduleView()
-//                .withGoogleMobileAds()
-//                .badge(50)
-//                .tabItem {
-//                    Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
-//                }
-//                .tag(0)
-//                .environment(\.isModalPopuped, $isModalPopuped)
-//            SchedulesView()
-//                .withGoogleMobileAds()
-//                .badge("?")
-//                .tabItem {
-//                    Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
-//                }
-//                .tag(2)
+            ResultsWithScheduleView()
+                .environment(\.isModalPopuped, $isModalPopuped)
+                .withGoogleMobileAds()
+                .tabItem {
+                    Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
+                }
+                .tag(0)
+            SchedulesView()
+                .withGoogleMobileAds()
+                .tabItem {
+                    Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
+                }
+                .tag(2)
             UserView()
-//                .withGoogleMobileAds()
-//                .badge("New")
-//                .tabItem {
-//                    Label("TAB_USER".sha256Hash, image: "TabType/Me")
-//                }
-//                .tag(3)
+                .environment(\.isModalPopuped, $isModalPopuped)
+                .withGoogleMobileAds()
+                .tabItem {
+                    Label("TAB_USER".sha256Hash, image: "TabType/Me")
+                }
+                .tag(3)
+        })
+        .onAppear(perform: {
+            print(isOAuthPresented)
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
-//        .overlay(isModalPopuped ? AnyView(Color.black.opacity(0.3).ignoresSafeArea()) : AnyView(EmptyView()))
-        .popup(isPresented: $isModalPopuped, autohideIn: 60, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: false, view: {
+        .popup(isPresented: isOAuthPresented, view: {
+            LoadingView(session: session)
+        })
+        .fullScreenCover(isPresented: $isModalPopuped, content: {
+            // リザルト読み込み
             ResultLoadingView()
                 .environment(\.isModalPopuped, $isModalPopuped)
         })
         .fullScreenCover(isPresented: isFirstLaunch , content: {
+            // チュートリアル
             TutorialView()
-                .environment(\.isModalPopuped, $isModalPopuped)
+                .environment(\.isOAuthPresented, isOAuthPresented)
         })
     }
 }

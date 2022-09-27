@@ -8,13 +8,13 @@
 import SwiftUI
 import Introspect
 import AppTrackingTransparency
-import GoogleMobileAds
 import SplatNet3
 import SDWebImageSwiftUI
 import PopupView
 
 struct TutorialView: View {
     @State private var selection: Int = 0
+    
     var body: some View {
         TabView(selection: $selection, content: {
             Tutorial(
@@ -28,7 +28,7 @@ struct TutorialView: View {
                 title: NSLocalizedString("TITLE_TRACKING", comment: ""),
                 description: NSLocalizedString("DESC_TRACKING_USAGE_DATA", comment: "")
             )
-            .authorize()
+            .trackingiOS()
             .transition(.fade)
             .tag(1)
             TutorialSignIn()
@@ -39,58 +39,12 @@ struct TutorialView: View {
     }
 }
 
-private struct NSTrackingConfirm: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .onAppear(perform: {
-                let status = ATTrackingManager.trackingAuthorizationStatus
-                switch status {
-                case .notDetermined:
-                    print("Not determined")
-                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                        switch status {
-                        case .notDetermined:
-                            break
-                        case .restricted:
-                            print("Restricted")
-                            GADMobileAds.sharedInstance().start(completionHandler: nil)
-                        case .denied:
-                            print("Denied")
-                            GADMobileAds.sharedInstance().start(completionHandler: nil)
-                        case .authorized:
-                            print("Authorized")
-                            GADMobileAds.sharedInstance().start(completionHandler: nil)
-                        @unknown default:
-                            fatalError()
-                        }
-                    })
-                case .restricted:
-                    print("Restricted")
-                    GADMobileAds.sharedInstance().start(completionHandler: nil)
-                case .denied:
-                    print("Denied")
-                    GADMobileAds.sharedInstance().start(completionHandler: nil)
-                case .authorized:
-                    print("Authorized")
-                    GADMobileAds.sharedInstance().start(completionHandler: nil)
-                @unknown default:
-                    fatalError()
-                }
-            })
-    }
-}
-
-private extension View {
-    func authorize() -> some View {
-        self.modifier(NSTrackingConfirm())
-    }
-}
 
 private struct TutorialSignIn: View {
-    @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
+    @Environment(\.isFirstLaunch) var isFirstLaunch
     @StateObject var session: Session = Session()
+    @State private var isOAuthPresented: Bool = false
     @State private var isPresented: Bool = false
-    @State private var isModalPopuped: Bool = false
 
     var body: some View {
         GeometryReader(content: { geometry in
@@ -124,6 +78,7 @@ private struct TutorialSignIn: View {
                         .cornerRadius(30)
                 })
                 Button(action: {
+                    print(isOAuthPresented)
                     isPresented.toggle()
                 }, label: {
                     Text(localizedText: "BUTTON_SIGN_IN")
@@ -139,18 +94,16 @@ private struct TutorialSignIn: View {
                 isPresented: $isPresented,
                 session: session,
                 onPresent: {
-                    isModalPopuped.toggle()
+                    isOAuthPresented.toggle()
                 },
                 onDismiss: {
                     // ログイン終了したらチュートリアルを非表示にする
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        isFirstLaunch.wrappedValue.toggle()
-                    })
+                    isFirstLaunch.wrappedValue.toggle()
                 },
                 onFailure: {
-                    isModalPopuped.toggle()
+                    isOAuthPresented.toggle()
                 })
-            .popup(isPresented: $isModalPopuped, view: {
+            .popup(isPresented: $isOAuthPresented, view: {
                 LoadingView(session: session)
             })
             #else
@@ -164,24 +117,22 @@ private struct TutorialSignIn: View {
                     .background(.white)
                     .cornerRadius(30)
             })
-            .disabled(isModalPopuped)
+            .disabled(isOAuthPresented)
             .position(x: geometry.center.x, y: geometry.height - 100)
             .authorize(
                 isPresented: $isPresented,
                 session: session,
                 onPresent: {
-                    isModalPopuped.toggle()
+                    isOAuthPresented.toggle()
                 },
                 onDismiss: {
                     // ログイン終了したらチュートリアルを非表示にする
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        isFirstLaunch.wrappedValue.toggle()
-                    })
+                    isFirstLaunch.wrappedValue.toggle()
                 },
                 onFailure: {
-                    isModalPopuped.toggle()
+                    isOAuthPresented.toggle()
                 })
-            .popup(isPresented: $isModalPopuped, view: {
+            .popup(isPresented: $isOAuthPresented, view: {
                 LoadingView(session: session)
             })
             #endif
