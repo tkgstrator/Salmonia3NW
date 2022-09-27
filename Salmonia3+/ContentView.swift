@@ -44,9 +44,6 @@ struct ContentView: View {
                 }
                 .tag(3)
         })
-        .onAppear(perform: {
-            print(isOAuthPresented)
-        })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
         .popup(isPresented: isOAuthPresented, view: {

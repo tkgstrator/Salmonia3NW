@@ -12,13 +12,22 @@ import SwiftUI
 
 class RealmService {
     public static let shared = RealmService()
-    
+
+    private let schemeVersion: UInt64 = 1
+
     internal var realm: Realm {
         get {
+            #if DEBUG
+            let config = Realm.Configuration(
+                schemaVersion: schemeVersion,
+                deleteRealmIfMigrationNeeded: false
+            )
+            #else
             let config = Realm.Configuration(
                 schemaVersion: schemeVersion,
                 deleteRealmIfMigrationNeeded: true
             )
+            #endif
             Realm.Configuration.defaultConfiguration = config
             do {
                 return try Realm()
@@ -27,8 +36,6 @@ class RealmService {
             }
         }
     }
-
-    private let schemeVersion: UInt64 = 0
 
     init() {
     }
