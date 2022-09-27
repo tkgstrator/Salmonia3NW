@@ -63,7 +63,7 @@ struct ResultDetailView: View {
                 })
             })
         })
-        .navigationTitle(Text(localizedText: "TAB_SCHEDULE"))
+        .navigationTitle(Text(localizedText: "TAB_RESULTS"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
