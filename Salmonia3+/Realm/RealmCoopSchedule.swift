@@ -16,7 +16,7 @@ class RealmCoopSchedule: Object, Identifiable {
     @Persisted var endTime: Date?
     @Persisted var weaponList: List<WeaponType>
     @Persisted var results: List<RealmCoopResult>
-    @Persisted var rareWeapon: Int?
+    @Persisted var rareWeapon: WeaponType?
     @Persisted var rule: SplatNet2.Rule
 
     convenience init(from result: SplatNet2.Result) {
