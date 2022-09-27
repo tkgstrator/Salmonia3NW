@@ -28,10 +28,17 @@ struct mainApp: SwiftUI.App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         let schemeVersion: UInt64 = 0
+        #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
             deleteRealmIfMigrationNeeded: true
             )
+        #else
+        let config = Realm.Configuration(
+            schemaVersion: schemeVersion,
+            deleteRealmIfMigrationNeeded: false
+            )
+        #endif
         Realm.Configuration.defaultConfiguration = config
         do {
             let _ =  try Realm()
