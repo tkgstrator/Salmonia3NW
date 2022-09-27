@@ -12,6 +12,8 @@ import SplatNet3
 class RealmCoopSchedule: Object, Identifiable {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var stageId: StageType
+    @Persisted var startTime: Date?
+    @Persisted var endTime: Date?
     @Persisted var weaponList: List<WeaponType>
     @Persisted var results: List<RealmCoopResult>
     @Persisted var rareWeapon: Int?
