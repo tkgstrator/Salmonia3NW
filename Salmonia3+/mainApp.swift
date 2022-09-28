@@ -27,7 +27,7 @@ struct mainApp: SwiftUI.App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let schemeVersion: UInt64 = 1
+        let schemeVersion: UInt64 = 2
         #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
