@@ -34,17 +34,37 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             schemaVersion: schemeVersion,
             migrationBlock: { migration, oldSchemeVersion in
                 if oldSchemeVersion < schemeVersion {
+                    // プレイヤー情報を仮アップデート
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         newValue!["isMyself"] = false
                         newValue!["byname"] = ""
                         newValue!["nameId"] = ""
                     })
+                    // スケジュール情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         newValue!["startTime"] = nil
                         newValue!["endTime"] = nil
                         newValue!["rareWeapon"] = nil
+                    })
+                    // リザルト情報をアップデート
+                    migration.enumerateObjects(ofType: RealmCoopResult.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            // クリア情報を更新(WAVE3をクリアしていたらクリアとする)
+                            if let waves: RealmSwift.List<MigrationObject> = oldValue["waves"] as? RealmSwift.List<MigrationObject>,
+                               let boolValue: Bool = oldValue["isClear"] as? Bool {
+                                // WAVE数が4または既にクリア済みだった
+                                newValue["isClear"] = waves.count == 4 || boolValue
+                            }
+
+                            // リザルトの先頭は常に自分とする
+                            if let players: RealmSwift.List<MigrationObject> = newValue["players"] as? RealmSwift.List<MigrationObject>,
+                               let player: MigrationObject = players.first {
+                                player["isMyself"] = true
+                            }
+                        }
                     })
                 }
             },
@@ -55,22 +75,37 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             schemaVersion: schemeVersion,
             migrationBlock: { migration, oldSchemeVersion in
                 if oldSchemeVersion < schemeVersion {
+                    // プレイヤー情報を仮アップデート
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         newValue!["isMyself"] = false
                         newValue!["byname"] = ""
                         newValue!["nameId"] = ""
                     })
+                    // スケジュール情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         newValue!["startTime"] = nil
                         newValue!["endTime"] = nil
                         newValue!["rareWeapon"] = nil
                     })
+                    // リザルト情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopResult.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
-                        // WAVE数が4または既にクリア済みだった
-                        newValue!["isClear"] = oldValue!["waves"].count == 4 || oldValue!["isClear"]
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            // クリア情報を更新(WAVE3をクリアしていたらクリアとする)
+                            if let waves: RealmSwift.List<MigrationObject> = oldValue["waves"] as? RealmSwift.List<MigrationObject>,
+                               let boolValue: Bool = oldValue["isClear"] as? Bool {
+                                // WAVE数が4または既にクリア済みだった
+                                newValue["isClear"] = waves.count == 4 || boolValue
+                            }
+
+                            // リザルトの先頭は常に自分とする
+                            if let players: RealmSwift.List<MigrationObject> = newValue["players"] as? RealmSwift.List<MigrationObject>,
+                               let player: MigrationObject = players.first {
+                                player["isMyself"] = true
+                            }
+                        }
                     })
                 }
             },
