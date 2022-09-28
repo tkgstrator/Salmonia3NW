@@ -21,7 +21,7 @@ struct ResultPlayer: View {
                     .fill(SPColor.Theme.SPOrange)
                 HStack(alignment: .bottom, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
-                        Text(isNameVisible ? result.name : "-")
+                        Text((isNameVisible || result.isMyself) ? result.name : "-")
                             .font(systemName: .Splatfont2, size: 17 * scale)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)
