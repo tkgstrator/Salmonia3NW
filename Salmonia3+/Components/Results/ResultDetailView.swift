@@ -47,8 +47,6 @@ struct ResultDetailView: View {
                         }
                     })
                 ResultSakelien(result: result)
-                    .frame(maxWidth: 540)
-                    .padding(.horizontal, 4)
             })
         })
         .toolbar(content: {

@@ -25,12 +25,13 @@ struct ResultSakelien: View {
                 let bossCount: [Int] = bossCounts[index]
                 let sakelienType: SakelienType = SakelienType.allCases[index]
                 if bossCount[2] != 0 {
-                    HStack(content: {
+                    HStack(spacing: 20, content: {
                         Image(bundle: sakelienType)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 40, height: 40, alignment: .center)
-                            .background(Circle().fill(Color.primary).opacity(0.9))
+                            .padding(2)
+                            .background(Circle().fill(SPColor.Theme.SPTheme))
                         Text(sakelienType.localizedText)
                             .font(systemName: .Splatfont2, size: 18)
                             .frame(height: 16, alignment: .center)
@@ -53,6 +54,7 @@ struct ResultSakelien: View {
                 }
             }
         })
+        .frame(maxWidth: 340)
     }
 }
 
@@ -60,6 +62,9 @@ struct ResultSakelien_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult()
     static var previews: some View {
         ResultSakelien(result: result)
-            .previewLayout(.fixed(width: 400, height: 900))
+            .previewLayout(.fixed(width: 400, height: 300))
+            .preferredColorScheme(.dark)
+        ResultSakelien(result: result)
+            .previewLayout(.fixed(width: 400, height: 300))
     }
 }
