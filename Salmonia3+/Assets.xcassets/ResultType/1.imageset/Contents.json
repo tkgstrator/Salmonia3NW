@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "85fa09f4dd66dd7f3637edc5994ae985_en_clear.svg",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "85fa09f4dd66dd7f3637edc5994ae985_jp_clear.svg",
+      "idiom" : "universal",
+      "locale" : "ja"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "lossless",
+    "localizable" : true,
+    "preserves-vector-representation" : true
+  }
+}
