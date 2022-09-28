@@ -28,7 +28,7 @@ struct mainApp: SwiftUI.App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let schemeVersion: UInt64 = 2
+        let schemeVersion: UInt64 = 3
         #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
@@ -66,6 +66,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                         newValue!["startTime"] = nil
                         newValue!["endTime"] = nil
                         newValue!["rareWeapon"] = nil
+                    })
+                    migration.enumerateObjects(ofType: RealmCoopResult.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        // WAVE数が4または既にクリア済みだった
+                        newValue!["isClear"] = oldValue!["waves"].count == 4 || oldValue!["isClear"]
                     })
                 }
             },
