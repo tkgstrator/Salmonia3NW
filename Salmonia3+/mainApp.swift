@@ -27,15 +27,55 @@ struct mainApp: SwiftUI.App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let schemeVersion: UInt64 = 0
+        let schemeVersion: UInt64 = 1
+        #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
-            deleteRealmIfMigrationNeeded: true
+            migrationBlock: { migration, oldSchemeVersion in
+                if oldSchemeVersion < schemeVersion {
+                    migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        newValue!["isMyself"] = false
+                        newValue!["byname"] = ""
+                        newValue!["nameId"] = ""
+                    })
+                    migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        newValue!["startTime"] = nil
+                        newValue!["endTime"] = nil
+                        newValue!["rareWeapon"] = nil
+                    })
+                }
+            },
+            deleteRealmIfMigrationNeeded: false
             )
+        #else
+        let config = Realm.Configuration(
+            schemaVersion: schemeVersion,
+            migrationBlock: { migration, oldSchemeVersion in
+                if oldSchemeVersion < schemeVersion {
+                    migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        newValue!["isMyself"] = false
+                        newValue!["byname"] = ""
+                        newValue!["nameId"] = ""
+                    })
+                    migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
+                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                        newValue!["startTime"] = nil
+                        newValue!["endTime"] = nil
+                        newValue!["rareWeapon"] = nil
+                    })
+                }
+            },
+            deleteRealmIfMigrationNeeded: false
+            )
+        #endif
         Realm.Configuration.defaultConfiguration = config
         do {
-            let _ =  try Realm()
+            let _ =  try Realm(configuration: config)
         } catch (let error) {
+            print(error)
             let _ = try! Realm(configuration: config)
         }
 
