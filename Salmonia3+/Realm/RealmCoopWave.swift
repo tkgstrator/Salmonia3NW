@@ -53,7 +53,17 @@ extension RealmCoopWave {
             if let failureWave: Int = result.failureWave {
                 return failureWave != self.id
             }
-            // ミスしてなかったら常にTrue
+
+            // オカシラシャケと戦っている
+            if let isBossDefeated = result.isBossDefeated {
+                // EX-WAVE以外には常に勝利
+                if self.id != 4 {
+                    return true
+                }
+                // EX-WAVEはisBossDefeatedを返す
+                return isBossDefeated
+            }
+            // オカシラシャケと戦っていない&failureWaveがないのは全WAVEクリア
             return true
         }
         return true
