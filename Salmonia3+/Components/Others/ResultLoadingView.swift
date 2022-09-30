@@ -91,9 +91,6 @@ struct ResultLoadingView: View {
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除
             UIApplication.shared.isIdleTimerDisabled = false
-            DispatchQueue.main.async(execute: { [self] in
-                session.loginProgress.removeAll()
-            })
         })
     }
 }
