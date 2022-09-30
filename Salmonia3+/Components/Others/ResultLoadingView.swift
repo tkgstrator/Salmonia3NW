@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 import SplatNet3
 
 struct ResultLoadingView: View {
+    @Environment(\.dismissModal) var dismiss
     @StateObject var session: Session = Session()
 
     var body: some View {
@@ -74,9 +75,11 @@ struct ResultLoadingView: View {
                     // リザルト取得後にモーダルを閉じる
                     try await session.getCoopResults()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        dismiss()
                     })
                 } catch(_) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        dismiss()
                     })
                 }
             }
@@ -84,6 +87,9 @@ struct ResultLoadingView: View {
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除
             UIApplication.shared.isIdleTimerDisabled = false
+            DispatchQueue.main.async(execute: { [self] in
+                session.loginProgress.removeAll()
+            })
         })
     }
 }

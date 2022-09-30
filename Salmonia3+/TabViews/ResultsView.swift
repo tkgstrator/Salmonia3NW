@@ -61,6 +61,7 @@ struct ResultsWithScheduleView: View {
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+    @State private var isPresented: Bool = false
     @StateObject var session: Session = Session()
 
     var body: some View {
@@ -80,8 +81,13 @@ struct ResultsWithScheduleView: View {
                 $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
             })
             .refreshable(action: {
-//                await session.dummy(action: {
-//                })
+                await session.dummy(action: {
+                    isPresented.toggle()
+                })
+            })
+            .fullScreen(isPresented: $isPresented, content: {
+                ResultLoadingView()
+                    .environment(\.dismissModal, DismissModalAction($isPresented))
             })
             .listStyle(.plain)
             .navigationTitle(Text(localizedText: "TAB_RESULTS"))
