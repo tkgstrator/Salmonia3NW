@@ -9,7 +9,6 @@ import SwiftUI
 import SDWebImageSwiftUI
 import StoreKit
 import BetterSafariView
-import PopupView
 
 enum IconList {
     static let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -17,7 +16,6 @@ enum IconList {
     struct NSO: View {
         @StateObject var session: Session = Session()
         @State private var isPresented: Bool = false
-        @Environment(\.isModalPopuped) var isModalPopuped
 
         var body: some View {
             if let account = session.account {
@@ -38,18 +36,6 @@ enum IconList {
                     })
                 })
                 .frame(maxWidth: 100)
-                .authorize(
-                    isPresented: $isPresented,
-                    session: session,
-                    onPresent: {
-                        isModalPopuped.wrappedValue.toggle()
-                    },
-                    onDismiss: {
-                        isModalPopuped.wrappedValue.toggle()
-                    },
-                    onFailure: {
-                        isModalPopuped.wrappedValue.toggle()
-                    })
             } else {
                 EmptyView()
             }

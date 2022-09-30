@@ -8,7 +8,6 @@
 import SwiftUI
 import SplatNet3
 import RealmSwift
-import PopupView
 
 struct ContentView: View {
     @StateObject var session: Session = Session()
@@ -46,9 +45,6 @@ struct ContentView: View {
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
-        .popup(isPresented: isOAuthPresented, view: {
-            LoadingView(session: session)
-        })
         .fullScreenCover(isPresented: $isModalPopuped, content: {
             // リザルト読み込み
             ResultLoadingView()

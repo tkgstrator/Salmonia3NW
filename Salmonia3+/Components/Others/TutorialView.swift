@@ -10,7 +10,6 @@ import Introspect
 import AppTrackingTransparency
 import SplatNet3
 import SDWebImageSwiftUI
-import PopupView
 
 struct TutorialView: View {
     @State private var selection: Int = 0
@@ -90,22 +89,6 @@ private struct TutorialSignIn: View {
                 })
             })
             .position(x: geometry.center.x, y: geometry.height - 100)
-            .authorize(
-                isPresented: $isPresented,
-                session: session,
-                onPresent: {
-                    isOAuthPresented.toggle()
-                },
-                onDismiss: {
-                    // ログイン終了したらチュートリアルを非表示にする
-                    isFirstLaunch.wrappedValue.toggle()
-                },
-                onFailure: {
-                    isOAuthPresented.toggle()
-                })
-            .popup(isPresented: $isOAuthPresented, view: {
-                LoadingView(session: session)
-            })
             #else
             Button(action: {
                 isPresented.toggle()
@@ -119,22 +102,6 @@ private struct TutorialSignIn: View {
             })
             .disabled(isOAuthPresented)
             .position(x: geometry.center.x, y: geometry.height - 100)
-            .authorize(
-                isPresented: $isPresented,
-                session: session,
-                onPresent: {
-                    isOAuthPresented.toggle()
-                },
-                onDismiss: {
-                    // ログイン終了したらチュートリアルを非表示にする
-                    isFirstLaunch.wrappedValue.toggle()
-                },
-                onFailure: {
-                    isOAuthPresented.toggle()
-                })
-            .popup(isPresented: $isOAuthPresented, view: {
-                LoadingView(session: session)
-            })
             #endif
         })
     }
