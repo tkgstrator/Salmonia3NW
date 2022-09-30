@@ -19,6 +19,7 @@ struct TypePicker<T: AllCaseable>: View {
             ForEach(T.allCases.dropLast()) { rule in
                 Text(localizedText: rule.rawValue)
                     .tag(rule)
+                    .id(rule)
             }
         }, label: {
         })
