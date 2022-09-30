@@ -81,9 +81,9 @@ class Session: SplatNet3, ObservableObject {
     }
 
     func dummy(action: @escaping () -> Void) async {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [self] in
             action()
-            return
+            loginProgress.removeAll()
         })
     }
 

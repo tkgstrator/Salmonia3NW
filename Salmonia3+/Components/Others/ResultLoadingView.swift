@@ -20,7 +20,7 @@ struct ResultLoadingView: View {
                     RoundedRectangle(cornerRadius: 4)
                         .frame(width: 60, height: 24, alignment: .center)
                         .foregroundColor(progress.color)
-                        .overlay(Text(progress.apiType.rawValue))
+                        .overlay(Text(progress.apiType.rawValue).foregroundColor(.white))
                     Text(progress.path.rawValue)
                         .frame(width: 220, height: nil, alignment: .leading)
                         .lineLimit(1)
@@ -50,6 +50,7 @@ struct ResultLoadingView: View {
                     .trim(from: 0, to: session.resultCountsNum == 0 ? 0 : CGFloat(session.resultCounts) / CGFloat(session.resultCountsNum))
                     .stroke(.pink, lineWidth: 10)
                     .rotationEffect(.degrees(-90))
+                    .animation(.default, value: session.resultCounts)
                 VStack(alignment: .center, spacing: 0, content: {
                     WebImage(loading: .SPLATNET2)
                         .resizable()
@@ -67,6 +68,7 @@ struct ResultLoadingView: View {
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
         .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
+        .animation(.default, value: session.loginProgress.count)
         .onAppear(perform: {
             // スリープモードにならないようにする
             UIApplication.shared.isIdleTimerDisabled = true
@@ -75,10 +77,12 @@ struct ResultLoadingView: View {
                     // リザルト取得後にモーダルを閉じる
                     try await session.getCoopResults()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        session.loginProgress.removeAll()
                         dismiss()
                     })
                 } catch(_) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                        session.loginProgress.removeAll()
                         dismiss()
                     })
                 }
@@ -87,9 +91,6 @@ struct ResultLoadingView: View {
         .onDisappear(perform: {
             // 処理が終わったのでスリープモード制限解除
             UIApplication.shared.isIdleTimerDisabled = false
-            DispatchQueue.main.async(execute: { [self] in
-                session.loginProgress.removeAll()
-            })
         })
     }
 }

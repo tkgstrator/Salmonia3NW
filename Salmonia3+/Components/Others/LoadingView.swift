@@ -56,6 +56,7 @@ struct LoadingView: View {
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
         .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
+        .animation(.default, value: session.loginProgress.count)
         .onAppear(perform: {
             if let code = code, let verifier = verifier {
                 Task {
