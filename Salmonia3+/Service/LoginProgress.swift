@@ -56,7 +56,7 @@ struct LoginProgress: Identifiable {
     var progressType: ProgressType = .PROGRESS
 
     /// Identifiable
-    var id: String { path.rawValue }
+    let id: UUID = UUID()
 
     /// 背景色
     var color: Color {

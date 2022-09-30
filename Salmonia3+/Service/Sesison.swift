@@ -29,6 +29,7 @@ class Session: SplatNet3, ObservableObject {
     override init() {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
+
     /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する

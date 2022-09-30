@@ -10,20 +10,16 @@ import SplatNet3
 import RealmSwift
 
 struct ContentView: View {
-    @StateObject var session: Session = Session()
     /// 初回起動フラグ
     @Environment(\.isFirstLaunch) var isFirstLaunch
-    /// 認証中フラグ
-    @Environment(\.isOAuthPresented) var isOAuthPresented
-    /// リザルト取得中フラグ
-    @State private var isModalPopuped: Bool = false
+    /// モーダル表示かどうかのフラグ
+    @Environment(\.isModalPresented) var isModalPresented
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
 
     var body: some View {
         TabView(selection: $selection, content: {
             ResultsWithScheduleView()
-                .environment(\.isModalPopuped, $isModalPopuped)
                 .withGoogleMobileAds()
                 .tabItem {
                     Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
@@ -36,7 +32,6 @@ struct ContentView: View {
                 }
                 .tag(2)
             UserView()
-                .environment(\.isModalPopuped, $isModalPopuped)
                 .withGoogleMobileAds()
                 .tabItem {
                     Label("TAB_USER".sha256Hash, image: "TabType/Me")
@@ -45,15 +40,9 @@ struct ContentView: View {
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
-        .fullScreenCover(isPresented: $isModalPopuped, content: {
-            // リザルト読み込み
-            ResultLoadingView()
-                .environment(\.isModalPopuped, $isModalPopuped)
-        })
         .fullScreenCover(isPresented: isFirstLaunch , content: {
             // チュートリアル
             TutorialView()
-                .environment(\.isOAuthPresented, isOAuthPresented)
         })
     }
 }

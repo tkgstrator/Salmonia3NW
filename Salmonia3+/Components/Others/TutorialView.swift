@@ -40,10 +40,13 @@ struct TutorialView: View {
 
 
 private struct TutorialSignIn: View {
+    // 初回起動かどうかのフラグ
     @Environment(\.isFirstLaunch) var isFirstLaunch
     @StateObject var session: Session = Session()
-    @State private var isOAuthPresented: Bool = false
+    @State private var isModalPresented: Bool = false
     @State private var isPresented: Bool = false
+    @State private var verifier: String? = nil
+    @State private var code: String? = nil
 
     var body: some View {
         GeometryReader(content: { geometry in
@@ -77,7 +80,6 @@ private struct TutorialSignIn: View {
                         .cornerRadius(30)
                 })
                 Button(action: {
-                    print(isOAuthPresented)
                     isPresented.toggle()
                 }, label: {
                     Text(localizedText: "BUTTON_SIGN_IN")
@@ -89,6 +91,21 @@ private struct TutorialSignIn: View {
                 })
             })
             .position(x: geometry.center.x, y: geometry.height - 100)
+            .authorize(isPresented: $isPresented, completion: { result in
+                switch result {
+                case .success((let code, let verifier)):
+                    self.code = code
+                    self.verifier = verifier
+                    isModalPresented.toggle()
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            .fullScreen(isPresented: $isModalPresented, content: {
+                LoadingView(code: $code, verifier: $verifier, onSuccess: {
+                    isFirstLaunch.wrappedValue.toggle()
+                })
+            })
             #else
             Button(action: {
                 isPresented.toggle()

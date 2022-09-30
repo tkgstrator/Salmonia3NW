@@ -197,7 +197,6 @@ enum IconList {
 
     struct Accounts: View {
         @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
-        @StateObject var session: Session = Session()
         @State private var isPresented: Bool = false
 
         var body: some View {
@@ -208,7 +207,6 @@ enum IconList {
                     isPresented.toggle()
                 })
                 .alert(isPresented: $isPresented, confirm: {
-                    try? session.removeAll()
                     isFirstLaunch.wrappedValue.toggle()
                 })
         }

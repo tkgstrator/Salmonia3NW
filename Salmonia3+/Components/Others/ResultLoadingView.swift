@@ -11,8 +11,6 @@ import SplatNet3
 
 struct ResultLoadingView: View {
     @StateObject var session: Session = Session()
-    @Environment(\.isModalPopuped) var isModalPopuped
-    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(content: {
@@ -76,11 +74,9 @@ struct ResultLoadingView: View {
                     // リザルト取得後にモーダルを閉じる
                     try await session.getCoopResults()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                        dismiss()
                     })
                 } catch(_) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                        dismiss()
                     })
                 }
             }

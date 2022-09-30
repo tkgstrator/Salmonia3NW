@@ -20,7 +20,7 @@ struct IsFirstLaunch: EnvironmentKey {
     static var defaultValue: Binding<Bool> = .constant(true)
 }
 
-struct IsModalPopuped: EnvironmentKey {
+struct IsModalPresented: EnvironmentKey {
     typealias Value = Binding<Bool>
 
     static var defaultValue: Binding<Bool> = .constant(false)
@@ -33,12 +33,12 @@ struct IsOAuthPresented: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var isModalPopuped: Binding<Bool> {
+    var isModalPresented: Binding<Bool> {
         get {
-            return self[IsModalPopuped.self]
+            return self[IsModalPresented.self]
         }
         set {
-            self[IsModalPopuped.self] = newValue
+            self[IsModalPresented.self] = newValue
         }
     }
 
