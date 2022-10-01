@@ -16,7 +16,7 @@ struct ResultSakelien: View {
             self.bossCounts = [result.bossKillCounts, bossKillCounts, result.bossCounts].transposed()
             return
         }
-        self.bossCounts = Array(repeating: [99, 99, 99], count: 15)
+        self.bossCounts = Array(repeating: [100, 100, 100], count: 15)
     }
 
     var body: some View {
