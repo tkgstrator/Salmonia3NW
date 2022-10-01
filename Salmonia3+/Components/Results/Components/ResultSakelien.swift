@@ -16,7 +16,7 @@ struct ResultSakelien: View {
             self.bossCounts = [result.bossKillCounts, bossKillCounts, result.bossCounts].transposed()
             return
         }
-        self.bossCounts = Array(repeating: [100, 100, 100], count: 15)
+        self.bossCounts = Array(repeating: [99, 99, 99], count: 15)
     }
 
     var body: some View {
@@ -36,17 +36,18 @@ struct ResultSakelien: View {
                             .font(systemName: .Splatfont2, size: 18)
                             .frame(height: 16, alignment: .center)
                         Spacer()
-                        HStack(alignment: .lastTextBaseline, spacing: 0, content: {
+                        HStack(alignment: .firstTextBaseline, spacing: 2, content: {
                             Text(String(format: "%02d", bossCount[0]))
-                                .frame(width: 36)
+                                .frame(minWidth: 30)
+                                .font(systemName: .Splatfont2, size: 18)
                             Text(String(format: "(%02d)", bossCount[1]))
-                                .frame(width: 40)
+                                .frame(minWidth: 34)
                                 .font(systemName: .Splatfont2, size: 14)
                             Text(String(format: "/%02d", bossCount[2]))
-                                .frame(width: 45)
+                                .font(systemName: .Splatfont2, size: 18)
+                                .frame(minWidth: 34)
                         })
-                        .font(systemName: .Splatfont2, size: 18)
-                        .frame(height: 16, alignment: .center)
+                        .frame(height: 18)
                     })
                     if index != bossCounts.count {
                         Divider()

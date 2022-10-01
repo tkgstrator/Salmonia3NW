@@ -49,7 +49,7 @@ private struct ResultScorePoint: View {
             .font(systemName: .Splatfont2, size: 16)
             .frame(height: 18)
             Divider()
-            HStack(alignment: .center, spacing: 1, content: {
+            HStack(alignment: .top, spacing: 1, content: {
                 if let score = result.jobScore,
                    let rate = result.jobRate,
                    let bonus = result.jobBonus {
@@ -64,6 +64,8 @@ private struct ResultScorePoint: View {
                     })
                     Text("x")
                         .padding(.horizontal, 4)
+                        .padding(.bottom, 3)
+                        .frame(height: 18, alignment: .center)
                     VStack(alignment: .center, spacing: 0, content: {
                         Text(String(format: "%.2f", rate))
                             .frame(height: 18)
@@ -74,6 +76,7 @@ private struct ResultScorePoint: View {
                     })
                     Text("+")
                         .padding(.horizontal, 4)
+                        .frame(height: 18, alignment: .center)
                     VStack(alignment: .center, spacing: 0, content: {
                         Text(String(format: "%d", bonus))
                             .frame(height: 18)
