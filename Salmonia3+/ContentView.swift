@@ -16,27 +16,55 @@ struct ContentView: View {
     @Environment(\.isModalPresented) var isModalPresented
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
+    /// タブを戻すための処理
+    @State private var root: [UUID] = [UUID(), UUID(), UUID()]
+
+    /// 切り替え用の変数
+    private var selected: Binding<Int> {
+        Binding(
+            get: {
+                return selection
+            },
+            set: { newValue in
+                if newValue == selection {
+                    root[selection] = UUID()
+                }
+                selection = newValue
+            })
+    }
 
     var body: some View {
-        TabView(selection: $selection, content: {
-            ResultsWithScheduleView()
-                .withGoogleMobileAds()
-                .tabItem {
-                    Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
-                }
-                .tag(0)
-            SchedulesView()
-                .withGoogleMobileAds()
-                .tabItem {
-                    Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
-                }
-                .tag(2)
-            UserView()
-                .withGoogleMobileAds()
-                .tabItem {
-                    Label("TAB_USER".sha256Hash, image: "TabType/Me")
-                }
-                .tag(3)
+        TabView(selection: selected, content: {
+            NavigationView(content: {
+                ResultsWithScheduleView()
+                    .id(root[0])
+            })
+            .navigationViewStyle(.split)
+            .withGoogleMobileAds()
+            .tabItem {
+                Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
+            }
+            .tag(0)
+            NavigationView(content: {
+                SchedulesView()
+                    .id(root[1])
+            })
+            .navigationViewStyle(.split)
+            .withGoogleMobileAds()
+            .tabItem {
+                Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
+            }
+            .tag(1)
+            NavigationView(content: {
+                UserView()
+                    .id(root[2])
+            })
+            .navigationViewStyle(.split)
+            .withGoogleMobileAds()
+            .tabItem {
+                Label("TAB_USER".sha256Hash, image: "TabType/Me")
+            }
+            .tag(2)
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)

@@ -11,33 +11,33 @@ import SplatNet3
 
 struct SchedulesView: View {
     @ObservedResults(
-        RealmCoopSchedule.self,
-        filter: NSPredicate(format: "rule = %@", SplatNet2.Rule.REGULAR.rawValue)
-        //        sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
+        RealmCoopSchedule.self
     ) var schedules
-    @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+    @AppStorage("CONFIG_SELECTED_RULE") var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
 
     var body: some View {
-        NavigationView(content: {
-            List(content: {
-                TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(schedules.reversed()) { schedule in
-                    NavigationLinker(destination: {
-                        ResultsView(results: schedule.results)
-                    }, label: {
-                        ScheduleView(schedule: schedule)
-//                            .badge(schedule.results.count)
-                    })
-                }
-            })
-            .navigationTitle(Text(localizedText: "TAB_SCHEDULE"))
-            .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: selection, perform: { newValue in
-                $schedules.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-            })
-            .listStyle(.plain)
+        List(content: {
+            TypePicker<SplatNet2.Rule>(selection: $selection)
+            ForEach(schedules.filter(selection).reversed()) { schedule in
+                NavigationLinker(destination: {
+                    ResultsView(results: schedule.results)
+                }, label: {
+                    ScheduleView(schedule: schedule)
+                })
+            }
         })
-        .navigationViewStyle(.split)
+        .navigationTitle(Text(localizedText: "TAB_SCHEDULE"))
+        .navigationBarTitleDisplayMode(.inline)
+//        .onChange(of: selection, perform: { newValue in
+//            $schedules.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+//        })
+        .listStyle(.plain)
+    }
+}
+
+fileprivate extension RealmSwift.Results where Element == RealmCoopSchedule {
+    func filter(_ condition: SplatNet2.Rule) -> RealmSwift.Results<RealmCoopSchedule> {
+        self.filter("rule = %@", condition)
     }
 }
 

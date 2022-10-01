@@ -12,29 +12,26 @@ import RealmSwift
 struct UserView: View {
 
     var body: some View {
-        NavigationView(content: {
-            ScrollView(content: {
-                GeometryReader(content: { geometry in
-                    LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
-                        IconList.NSO()
-                        IconList.Review()
-                        IconList.Appearance()
-                        IconList.Setting()
-                        IconList.Privacy()
-                        IconList.Debug()
-                        #if DEBUG
-                        IconList.Status()
-                        IconList.Chart()
-                        IconList.Friends()
-                        #else
-                        #endif
-                    })
+        ScrollView(content: {
+            GeometryReader(content: { geometry in
+                LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
+                    IconList.NSO()
+                    IconList.Review()
+                    IconList.Appearance()
+                    IconList.Setting()
+                    IconList.Privacy()
+                    IconList.Debug()
+#if DEBUG
+                    IconList.Status()
+                    IconList.Chart()
+                    IconList.Friends()
+#else
+#endif
                 })
             })
-            .navigationTitle(Text(localizedText: "TAB_USER"))
-            .navigationBarTitleDisplayMode(.inline)
         })
-        .navigationViewStyle(.split)
+        .navigationTitle(Text(localizedText: "TAB_USER"))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

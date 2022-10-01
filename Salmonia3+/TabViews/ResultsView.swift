@@ -57,19 +57,17 @@ private struct ResultsEmpty: View {
 struct ResultsWithScheduleView: View {
     @ObservedResults(
         RealmCoopResult.self,
-        filter: NSPredicate(format: "rule = %@", SplatNet2.Rule.REGULAR.rawValue),
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
-    @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+    @AppStorage("CONFIG_SELECTED_RULE") var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
     @State private var isPresented: Bool = false
     @StateObject var session: Session = Session()
 
     var body: some View {
-        NavigationView(content: {
             List(content: {
                 TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(results.indices, id: \.self) { index in
-                    let result: RealmCoopResult = results[index]
+                ForEach(results.filter(selection).indices, id: \.self) { index in
+                    let result: RealmCoopResult = results.filter(selection)[index]
                     NavigationLinker(destination: {
                         ResultTabView(results: results)
                             .environment(\.selection, .constant(index))
@@ -79,9 +77,9 @@ struct ResultsWithScheduleView: View {
                 }
             })
             .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
-            .onChange(of: selection, perform: { newValue in
-                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-            })
+//            .onChange(of: selection, perform: { newValue in
+//                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+//            })
             .refreshable(action: {
                 await session.dummy(action: {
                     isPresented.toggle()
@@ -94,8 +92,12 @@ struct ResultsWithScheduleView: View {
             .listStyle(.plain)
             .navigationTitle(Text(localizedText: "TAB_RESULTS"))
             .navigationBarTitleDisplayMode(.inline)
-        })
-        .navigationViewStyle(.split)
+    }
+}
+
+fileprivate extension RealmSwift.Results where Element == RealmCoopResult {
+    func filter(_ condition: SplatNet2.Rule) -> RealmSwift.Results<RealmCoopResult> {
+        self.filter("rule = %@", condition)
     }
 }
 
