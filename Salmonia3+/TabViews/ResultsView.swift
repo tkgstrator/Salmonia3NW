@@ -66,8 +66,8 @@ struct ResultsWithScheduleView: View {
     var body: some View {
             List(content: {
                 TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(results.filter(selection).indices, id: \.self) { index in
-                    let result: RealmCoopResult = results.filter(selection)[index]
+                ForEach(results.indices, id: \.self) { index in
+                    let result: RealmCoopResult = results[index]
                     NavigationLinker(destination: {
                         ResultTabView(results: results)
                             .environment(\.selection, .constant(index))
@@ -77,9 +77,12 @@ struct ResultsWithScheduleView: View {
                 }
             })
             .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
-//            .onChange(of: selection, perform: { newValue in
-//                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-//            })
+            .onAppear(perform: {
+                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+            })
+            .onChange(of: selection, perform: { newValue in
+                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
+            })
             .refreshable(action: {
                 await session.dummy(action: {
                     isPresented.toggle()

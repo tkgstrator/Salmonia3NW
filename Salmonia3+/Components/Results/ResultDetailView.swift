@@ -74,26 +74,11 @@ struct ResultDetailView: View {
                         ForEach(result.players, id: \.self) { player in
                             ResultPlayer(result: player)
                                 .frame(maxWidth: maxWidth)
-                                .environment(\.isNameVisible, isNameVisible)
                         }
                     })
                 .padding(.horizontal)
                 ResultSakelien(result: result)
                     .padding(.horizontal)
-            })
-        })
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing, content: {
-                Button(action: {
-                    isNameVisible.toggle()
-                }, label: {
-                    Image(systemName: isNameVisible ? "eye" : "eye.slash")
-                        .resizable()
-                        .scaledToFit()
-                        .font(Font.system(size: 30, weight: .bold))
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(SPColor.Theme.SPOrange)
-                })
             })
         })
         .background(Image("BackgroundType/SplatNet3", bundle: .main).resizable(resizingMode: .tile).overlay(Color.black.opacity(0.3)))
