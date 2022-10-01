@@ -14,6 +14,12 @@ struct ResultView: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
+            let foregroundColor: Color = {
+                if let isBossDefeated: Bool = result.isBossDefeated {
+                    return isBossDefeated ? SPColor.SplatNet3.SPSalmonGreen : SPColor.SplatNet3.SPSalmonGreen
+                }
+                return Color.clear
+            }()
             let scale: CGFloat = min(1.0, geometry.height / 60)
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 0, content: {
@@ -57,7 +63,7 @@ struct ResultView: View {
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.orange)
+                                .foregroundColor(foregroundColor)
                                 .rotation3DEffect(.degrees(180), axis: (0, 1, 0))
                                 .padding(.trailing, 4 * scale)
                         }
@@ -68,7 +74,6 @@ struct ResultView: View {
             })
         })
         .frame(minHeight: 60)
-//        .aspectRatio(400/80, contentMode: .fit)
     }
 }
 
