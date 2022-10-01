@@ -17,7 +17,9 @@ struct ResultWave: View {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: 3).fill(SPColor.Theme.SPYellow)
                     .mask(Hanger().scaledToFill())
+                    .overlay(Image(bundle: .WAVE).resizable().scaledToFill())
                     .overlay(WaterLevel().fill(.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
+                    .clipShape(RoundedRectangle(cornerRadius: 3))
                 VStack(alignment: .center, spacing: 0, content: {
                     Text("Wave \(wave.id)")
                         .font(systemName: .Splatfont2, size: 17 * scale)
@@ -62,9 +64,10 @@ struct ResultWave: View {
                     .padding(.top, 4)
                 })
             })
+            .overlay(Image(bundle: wave.isClearWave ? .CLEAR : .FAILURE).resizable().frame(width: 34 * scale, height: 34 * scale, alignment: .topTrailing).offset(x: 12 * scale, y: -17 * scale), alignment: .topTrailing)
         })
         .aspectRatio(124/160, contentMode: .fit)
-        .overlay(Image(bundle: wave.isClearWave ? .CLEAR : .FAILURE).resizable().frame(width: 46, height: 46, alignment: .topTrailing).offset(x: 20, y: -23), alignment: .topTrailing)
+        .padding(.top, 10)
     }
 }
 

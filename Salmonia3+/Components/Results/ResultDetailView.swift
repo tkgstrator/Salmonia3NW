@@ -44,6 +44,7 @@ struct ResultTabView: View {
 struct ResultDetailView: View {
     let result: RealmCoopResult
     let schedule: RealmCoopSchedule
+    let maxWidth: CGFloat = 340
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
@@ -51,11 +52,10 @@ struct ResultDetailView: View {
                 ResultHeader(result: result)
                     .scaledToFill()
                 ResultScore(result: result)
-                    .scaledToFill()
-                    .padding(.horizontal, 4)
-                    .frame(maxWidth: 540)
+                    .padding(.horizontal, 8)
+                    .frame(maxWidth: maxWidth + 60)
                 LazyVGrid(
-                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: nil, alignment: .top), count: result.waves.count),
+                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: 2, alignment: .top), count: result.waves.count),
                     alignment: .center,
                     spacing: 0,
                     content: {
@@ -73,13 +73,30 @@ struct ResultDetailView: View {
                     content: {
                         ForEach(result.players, id: \.self) { player in
                             ResultPlayer(result: player)
-                                .frame(maxWidth: 400)
-                                .padding(.horizontal, 4)
+                                .frame(maxWidth: maxWidth)
+                                .environment(\.isNameVisible, isNameVisible)
                         }
                     })
+                .padding(.horizontal)
                 ResultSakelien(result: result)
+                    .padding(.horizontal)
             })
         })
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    isNameVisible.toggle()
+                }, label: {
+                    Image(systemName: isNameVisible ? "eye" : "eye.slash")
+                        .resizable()
+                        .scaledToFit()
+                        .font(Font.system(size: 30, weight: .bold))
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .foregroundColor(SPColor.Theme.SPOrange)
+                })
+            })
+        })
+        .background(Image("BackgroundType/SplatNet3", bundle: .main).resizable(resizingMode: .tile).overlay(Color.black.opacity(0.3)))
         .navigationTitle(Text(localizedText: "TAB_RESULTS"))
         .navigationBarTitleDisplayMode(.inline)
     }

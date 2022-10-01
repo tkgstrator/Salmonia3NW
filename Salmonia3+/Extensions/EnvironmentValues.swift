@@ -38,6 +38,12 @@ struct TabSelectionKey: EnvironmentKey {
     static var defaultValue: Binding<Int> = .constant(0)
 }
 
+struct ScaleForView: EnvironmentKey {
+    typealias Value = CGFloat
+
+    static var defaultValue: CGFloat = 1.0
+}
+
 extension EnvironmentValues {
     /// モーダルが表示されているかどうかを取得する環境変数
     var isModalPresented: Binding<Bool> {
@@ -82,5 +88,14 @@ extension EnvironmentValues {
     var selection: Binding<Int> {
         get { self[TabSelectionKey.self] }
         set { self[TabSelectionKey.self] = newValue }
+    }
+
+    var scale: CGFloat {
+        get {
+            return self[ScaleForView.self]
+        }
+        set {
+            self[ScaleForView.self] = newValue
+        }
     }
 }
