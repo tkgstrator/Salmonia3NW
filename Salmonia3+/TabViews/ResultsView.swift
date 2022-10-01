@@ -66,7 +66,8 @@ struct ResultsWithScheduleView: View {
     var body: some View {
             List(content: {
                 TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(results.filter(selection)) { result in
+                ForEach(results.filter(selection).indices, id: \.self) { index in
+                    let result: RealmCoopResult = results.filter(selection)[index]
                     NavigationLinker(destination: {
                         ResultTabView(results: results)
                             .environment(\.selection, .constant(index))
