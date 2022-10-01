@@ -7,9 +7,41 @@
 
 import SwiftUI
 import SplatNet3
+import RealmSwift
+
+struct ResultTabView: View {
+    @Environment(\.selection) var selection
+    @State private var isNameVisible: Bool = true
+    let results: RealmSwift.Results<RealmCoopResult>
+
+    var body: some View {
+        TabView(selection: selection, content: {
+            ForEach(results.indices, id: \.self) { index in
+                let result: RealmCoopResult = results[index]
+                ResultDetailView(result: result, schedule: result.schedule)
+                    .environment(\.isNameVisible, isNameVisible)
+                    .tag(index)
+            }
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    isNameVisible.toggle()
+                }, label: {
+                    Image(systemName: isNameVisible ? "eye" : "eye.slash")
+                        .resizable()
+                        .scaledToFit()
+                        .font(Font.system(size: 30, weight: .bold))
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .foregroundColor(SPColor.Theme.SPOrange)
+                })
+            })
+        })
+        .tabViewStyle(.page(indexDisplayMode: .never))
+    }
+}
 
 struct ResultDetailView: View {
-    @State private var isNameVisible: Bool = true
     let result: RealmCoopResult
     let schedule: RealmCoopSchedule
 
@@ -43,24 +75,9 @@ struct ResultDetailView: View {
                             ResultPlayer(result: player)
                                 .frame(maxWidth: 400)
                                 .padding(.horizontal, 4)
-                                .environment(\.isNameVisible, isNameVisible)
                         }
                     })
                 ResultSakelien(result: result)
-            })
-        })
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing, content: {
-                Button(action: {
-                    isNameVisible.toggle()
-                }, label: {
-                    Image(systemName: isNameVisible ? "eye" : "eye.slash")
-                        .resizable()
-                        .scaledToFit()
-                        .font(Font.system(size: 30, weight: .bold))
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(SPColor.Theme.SPOrange)
-                })
             })
         })
         .navigationTitle(Text(localizedText: "TAB_RESULTS"))
