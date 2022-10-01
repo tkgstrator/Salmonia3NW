@@ -90,10 +90,11 @@ private struct ResultScorePoint: View {
             .foregroundColor(.white)
             .font(systemName: .Splatfont2, size: 16)
         })
+        .frame(height: 70)
         .scaleEffect(scale)
+        .aspectRatio(200/70, contentMode: .fit)
         .padding(4)
         .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
-        .aspectRatio(200/70, contentMode: .fit)
     }
 }
 
@@ -110,7 +111,7 @@ private struct ResultScoreScale: View {
                     Spacer()
                 })
                 .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
-                .frame(height: 18)
+                .frame(height: 20)
             }
             HStack(content: {
                 HStack(spacing: 4, content: {
@@ -148,6 +149,7 @@ private struct ResultScoreScale: View {
             .foregroundColor(.white)
             .frame(height: 20)
         })
+        .frame(height: 70)
         .font(systemName: .Splatfont2, size: 14)
         .scaleEffect(scale)
         .aspectRatio(200/70, contentMode: .fit)
