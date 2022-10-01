@@ -20,36 +20,39 @@ struct ResultSakelien: View {
     }
 
     var body: some View {
-        VStack(spacing: nil, content: {
+        VStack(spacing: 6, content: {
             ForEach(bossCounts.indices, id: \.self) { index in
                 let bossCount: [Int] = bossCounts[index]
                 let sakelienType: SakelienType = SakelienType.allCases[index]
                 if bossCount[2] != 0 {
-                    HStack(spacing: 20, content: {
+                    HStack(spacing: 10, content: {
                         Image(bundle: sakelienType)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 40, height: 40, alignment: .center)
                             .padding(2)
-                            .background(Circle().fill(SPColor.Theme.SPTheme))
+                            .background(Circle().fill(SPColor.SplatNet3.SPBackground))
                         Text(sakelienType.localizedText)
                             .font(systemName: .Splatfont2, size: 18)
                             .frame(height: 16, alignment: .center)
                         Spacer()
-                        HStack(alignment: .lastTextBaseline, spacing: 0, content: {
+                        HStack(alignment: .firstTextBaseline, spacing: 2, content: {
                             Text(String(format: "%02d", bossCount[0]))
-                                .frame(width: 30)
+                                .frame(minWidth: 30)
+                                .font(systemName: .Splatfont2, size: 18)
                             Text(String(format: "(%02d)", bossCount[1]))
-                                .frame(width: 30)
+                                .frame(minWidth: 34)
                                 .font(systemName: .Splatfont2, size: 14)
                             Text(String(format: "/%02d", bossCount[2]))
-                                .frame(width: 40)
+                                .font(systemName: .Splatfont2, size: 18)
+                                .frame(minWidth: 34)
                         })
-                        .font(systemName: .Splatfont2, size: 18)
-                        .frame(height: 16, alignment: .center)
+                        .frame(height: 18)
                     })
                     if index != bossCounts.count {
                         Divider()
+                            .frame(height: 1.2)
+                            .background(.white)
                     }
                 }
             }

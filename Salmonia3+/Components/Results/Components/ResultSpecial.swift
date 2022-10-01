@@ -33,7 +33,7 @@ struct ResultSpecial: View {
                     .resizable()
                     .scaledToFit()
                     .padding(2)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color.primary.opacity(0.7)))
+                    .background(RoundedRectangle(cornerRadius: 8).fill(Color.black))
             }
         })
     }

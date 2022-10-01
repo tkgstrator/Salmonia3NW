@@ -55,7 +55,7 @@ struct ResultHeader: View {
                     .scaledToFit()
                     .clipped()
                     .mask(
-                        Image("SakelienType/99", bundle: .main)
+                        Image(bundle: .SakelienGiant)
                             .resizable()
                             .scaledToFit()
                             .padding(8 * scale)
@@ -83,7 +83,7 @@ struct ResultHeader: View {
                             .foregroundColor(.white)
                             .font(systemName: .Splatfont, size: 18 * scale)
                     })
-                    .frame(width: min(360, geometry.width * 0.6))
+                    .frame(width: min(200, geometry.width * 0.5), height: min(40, 30 * scale))
                     .background(RoundedRectangle(cornerRadius: 40 * scale).fill(Color.black.opacity(0.8)))
                 })
             })

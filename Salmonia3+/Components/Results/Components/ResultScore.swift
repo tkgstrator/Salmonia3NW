@@ -13,127 +13,160 @@ struct ResultScore: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            HStack(alignment: .center, spacing: 0, content: {
-                ResultScore_1(result: result, geometry: geometry)
-                ResultScore_2(result: result, geometry: geometry)
+            LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2), content: {
+                let scale: CGFloat = geometry.width / 400
+                ResultScoreScale(result: result)
+                    .environment(\.scale, scale)
+                ResultScorePoint(result: result)
+                    .environment(\.scale, scale)
             })
         })
         .aspectRatio(400/70, contentMode: .fit)
     }
 }
 
-private struct ResultScore_2: View {
+private struct ResultScorePoint: View {
+    @Environment(\.scale) var scale: CGFloat
     let result: RealmCoopResult
-    let geometry: GeometryProxy
 
     var body: some View {
-        let scale: CGFloat = geometry.width * 0.5 / 200
-        let width: CGFloat = geometry.width * 0.5
-        let height: CGFloat = geometry.width / 200 * 70 * 0.5
-        VStack(alignment: .center, spacing: nil, content: {
+        VStack(alignment: .trailing, spacing: 8, content: {
             HStack(alignment: .center, spacing: nil, content: {
+                Text(localizedText: "JOB_RESULT_POINTS")
+                    .foregroundColor(.gray)
+                    .font(systemName: .Splatfont2, size: 12)
                 Spacer()
                 if let kumaPoint: Int = result.kumaPoint {
                     Text(String(format: "%dp", kumaPoint))
-                        .font(systemName: .Splatfont2, size: 18 * scale)
-                        .frame(height: 16 * scale)
+                        .foregroundColor(.white)
+                        .frame(height: 18)
                 } else {
                     Text(String(format: "-"))
+                        .foregroundColor(.white)
+                        .frame(height: 18)
                 }
             })
+            .font(systemName: .Splatfont2, size: 16)
+            .frame(height: 18)
             Divider()
-            HStack(alignment: .center, spacing: 1 * scale, content: {
+            HStack(alignment: .top, spacing: 1, content: {
                 if let score = result.jobScore,
                    let rate = result.jobRate,
                    let bonus = result.jobBonus {
                     Spacer()
-                    Text(String(format: "%d", score))
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%d", score))
+                            .frame(height: 18)
+                        Text(localizedText: "JOB_RESULT_SCORE")
+                            .foregroundColor(.gray)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .frame(height: 10)
+                    })
                     Text("x")
                         .padding(.horizontal, 4)
-                    Text(String(format: "%.2f", rate))
+                        .padding(.bottom, 3)
+                        .frame(height: 18, alignment: .center)
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%.2f", rate))
+                            .frame(height: 18)
+                        Text(localizedText: "JOB_RESULT_RATE")
+                            .foregroundColor(.gray)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .frame(height: 10)
+                    })
                     Text("+")
                         .padding(.horizontal, 4)
-                    Text(String(format: "%d", bonus))
+                        .frame(height: 18, alignment: .center)
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%d", bonus))
+                            .frame(height: 18)
+                        Text(localizedText: "JOB_RESULT_BONUS")
+                            .foregroundColor(.gray)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .frame(height: 10)
+                    })
                 }
             })
-            .font(systemName: .Splatfont2, size: 16 * scale)
-            .frame(height: 20 * scale)
+            .foregroundColor(.white)
+            .font(systemName: .Splatfont2, size: 16)
         })
-        .frame(width: width, height: height, alignment: .center)
+        .frame(height: 70)
+        .scaleEffect(scale)
         .aspectRatio(200/70, contentMode: .fit)
+        .padding(4)
+        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
     }
 }
 
-private struct ResultScore_1: View {
+private struct ResultScoreScale: View {
+    @Environment(\.scale) var scale: CGFloat
     let result: RealmCoopResult
-    let geometry: GeometryProxy
 
     var body: some View {
-        let scale: CGFloat = geometry.width * 0.5 / 200
-        let width: CGFloat = geometry.width * 0.5
-        let height: CGFloat = geometry.width / 200 * 70 * 0.5
-
-        VStack(alignment: .leading, spacing: nil, content: {
-            if let grade = result.grade, let gradePoint = result.gradePoint {
-                HStack(spacing: nil, content: {
-                    Text(grade.localizedText)
-                        .font(systemName: .Splatfont2, size: 16 * scale)
-                        .frame(height: 16 * scale)
+        VStack(alignment: .leading, spacing: 4, content: {
+            if let gradeId = result.grade, let gradePoint = result.gradePoint {
+                HStack(content: {
+                    Text(gradeId.localizedText)
                     Text("\(gradePoint)")
-                        .font(systemName: .Splatfont2, size: 16 * scale)
-                        .frame(height: 16 * scale)
                     Spacer()
                 })
-                .frame(width: width)
-                ZStack(alignment: .leading, content: {
-                    let maxValue: CGFloat = grade == .Eggsecutive_VP ? 999 : 100
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.primary.opacity(0.3))
-                        .frame(width: (width - 10 * scale), height: 8 * scale, alignment: .center)
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(SPColor.Theme.SPOrange)
-                        .frame(width: (width - 10 * scale) * CGFloat(gradePoint) / maxValue, height: 8 * scale, alignment: .center)
-                })
+                .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
+                .frame(height: 20)
             }
-            HStack(spacing: 0 * scale, content: {
-                ForEach(result.scale.indices, id: \.self) { index in
-                    let width: CGFloat = (geometry.width - 20) * 0.06
-                    if let scaleType: ScaleType = ScaleType(rawValue: index) {
-                        Group(content: {
-                            Image(bundle: scaleType)
-                                .resizable()
-                                .frame(width: width, height: width, alignment: .center)
-                            if let scaleCount: Int = result.scale[index] {
-                                Text("\(scaleCount)")
-                                    .font(systemName: .Splatfont2, size: 16 * scale)
-                                    .frame(width: 30 * scale, height: 16 * scale)
-                            } else {
-                                Text("-")
-                                    .font(systemName: .Splatfont2, size: 16 * scale)
-                                    .frame(height: 30 * scale)
-                            }
-                        })
-                        .frame(width: 28 * scale)
-                    }
-                }
-                Spacer()
+            HStack(content: {
+                HStack(spacing: 4, content: {
+                    Image(bundle: .Golden)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20, alignment: .center)
+                    Text("x\(String(format: "%d", result.goldenIkuraNum))")
+                })
+                HStack(spacing: 4, content: {
+                    Image(bundle: .Power)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20, alignment: .center)
+                    Text("x\(String(format: "%d", result.ikuraNum))")
+                })
             })
-            .frame(width: width, height: 20 * scale)
+            .foregroundColor(.white)
+            .frame(height: 20)
+            HStack(content: {
+                ForEach(ScaleType.allCases) { scaleId in
+                    HStack(spacing: 4, content: {
+                        Image(bundle: scaleId)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .center)
+                        if let count: Int = result.scale[scaleId.rawValue] {
+                            Text("x\(count)")
+                        } else {
+                            Text("-")
+                        }
+                    })
+                }
+            })
+            .foregroundColor(.white)
+            .frame(height: 20)
         })
-        .frame(width: width, height: height, alignment: .center)
+        .frame(height: 70)
+        .font(systemName: .Splatfont2, size: 14)
+        .scaleEffect(scale)
         .aspectRatio(200/70, contentMode: .fit)
+        .padding(4)
+        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
     }
+}
+
+extension ScaleType: Identifiable {
+    public var id: Int { rawValue }
 }
 
 struct ResultScore_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
-//        ResultDetailView(result: result, schedule: schedule)
-//            .previewLayout(.fixed(width: 400, height: 800))
-//            .preferredColorScheme(.dark)
         ResultScore(result: result)
-            .previewLayout(.fixed(width: 400, height: 70))
             .preferredColorScheme(.dark)
     }
 }

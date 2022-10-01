@@ -13,9 +13,19 @@ enum ResultType: Int, CaseIterable, Codable {
     case CLEAR
 }
 
+enum MaskType: Int, CaseIterable, Codable {
+    case WAVE
+    case BACKGROUND
+    case WAVE_BACKGROUND
+}
+
 extension Image {
     init(bundle: ResultType) {
         self.init("ResultType/\(bundle.rawValue)", bundle: .main)
+    }
+
+    init(bundle: MaskType) {
+        self.init("MaskType/\(bundle.rawValue)", bundle: .main)
     }
 }
 
