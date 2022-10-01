@@ -60,8 +60,8 @@ struct ResultsWithScheduleView: View {
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
     @AppStorage("CONFIG_SELECTED_RULE") var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
-    @State private var isPresented: Bool = false
     @StateObject var session: Session = Session()
+    @State private var isPresented: Bool = false
 
     var body: some View {
             List(content: {

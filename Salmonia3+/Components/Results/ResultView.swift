@@ -23,8 +23,8 @@ struct ResultView: View {
             let scale: CGFloat = min(1.0, geometry.height / 60)
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 0, content: {
-                    let title: String = result.isClear ? "Clear!" : "Defeat"
-                    Text(title)
+                    let title: String = result.isClear ? "JOB_RESULT_CLEAR" : "JOB_RESULT_FAILURE"
+                    Text(localizedText: title)
                         .font(systemName: .Splatfont, size: 16 * scale)
                         .foregroundColor(result.isClear ? .green : .orange)
                         .frame(height: 20 * scale)

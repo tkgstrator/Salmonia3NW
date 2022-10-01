@@ -1,6 +1,6 @@
 //
-//  salmonia3nwApp.swift
-//  salmonia3nw
+//  mainApp.swift
+//  Salmonia3+
 //
 //  Created by devonly on 2022/08/25.
 //
@@ -14,20 +14,21 @@ struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage("CONFIG_COLOR_SCHEME") var preferredColorScheme: Bool = true
     @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
-    @AppStorage("CONFIG_IS_IN_OAUTH") var isOAuthPresented: Bool = false
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(preferredColorScheme ? .dark : .light)
                 .environment(\.isFirstLaunch, $isFirstLaunch)
-                .environment(\.isOAuthPresented, $isOAuthPresented)
         }
     }
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        /// Firebase
+        FirebaseApp.configure()
+
         let schemeVersion: UInt64 = 3
         #if DEBUG
         let config = Realm.Configuration(
@@ -116,7 +117,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         do {
             let _ =  try Realm(configuration: config)
         } catch (let error) {
-            print(error)
             let _ = try! Realm(configuration: config)
         }
 
