@@ -10,7 +10,17 @@ import SplatNet3
 import SDWebImageSwiftUI
 
 struct LoadingView: View {
-    @StateObject var session: Session
+    @Environment(\.dismiss) var dismiss
+    @StateObject var session: Session = Session()
+    @Binding var code: String?
+    @Binding var verifier: String?
+    let onSuccess: () -> Void
+
+    init(code: Binding<String?>, verifier: Binding<String?>, onSuccess: @escaping () -> Void) {
+        self._code = code
+        self._verifier = verifier
+        self.onSuccess = onSuccess
+    }
 
     var body: some View {
         VStack(content: {
@@ -46,6 +56,24 @@ struct LoadingView: View {
         .padding(EdgeInsets(top: 20, leading: 12, bottom: 20, trailing: 12))
         .background(SPColor.Theme.SPTheme.cornerRadius(12))
         .padding(.horizontal, 40)
+        .animation(.default, value: session.loginProgress.count)
+        .onAppear(perform: {
+            if let code = code, let verifier = verifier {
+                Task {
+                    do {
+                        try await session.getCookie(code: code, verifier: verifier)
+                        onSuccess()
+                        dismiss()
+                    } catch {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                            // ログインが失敗したらすべてのデータを消去
+                            session.loginProgress.removeAll()
+                            dismiss()
+                        })
+                    }
+                }
+            }
+        })
     }
 }
 //

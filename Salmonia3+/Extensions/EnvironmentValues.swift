@@ -20,7 +20,7 @@ struct IsFirstLaunch: EnvironmentKey {
     static var defaultValue: Binding<Bool> = .constant(true)
 }
 
-struct IsModalPopuped: EnvironmentKey {
+struct IsModalPresented: EnvironmentKey {
     typealias Value = Binding<Bool>
 
     static var defaultValue: Binding<Bool> = .constant(false)
@@ -32,13 +32,20 @@ struct IsOAuthPresented: EnvironmentKey {
     static var defaultValue: Binding<Bool> = .constant(false)
 }
 
+struct TabSelectionKey: EnvironmentKey {
+    typealias Value = Binding<Int>
+
+    static var defaultValue: Binding<Int> = .constant(0)
+}
+
 extension EnvironmentValues {
-    var isModalPopuped: Binding<Bool> {
+    /// モーダルが表示されているかどうかを取得する環境変数
+    var isModalPresented: Binding<Bool> {
         get {
-            return self[IsModalPopuped.self]
+            return self[IsModalPresented.self]
         }
         set {
-            self[IsModalPopuped.self] = newValue
+            self[IsModalPresented.self] = newValue
         }
     }
 
@@ -51,6 +58,7 @@ extension EnvironmentValues {
         }
     }
 
+    /// 初回起動かどうかを取得する環境変数
     var isFirstLaunch: Binding<Bool> {
         get {
             return self[IsFirstLaunch.self]
@@ -60,6 +68,7 @@ extension EnvironmentValues {
         }
     }
 
+    /// プレイヤー名が非表示になっているかどうかを取得する環境変数
     var isNameVisible: Bool {
         get {
             return self[IsNameVisible.self]
@@ -67,5 +76,11 @@ extension EnvironmentValues {
         set {
             self[IsNameVisible.self] = newValue
         }
+    }
+
+    /// 現在表示されているタブを取得する環境変数
+    var selection: Binding<Int> {
+        get { self[TabSelectionKey.self] }
+        set { self[TabSelectionKey.self] = newValue }
     }
 }

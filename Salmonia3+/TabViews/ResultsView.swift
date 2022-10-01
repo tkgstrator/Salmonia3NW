@@ -61,17 +61,18 @@ struct ResultsWithScheduleView: View {
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
     @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
-    // ロード画面を表示する
-    @Environment(\.isModalPopuped) var isModalPopuped
+    @State private var isPresented: Bool = false
     @StateObject var session: Session = Session()
 
     var body: some View {
         NavigationView(content: {
             List(content: {
                 TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(results) { result in
+                ForEach(results.indices, id: \.self) { index in
+                    let result: RealmCoopResult = results[index]
                     NavigationLinker(destination: {
-                        ResultDetailView(result: result, schedule: result.schedule)
+                        ResultTabView(results: results)
+                            .environment(\.selection, .constant(index))
                     }, label: {
                         ResultView(result: result)
                     })
@@ -83,8 +84,12 @@ struct ResultsWithScheduleView: View {
             })
             .refreshable(action: {
                 await session.dummy(action: {
-                    isModalPopuped.wrappedValue.toggle()
+                    isPresented.toggle()
                 })
+            })
+            .fullScreen(isPresented: $isPresented, content: {
+                ResultLoadingView()
+                    .environment(\.dismissModal, DismissModalAction($isPresented))
             })
             .listStyle(.plain)
             .navigationTitle(Text(localizedText: "TAB_RESULTS"))

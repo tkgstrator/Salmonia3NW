@@ -8,7 +8,6 @@
 import SwiftUI
 import Common
 import SplatNet3
-import PopupView
 
 struct DebugView: View {
     @StateObject var session: Session = Session()
@@ -69,16 +68,6 @@ struct DebugView: View {
                 }, label: {
                     Text("ログイン")
                 })
-                .authorize(
-                    isPresented: $isPresented,
-                    session: session,
-                    onPresent: {
-                        isPopuped.toggle()
-                    }, onDismiss: {
-                        isPopuped.toggle()
-                    }, onFailure: {
-                        isPopuped.toggle()
-                    })
             }, header: {
                 Text("エラー")
             })
@@ -98,9 +87,6 @@ struct DebugView: View {
             }, header: {
                 Text("追加コマンド")
             })
-        })
-        .popup(isPresented: $isPopuped, view: {
-            LoadingView(session: session)
         })
         .onAppear(perform: {
             if lists.count < SPEndpoint.allCases.count {

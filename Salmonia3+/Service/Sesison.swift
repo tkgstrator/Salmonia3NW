@@ -29,6 +29,7 @@ class Session: SplatNet3, ObservableObject {
     override init() {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
+
     /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
@@ -80,9 +81,9 @@ class Session: SplatNet3, ObservableObject {
     }
 
     func dummy(action: @escaping () -> Void) async {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: { [self] in
             action()
-            return
+            loginProgress.removeAll()
         })
     }
 

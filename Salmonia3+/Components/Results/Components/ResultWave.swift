@@ -15,10 +15,9 @@ struct ResultWave: View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 124
             ZStack(content: {
-                RoundedRectangle(cornerRadius: 6).fill(SPColor.Theme.SPYellow)
-                    .aspectRatio(124/180, contentMode: .fit)
-                    .overlay(WaterLevel().fill(Color.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
+                RoundedRectangle(cornerRadius: 3).fill(SPColor.Theme.SPYellow)
                     .mask(Hanger().scaledToFill())
+                    .overlay(WaterLevel().fill(.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
                 VStack(alignment: .center, spacing: 0, content: {
                     Text("Wave \(wave.id)")
                         .font(systemName: .Splatfont2, size: 17 * scale)
@@ -43,24 +42,29 @@ struct ResultWave: View {
                     Text(wave.waterLevel.localizedText)
                         .font(systemName: .Splatfont2, size: 16 * scale)
                         .foregroundColor(.black)
-                        .padding(.top, 8 * scale)
+                        .frame(height: 16 * scale)
+                        .padding(.top, 8)
                     Text(wave.eventType.localizedText)
                         .font(systemName: .Splatfont2, size: 16 * scale)
                         .foregroundColor(.black)
+                        .frame(height: 16 * scale)
+                        .padding(.top, 8)
                     HStack(spacing: nil, content: {
                         Image(bundle: .Golden)
                             .resizable()
                             .frame(width: 20 * scale, height: 20 * scale, alignment: .center)
                         Text("x\(wave.goldenIkuraPopNum)")
                             .font(systemName: .Splatfont2, size: 16 * scale)
+                            .frame(height: 16 * scale)
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                     })
+                    .padding(.top, 4)
                 })
-                .frame(maxWidth: .infinity)
             })
         })
-        .aspectRatio(124/180, contentMode: .fit)
+        .aspectRatio(124/160, contentMode: .fit)
+        .overlay(Image(bundle: wave.isClearWave ? .CLEAR : .FAILURE).resizable().frame(width: 46, height: 46, alignment: .topTrailing).offset(x: 20, y: -23), alignment: .topTrailing)
     }
 }
 
@@ -68,22 +72,23 @@ private extension WaterType {
     var height: CGFloat {
         switch self {
         case .Low_Tide:
-            return 154
+            return 130
         case .Middle_Tide:
-            return 124
+            return 105
         case .High_Tide:
-            return 94
+            return 80
         }
     }
 }
 
 struct CoopWave_Previews: PreviewProvider {
-    static let wave: RealmCoopWave = RealmCoopWave(dummy: true)
+
     static var previews: some View {
         LazyVGrid(columns: Array(repeating: .init(), count: 4), content: {
-            ForEach([0, 1, 2, 3].indices, id: \.self) { index in
-                ResultWave(wave: wave)
-            }
+            ResultWave(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
+            ResultWave(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
+            ResultWave(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
+            ResultWave(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
         })
         .previewLayout(.fixed(width: 460, height: 250))
         .preferredColorScheme(.dark)

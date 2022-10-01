@@ -28,11 +28,11 @@ final class RealmCoopWave: Object, Identifiable {
         self.quotaNum = result.quotaNum
     }
 
-    convenience init(dummy: Bool = true, id: Int = 0) {
+    convenience init(dummy: Bool = true, id: Int = 0, eventType: EventType = EventType.Water_Levels, waterLevel: WaterType = WaterType.Middle_Tide) {
         self.init()
         self.id = id
-        self.waterLevel = WaterType.Middle_Tide
-        self.eventType = EventType.Water_Levels
+        self.waterLevel = waterLevel
+        self.eventType = eventType
         self.goldenIkuraNum = 999
         self.goldenIkuraPopNum = 999
         self.quotaNum = 35
@@ -40,12 +40,41 @@ final class RealmCoopWave: Object, Identifiable {
 }
 
 extension RealmCoopWave {
-    var result: RealmCoopResult {
-        self.link.first!
+    /// リザルト
+    private var result: RealmCoopResult? {
+        self.link.first
     }
 
+    /// クリアしたWAVEかどうか
+    var isClearWave: Bool {
+        /// リザルトが存在する
+        if let result = result {
+            // ミスしていたらWAVEのIDと同じならFalse、違うならTrue
+            if let failureWave: Int = result.failureWave {
+                return failureWave != self.id
+            }
+
+            // オカシラシャケと戦っている
+            if let isBossDefeated = result.isBossDefeated {
+                // EX-WAVE以外には常に勝利
+                if self.id != 4 {
+                    return true
+                }
+                // EX-WAVEはisBossDefeatedを返す
+                return isBossDefeated
+            }
+            // オカシラシャケと戦っていない&failureWaveがないのは全WAVEクリア
+            return true
+        }
+        return true
+    }
+
+    /// そのWAVEで使ったスペシャルの配列
     var specialUsage: [SpecialType] {
-        result.specialUsage[self.id - 1]
+        if let result = result {
+            return result.specialUsage[self.id - 1]
+        }
+        return []
     }
 }
 
