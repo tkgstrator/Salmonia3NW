@@ -89,7 +89,7 @@ private struct ResultScorePoint: View {
         })
         .scaleEffect(scale)
         .padding(4)
-        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground))
+        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
         .aspectRatio(200/70, contentMode: .fit)
     }
 }
@@ -149,7 +149,7 @@ private struct ResultScoreScale: View {
         .scaleEffect(scale)
         .aspectRatio(200/70, contentMode: .fit)
         .padding(4)
-        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground))
+        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
     }
 }
 

@@ -16,6 +16,7 @@ enum ResultType: Int, CaseIterable, Codable {
 enum MaskType: Int, CaseIterable, Codable {
     case WAVE
     case BACKGROUND
+    case WAVE_BACKGROUND
 }
 
 extension Image {
