@@ -42,7 +42,11 @@ struct ContentView: View {
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
             .tabItem {
-                Label("TAB_RESULTS".sha256Hash, systemImage: "sparkles")
+                Label(title: {
+                    Text(bundle: .CoopHistory_History)
+                }, icon: {
+                    Image(systemName: "sparkles")
+                })
             }
             .tag(0)
             NavigationView(content: {
@@ -52,7 +56,11 @@ struct ContentView: View {
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
             .tabItem {
-                Label("TAB_SCHEDULE".sha256Hash, systemImage: "calendar")
+                Label(title: {
+                    Text(bundle: .StageSchedule_Title)
+                }, icon: {
+                    Image(systemName: "calendar")
+                })
             }
             .tag(1)
             NavigationView(content: {
@@ -62,7 +70,11 @@ struct ContentView: View {
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
             .tabItem {
-                Label("TAB_USER".sha256Hash, image: "TabType/Me")
+                Label(title: {
+                    Text(bundle: .Common_Home)
+                }, icon: {
+                    Image("TabType/Me", bundle: .main)
+                })
             }
             .tag(2)
         })

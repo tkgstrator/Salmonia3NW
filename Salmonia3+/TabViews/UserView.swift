@@ -30,7 +30,7 @@ struct UserView: View {
                 })
             })
         })
-        .navigationTitle(Text(localizedText: "TAB_USER"))
+        .navigationTitle(Text(bundle: .Common_Home))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

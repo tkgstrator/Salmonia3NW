@@ -53,6 +53,7 @@ struct ResultDetailView: View {
                     .scaledToFill()
                 ResultScore(result: result)
                     .padding(.horizontal, 8)
+                    .padding(.bottom, 10)
                     .frame(maxWidth: maxWidth + 60)
                 LazyVGrid(
                     columns: Array(repeating: .init(.flexible(maximum: 120), spacing: 2, alignment: .top), count: result.waves.count),
@@ -82,7 +83,7 @@ struct ResultDetailView: View {
             })
         })
         .background(Image("BackgroundType/SplatNet3", bundle: .main).resizable(resizingMode: .tile).overlay(Color.black.opacity(0.3)))
-        .navigationTitle(Text(localizedText: "TAB_RESULTS"))
+        .navigationTitle(Text(bundle: .CoopHistory_History))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -20,7 +20,11 @@ struct ResultDefeated: View {
     var body: some View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 172
-            Text("BOSS_SALMONIDS_DEFEATED_\(bossKillCountsTotal)")
+            Group(content: {
+                Text(bundle: .CoopHistory_Enemy)
+                +
+                Text(" x\(bossKillCountsTotal)")
+            })
                 .font(systemName: .Splatfont2, size: 11 * scale)
                 .foregroundColor(SPColor.Theme.SPYellow)
                 .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)

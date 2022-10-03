@@ -62,8 +62,7 @@ struct ResultHeader: View {
                     )
                 })
                 VStack(alignment: .center, spacing: 6 * scale, content: {
-                    let title: String = result.isClear ? "JOB_RESULT_CLEAR" : "JOB_RESULT_FAILURE"
-                    Text(localizedText: title)
+                    Text(bundle: result.isClear ? .CoopHistory_Clear : .CoopHistory_Failure)
                         .font(systemName: .Splatfont, size: 22 * scale)
                         .frame(height: 20 * scale)
                         .shadow(color: .black, radius: 0, x: 1 * scale, y: 1 * scale)

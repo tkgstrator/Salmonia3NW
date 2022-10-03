@@ -21,7 +21,19 @@ struct ResultWave: View {
                     .overlay(WaterLevel().fill(.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
                     .clipShape(RoundedRectangle(cornerRadius: 3))
                 VStack(alignment: .center, spacing: 0, content: {
-                    Text("Wave \(wave.id)")
+                    let waveId: LocalizedText = {
+                        switch wave.id {
+                        case 1:
+                            return .CoopHistory_Wave1
+                        case 2:
+                            return .CoopHistory_Wave2
+                        case 3:
+                            return .CoopHistory_Wave3
+                        default:
+                            return .CoopHistory_ExWave
+                        }
+                    }()
+                    Text(bundle: waveId)
                         .font(systemName: .Splatfont2, size: 17 * scale)
                         .frame(height: 25 * scale, alignment: .center)
                         .foregroundColor(.black)

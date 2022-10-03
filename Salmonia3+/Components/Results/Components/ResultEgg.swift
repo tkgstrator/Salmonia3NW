@@ -27,12 +27,10 @@ struct ResultEgg: View {
                     HStack(alignment: .firstTextBaseline, spacing: 0, content: {
                         Text(String(format: "x%2d", goldenIkuraNum))
                             .foregroundColor(.white)
-//                        Text(String(format: "(%2d)", goldenIkuraAssistNum))
-//                            .font(systemName: .Splatfont2, size: 8 * scale)
-//                            .foregroundColor(.gray)
                     })
                 })
                 .padding(.horizontal, 6 * scale)
+                .padding(.vertical, 2 * scale)
                 .background(Capsule().fill(Color.black.opacity(0.85)))
                 .frame(width: 78.5 * scale, height: 23.5 * scale)
                 HStack(spacing: 0, content: {
@@ -45,10 +43,11 @@ struct ResultEgg: View {
                         .foregroundColor(.white)
                 })
                 .padding(.horizontal, 6 * scale)
+                .padding(.vertical, 2 * scale)
                 .background(Capsule().fill(Color.black.opacity(0.85)))
                 .frame(width: 78.5 * scale, height: 23.5 * scale)
             })
-            .font(systemName: .Splatfont2, size: 12.4 * scale)
+            .font(systemName: .Splatfont2, size: 14.5 * scale)
         })
         .aspectRatio(160/23.5, contentMode: .fit)
     }

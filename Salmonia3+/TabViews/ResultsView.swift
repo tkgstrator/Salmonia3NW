@@ -28,7 +28,7 @@ struct ResultsView: View {
             }
         })
         .listStyle(.plain)
-        .navigationTitle(Text(localizedText: "TAB_RESULTS"))
+        .navigationTitle(Text(bundle: .Record_Title))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -42,7 +42,7 @@ private struct ResultsEmpty: View {
             Text("↓")
                 .font(systemName: .Splatfont, size: 34)
                 .position(x: geometry.center.x, y: 80 + value)
-            Text(localizedText: "PULL_TO_REFRESH")
+            Text(bundle: .Common_PullToRefresh)
                 .font(systemName: .Splatfont, size: 28)
                 .position(x: geometry.center.x, y: 180)
         })
@@ -93,7 +93,7 @@ struct ResultsWithScheduleView: View {
                     .environment(\.dismissModal, DismissModalAction($isPresented))
             })
             .listStyle(.plain)
-            .navigationTitle(Text(localizedText: "TAB_RESULTS"))
+            .navigationTitle(Text(bundle: .Record_Title))
             .navigationBarTitleDisplayMode(.inline)
     }
 }

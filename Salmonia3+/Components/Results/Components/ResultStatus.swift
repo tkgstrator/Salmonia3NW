@@ -26,6 +26,7 @@ struct ResultStatus: View {
                         .foregroundColor(.white)
                 })
                 .padding(.horizontal, 6 * scale)
+                .padding(.vertical, 2 * scale)
                 .background(Capsule().fill(Color.black.opacity(0.85)))
                 .frame(width: 78.5 * scale, height: 23.5 * scale)
                 HStack(spacing: -10, content: {
@@ -38,10 +39,11 @@ struct ResultStatus: View {
                         .foregroundColor(.white)
                 })
                 .padding(.horizontal, 6 * scale)
+                .padding(.vertical, 2 * scale)
                 .background(Capsule().fill(Color.black.opacity(0.85)))
                 .frame(width: 78.5 * scale, height: 23.5 * scale)
             })
-            .font(systemName: .Splatfont2, size: 13 * scale)
+            .font(systemName: .Splatfont2, size: 14.5 * scale)
         })
         .aspectRatio(160/23.5, contentMode: .fit)
     }
