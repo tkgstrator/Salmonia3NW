@@ -247,14 +247,12 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10F01B4D28EC363400F7A7E2 /* FullScreen */,
 				10A0ACBD28DD808D008B332A /* Others */,
 				1018B49228D6FB42002BD1F0 /* Icons */,
 				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
-				1001B4DD28E7022500A370FD /* FullScreenView.swift */,
-				1001B4DF28E7023000A370FD /* FullScreenViewModifier.swift */,
-				1001B4E128E702BB00A370FD /* DismissModalAction.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -491,6 +489,16 @@
 				100E874D28D4AC66007FCF3C /* ResultsView.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		10F01B4D28EC363400F7A7E2 /* FullScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1001B4DD28E7022500A370FD /* FullScreenView.swift */,
+				1001B4DF28E7023000A370FD /* FullScreenViewModifier.swift */,
+				1001B4E128E702BB00A370FD /* DismissModalAction.swift */,
+			);
+			path = FullScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -955,7 +963,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -989,7 +997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

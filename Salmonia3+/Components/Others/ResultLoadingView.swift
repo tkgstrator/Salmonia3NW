@@ -76,12 +76,12 @@ struct ResultLoadingView: View {
                 do {
                     // リザルト取得後にモーダルを閉じる
                     try await session.getCoopResults()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
                         dismiss()
                     })
                 } catch(_) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
                         dismiss()
                     })
