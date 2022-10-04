@@ -92,6 +92,7 @@
 		10F01B4A28EB1B1A00F7A7E2 /* splatoon2chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4228EB157D00F7A7E2 /* splatoon2chzh.ttf */; };
 		10F01B4B28EB1B1A00F7A7E2 /* splatoon2jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4628EB157D00F7A7E2 /* splatoon2jpja.ttf */; };
 		10F01B4C28EB1B1A00F7A7E2 /* splatoon2twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4128EB157C00F7A7E2 /* splatoon2twzh.ttf */; };
+		10F01B4F28EC726000F7A7E2 /* RuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F01B4E28EC726000F7A7E2 /* RuleType.swift */; };
 		10FA715328E44DF1001549B9 /* SwiftUI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FA715228E44DF1001549B9 /* SwiftUI+Image.swift */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,7 @@
 		10F01B4428EB157D00F7A7E2 /* splatoon1chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1chzh.ttf; sourceTree = "<group>"; };
 		10F01B4528EB157D00F7A7E2 /* splatoon1twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1twzh.ttf; sourceTree = "<group>"; };
 		10F01B4628EB157D00F7A7E2 /* splatoon2jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2jpja.ttf; sourceTree = "<group>"; };
+		10F01B4E28EC726000F7A7E2 /* RuleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleType.swift; sourceTree = "<group>"; };
 		10FA715228E44DF1001549B9 /* SwiftUI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Image.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,14 +288,14 @@
 		100E875128D4B90E007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				100E876C28D4FE13007FCF3C /* ResultEgg.swift */,
+				100E877228D506F3007FCF3C /* ResultStatus.swift */,
 				100E875228D4B91A007FCF3C /* ResultHeader.swift */,
 				100E875928D4D4DB007FCF3C /* ResultWave.swift */,
 				100E876228D4E8EF007FCF3C /* ResultPlayer.swift */,
 				100E876628D4EB5C007FCF3C /* ResultWeapon.swift */,
 				100E876A28D4FC62007FCF3C /* ResultDefeated.swift */,
-				100E876C28D4FE13007FCF3C /* ResultEgg.swift */,
 				100E877028D504C3007FCF3C /* ResultSakelien.swift */,
-				100E877228D506F3007FCF3C /* ResultStatus.swift */,
 				100E877428D59261007FCF3C /* ResultScore.swift */,
 				100E877628D5B687007FCF3C /* ResultSpecial.swift */,
 			);
@@ -424,6 +426,7 @@
 		10320C6928D41B7700666F09 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
 				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				10FA715228E44DF1001549B9 /* SwiftUI+Image.swift */,
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
@@ -758,6 +761,7 @@
 				10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */,
 				100E877328D506F3007FCF3C /* ResultStatus.swift in Sources */,
 				105757B428DB22A200833B95 /* LoginProgress.swift in Sources */,
+				10F01B4F28EC726000F7A7E2 /* RuleType.swift in Sources */,
 				1018B4A728D87B05002BD1F0 /* DeleteConfirmView.swift in Sources */,
 				1018B4A928D9F1FC002BD1F0 /* SalmonLogo.swift in Sources */,
 				1001B4E028E7023000A370FD /* FullScreenViewModifier.swift in Sources */,

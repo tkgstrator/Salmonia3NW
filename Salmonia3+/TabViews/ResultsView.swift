@@ -43,7 +43,8 @@ private struct ResultsEmpty: View {
                 .font(systemName: .Splatfont, size: 34)
                 .position(x: geometry.center.x, y: 80 + value)
             Text(bundle: .Common_PullToRefresh)
-                .font(systemName: .Splatfont, size: 28)
+                .font(systemName: .Splatfont, size: 24)
+                .multilineTextAlignment(.center)
                 .position(x: geometry.center.x, y: 180)
         })
         .onAppear(perform: {
@@ -65,24 +66,16 @@ struct ResultsWithScheduleView: View {
 
     var body: some View {
             List(content: {
-                TypePicker<SplatNet2.Rule>(selection: $selection)
-                ForEach(results.indices, id: \.self) { index in
-                    let result: RealmCoopResult = results[index]
+                ForEach(results, id: \.self) { result in
                     NavigationLinker(destination: {
                         ResultTabView(results: results)
-                            .environment(\.selection, .constant(index))
+//                            .environment(\.selection, .constant(index))
                     }, label: {
                         ResultView(result: result)
                     })
                 }
             })
-            .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
-            .onAppear(perform: {
-                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-            })
-            .onChange(of: selection, perform: { newValue in
-                $results.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-            })
+//            .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
             .refreshable(action: {
                 await session.dummy(action: {
                     isPresented.toggle()
@@ -93,7 +86,7 @@ struct ResultsWithScheduleView: View {
                     .environment(\.dismissModal, DismissModalAction($isPresented))
             })
             .listStyle(.plain)
-            .navigationTitle(Text(bundle: .Record_Title))
+            .navigationTitle(Text(rule: .CoopHistory_Regular))
             .navigationBarTitleDisplayMode(.inline)
     }
 }

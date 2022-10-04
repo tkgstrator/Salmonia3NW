@@ -18,7 +18,7 @@ struct ResultPlayer: View {
             let scale: CGFloat = geometry.width / 356
             ZStack(alignment: .bottom, content: {
                 Salmon()
-                    .fill(SPColor.Theme.SPOrange)
+                    .fill(SPColor.SplatNet2.SPOrange)
                 HStack(alignment: .bottom, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
                         Text((isNameVisible || result.isMyself) ? result.name : "-")
@@ -30,12 +30,12 @@ struct ResultPlayer: View {
                         ResultDefeated(bossKillCountsTotal: result.bossKillCountsTotal)
                     })
                     .padding(.leading, 12 * scale)
-                    VStack(alignment: .trailing, spacing: 6 * scale, content: {
+                    VStack(alignment: .trailing, spacing: 2 * scale, content: {
                         ResultEgg(ikuraNum: result.ikuraNum, goldenIkuraNum: result.goldenIkuraNum, goldenIkuraAssistNum: result.goldenIkuraAssistNum)
                         ResultStatus(deadCount: result.deadCount, helpCount: result.helpCount)
                     })
-                    .padding(.trailing, 16 * scale)
                     .frame(width: 160 * scale, height: 51 * scale)
+                    .padding(.trailing, 16 * scale)
                 })
                 .padding(.bottom, 4 * scale)
             })

@@ -26,13 +26,12 @@ struct ResultEgg: View {
                     Spacer()
                     HStack(alignment: .firstTextBaseline, spacing: 0, content: {
                         Text(String(format: "x%2d", goldenIkuraNum))
-                            .foregroundColor(.white)
+                            .foregroundColor(SPColor.SplatNet2.SPWhite)
                     })
                 })
                 .padding(.horizontal, 6 * scale)
-                .padding(.vertical, 2 * scale)
-                .background(Capsule().fill(Color.black.opacity(0.85)))
-                .frame(width: 78.5 * scale, height: 23.5 * scale)
+                .frame(height: 24 * scale)
+                .background(Capsule().fill(Color.black.opacity(0.75)))
                 HStack(spacing: 0, content: {
                     Image(bundle: .Power)
                         .resizable()
@@ -40,16 +39,15 @@ struct ResultEgg: View {
                         .frame(width: 18 * scale)
                     Spacer()
                     Text(String(format: "x%4d", ikuraNum))
-                        .foregroundColor(.white)
+                        .foregroundColor(SPColor.SplatNet2.SPWhite)
                 })
                 .padding(.horizontal, 6 * scale)
-                .padding(.vertical, 2 * scale)
-                .background(Capsule().fill(Color.black.opacity(0.85)))
-                .frame(width: 78.5 * scale, height: 23.5 * scale)
+                .frame(height: 24 * scale)
+                .background(Capsule().fill(Color.black.opacity(0.75)))
             })
-            .font(systemName: .Splatfont2, size: 14.5 * scale)
+            .font(systemName: .Splatfont2, size: 14 * scale)
         })
-        .aspectRatio(160/23.5, contentMode: .fit)
+        .aspectRatio(160/24, contentMode: .fit)
     }
 }
 

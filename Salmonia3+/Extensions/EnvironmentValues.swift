@@ -33,9 +33,9 @@ struct IsOAuthPresented: EnvironmentKey {
 }
 
 struct TabSelectionKey: EnvironmentKey {
-    typealias Value = Binding<Int>
+    typealias Value = Binding<String>
 
-    static var defaultValue: Binding<Int> = .constant(0)
+    static var defaultValue: Binding<String> = .constant("")
 }
 
 struct ScaleForView: EnvironmentKey {
@@ -85,7 +85,7 @@ extension EnvironmentValues {
     }
 
     /// 現在表示されているタブを取得する環境変数
-    var selection: Binding<Int> {
+    var selection: Binding<String> {
         get { self[TabSelectionKey.self] }
         set { self[TabSelectionKey.self] = newValue }
     }

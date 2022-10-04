@@ -15,7 +15,7 @@ struct ResultWave: View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 124
             ZStack(content: {
-                RoundedRectangle(cornerRadius: 3).fill(SPColor.Theme.SPYellow)
+                RoundedRectangle(cornerRadius: 3).fill(SPColor.SplatNet2.SPYellow)
                     .mask(Hanger().scaledToFill())
                     .overlay(Image(bundle: .WAVE).resizable().scaledToFill())
                     .overlay(WaterLevel().fill(.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
@@ -38,7 +38,7 @@ struct ResultWave: View {
                         .frame(height: 25 * scale, alignment: .center)
                         .foregroundColor(.black)
                     ZStack(content: {
-                        Rectangle().fill(SPColor.Theme.SPDark)
+                        Rectangle().fill(SPColor.SplatNet2.SPBackground)
                         if let goldenIkuraNum = wave.goldenIkuraNum, let quotaNum = wave.quotaNum {
                             Text("\(goldenIkuraNum)/\(quotaNum)")
                                 .font(systemName: .Splatfont2, size: 25 * scale)
