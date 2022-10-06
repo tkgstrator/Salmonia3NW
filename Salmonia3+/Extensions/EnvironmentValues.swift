@@ -38,6 +38,37 @@ struct TabSelectionKey: EnvironmentKey {
     static var defaultValue: Binding<String> = .constant("")
 }
 
+public class ResultRuleAction: Equatable {
+    public static func == (lhs: ResultRuleAction, rhs: ResultRuleAction) -> Bool {
+        lhs.rawValue == rhs.rawValue
+    }
+
+    public var selection: RuleType
+
+    public var rawValue: String {
+        selection.rule
+    }
+
+    private func next() {
+        self.selection.next()
+    }
+
+    public init(_ selection: RuleType) {
+        self.selection = selection
+    }
+
+    public func callAsFunction() {
+        next()
+    }
+}
+
+struct ResultRule: EnvironmentKey {
+    typealias Value = ResultRuleAction
+
+    static var defaultValue: ResultRuleAction = ResultRuleAction(.CoopHistory_Regular)
+
+}
+
 struct ScaleForView: EnvironmentKey {
     typealias Value = CGFloat
 
@@ -45,6 +76,16 @@ struct ScaleForView: EnvironmentKey {
 }
 
 extension EnvironmentValues {
+    /// モーダルが表示されているかどうかを取得する環境変数
+    var resultRule: ResultRuleAction {
+        get {
+            return self[ResultRule.self]
+        }
+        set {
+            self[ResultRule.self] = newValue
+        }
+    }
+
     /// モーダルが表示されているかどうかを取得する環境変数
     var isModalPresented: Binding<Bool> {
         get {

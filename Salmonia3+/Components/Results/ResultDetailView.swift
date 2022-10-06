@@ -8,21 +8,31 @@
 import SwiftUI
 import SplatNet3
 import RealmSwift
+import Introspect
 
 struct ResultTabView: View {
     @Environment(\.selection) var selection
     @State private var isNameVisible: Bool = true
     let results: RealmSwift.Results<RealmCoopResult>
 
+    var selected: Binding<String> {
+        Binding(get: {
+            selection.wrappedValue
+        }, set: { newValue in
+            selection.wrappedValue = newValue
+        })
+    }
+
     var body: some View {
-        TabView(selection: selection, content: {
-            ForEach(results.indices, id: \.self) { index in
-                let result: RealmCoopResult = results[index]
+        TabView(selection: selected, content: {
+            ForEach(results) { result in
                 ResultDetailView(result: result, schedule: result.schedule)
                     .environment(\.isNameVisible, isNameVisible)
-                    .tag(index)
+                    .tag(result.id)
             }
         })
+        .navigationTitle(Text(bundle: .CoopHistory_History))
+        .tabViewStyle(.page(indexDisplayMode: .never))
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
@@ -33,11 +43,10 @@ struct ResultTabView: View {
                         .scaledToFit()
                         .font(Font.system(size: 30, weight: .bold))
                         .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(SPColor.Theme.SPOrange)
+                        .foregroundColor(.white)
                 })
             })
         })
-        .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }
 
@@ -45,6 +54,10 @@ struct ResultDetailView: View {
     let result: RealmCoopResult
     let schedule: RealmCoopSchedule
     let maxWidth: CGFloat = 340
+
+    func refresh(sender: UIRefreshControl) {
+        sender.endRefreshing()
+    }
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
@@ -82,8 +95,9 @@ struct ResultDetailView: View {
                     .padding(.horizontal)
             })
         })
-        .background(Image("BackgroundType/SplatNet3", bundle: .main).resizable(resizingMode: .tile).overlay(Color.black.opacity(0.3)))
-        .navigationTitle(Text(bundle: .CoopHistory_History))
+        .background(Image("BackgroundType/SplatNet3", bundle: .main)
+            .resizable(resizingMode: .tile)
+            .overlay(Color.black.opacity(0.3)))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

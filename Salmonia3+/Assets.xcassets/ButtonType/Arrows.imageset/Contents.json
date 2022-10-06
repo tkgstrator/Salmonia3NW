@@ -1,12 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "50732dded088309dfb8f436f3885e782.png",
+      "filename" : "FePL_kcaUAA7pCt01.svg",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "lossless",
+    "preserves-vector-representation" : true
   }
 }

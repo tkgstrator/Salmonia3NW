@@ -34,6 +34,7 @@ struct ResultSakelien: View {
                             .background(Circle().fill(SPColor.SplatNet3.SPBackground))
                         Text(sakelienType.localizedText)
                             .font(systemName: .Splatfont2, size: 18)
+                            .foregroundColor(.white)
                             .frame(height: 16, alignment: .center)
                         Spacer()
                         HStack(alignment: .firstTextBaseline, spacing: 2, content: {
@@ -47,6 +48,7 @@ struct ResultSakelien: View {
                                 .font(systemName: .Splatfont2, size: 18)
                                 .frame(minWidth: 34)
                         })
+                        .foregroundColor(.white)
                         .frame(height: 18)
                     })
                     if index != bossCounts.count {

@@ -11,14 +11,14 @@ import SplatNet3
 
 struct SchedulesView: View {
     @ObservedResults(
-        RealmCoopSchedule.self
+        RealmCoopSchedule.self,
+        filter: NSPredicate(format: "rule = %@", RuleType.CoopHistory_Regular.rule)
     ) var schedules
-    @AppStorage("CONFIG_SELECTED_RULE") var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
+    @State private var selection: RuleType = RuleType.CoopHistory_Regular
 
     var body: some View {
         List(content: {
-            TypePicker<SplatNet2.Rule>(selection: $selection)
-            ForEach(schedules.filter(selection).reversed()) { schedule in
+            ForEach(schedules.reversed()) { schedule in
                 NavigationLinker(destination: {
                     ResultsView(results: schedule.results)
                 }, label: {
@@ -26,11 +26,25 @@ struct SchedulesView: View {
                 })
             }
         })
-        .navigationTitle(Text(bundle: .StageSchedule_Title))
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    selection.next()
+                }, label: {
+                    Image("ButtonType/Update", bundle: .main)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .foregroundColor(.primary)
+                })
+            })
+        })
+        .navigationTitle(Text(rule: selection))
         .navigationBarTitleDisplayMode(.inline)
-//        .onChange(of: selection, perform: { newValue in
-//            $schedules.filter = NSPredicate(format: "rule = %@", selection.rawValue)
-//        })
+        .onChange(of: selection, perform: { newValue in
+            $schedules.filter = NSPredicate(format: "rule = %@", newValue.rule)
+        })
         .listStyle(.plain)
     }
 }

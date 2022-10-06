@@ -58,36 +58,54 @@ private struct ResultsEmpty: View {
 struct ResultsWithScheduleView: View {
     @ObservedResults(
         RealmCoopResult.self,
+        filter: NSPredicate(format: "rule = %@", RuleType.CoopHistory_Regular.rule),
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
-    @AppStorage("CONFIG_SELECTED_RULE") var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
     @StateObject var session: Session = Session()
+    @State private var selection: RuleType = RuleType.CoopHistory_Regular
     @State private var isPresented: Bool = false
 
     var body: some View {
-            List(content: {
-                ForEach(results, id: \.self) { result in
-                    NavigationLinker(destination: {
-                        ResultTabView(results: results)
-//                            .environment(\.selection, .constant(index))
-                    }, label: {
-                        ResultView(result: result)
-                    })
-                }
+        List(content: {
+            ForEach(results, id: \.self) { result in
+                NavigationLinker(destination: {
+                    ResultTabView(results: results)
+                        .environment(\.selection, .constant(result.id))
+                }, label: {
+                    ResultView(result: result)
+                })
+            }
+        })
+        .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
+        .onChange(of: selection, perform: { newValue in
+            $results.filter = NSPredicate(format: "rule = %@", selection.rule)
+        })
+        .refreshable(action: {
+            await session.dummy(action: {
+                isPresented.toggle()
             })
-//            .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
-            .refreshable(action: {
-                await session.dummy(action: {
-                    isPresented.toggle()
+        })
+        .fullScreen(isPresented: $isPresented, content: {
+            ResultLoadingView()
+                .environment(\.dismissModal, DismissModalAction($isPresented))
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    selection.next()
+                }, label: {
+                    Image("ButtonType/Update", bundle: .main)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .foregroundColor(.primary)
                 })
             })
-            .fullScreen(isPresented: $isPresented, content: {
-                ResultLoadingView()
-                    .environment(\.dismissModal, DismissModalAction($isPresented))
-            })
-            .listStyle(.plain)
-            .navigationTitle(Text(rule: .CoopHistory_Regular))
-            .navigationBarTitleDisplayMode(.inline)
+        })
+        .listStyle(.plain)
+        .navigationTitle(Text(rule: selection))
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

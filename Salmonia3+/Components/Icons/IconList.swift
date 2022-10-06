@@ -183,7 +183,7 @@ enum IconList {
         @State private var isPresented: Bool = false
 
         var body: some View {
-            Image("TabType/Salmon", bundle: .main)
+            Image("ButtonType/Salmon", bundle: .main)
                 .resizable()
                 .scaledToFit()
                 .actionCircleButton(localizedText: "TITLE_ERASE_RESULTS", action: {
@@ -228,7 +228,7 @@ struct AlertModifier: ViewModifier {
                 Button(role: .destructive, action: {
                     confirm()
                 }, label: {
-                    Text(localizedText: "TITLE_DANGER_OK")
+                    Text(bundle: .Common_Decide)
                 })
             } message: {
                 Text(localizedText: "DESC_DANGER_ERASE")
