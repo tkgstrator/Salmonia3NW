@@ -71,9 +71,9 @@
 		10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */; };
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		10343BC028EF127500D0C78F /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10343BBF28EF127500D0C78F /* PullToRefresh.swift */; };
+		10343BC228EF227D00D0C78F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10343BC128EF227D00D0C78F /* GoogleService-Info.plist */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
-		1076274228E301730034F9A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1076274128E301730034F9A4 /* GoogleService-Info.plist */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -191,9 +191,9 @@
 		10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		10343BBF28EF127500D0C78F /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		10343BC128EF227D00D0C78F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
-		1076274128E301730034F9A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -348,7 +348,6 @@
 		101AACAF28B77C750030B56C = {
 			isa = PBXGroup;
 			children = (
-				1076274128E301730034F9A4 /* GoogleService-Info.plist */,
 				1018B4A428D74635002BD1F0 /* InfoPlist.strings */,
 				100E874028D4A73C007FCF3C /* Localizable.strings */,
 				10A6A18328B7A3D60075563F /* Packages */,
@@ -373,6 +372,7 @@
 		101AACBA28B77C750030B56C /* Salmonia3+ */ = {
 			isa = PBXGroup;
 			children = (
+				10343BC128EF227D00D0C78F /* GoogleService-Info.plist */,
 				100E873B28D4A541007FCF3C /* Salmonia3--Info.plist */,
 				100E873628D4A4DF007FCF3C /* Assets */,
 				100E873028D47DA5007FCF3C /* Components */,
@@ -651,11 +651,11 @@
 				100E873E28D4A73C007FCF3C /* Localizable.strings in Resources */,
 				101AACC328B77C760030B56C /* Preview Assets.xcassets in Resources */,
 				1018B48828D6CC06002BD1F0 /* SPLATNET3.png in Resources */,
+				10343BC228EF227D00D0C78F /* GoogleService-Info.plist in Resources */,
 				10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */,
 				101AACC028B77C760030B56C /* Assets.xcassets in Resources */,
 				1018B48A28D6CC0E002BD1F0 /* SPLATNET2.png in Resources */,
 				100E873928D4A509007FCF3C /* Splatfont1.ttf in Resources */,
-				1076274228E301730034F9A4 /* GoogleService-Info.plist in Resources */,
 				1018B4A228D74635002BD1F0 /* InfoPlist.strings in Resources */,
 				100E873A28D4A509007FCF3C /* Splatfont2.ttf in Resources */,
 			);
