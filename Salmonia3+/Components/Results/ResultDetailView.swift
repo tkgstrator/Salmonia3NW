@@ -43,7 +43,7 @@ struct ResultTabView: View {
                         .scaledToFit()
                         .font(Font.system(size: 30, weight: .bold))
                         .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 })
             })
         })
