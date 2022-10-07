@@ -16,28 +16,11 @@ struct ContentView: View {
     @Environment(\.isModalPresented) var isModalPresented
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
-    /// タブを戻すための処理
-    @State private var root: [UUID] = [UUID(), UUID(), UUID()]
-
-    /// 切り替え用の変数
-    private var selected: Binding<Int> {
-        Binding(
-            get: {
-                return selection
-            },
-            set: { newValue in
-                if newValue == selection {
-                    root[selection] = UUID()
-                }
-                selection = newValue
-            })
-    }
 
     var body: some View {
-        TabView(selection: selected, content: {
+        TabView(selection: $selection, content: {
             NavigationView(content: {
                 ResultsWithScheduleView()
-                    .id(root[0])
             })
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
@@ -51,7 +34,6 @@ struct ContentView: View {
             .tag(0)
             NavigationView(content: {
                 SchedulesView()
-                    .id(root[1])
             })
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
@@ -65,7 +47,6 @@ struct ContentView: View {
             .tag(1)
             NavigationView(content: {
                 UserView()
-                    .id(root[2])
             })
             .navigationViewStyle(.split)
             .withGoogleMobileAds()

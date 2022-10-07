@@ -16,7 +16,6 @@ struct LoginProgress: Identifiable {
         // 冗長なパスがあるので短くする
         let path: String = request.path
             .replacingOccurrences(of: "connect/1.0.0/", with: "")
-            .replacingOccurrences(of: "?id=1234806557", with: "")
 
         // バージョン取得のやつは更に冗長なので修正
         self.path = {

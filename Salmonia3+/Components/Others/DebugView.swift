@@ -105,7 +105,7 @@ enum SPEndpoint: String, CaseIterable, Identifiable {
     case F                      = "f"
     case SPLATOON_TOKEN         = "v3/Account/Login"
     case SPLATOON_ACCESS_TOKEN  = "v2/Game/GetWebServiceToken"
-    case VERSION                = "lookup"
+    case VERSION                = "app/id1234806557"
     case WEB_VERSION            = "api/web_version"
     case BULLET_TOKEN           = "api/bullet_tokens"
     case COOP_SUMMARY           = "api/summary"

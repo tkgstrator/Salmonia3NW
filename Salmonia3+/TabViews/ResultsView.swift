@@ -67,7 +67,7 @@ struct ResultsWithScheduleView: View {
 
     var body: some View {
         List(content: {
-            ForEach(results, id: \.self) { result in
+            ForEach(results) { result in
                 NavigationLinker(destination: {
                     ResultTabView(results: results)
                         .environment(\.selection, .constant(result.id))

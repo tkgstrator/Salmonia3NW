@@ -30,6 +30,31 @@ class Session: SplatNet3, ObservableObject {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
 
+    /// Versionリクエスト
+    override func request(_ request: Version) async throws -> Version.Response {
+        // 進行具合に合わせて追加する
+        DispatchQueue.main.async(execute: { [self] in
+            loginProgress.append(LoginProgress(request))
+        })
+
+        do {
+            if lists[.VERSION] {
+                throw Failure.API(error: NXError.API.response)
+            }
+            let response: Version.Response = try await super.request(request)
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.success()
+            })
+            return response
+        } catch(let error) {
+            DispatchQueue.main.async(execute: { [self] in
+                loginProgress.failure()
+            })
+            dismiss()
+            throw error
+        }
+    }
+
     /// WebVersionリクエスト
     override func request(_ request: WebVersion) async throws -> WebVersion.Response {
         // 進行具合に合わせて追加する
@@ -39,7 +64,7 @@ class Session: SplatNet3, ObservableObject {
 
         do {
             if lists[.WEB_VERSION] {
-                throw Failure.API(error: NXError.API.content)
+                throw Failure.API(error: NXError.API.response)
             }
             let response: WebVersion.Response = try await super.request(request)
             DispatchQueue.main.async(execute: { [self] in
