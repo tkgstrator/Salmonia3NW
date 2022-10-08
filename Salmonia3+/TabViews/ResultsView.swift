@@ -68,19 +68,30 @@ struct ResultsView: View {
 
     var body: some View {
         List(content: {
+            ForEach(schedules) { schedule in
+                if !schedule.results.isEmpty {
+                    ScheduleView(schedule: schedule)
+                    ForEach(schedule.results) { result in
+                        NavigationLinker(destination: {
+                            ResultTabView(results: schedule.results)
+                                .environment(\.selection, .constant(result.id))
+                        }, label: {
+                            ResultView(result: result)
+                        })
+                    }
+                }
+            }
         })
-//        .onChange(of: selection, perform: { newValue in
-//            $results.filter = NSPredicate(format: "ANY link.mode = %@", selection.mode)
-//        })
+        .onChange(of: selection, perform: { newValue in
+            $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
+        })
         .refreshable(action: {
             await session.dummy(action: {
                 isPresented.toggle()
             })
         })
         .fullScreen(isPresented: $isPresented, content: {
-//            EmptyView()
             ResultLoadingView()
-//                .environment(\.dismissModal, DismissModalAction($isPresented))
         })
         .fullScreenCover(isPresented: $isFirstLaunch , content: {
             TutorialView()
@@ -88,7 +99,7 @@ struct ResultsView: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
-//                    selection.next()
+                    selection.next()
                 }, label: {
                     Image("ButtonType/Update", bundle: .main)
                         .renderingMode(.template)
