@@ -90,6 +90,7 @@
 		10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
+		10E3191628F2066F009C6BBC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3191528F2066F009C6BBC /* SwiftUICharts */; };
 		10F01B4728EB1B1A00F7A7E2 /* splatoon1chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4428EB157D00F7A7E2 /* splatoon1chzh.ttf */; };
 		10F01B4828EB1B1A00F7A7E2 /* splatoon1jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */; };
 		10F01B4928EB1B1A00F7A7E2 /* splatoon1twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4528EB157D00F7A7E2 /* splatoon1twzh.ttf */; };
@@ -234,6 +235,7 @@
 				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
 				10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1009735628E4AC280032BB84 /* FirebaseAuth in Frameworks */,
+				10E3191628F2066F009C6BBC /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +545,7 @@
 				1009735328E4AC280032BB84 /* FirebaseAnalytics */,
 				1009735528E4AC280032BB84 /* FirebaseAuth */,
 				10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */,
+				10E3191528F2066F009C6BBC /* SwiftUICharts */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -634,6 +637,7 @@
 				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -1201,6 +1205,14 @@
 				version = 10.30.0;
 			};
 		};
+		10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1247,6 +1259,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		10E3191528F2066F009C6BBC /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

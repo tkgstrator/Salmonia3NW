@@ -9,29 +9,6 @@ import SwiftUI
 import RealmSwift
 import SplatNet3
 
-//struct ResultsView: View {
-//    let results: RealmSwift.Results<RealmCoopResult>
-//
-//    init(results: RealmSwift.List<RealmCoopResult>) {
-//        self.results = results.sorted(byKeyPath: "playTime", ascending: false)
-//    }
-//
-//    var body: some View {
-//        List(content: {
-//            ForEach(results) { result in
-//                NavigationLinker(destination: {
-//                    ResultDetailView(result: result, schedule: result.schedule)
-//                }, label: {
-//                    ResultView(result: result)
-//                })
-//            }
-//        })
-//        .listStyle(.plain)
-//        .navigationTitle(Text(bundle: .Record_Title))
-//        .navigationBarTitleDisplayMode(.inline)
-//    }
-//}
-
 /// リザルトがなにもないときに下スワイプで取得できることを表示する
 private struct ResultsEmpty: View {
     @State private var value: CGFloat = 0
@@ -116,10 +93,3 @@ struct ResultsView: View {
     }
 }
 
-//extension SplatNet2.Rule: AllCaseable {}
-
-//struct ResultsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ResultsView()
-//    }
-//}
