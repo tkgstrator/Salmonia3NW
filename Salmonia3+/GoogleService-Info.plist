@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:326463476451:ios:1302c6354ee92d17c12bd6</string>
-	<key>ADMOB_APP_ID</key>
-	<string>ca-app-pub-7107468397673752~6827583174</string>
+	<string>1:326463476451:ios:22719a288c20de58c12bd6</string>
 </dict>
 </plist>

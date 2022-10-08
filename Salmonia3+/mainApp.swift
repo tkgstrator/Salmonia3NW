@@ -7,10 +7,8 @@
 
 import SwiftUI
 import RealmSwift
-import FirebaseCore
-import FirebaseAnalytics
-import FirebaseAuth
 import SplatNet3
+import Firebase
 
 @main
 struct mainApp: SwiftUI.App {

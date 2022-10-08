@@ -13,7 +13,7 @@ import SwiftUI
 class RealmService {
     public static let shared = RealmService()
 
-    private let schemeVersion: UInt64 = 3
+    private let schemeVersion: UInt64 = 4
 
     internal var realm: Realm {
         get {
@@ -134,10 +134,10 @@ class RealmService {
 
             let schedule: RealmCoopSchedule = RealmCoopSchedule(from: result)
             if realm.isInWriteTransaction {
-                realm.add(schedule, update: .modified)
+                realm.add(schedule)
             } else {
                 realm.beginWrite()
-                realm.add(schedule, update: .modified)
+                realm.add(schedule)
                 try? realm.commitWrite()
             }
 

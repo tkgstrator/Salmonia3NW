@@ -12,15 +12,16 @@ import SplatNet3
 struct SchedulesView: View {
     @ObservedResults(
         RealmCoopSchedule.self,
-        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode)
+        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode),
+        sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
     ) var schedules
     @State private var selection: ModeType = ModeType.CoopHistory_Regular
 
     var body: some View {
         List(content: {
-            ForEach(schedules.reversed()) { schedule in
+            ForEach(schedules) { schedule in
                 NavigationLinker(destination: {
-                    ResultsView(results: schedule.results)
+                    EmptyView()
                 }, label: {
                     ScheduleView(schedule: schedule)
                 })

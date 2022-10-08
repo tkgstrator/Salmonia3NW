@@ -72,7 +72,7 @@ extension RealmCoopSchedule: Identifiable {
             return startTime.hashValue
         }
         /// プライベートバイト
-        return weaponList.hash &+ stageId.hashValue 
+        return self.hashValue
     }
 }
 

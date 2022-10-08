@@ -10,7 +10,6 @@ import SDWebImageSwiftUI
 import SplatNet3
 
 struct ResultLoadingView: View {
-    @Environment(\.dismissModal) var dismiss
     @StateObject var session: Session = Session()
 
     var body: some View {
@@ -78,12 +77,12 @@ struct ResultLoadingView: View {
                     try await session.getCoopResults()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
-                        dismiss()
+                        UIApplication.shared.dismiss()
                     })
                 } catch(_) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
-                        dismiss()
+                        UIApplication.shared.dismiss()
                     })
                 }
             }
