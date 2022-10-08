@@ -11,26 +11,26 @@ import Introspect
 
 public protocol AllCaseable: RawRepresentable, Identifiable, CaseIterable, Hashable where RawValue == String, AllCases: RandomAccessCollection { }
 
-struct TypePicker<T: AllCaseable>: View {
-    @Binding var selection: SplatNet2.Rule
-
-    var body: some View {
-        Picker(selection: $selection, content: {
-            ForEach(T.allCases.dropLast()) { rule in
-                Text(localizedText: rule.rawValue)
-                    .tag(rule)
-                    .id(rule)
-            }
-        }, label: {
-        })
-        .pickerStyle(.segmented)
-        .introspectSegmentedControl(customize: { controller in
-            controller.selectedSegmentTintColor = UIColor(SPColor.Theme.SPOrange)
-            controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .selected)
-            controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .normal)
-        })
-    }
-}
+//struct TypePicker<T: AllCaseable>: View {
+//    @Binding var selection: SplatNet2.Rule
+//
+//    var body: some View {
+//        Picker(selection: $selection, content: {
+//            ForEach(T.allCases.dropLast()) { rule in
+//                Text(localizedText: rule.rawValue)
+//                    .tag(rule)
+//                    .id(rule)
+//            }
+//        }, label: {
+//        })
+//        .pickerStyle(.segmented)
+//        .introspectSegmentedControl(customize: { controller in
+//            controller.selectedSegmentTintColor = UIColor(SPColor.Theme.SPOrange)
+//            controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .selected)
+//            controller.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatfont2", size: 16)!], for: .normal)
+//        })
+//    }
+//}
 
 //struct TypePicker_Previews: PreviewProvider {
 //    @State static var selection: SplatNet2.Rule = .REGULAR

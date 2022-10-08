@@ -8,6 +8,7 @@
 import SwiftUI
 import RealmSwift
 import FirebaseCore
+import SplatNet3
 
 @main
 struct mainApp: SwiftUI.App {
@@ -25,11 +26,16 @@ struct mainApp: SwiftUI.App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    private enum Mode: String, CaseIterable, PersistableEnum {
+        case REGULAR = "RULE_REGULAR"
+        case PRIVATE = "RULE_PRIVATE"
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         /// Firebase
         FirebaseApp.configure()
 
-        let schemeVersion: UInt64 = 3
+        let schemeVersion: UInt64 = 4
         #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
@@ -38,16 +44,32 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     // プレイヤー情報を仮アップデート
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
-                        newValue!["isMyself"] = false
-                        newValue!["byname"] = ""
-                        newValue!["nameId"] = ""
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            if let byname: String = oldValue["byname"] as? String,
+                               let nameId: String = oldValue["nameId"] as? String,
+                               let isMyself: Bool = oldValue["isMyself"] as? Bool {
+                                print("No Migration")
+                            } else {
+                                newValue["isMyself"] = false
+                                newValue["byname"] =
+                                newValue["nameId"] = ""
+                            }
+                        }
                     })
                     // スケジュール情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
-                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
-                        newValue!["startTime"] = nil
-                        newValue!["endTime"] = nil
-                        newValue!["rareWeapon"] = nil
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                            if let rawValue: String = oldValue["rule"] as? String,
+                               let mode: Mode = Mode(rawValue: rawValue) {
+                                newValue["rule"] = Common.Rule.REGULAR
+                                newValue["mode"] = mode == .REGULAR ? Common.Mode.REGULAR : Common.Mode.PRIVATE_CUSTOM
+                                print(rawValue, mode)
+                            }
+                            newValue["startTime"] = nil
+                            newValue["endTime"] = nil
+                            newValue["rareWeapon"] = nil
+                        }
                     })
                     // リザルト情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopResult.className(), { oldValue, newValue in

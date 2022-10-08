@@ -79,7 +79,8 @@ class RealmService {
             if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
                 $0.stageId == result.schedule.stage &&
                 Array($0.weaponList) == result.schedule.weaponLists &&
-                $0.rule == result.rule
+                $0.rule == result.schedule.rule &&
+                $0.mode == result.schedule.mode
             }) {
                 return schedule
             }
@@ -121,5 +122,4 @@ class RealmService {
             try? realm.commitWrite()
         }
     }
-
 }

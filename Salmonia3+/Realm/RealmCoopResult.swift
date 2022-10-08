@@ -12,8 +12,6 @@ import SplatNet3
 final class RealmCoopResult: Object, Identifiable {
     /// 固有ID
     @Persisted(primaryKey: true) var id: String
-    /// ルール
-    @Persisted(indexed: true) var rule: SplatNet2.Rule?
     /// Salmon Stats用のID
     @Persisted var salmonId: Int?
     /// 評価レート
@@ -64,7 +62,6 @@ final class RealmCoopResult: Object, Identifiable {
     convenience init(from result: SplatNet2.Result) {
         self.init()
         self.id = result.id
-        self.rule = result.rule
         self.gradePoint = result.gradePoint
         self.grade = result.grade
         self.failureWave = result.jobResult.failureWave
@@ -92,7 +89,6 @@ final class RealmCoopResult: Object, Identifiable {
     convenience init(dummy: Bool = true) {
         self.init()
         self.id = "00000000000000000000000000000000"
-        self.rule = .REGULAR
         self.gradePoint = 400
         self.grade = GradeType.Eggsecutive_VP
         self.failureWave = nil
@@ -140,4 +136,4 @@ extension GradeType: RawRepresentable, PersistableEnum {
     public var rawValue: Int { self.id! }
 }
 
-extension SplatNet2.Rule: PersistableEnum {}
+//extension SplatNet2.Rule: PersistableEnum {}

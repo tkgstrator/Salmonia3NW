@@ -10,30 +10,57 @@ import RealmSwift
 import SplatNet3
 
 class RealmCoopSchedule: Object, Identifiable {
-    @Persisted(primaryKey: true) var id: Int
+    @Persisted(indexed: true) var startTime: Date?
+    @Persisted(indexed: true) var endTime: Date?
     @Persisted var stageId: StageType
-    @Persisted var startTime: Date?
-    @Persisted var endTime: Date?
     @Persisted var weaponList: List<WeaponType>
     @Persisted var results: List<RealmCoopResult>
     @Persisted var rareWeapon: WeaponType?
-    @Persisted var rule: SplatNet2.Rule
+    @Persisted var rule: Common.Rule
+    @Persisted var mode: Common.Mode
 
     convenience init(from result: SplatNet2.Result) {
+        let dateFormatter: ISO8601DateFormatter = {
+            let formatter: ISO8601DateFormatter = ISO8601DateFormatter()
+            formatter.timeZone = TimeZone.current
+            return formatter
+        }()
         self.init()
+        self.startTime = {
+            if let startTime = result.schedule.endTime {
+                return dateFormatter.date(from: startTime)
+            }
+            return nil
+        }()
+        self.endTime = {
+            if let endTime = result.schedule.endTime {
+                return dateFormatter.date(from: endTime)
+            }
+            return nil
+        }()
         self.stageId = result.schedule.stage
         self.weaponList.append(objectsIn: result.schedule.weaponLists)
-        self.rule = result.rule
+        self.rule = result.schedule.rule
+        self.mode = result.schedule.mode
         self.rareWeapon = nil
-        self.id = weaponList.hash &+ stageId.hashValue &+ rule.hashValue
     }
 
     convenience init(dummy: Bool = true) {
         self.init()
         self.stageId = StageType.Shakespiral
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))
-        self.rule = SplatNet2.Rule.REGULAR
+        self.rule = Common.Rule.REGULAR
         self.rareWeapon = nil
-        self.id = 0
     }
 }
+
+//extension RealmCoopSchedule {
+//    static func == (lhs: RealmCoopSchedule, rhs: RealmCoopSchedule) -> Bool {
+//
+//    }
+//}
+
+
+extension Common.Rule: PersistableEnum {}
+
+extension Common.Mode: PersistableEnum {}

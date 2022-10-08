@@ -123,11 +123,11 @@ class Session: SplatNet3, ObservableObject {
         /// 最新のバイトID取得
         let resultId: String? = RealmService.shared.getLatestResultId()
 
-        let resultIds: [String] = try await {
+        let resultIds: [CoopHistoryElement] = try await {
             if isForceFetch {
-                return Array((try await getCoopResultIds(resultId: nil).sorted(by: { $0.playTime < $1.playTime })).prefix(Int(maxFetchCounts)))
+                return Array(try await getCoopResultIds(resultId: nil).prefix(Int(maxFetchCounts)))
             }
-            return try await getCoopResultIds(resultId: resultId).sorted(by: { $0.playTime < $1.playTime })
+            return try await getCoopResultIds(resultId: resultId)
         }()
 
         // 新規リザルトがなければ何もせず閉じる
@@ -145,7 +145,7 @@ class Session: SplatNet3, ObservableObject {
                 loginProgress.append(LoginProgress(.COOP_RESULT))
             })
             // リザルト取得を開始する
-            _ = try await resultIds.asyncMap({ try await getCoopResult(id: $0) })
+            _ = try await resultIds.asyncMap({ try await getCoopResult(element: $0) })
             success()
             dismiss()
         } catch(let error) {
@@ -155,14 +155,14 @@ class Session: SplatNet3, ObservableObject {
     }
 
     /// 概要取得
-    override func getCoopSummary() async throws -> CoopSummary.Response {
+    override func getCoopHistory() async throws -> CoopHistory.Response {
         // GraphQL用のデータを作成
         DispatchQueue.main.async(execute: { [self] in
             loginProgress.append(LoginProgress(.COOP_SUMMARY))
         })
 
         do {
-            let summary: CoopSummary.Response = try await super.getCoopSummary()
+            let summary: CoopHistory.Response = try await super.getCoopHistory()
             success()
             return summary
         } catch(let error) {
@@ -171,22 +171,17 @@ class Session: SplatNet3, ObservableObject {
         }
     }
 
-    /// リザルトのID取得
-    override func getCoopResultIds(resultId: String? = nil) async throws -> [String] {
-        let ids: [String] = try await super.getCoopResultIds(resultId: resultId)
-        return ids
-    }
-
     @discardableResult
-    override func getCoopResult(id: String) async throws -> SplatNet2.Result {
+    override func getCoopResult(element: CoopHistoryElement) async throws -> SplatNet2.Result {
         // リザルトを一件取得するごとにカウントアップする
         DispatchQueue.main.async(execute: { [self] in
             resultCounts += 1
         })
 
         do {
-            let result: SplatNet2.Result = try await super.getCoopResult(id: id)
+            let result: SplatNet2.Result = try await super.getCoopResult(element: element)
 
+            print(result)
             if !isWritable {
                 // リザルト書き込みをする
                 DispatchQueue.main.async(execute: {

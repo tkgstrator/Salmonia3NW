@@ -12,9 +12,9 @@ import SplatNet3
 struct SchedulesView: View {
     @ObservedResults(
         RealmCoopSchedule.self,
-        filter: NSPredicate(format: "rule = %@", RuleType.CoopHistory_Regular.rule)
+        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode)
     ) var schedules
-    @State private var selection: RuleType = RuleType.CoopHistory_Regular
+    @State private var selection: ModeType = ModeType.CoopHistory_Regular
 
     var body: some View {
         List(content: {
@@ -40,20 +40,20 @@ struct SchedulesView: View {
                 })
             })
         })
-        .navigationTitle(Text(rule: selection))
-        .navigationBarTitleDisplayMode(.inline)
         .onChange(of: selection, perform: { newValue in
-            $schedules.filter = NSPredicate(format: "rule = %@", newValue.rule)
+            $schedules.filter = NSPredicate(format: "mode = %@", newValue.mode)
         })
+        .navigationTitle(Text(mode: selection))
+        .navigationBarTitleDisplayMode(.inline)
         .listStyle(.plain)
     }
 }
 
-fileprivate extension RealmSwift.Results where Element == RealmCoopSchedule {
-    func filter(_ condition: SplatNet2.Rule) -> RealmSwift.Results<RealmCoopSchedule> {
-        self.filter("rule = %@", condition)
-    }
-}
+//fileprivate extension RealmSwift.Results where Element == RealmCoopSchedule {
+//    func filter(_ condition: SplatNet2.Rule) -> RealmSwift.Results<RealmCoopSchedule> {
+//        self.filter("rule = %@", condition)
+//    }
+//}
 
 struct SchedulesView_Previews: PreviewProvider {
     static var previews: some View {

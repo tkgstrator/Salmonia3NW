@@ -43,17 +43,17 @@ public class ResultRuleAction: Equatable {
         lhs.rawValue == rhs.rawValue
     }
 
-    public var selection: RuleType
+    public var selection: ModeType
 
     public var rawValue: String {
-        selection.rule
+        selection.mode
     }
 
     private func next() {
         self.selection.next()
     }
 
-    public init(_ selection: RuleType) {
+    public init(_ selection: ModeType) {
         self.selection = selection
     }
 

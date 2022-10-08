@@ -11,7 +11,6 @@ import SplatNet3
 
 struct ResultsView: View {
     let results: RealmSwift.Results<RealmCoopResult>
-    @State private var selection: SplatNet2.Rule = SplatNet2.Rule.REGULAR
 
     init(results: RealmSwift.List<RealmCoopResult>) {
         self.results = results.sorted(byKeyPath: "playTime", ascending: false)
@@ -58,11 +57,11 @@ private struct ResultsEmpty: View {
 struct ResultsWithScheduleView: View {
     @ObservedResults(
         RealmCoopResult.self,
-        filter: NSPredicate(format: "rule = %@", RuleType.CoopHistory_Regular.rule),
+        filter: NSPredicate(format: "ANY link.mode = %@", ModeType.CoopHistory_Regular.mode),
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
     @StateObject var session: Session = Session()
-    @State private var selection: RuleType = RuleType.CoopHistory_Regular
+    @State private var selection: ModeType = ModeType.CoopHistory_Regular
     @State private var isPresented: Bool = false
 
     var body: some View {
@@ -78,7 +77,7 @@ struct ResultsWithScheduleView: View {
         })
         .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
         .onChange(of: selection, perform: { newValue in
-            $results.filter = NSPredicate(format: "rule = %@", selection.rule)
+            $results.filter = NSPredicate(format: "ANY link.mode = %@", selection.mode)
         })
         .refreshable(action: {
             await session.dummy(action: {
@@ -104,18 +103,12 @@ struct ResultsWithScheduleView: View {
             })
         })
         .listStyle(.plain)
-        .navigationTitle(Text(rule: selection))
+        .navigationTitle(Text(mode: selection))
         .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-fileprivate extension RealmSwift.Results where Element == RealmCoopResult {
-    func filter(_ condition: SplatNet2.Rule) -> RealmSwift.Results<RealmCoopResult> {
-        self.filter("rule = %@", condition)
-    }
-}
-
-extension SplatNet2.Rule: AllCaseable {}
+//extension SplatNet2.Rule: AllCaseable {}
 
 //struct ResultsView_Previews: PreviewProvider {
 //    static var previews: some View {
