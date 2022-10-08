@@ -60,24 +60,25 @@ struct ResultsWithScheduleView: View {
         filter: NSPredicate(format: "ANY link.mode = %@", ModeType.CoopHistory_Regular.mode),
         sortDescriptor: SortDescriptor(keyPath: "playTime", ascending: false)
     ) var results
+    @ObservedResults(
+        RealmCoopSchedule.self,
+        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode),
+        sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
+    ) var schedules
     @StateObject var session: Session = Session()
     @State private var selection: ModeType = ModeType.CoopHistory_Regular
     @State private var isPresented: Bool = false
+    @State private var isExpanded: Bool = false
 
     var body: some View {
         List(content: {
             ForEach(results) { result in
-                NavigationLinker(destination: {
-                    ResultTabView(results: results)
-                        .environment(\.selection, .constant(result.id))
-                }, label: {
-                    ResultView(result: result)
-                })
+                ResultView(result: result)
             }
         })
         .overlay(results.isEmpty ? AnyView(ResultsEmpty()) : AnyView(EmptyView()), alignment: .center)
         .onChange(of: selection, perform: { newValue in
-            $results.filter = NSPredicate(format: "ANY link.mode = %@", selection.mode)
+//            $results.filter = NSPredicate(format: "ANY link.mode = %@", selection.mode)
         })
         .refreshable(action: {
             await session.dummy(action: {
@@ -91,7 +92,7 @@ struct ResultsWithScheduleView: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
-                    selection.next()
+//                    selection.next()
                 }, label: {
                     Image("ButtonType/Update", bundle: .main)
                         .renderingMode(.template)
@@ -102,6 +103,7 @@ struct ResultsWithScheduleView: View {
                 })
             })
         })
+//        .listStyle(.sidebar)
         .listStyle(.plain)
         .navigationTitle(Text(mode: selection))
         .navigationBarTitleDisplayMode(.inline)

@@ -10,8 +10,7 @@ import SplatNet3
 import RealmSwift
 
 struct ContentView: View {
-    /// 初回起動フラグ
-    @Environment(\.isFirstLaunch) var isFirstLaunch
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
     /// モーダル表示かどうかのフラグ
     @Environment(\.isModalPresented) var isModalPresented
     /// 現在の表示中タブ取得
@@ -20,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection, content: {
             NavigationView(content: {
-                ResultsWithScheduleView()
+//                ResultsWithScheduleView()
             })
             .navigationViewStyle(.split)
             .withGoogleMobileAds()
@@ -61,8 +60,7 @@ struct ContentView: View {
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)
-        .fullScreenCover(isPresented: isFirstLaunch , content: {
-            // チュートリアル
+        .fullScreenCover(isPresented: $isFirstLaunch , content: {
             TutorialView()
         })
     }

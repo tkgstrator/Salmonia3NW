@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import SplatNet3
 
-class RealmCoopSchedule: Object, Identifiable {
+class RealmCoopSchedule: Object {
     @Persisted(indexed: true) var startTime: Date?
     @Persisted(indexed: true) var endTime: Date?
     @Persisted var stageId: StageType
@@ -18,6 +18,17 @@ class RealmCoopSchedule: Object, Identifiable {
     @Persisted var rareWeapon: WeaponType?
     @Persisted var rule: Common.Rule
     @Persisted var mode: Common.Mode
+
+    convenience init(from schedule: CoopSchedule) {
+        self.init()
+        self.startTime = schedule.startTime
+        self.endTime = schedule.endTime
+        self.stageId = schedule.stage
+        self.weaponList.append(objectsIn: schedule.weaponList)
+        self.rareWeapon = nil
+        self.rule = schedule.rule
+        self.mode = schedule.mode
+    }
 
     convenience init(from result: SplatNet2.Result) {
         let dateFormatter: ISO8601DateFormatter = {
@@ -51,6 +62,17 @@ class RealmCoopSchedule: Object, Identifiable {
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))
         self.rule = Common.Rule.REGULAR
         self.rareWeapon = nil
+    }
+}
+
+extension RealmCoopSchedule: Identifiable {
+    public var id: Int {
+        /// いつものバイト
+        if let startTime: Date = self.startTime {
+            return startTime.hashValue
+        }
+        /// プライベートバイト
+        return weaponList.hash &+ stageId.hashValue 
     }
 }
 

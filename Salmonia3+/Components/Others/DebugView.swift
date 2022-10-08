@@ -108,6 +108,7 @@ enum SPEndpoint: String, CaseIterable, Identifiable {
     case VERSION                = "app/id1234806557"
     case WEB_VERSION            = "api/web_version"
     case BULLET_TOKEN           = "api/bullet_tokens"
+    case COOP_SCHEDULE          = "api/schedules"
     case COOP_SUMMARY           = "api/summary"
     case COOP_RESULT            = "api/results"
     case UNKNOWN                = "unknown"

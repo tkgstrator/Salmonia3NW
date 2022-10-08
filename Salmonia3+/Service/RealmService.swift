@@ -37,7 +37,15 @@ class RealmService {
         }
     }
 
-    init() {
+    init() {}
+
+    func getCoopRegularSchedule() {
+        Task(priority: .background, operation: {
+            let session: Session = Session()
+            let schedules: [CoopSchedule] = try await session.getCoopSchedule()
+//            let objects: [RealmCoopSchedule]
+            print(schedules)
+        })
     }
 
     func deleteAll() {
@@ -70,6 +78,45 @@ class RealmService {
     /// リザルト複数書き込み(ただし、そんなに速くない)
     func save(_ results: [SplatNet2.Result]) {
         _ = results.map({ save($0) })
+    }
+
+    func save(_ schedules: [CoopSchedule]) {
+        for schedule in schedules {
+            save(schedule)
+        }
+    }
+
+    private func save(_ schedule: CoopSchedule) {
+        // 抜けているステージ情報があるかどうか
+        if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
+            // ステージが一致
+            $0.stageId == schedule.stage &&
+            /// 支給ブキが一致
+            Array($0.weaponList) == schedule.weaponList &&
+            /// プライベートバイトではない
+            $0.rule == schedule.rule &&
+            /// モードが一致している
+            $0.mode == schedule.mode &&
+            /// 時刻情報が抜けている
+            $0.startTime == nil && $0.endTime == nil
+        }) {
+            if realm.isInWriteTransaction {
+                schedule.startTime = schedule.startTime
+                schedule.endTime = schedule.endTime
+            } else {
+                try? realm.write {
+                    schedule.startTime = schedule.startTime
+                    schedule.endTime = schedule.endTime
+                }
+            }
+        }
+        // 追加されていないステージ情報があるかどうか
+        guard let _ = realm.objects(RealmCoopSchedule.self).first(where: { $0.startTime == schedule.startTime }) else {
+            // 追加されていないステージがあればDBに書き込む
+            let schedule: RealmCoopSchedule = RealmCoopSchedule(from: schedule)
+            save(schedule)
+            return
+        }
     }
 
     /// リザルト一件書き込み
@@ -110,6 +157,16 @@ class RealmService {
                 schedule.results.append(object)
                 try? realm.commitWrite()
             }
+        }
+    }
+
+    func save<T: Object>(_ object: T) {
+        if realm.isInWriteTransaction {
+            realm.add(object)
+        } else {
+            realm.beginWrite()
+            realm.add(object)
+            try? realm.commitWrite()
         }
     }
 

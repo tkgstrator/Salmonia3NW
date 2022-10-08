@@ -196,7 +196,7 @@ enum IconList {
     }
 
     struct Accounts: View {
-        @Environment(\.isFirstLaunch) var isFirstLaunch: Binding<Bool>
+        @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
         @State private var isPresented: Bool = false
 
         var body: some View {
@@ -207,7 +207,7 @@ enum IconList {
                     isPresented.toggle()
                 })
                 .alert(isPresented: $isPresented, confirm: {
-                    isFirstLaunch.wrappedValue.toggle()
+                    isFirstLaunch.toggle()
                 })
         }
     }

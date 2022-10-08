@@ -158,6 +158,23 @@ class Session: SplatNet3, ObservableObject {
     override func getCoopHistory() async throws -> CoopHistory.Response {
         // GraphQL用のデータを作成
         DispatchQueue.main.async(execute: { [self] in
+            loginProgress.append(LoginProgress(.COOP_SCHEDULE))
+        })
+
+        do {
+            let schedules: [CoopSchedule] = try await getCoopSchedule()
+
+            DispatchQueue.main.async(execute: {
+                RealmService.shared.save(schedules)
+            })
+            success()
+        } catch (let error) {
+            failure()
+            throw error
+        }
+
+        // GraphQL用のデータを作成
+        DispatchQueue.main.async(execute: { [self] in
             loginProgress.append(LoginProgress(.COOP_SUMMARY))
         })
 
@@ -180,8 +197,6 @@ class Session: SplatNet3, ObservableObject {
 
         do {
             let result: SplatNet2.Result = try await super.getCoopResult(element: element)
-
-            print(result)
             if !isWritable {
                 // リザルト書き込みをする
                 DispatchQueue.main.async(execute: {

@@ -40,8 +40,7 @@ struct TutorialView: View {
 
 
 private struct TutorialSignIn: View {
-    // 初回起動かどうかのフラグ
-    @Environment(\.isFirstLaunch) var isFirstLaunch
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
     @StateObject var session: Session = Session()
     @State private var isModalPresented: Bool = false
     @State private var isPresented: Bool = false
@@ -70,7 +69,7 @@ private struct TutorialSignIn: View {
             #if DEBUG
             VStack(content: {
                 Button(action: {
-                    isFirstLaunch.wrappedValue.toggle()
+                    isFirstLaunch.toggle()
                 }, label: {
                     Text("デバッグの強制エラー対策")
                         .fontWeight(.bold)
@@ -103,7 +102,7 @@ private struct TutorialSignIn: View {
             })
             .fullScreen(isPresented: $isModalPresented, content: {
                 LoadingView(code: $code, verifier: $verifier, onSuccess: {
-                    isFirstLaunch.wrappedValue.toggle()
+                    isFirstLaunch.toggle()
                 })
             })
             #else
@@ -130,7 +129,7 @@ private struct TutorialSignIn: View {
             })
             .fullScreen(isPresented: $isModalPresented, content: {
                 LoadingView(code: $code, verifier: $verifier, onSuccess: {
-                    isFirstLaunch.wrappedValue.toggle()
+                    isFirstLaunch.toggle()
                 })
             })
             #endif

@@ -13,7 +13,7 @@ import Introspect
 struct ResultTabView: View {
     @Environment(\.selection) var selection
     @State private var isNameVisible: Bool = true
-    let results: RealmSwift.Results<RealmCoopResult>
+    let results: RealmSwift.List<RealmCoopResult>
 
     var selected: Binding<String> {
         Binding(get: {
