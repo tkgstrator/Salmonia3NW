@@ -28,6 +28,7 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted var badges: List<BadgeType?>
     @Persisted var background: NamePlateType
     @Persisted var weaponList: List<WeaponType>
+    @Persisted(originProperty: "players") private var link: LinkingObjects<RealmCoopResult>
 
     convenience init(from result: SplatNet2.PlayerResult) {
         self.init()

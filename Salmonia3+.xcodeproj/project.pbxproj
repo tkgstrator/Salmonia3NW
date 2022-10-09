@@ -91,6 +91,13 @@
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
 		10E3191628F2066F009C6BBC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3191528F2066F009C6BBC /* SwiftUICharts */; };
+		10E3191928F206B6009C6BBC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191828F206B6009C6BBC /* ChartView.swift */; };
+		10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */; };
+		10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191C28F22A38009C6BBC /* SingleChartView.swift */; };
+		10E3191F28F2602A009C6BBC /* CircleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191E28F2602A009C6BBC /* CircleChartView.swift */; };
+		10E3192128F2683C009C6BBC /* Doughnut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192028F2683C009C6BBC /* Doughnut.swift */; };
+		10E3192328F271F9009C6BBC /* Ark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192228F271F9009C6BBC /* Ark.swift */; };
+		10E3192528F2847D009C6BBC /* WeaponChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192428F2847D009C6BBC /* WeaponChartView.swift */; };
 		10F01B4728EB1B1A00F7A7E2 /* splatoon1chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4428EB157D00F7A7E2 /* splatoon1chzh.ttf */; };
 		10F01B4828EB1B1A00F7A7E2 /* splatoon1jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */; };
 		10F01B4928EB1B1A00F7A7E2 /* splatoon1twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4528EB157D00F7A7E2 /* splatoon1twzh.ttf */; };
@@ -211,6 +218,13 @@
 		10A6A19928B7AC240075563F /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10E3191228F1EC91009C6BBC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		10E3191828F206B6009C6BBC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStatsView.swift; sourceTree = "<group>"; };
+		10E3191C28F22A38009C6BBC /* SingleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartView.swift; sourceTree = "<group>"; };
+		10E3191E28F2602A009C6BBC /* CircleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChartView.swift; sourceTree = "<group>"; };
+		10E3192028F2683C009C6BBC /* Doughnut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doughnut.swift; sourceTree = "<group>"; };
+		10E3192228F271F9009C6BBC /* Ark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ark.swift; sourceTree = "<group>"; };
+		10E3192428F2847D009C6BBC /* WeaponChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChartView.swift; sourceTree = "<group>"; };
 		10F01B4128EB157C00F7A7E2 /* splatoon2twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2twzh.ttf; sourceTree = "<group>"; };
 		10F01B4228EB157D00F7A7E2 /* splatoon2chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2chzh.ttf; sourceTree = "<group>"; };
 		10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1jpja.ttf; sourceTree = "<group>"; };
@@ -259,12 +273,14 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10E3191728F206AA009C6BBC /* Chart */,
 				10F01B4D28EC363400F7A7E2 /* FullScreen */,
 				10A0ACBD28DD808D008B332A /* Others */,
 				1018B49228D6FB42002BD1F0 /* Icons */,
 				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				100E873128D47DAB007FCF3C /* Results */,
+				10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -320,6 +336,7 @@
 				100E876428D4E92D007FCF3C /* Salmon.swift */,
 				1018B49928D71B64002BD1F0 /* NSOCircle.swift */,
 				1018B4A828D9F1FC002BD1F0 /* SalmonLogo.swift */,
+				10E3192228F271F9009C6BBC /* Ark.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -505,6 +522,18 @@
 				100E874D28D4AC66007FCF3C /* ResultsView.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		10E3191728F206AA009C6BBC /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				10E3191828F206B6009C6BBC /* ChartView.swift */,
+				10E3191C28F22A38009C6BBC /* SingleChartView.swift */,
+				10E3192028F2683C009C6BBC /* Doughnut.swift */,
+				10E3191E28F2602A009C6BBC /* CircleChartView.swift */,
+				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
+			);
+			path = Chart;
 			sourceTree = "<group>";
 		};
 		10F01B4D28EC363400F7A7E2 /* FullScreen */ = {
@@ -741,17 +770,20 @@
 				100E876328D4E8EF007FCF3C /* ResultPlayer.swift in Sources */,
 				10343BC028EF127500D0C78F /* PullToRefresh.swift in Sources */,
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
+				10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */,
 				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
+				10E3192528F2847D009C6BBC /* WeaponChartView.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				1001B4DE28E7022500A370FD /* FullScreenView.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
 				1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */,
 				1018B49A28D71B64002BD1F0 /* NSOCircle.swift in Sources */,
 				1001B4E228E702BB00A370FD /* DismissModalAction.swift in Sources */,
+				10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
 				1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */,
 				101AACBE28B77C750030B56C /* ContentView.swift in Sources */,
@@ -761,6 +793,7 @@
 				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
 				100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
+				10E3191F28F2602A009C6BBC /* CircleChartView.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,
@@ -789,14 +822,17 @@
 				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
+				10E3191928F206B6009C6BBC /* ChartView.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
 				10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
+				10E3192328F271F9009C6BBC /* Ark.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
 				1018B4AD28DAC394002BD1F0 /* Secrets.swift in Sources */,
 				100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */,
 				100E872F28D47966007FCF3C /* RealmCoopSchedule.swift in Sources */,
 				10FA715328E44DF1001549B9 /* SwiftUI+Image.swift in Sources */,
+				10E3192128F2683C009C6BBC /* Doughnut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +1022,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1004,7 +1040,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1020,7 +1056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1038,7 +1074,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1209,8 +1245,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.5.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

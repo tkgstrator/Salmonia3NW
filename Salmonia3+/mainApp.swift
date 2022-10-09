@@ -99,16 +99,32 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     // プレイヤー情報を仮アップデート
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
-                        newValue!["isMyself"] = false
-                        newValue!["byname"] = ""
-                        newValue!["nameId"] = ""
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            if let byname: String = oldValue["byname"] as? String,
+                               let nameId: String = oldValue["nameId"] as? String,
+                               let isMyself: Bool = oldValue["isMyself"] as? Bool {
+                                print("No Migration")
+                            } else {
+                                newValue["isMyself"] = false
+                                newValue["byname"] =
+                                newValue["nameId"] = ""
+                            }
+                        }
                     })
                     // スケジュール情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
-                        // 超適当なマイグレーションいろんな人に怒られますよ、これ
-                        newValue!["startTime"] = nil
-                        newValue!["endTime"] = nil
-                        newValue!["rareWeapon"] = nil
+                        if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            // 超適当なマイグレーションいろんな人に怒られますよ、これ
+                            if let rawValue: String = oldValue["rule"] as? String,
+                               let mode: Mode = Mode(rawValue: rawValue) {
+                                newValue["rule"] = Common.Rule.REGULAR
+                                newValue["mode"] = mode == .REGULAR ? Common.Mode.REGULAR : Common.Mode.PRIVATE_CUSTOM
+                                print(rawValue, mode)
+                            }
+                            newValue["startTime"] = nil
+                            newValue["endTime"] = nil
+                            newValue["rareWeapon"] = nil
+                        }
                     })
                     // リザルト情報をアップデート
                     migration.enumerateObjects(ofType: RealmCoopResult.className(), { oldValue, newValue in

@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 import SplatNet3
 
 struct ResultLoadingView: View {
+    @Environment(\.isModalPresented) var isPresented
     @StateObject var session: Session = Session()
 
     var body: some View {
@@ -78,11 +79,13 @@ struct ResultLoadingView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
                         UIApplication.shared.dismiss()
+                        isPresented.wrappedValue.toggle()
                     })
                 } catch(_) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                         session.loginProgress.removeAll()
                         UIApplication.shared.dismiss()
+                        isPresented.wrappedValue.toggle()
                     })
                 }
             }

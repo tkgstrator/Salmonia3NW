@@ -69,6 +69,7 @@ struct ResultsView: View {
         })
         .fullScreen(isPresented: $isPresented, content: {
             ResultLoadingView()
+                .environment(\.isModalPresented, $isPresented)
         })
         .fullScreenCover(isPresented: $isFirstLaunch , content: {
             TutorialView()

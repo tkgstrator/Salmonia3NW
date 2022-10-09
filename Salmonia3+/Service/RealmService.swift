@@ -123,12 +123,34 @@ class RealmService {
     func save(_ result: SplatNet2.Result) {
         // スケジュール情報を取得, なければ作成する
         let schedule: RealmCoopSchedule = {
+            // 一致するスケジュールがあるか確認する
             if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
                 $0.stageId == result.schedule.stage &&
                 Array($0.weaponList) == result.schedule.weaponLists &&
                 $0.rule == result.schedule.rule &&
                 $0.mode == result.schedule.mode
             }) {
+                let dateFormatter: ISO8601DateFormatter = {
+                    let formatter: ISO8601DateFormatter = ISO8601DateFormatter()
+                    formatter.timeZone = TimeZone.current
+                    return formatter
+                }()
+                // スケジュールの開始時刻と終了時刻が保存されていなければ上書きする
+                if let startTime = result.schedule.startTime,
+                   let endTime = result.schedule.endTime,
+                   schedule.startTime == nil,
+                   schedule.endTime == nil
+                {
+                    if realm.isInWriteTransaction {
+                        schedule.startTime = dateFormatter.date(from: startTime)
+                        schedule.endTime = dateFormatter.date(from: endTime)
+                    } else {
+                        realm.beginWrite()
+                        schedule.startTime = dateFormatter.date(from: startTime)
+                        schedule.endTime = dateFormatter.date(from: endTime)
+                        try? realm.commitWrite()
+                    }
+                }
                 return schedule
             }
 

@@ -20,11 +20,15 @@ struct SchedulesView: View {
     var body: some View {
         List(content: {
             ForEach(schedules) { schedule in
-                NavigationLinker(destination: {
-                    EmptyView()
-                }, label: {
+                if let startTime = schedule.startTime {
+                    NavigationLinker(destination: {
+                        ScheduleStatsView(startTime: startTime)
+                    }, label: {
+                        ScheduleView(schedule: schedule)
+                    })
+                } else {
                     ScheduleView(schedule: schedule)
-                })
+                }
             }
         })
         .toolbar(content: {
