@@ -33,12 +33,17 @@ extension ButtonStyle where Self == NSOLikeButtonStyle {
 
 struct NSOCircleActionModifier: ViewModifier {
     let action: () -> Void
-    let localizedText: String
+    let localizedText: Text
     let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(localizedText: String, action: @escaping () -> Void) {
         self.action = action
-        self.localizedText = localizedText.sha256Hash
+        self.localizedText = Text(localizedText.sha256Hash)
+    }
+
+    init(localizedText: Text, action: @escaping () -> Void) {
+        self.action = action
+        self.localizedText = localizedText
     }
 
     func body(content: Content) -> some View {
@@ -51,7 +56,7 @@ struct NSOCircleActionModifier: ViewModifier {
                     .scaledToFit()
                     .foregroundColor(SPColor.Theme.SPOrange)
                     .overlay(content.padding(4))
-                Text(localizedText)
+                localizedText
                     .font(systemName: .Splatfont, size: 16)
                     .frame(height: 16)
                     .foregroundColor(.primary)
@@ -65,12 +70,17 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
     @State private var isPresented: Bool = false
 
     let destination: () -> T
-    let localizedText: String
+    let localizedText: Text
     let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
     init(localizedText: String, destination: @escaping () -> T) {
         self.destination = destination
-        self.localizedText = localizedText.sha256Hash
+        self.localizedText = Text(localizedText.sha256Hash)
+    }
+
+    init(localizedText: Text, destination: @escaping () -> T) {
+        self.destination = destination
+        self.localizedText = localizedText
     }
 
     func body(content: Content) -> some View {
@@ -86,7 +96,7 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
                         .scaledToFit()
                         .foregroundColor(SPColor.Theme.SPOrange)
                         .overlay(content.padding(4))
-                    Text(localizedText)
+                    localizedText
                         .font(systemName: .Splatfont, size: 16)
                         .frame(height: 16)
                         .foregroundColor(.primary)
@@ -103,6 +113,10 @@ extension View {
     }
 
     func actionCircleButton(localizedText: String, action: @escaping () -> Void) -> some View {
+        self.modifier(NSOCircleActionModifier(localizedText: localizedText, action: action))
+    }
+
+    func actionCircleButton(localizedText: Text, action: @escaping () -> Void) -> some View {
         self.modifier(NSOCircleActionModifier(localizedText: localizedText, action: action))
     }
 }

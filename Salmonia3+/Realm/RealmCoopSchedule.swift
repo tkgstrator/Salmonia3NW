@@ -19,7 +19,7 @@ class RealmCoopSchedule: Object {
     @Persisted var rule: Common.Rule
     @Persisted var mode: Common.Mode
 
-    convenience init(from schedule: CoopSchedule) {
+    convenience init(from schedule: CoopSchedule.Response) {
         self.init()
         self.startTime = schedule.startTime
         self.endTime = schedule.endTime

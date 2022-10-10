@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 import StoreKit
 import BetterSafariView
+import SplatNet3
 
 enum IconList {
     static let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
@@ -163,6 +164,29 @@ enum IconList {
                     destination: {
                         EmptyView()
                     })
+        }
+    }
+
+    struct Schedule: View {
+        @StateObject var session: Session = Session()
+        @AppStorage("CONFIG_APP_GET_SCHEDULE") var isEnabled: Bool = false
+
+        var body: some View {
+            Image(bundle: .CoopClearDangerRateMax)
+                .resizable()
+                .scaledToFit()
+                .actionCircleButton(
+                    localizedText: Text(bundle: .StageSchedule_Title),
+                    action: {
+                        Task {
+                            let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
+                            DispatchQueue.main.async(execute: {
+                                RealmService.shared.save(schedules)
+                            })
+                            isEnabled.toggle()
+                        }
+                    })
+                .disabled(isEnabled)
         }
     }
 

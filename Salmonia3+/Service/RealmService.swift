@@ -42,7 +42,7 @@ class RealmService {
     func getCoopRegularSchedule() {
         Task(priority: .background, operation: {
             let session: Session = Session()
-            let schedules: [CoopSchedule] = try await session.getCoopSchedule()
+            let schedules: [CoopSchedule.Response] = try await session.getCoopSchedule()
 //            let objects: [RealmCoopSchedule]
             print(schedules)
         })
@@ -80,14 +80,17 @@ class RealmService {
         _ = results.map({ save($0) })
     }
 
-    func save(_ schedules: [CoopSchedule]) {
+    /// スケジュールを書き込む
+    func save(_ schedules: [CoopSchedule.Response]) {
         for schedule in schedules {
             save(schedule)
         }
     }
 
-    private func save(_ schedule: CoopSchedule) {
-        // 抜けているステージ情報があるかどうか
+    /// ステージ情報を書き込む
+    /// コード自体はあっているので後でもっとより良いものに修正する
+    private func save(_ schedule: CoopSchedule.Response) {
+        /// 抜けているステージ情報があるかどうか
         if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
             // ステージが一致
             $0.stageId == schedule.stage &&
@@ -97,9 +100,12 @@ class RealmService {
             $0.rule == schedule.rule &&
             /// モードが一致している
             $0.mode == schedule.mode &&
-            /// 時刻情報が抜けている
-            $0.startTime == nil && $0.endTime == nil
+            /// 開始時刻が抜けている
+            $0.startTime == nil &&
+            /// 終了時刻が抜けている
+            $0.endTime == nil
         }) {
+            /// 旧バージョンで書き込まれたスケジュールなので上書きする
             if realm.isInWriteTransaction {
                 schedule.startTime = schedule.startTime
                 schedule.endTime = schedule.endTime
@@ -110,9 +116,10 @@ class RealmService {
                 }
             }
         }
-        // 追加されていないステージ情報があるかどうか
+
+        /// 追加されていないステージ情報があるかどうか
         guard let _ = realm.objects(RealmCoopSchedule.self).first(where: { $0.startTime == schedule.startTime }) else {
-            // 追加されていないステージがあればDBに書き込む
+            /// 追加されていないステージがあればDBに書き込む
             let schedule: RealmCoopSchedule = RealmCoopSchedule(from: schedule)
             save(schedule)
             return
@@ -123,7 +130,14 @@ class RealmService {
     func save(_ result: SplatNet2.Result) {
         // スケジュール情報を取得, なければ作成する
         let schedule: RealmCoopSchedule = {
-            // 一致するスケジュールがあるか確認する
+            /// データベースに既にリザルトのスケジュールがあるかを確認する
+            /// 本来は不要のはずなのだが、旧バージョンの方の救済のため
+            /// 緑ランダム編成等で一致する可能性があるが、そのような状況は極めて珍しい
+            /// 条件 いつものバイトで検索する
+            /// - ステージが一致
+            /// - ルールが一致
+            /// - モードが一致
+            /// - ブキが一致
             if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
                 $0.stageId == result.schedule.stage &&
                 Array($0.weaponList) == result.schedule.weaponLists &&
@@ -135,7 +149,9 @@ class RealmService {
                     formatter.timeZone = TimeZone.current
                     return formatter
                 }()
-                // スケジュールの開始時刻と終了時刻が保存されていなければ上書きする
+                /// スケジュールの開始時刻と終了時刻が保存されていなければ上書きする
+                /// ルールが一致しているのでここは必ずいつものバイトのスケジュールのみ
+                /// いつものバイトにもかかわらず、開始時刻と終了時刻がないのはおかしいので上書き
                 if let startTime = result.schedule.startTime,
                    let endTime = result.schedule.endTime,
                    schedule.startTime == nil,
@@ -151,9 +167,11 @@ class RealmService {
                         try? realm.commitWrite()
                     }
                 }
+                /// 一致したスケジュールを返す
                 return schedule
             }
 
+            /// なければ新しいリザルトを追加してそれを返す
             let schedule: RealmCoopSchedule = RealmCoopSchedule(from: result)
             if realm.isInWriteTransaction {
                 realm.add(schedule)
@@ -166,7 +184,9 @@ class RealmService {
             return schedule
         }()
 
-        // リザルト存在チェック(Listへのappendではプライマリーキー制約が判定されないので)
+        /// リザルト存在チェック
+        /// Listへのappendではプライマリーキー制約が判定されない
+        /// プライマリーキーが重複していれば既に保存されているので書き込まなくて良い
         if realm.object(ofType: RealmCoopResult.self, forPrimaryKey: result.id) == nil {
             // リザルト作成
             let object: RealmCoopResult = RealmCoopResult(from: result)

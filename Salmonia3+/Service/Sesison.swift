@@ -162,7 +162,7 @@ class Session: SplatNet3, ObservableObject {
         })
 
         do {
-            let schedules: [CoopSchedule] = try await getCoopSchedule()
+            let schedules: [CoopSchedule.Response] = try await getCoopSchedule()
 
             DispatchQueue.main.async(execute: {
                 RealmService.shared.save(schedules)

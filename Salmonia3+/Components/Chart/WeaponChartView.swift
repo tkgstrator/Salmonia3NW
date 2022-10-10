@@ -27,9 +27,9 @@ struct WeaponChartView: View {
     private var rateValue: Int?
 
     let colors: [Color] = [
-        SPColor.SplatNet3.SPYellow,
-        SPColor.SplatNet3.SPOrange,
         SPColor.SplatNet3.SPPink,
+        SPColor.SplatNet3.SPOrange,
+        SPColor.SplatNet3.SPYellow,
         SPColor.SplatNet3.SPSalmonGreen,
     ]
 

@@ -20,6 +20,7 @@ struct UserView: View {
                     IconList.Appearance()
                     IconList.Setting()
                     IconList.Privacy()
+                    IconList.Schedule()
                     IconList.Debug()
 #if DEBUG
                     IconList.Status()
