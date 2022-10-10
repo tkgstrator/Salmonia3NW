@@ -48,7 +48,7 @@ struct ResultsView: View {
             ForEach(schedules) { schedule in
                 if !schedule.results.isEmpty {
                     ScheduleView(schedule: schedule)
-                    ForEach(schedule.results) { result in
+                    ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
                         NavigationLinker(destination: {
                             ResultTabView(results: schedule.results)
                                 .environment(\.selection, .constant(result.id))
