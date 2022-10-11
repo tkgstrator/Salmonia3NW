@@ -92,13 +92,17 @@ final class StatsService: ObservableObject {
             return []
         }()
 
-        self.shiftsWorked = results.count
-        self.waveCounts = 0
-        self.clearRatio = 0
-        self.clearWave = 0
-        self.bossDefeatedRatio = 0
-        self.bossCount = 0
-        self.bossKillCount = 0
+        let shiftsWorked: Int = results.count
+        let shiftsClearWorked: Int = results.filter({ $0.isClear }).count
+        self.shiftsWorked = shiftsWorked
+        self.waveCounts = results.map({ $0.waves }).count
+        self.clearRatio = Double(shiftsClearWorked) / Double(shiftsWorked)
+        self.clearWave = Double(results.map({ $0.waves.count }).reduce(0, +)) / Double(results.count)
+        let bossCount: Int = results.compactMap({ $0.isBossDefeated }).count
+        let bossKillCount: Int = results.filter({ $0.isBossDefeated == true}).count
+        self.bossDefeatedRatio = Double(bossKillCount) / Double(bossCount)
+        self.bossCount = bossCount
+        self.bossKillCount = bossKillCount
         self.specialCounts = {
             // 支給されたスペシャル一覧
             let suppliedSpecialList: [SpecialType] = players.compactMap({ $0.specialId })
@@ -108,7 +112,6 @@ final class StatsService: ObservableObject {
         self.weaponCounts = {
             // 支給されたブキ一覧
             let suppliedWeaponList: [WeaponType] = players.flatMap({ $0.weaponList })
-            print(suppliedWeaponList, Set(suppliedWeaponList))
             return weaponList.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
         }()
         self.failureWaveCount = Array(repeating: 0, count: 4)
@@ -172,6 +175,6 @@ final class StatsService: ObservableObject {
         self.waves = Array(repeating: Array(repeating: WaveStats(count: 0, ikuraStats: stats, goldenIkuraStats: stats, assistIkuraStats: stats), count: 9), count: 3)
         self.maxGradePoint = results.max(ofProperty: "gradePoint")
         self.gradePointHistory = results.compactMap({ $0.gradePoint }).map({ Double($0) })
-        print(self.weaponCounts)
+        dump(self)
     }
 }

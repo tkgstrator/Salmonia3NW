@@ -14,17 +14,9 @@ struct WeaponChartView: View {
     @ObservedObject var data: DoughnutChartData
     @State private var scale: Double = .zero
     public var title: Text
-    public var legend: String?
-    public var style: ChartStyle
-    public var darkModeStyle: ChartStyle
     public let weaponList: [WeaponType]
 
-    public var formSize:CGSize
-    public var dropShadow: Bool
     public var valueSpecifier: String
-
-    var frame = CGSize(width: 180, height: 120)
-    private var rateValue: Int?
 
     let colors: [Color] = [
         SPColor.SplatNet3.SPPink,
@@ -37,43 +29,25 @@ struct WeaponChartView: View {
         data: [Int]?,
         weaponList: [WeaponType],
         title: Text,
-        legend: String? = nil,
-        style: ChartStyle = Styles.lineChartStyleOne,
-        form: CGSize? = ChartForm.extraLarge,
-        rateValue: Int? = 14 ,
-        dropShadow: Bool? = true,
         valueSpecifier: String? = "%.1f") {
             self.data = DoughnutChartData(values: data)
-            self.title = title
-            self.legend = legend
-            self.style = style
-            self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
-            self.formSize = form!
-            frame = CGSize(width: self.formSize.width, height: self.formSize.height * 0.5)
-            self.dropShadow = dropShadow!
-            self.valueSpecifier = valueSpecifier!
-            self.rateValue = rateValue
             self.weaponList = weaponList
+            self.title = title
+            self.valueSpecifier = valueSpecifier!
         }
 
     var body: some View {
         ZStack(alignment: .center, content: {
             RoundedRectangle(cornerRadius: 20)
-                .fill(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
-                .frame(width: frame.width, height: 240, alignment: .center)
-                .shadow(color: self.style.dropShadowColor, radius: self.dropShadow ? 4 : 0)
-            VStack(alignment: .leading){
+                .fill(self.colorScheme == .dark ? .black : .white)
+                .shadow(color: .primary, radius: 2, x: 0, y: 0)
+            VStack(alignment: .leading, content: {
                 VStack(alignment: .leading, spacing: 8, content: {
                     self.title
-                        .font(.title)
+                        .font(.title3)
                         .bold()
                         .lineLimit(1)
-                        .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.textColor : self.style.textColor)
-                    if let legend = legend {
-                        Text(legend)
-                            .font(.callout)
-                            .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.legendTextColor : self.style.legendTextColor)
-                    }
+                        .foregroundColor(.primary)
                 })
                 .padding([.leading, .top])
                 Spacer()
@@ -91,12 +65,13 @@ struct WeaponChartView: View {
                     Doughnut(data: data)
                 })
                 .font(.callout)
-                .padding([.horizontal, .top, .bottom])
-                .frame(width: frame.width, height: 180)
+                .padding([.horizontal, .bottom])
+                .padding(.top, 8)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
-            .frame(width: self.formSize.width, height: self.formSize.height)
+            })
         })
+        .padding([.horizontal])
+        .aspectRatio(340/200, contentMode: .fit)
     }
 }
 

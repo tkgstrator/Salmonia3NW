@@ -74,6 +74,9 @@
 		10343BC028EF127500D0C78F /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10343BBF28EF127500D0C78F /* PullToRefresh.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
+		1098543628F5D29000E1E22F /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543528F5D29000E1E22F /* LineChartView.swift */; };
+		109A5D5028F561C1001F8724 /* ColumnChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109A5D4F28F561C1001F8724 /* ColumnChartView.swift */; };
+		109A5D5328F5C237001F8724 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 109A5D5228F5C237001F8724 /* SwiftUICharts */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -90,7 +93,6 @@
 		10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
-		10E3191628F2066F009C6BBC /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3191528F2066F009C6BBC /* SwiftUICharts */; };
 		10E3191928F206B6009C6BBC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191828F206B6009C6BBC /* ChartView.swift */; };
 		10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */; };
 		10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191C28F22A38009C6BBC /* SingleChartView.swift */; };
@@ -205,6 +207,9 @@
 		10343BBF28EF127500D0C78F /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
+		1098543528F5D29000E1E22F /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		109A5D4F28F561C1001F8724 /* ColumnChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnChartView.swift; sourceTree = "<group>"; };
+		109A5D5128F5BBE7001F8724 /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ChartView; path = ../ChartView; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -249,7 +254,7 @@
 				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
 				10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1009735628E4AC280032BB84 /* FirebaseAuth in Frameworks */,
-				10E3191628F2066F009C6BBC /* SwiftUICharts in Frameworks */,
+				109A5D5328F5C237001F8724 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				10A6A18428B7A3D60075563F /* SplatNet */,
+				109A5D5128F5BBE7001F8724 /* ChartView */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -532,6 +538,8 @@
 				10E3192028F2683C009C6BBC /* Doughnut.swift */,
 				10E3191E28F2602A009C6BBC /* CircleChartView.swift */,
 				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
+				109A5D4F28F561C1001F8724 /* ColumnChartView.swift */,
+				1098543528F5D29000E1E22F /* LineChartView.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -574,7 +582,7 @@
 				1009735328E4AC280032BB84 /* FirebaseAnalytics */,
 				1009735528E4AC280032BB84 /* FirebaseAuth */,
 				10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */,
-				10E3191528F2066F009C6BBC /* SwiftUICharts */,
+				109A5D5228F5C237001F8724 /* SwiftUICharts */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -666,7 +674,6 @@
 				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -764,6 +771,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A6A19A28B7AC240075563F /* SchedulesView.swift in Sources */,
+				109A5D5028F561C1001F8724 /* ColumnChartView.swift in Sources */,
 				101726FB28F18DE60040F88B /* StatsService.swift in Sources */,
 				10A0ACB628DD42A4008B332A /* IconList.swift in Sources */,
 				10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */,
@@ -821,6 +829,7 @@
 				100E875F28D4E47B007FCF3C /* Hanger.swift in Sources */,
 				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
+				1098543628F5D29000E1E22F /* LineChartView.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10E3191928F206B6009C6BBC /* ChartView.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
@@ -1022,7 +1031,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1056,7 +1065,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1241,14 +1250,6 @@
 				version = 10.30.0;
 			};
 		};
-		10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = exactVersion;
-				version = 1.5.5;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1276,6 +1277,10 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SplatNet3;
 		};
+		109A5D5228F5C237001F8724 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUICharts;
+		};
 		10A6A19128B7A7130075563F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */;
@@ -1295,11 +1300,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		10E3191528F2066F009C6BBC /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 10E3191428F2066E009C6BBC /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

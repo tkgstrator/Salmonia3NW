@@ -19,7 +19,27 @@ enum MaskType: Int, CaseIterable, Codable {
     case WAVE_BACKGROUND
 }
 
+enum ButtonType: String, CaseIterable, Codable {
+    case Arrows
+    case Chart
+    case Circle
+    case Flag
+    case GesoTown
+    case GoldenIkura
+    case Ikura
+    case Salmon
+    case Solo
+    case Squid
+    case Team
+    case Update
+    case Weapon
+}
+
 extension Image {
+    init(bundle :ButtonType) {
+        self.init("ButtonType/\(bundle.rawValue)", bundle: .main)
+    }
+
     init(bundle: ResultType) {
         self.init("ResultType/\(bundle.rawValue)", bundle: .main)
     }

@@ -16,7 +16,7 @@ struct ChartView: View {
                 LineChartView(data: [8,23,54,32], title: "Title", legend: "Legendary", form: ChartForm.medium, dropShadow: false)
                 LineChartView(data: [8,23,54,32], title: "Title", legend: "Legendary", form: ChartForm.medium, dropShadow: false)
                 BarChartView(data: ChartData(points: [8,23,54,32,12,37,7,23,43]), title: "Title", legend: "Legendary", form: ChartForm.medium, dropShadow: false, animatedToBack: true)
-                SingleChartView(max: 100, min: 30, avg: 45, title: Text(bundle: .CoopHistory_RescueCount))
+                LineChartView(data: [8,23,54,32], title: "Title", legend: "Legendary", form: ChartForm.extraLarge, dropShadow: true)
             })
         })
     }

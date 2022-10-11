@@ -22,7 +22,7 @@ struct LoginProgress: Identifiable {
             if let value: SPEndpoint = SPEndpoint(rawValue: path) {
                 return value
             }
-            if path == "static/js/main.cf1388fb.js" {
+            if path.contains("static/js") {
                 return .WEB_VERSION
             }
             return .UNKNOWN
