@@ -11,7 +11,7 @@ import SwiftUI
 /// アプリ設定(将来的に書き直したい)
 class APPConfiguration: ObservableObject {
     /// アプリのカラーテーマ
-    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
     
     /// アプリのカラーテーマ
     @AppStorage("CONFIG_COLOR_SCHEME") var colorScheme: Bool = false

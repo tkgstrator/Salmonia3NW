@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 import StoreKit
 import BetterSafariView
 import SplatNet3
@@ -17,16 +16,17 @@ enum IconList {
     struct NSO: View {
         @StateObject var session: Session = Session()
         @State private var isPresented: Bool = false
+        @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
+
 
         var body: some View {
             if let account = session.account {
                 Button(action: {
                     IconList.generator.notificationOccurred(.success)
-                    isPresented.toggle()
+                    isAppDeveloperMode.toggle()
                 }, label: {
                     VStack(alignment: .center, spacing: nil, content: {
                         Image(bundle: .User)
-//                        WebImage(url: account.thumbnailURL)
                             .resizable()
                             .scaledToFit()
                             .padding()
@@ -47,8 +47,6 @@ enum IconList {
     }
 
     struct Debug: View {
-        @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
-
         var body: some View {
             Image(bundle: .Mission_Lv00)
                 .resizable()
@@ -58,8 +56,6 @@ enum IconList {
                     destination: {
                         DebugView()
                     })
-                .disabled(!isAppDeveloperMode)
-                .opacity(isAppDeveloperMode ? 1.0 : 0.0)
         }
     }
 
@@ -67,9 +63,10 @@ enum IconList {
         @State private var isPresented: Bool = false
 
         var body: some View {
-            Image(bundle: .CatalogueLevel_Lv00)
+            Image(bundle: .Privacy)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .actionCircleButton(
                     localizedText: "TITLE_PRIVACY",
                     action: {
@@ -92,17 +89,12 @@ enum IconList {
                 .actionCircleButton(
                     localizedText: "TITLE_REVIEW",
                     action: {
-                        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                            SKStoreReviewController.requestReview(in: scene)
+                        if let scene = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first(where: { $0.activationState == .foregroundActive }) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                SKStoreReviewController.requestReview(in: scene)
+                            })
                         }
                     })
-                .simultaneousGesture(
-                    LongPressGesture(minimumDuration: 5, maximumDistance: 10).onEnded({ _ in
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            isAppDeveloperMode.toggle()
-                        }
-                    })
-                )
         }
     }
 
@@ -230,7 +222,7 @@ enum IconList {
     }
 
     struct Accounts: View {
-        @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+        @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
         @State private var isPresented: Bool = false
 
         var body: some View {

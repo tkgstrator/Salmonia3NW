@@ -10,10 +10,11 @@ import SplatNet3
 import RealmSwift
 
 struct UserView: View {
+    @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = false
 
     var body: some View {
         ScrollView(content: {
-            GeometryReader(content: { geometry in
+//            GeometryReader(content: { geometry in
                 LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
                     IconList.NSO()
                     IconList.Review()
@@ -21,7 +22,9 @@ struct UserView: View {
                     IconList.Setting()
                     IconList.Privacy()
                     IconList.Schedule()
-                    IconList.Debug()
+                    if isAppDeveloperMode {
+                        IconList.Debug()
+                    }
 #if DEBUG
                     IconList.Status()
                     IconList.Chart()
@@ -30,7 +33,7 @@ struct UserView: View {
 #endif
                 })
             })
-        })
+//        })
         .navigationTitle(Text(bundle: .Common_Home))
         .navigationBarTitleDisplayMode(.inline)
     }

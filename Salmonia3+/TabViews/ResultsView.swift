@@ -32,7 +32,7 @@ private struct ResultsEmpty: View {
 }
 
 struct ResultsView: View {
-    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
     @StateObject var session: Session = Session()
     @ObservedResults(
         RealmCoopSchedule.self,
@@ -57,12 +57,6 @@ struct ResultsView: View {
                         })
                     }
                 }
-            }
-        })
-        .onAppear(perform: {
-            guard let account = session.account else {
-                isFirstLaunch.toggle()
-                return
             }
         })
         .onChange(of: selection, perform: { newValue in

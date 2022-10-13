@@ -76,12 +76,36 @@ extension RealmCoopSchedule: Identifiable {
     }
 }
 
-//extension RealmCoopSchedule {
-//    static func == (lhs: RealmCoopSchedule, rhs: RealmCoopSchedule) -> Bool {
-//
-//    }
-//}
+extension RealmCoopSchedule {
+    /// 同じシフトであるとの判定条件
+    override func isEqual(_ object: Any?) -> Bool {
+        if let target: RealmCoopSchedule = object as? RealmCoopSchedule {
+            return self.stageId == target.stageId &&
+            self.rule == target.rule &&
+            self.mode == target.mode &&
+            Array(self.weaponList) == Array(target.weaponList) &&
+            self.startTime == target.startTime &&
+            self.endTime == target.endTime
+        }
+        return false
+    }
 
+    /// 同じシフトであるとの判定条件
+    static func == (lhs: RealmCoopSchedule, rhs: RealmCoopSchedule) -> Bool {
+        /// ステージが同じ
+        lhs.stageId == rhs.stageId &&
+        /// ルールが同じ
+        lhs.rule == rhs.rule &&
+        /// モードが同じ
+        lhs.mode == rhs.mode &&
+        /// 支給されたブキが同じ
+        Array(lhs.weaponList) == Array(rhs.weaponList) &&
+        /// 開始時刻が同じ
+        lhs.startTime == rhs.startTime &&
+        /// 終了時刻が同じ
+        lhs.endTime == rhs.endTime
+    }
+}
 
 extension Common.Rule: PersistableEnum {}
 

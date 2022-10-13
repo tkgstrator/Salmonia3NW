@@ -10,7 +10,6 @@ import SplatNet3
 
 struct DeleteConfirmView: View {
     @StateObject var session: Session = Session()
-    @AppStorage("IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
     @State private var isPresented: Bool = false
 
     var body: some View {
