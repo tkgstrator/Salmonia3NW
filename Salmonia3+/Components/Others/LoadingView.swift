@@ -62,10 +62,13 @@ struct LoadingView: View {
                 Task {
                     do {
                         try await session.getCookie(code: code, verifier: verifier)
-                        onSuccess()
-                        dismiss()
-                    } catch {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                            onSuccess()
+                            session.loginProgress.removeAll()
+                            dismiss()
+                        })
+                    } catch {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                             // ログインが失敗したらすべてのデータを消去
                             session.loginProgress.removeAll()
                             dismiss()

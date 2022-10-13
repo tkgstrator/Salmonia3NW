@@ -82,7 +82,7 @@ struct ResultLoadingView: View {
                         isPresented.wrappedValue.toggle()
                     })
                 } catch(_) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                         session.loginProgress.removeAll()
                         UIApplication.shared.dismiss()
                         isPresented.wrappedValue.toggle()

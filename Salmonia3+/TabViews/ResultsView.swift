@@ -59,6 +59,12 @@ struct ResultsView: View {
                 }
             }
         })
+        .onAppear(perform: {
+            guard let account = session.account else {
+                isFirstLaunch.toggle()
+                return
+            }
+        })
         .onChange(of: selection, perform: { newValue in
             $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
         })

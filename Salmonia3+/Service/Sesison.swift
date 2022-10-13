@@ -94,7 +94,7 @@ class Session: SplatNet3, ObservableObject {
             success()
             /// 最初のリクエストと現在リクエストのチェック
             if let first: LoginProgress = loginProgress.first {
-                if first.path != .COOP_SUMMARY && progress.path == .BULLET_TOKEN {
+                if first.path != .COOP_SCHEDULE && progress.path == .BULLET_TOKEN {
                     dismiss()
                 }
             }
@@ -226,7 +226,7 @@ class Session: SplatNet3, ObservableObject {
 
     /// スタックを全削除
     private func dismiss() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
             self.loginProgress.removeAll()
         })
     }
