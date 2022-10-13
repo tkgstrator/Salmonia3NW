@@ -52,7 +52,8 @@ struct ContentView: View {
                 Label(title: {
                     Text(bundle: .Common_Home)
                 }, icon: {
-                    Image("TabType/Me", bundle: .main)
+                    Image(bundle: .Home)
+                        .renderingMode(.template)
                 })
             }
             .tag(2)

@@ -54,34 +54,29 @@ struct GrizzcoPointCard: View {
                 ZStack(alignment: .center, content: {
                     Rectangle()
                         .fill(SPColor.SplatNet2.SPYellow)
-                    VStack(alignment: .center, spacing: 8, content: {
-                        RoundedRectangle(cornerRadius: 14)
-                            .foregroundColor(SPColor.SplatNet2.SPBackground)
-                            .aspectRatio(120/40, contentMode: .fit)
-                            .padding(.top, 8)
-                            .overlay(
-                                VStack(alignment: .leading, spacing: nil, content: {
-                                    Text(bundle: .CoopHistory_RegularPoint)
-                                        .foregroundColor(SPColor.SplatNet2.SPYellow)
-                                        .font(systemName: .Splatfont2, size: 14)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                    Text(String(format: "%dp", data.regularPoint))
-                                        .foregroundColor(SPColor.SplatNet2.SPYellow)
-                                        .font(systemName: .Splatfont2, size: 20)
-                                        .frame(maxWidth: .infinity, alignment: .trailing)
-                                })
-                                .padding(.horizontal, 8)
-                                .padding(.top)
-                            )
+                    VStack(alignment: .center, spacing: 6, content: {
+                        VStack(alignment: .leading, spacing: nil, content: {
+                            Text(bundle: .CoopHistory_RegularPoint)
+                                .foregroundColor(SPColor.SplatNet2.SPYellow)
+                                .font(systemName: .Splatfont2, size: 14)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(String(format: "%dp", data.regularPoint))
+                                .foregroundColor(SPColor.SplatNet2.SPYellow)
+                                .font(systemName: .Splatfont2, size: 20)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                        })
+                        .padding(8)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(SPColor.SplatNet2.SPBackground))
+                        .padding(.top, 8)
                         Group(content: {
                             HStack(alignment: .top, spacing: nil, content: {
                                 Text(bundle: .CoopHistory_PlayCount)
-                                    .font(systemName: .Splatfont2, size: 14)
+                                    .font(systemName: .Splatfont2, size: 12)
                                     .foregroundColor(.black)
                                 Spacer()
                                 Text(String(format: "%d", data.playCount))
                                     .foregroundColor(.black)
-                                    .font(systemName: .Splatfont2, size: 16)
+                                    .font(systemName: .Splatfont2, size: 14)
                             })
                             Divider()
                                 .frame(height: 2)
@@ -92,10 +87,10 @@ struct GrizzcoPointCard: View {
                                 HStack(alignment: .top, spacing: nil, content: {
                                     Text(bundle: value.1)
                                         .foregroundColor(.black)
-                                        .font(systemName: .Splatfont2, size: 14)
+                                        .font(systemName: .Splatfont2, size: 12)
                                     Spacer()
                                     Text(String(format: "%d", value.0))
-                                        .font(systemName: .Splatfont2, size: 16)
+                                        .font(systemName: .Splatfont2, size: 14)
                                         .foregroundColor(.black)
                                 })
                                 if value.1 != .CoopHistory_TotalPoint {
@@ -113,7 +108,6 @@ struct GrizzcoPointCard: View {
         })
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .primary, radius: 2, x: 0, y: 0)
-        .aspectRatio(120/200, contentMode: .fit)
     }
 }
 
@@ -132,15 +126,24 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
         gradePointMax: 999,
         failureWaves: (clear: 999, wave1: 99, wave2: 99, wave3: 99)
     )
+    static let scale: ScaleData = ScaleData(gold: 100, silver: 100, bronze: 100)
+
+    enum XcodePreviewDevice: String, CaseIterable {
+        case iPhone13Pro = "iPhone 13 Pro"
+        case iPadPro = "iPad Pro"
+    }
+
     static var previews: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 240), alignment: .top), count: 2), content: {
-            LazyVStack(alignment: .center, spacing: nil, content: {
-                AbstructView(data: record)
-//                ScaleChartView()
+        ForEach(XcodePreviewDevice.allCases, id:\.rawValue) { device in
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 220), alignment: .top), count: 2), content: {
+                LazyVStack(alignment: .center, spacing: nil, content: {
+                    AbstructView(data: record)
+                    ScaleChartView(data: scale)
+                })
+                GrizzcoPointCard(data: data)
             })
-            GrizzcoPointCard(data: data)
-        })
-        .previewLayout(.fixed(width: 600, height: 800))
-        .preferredColorScheme(.dark)
+            .previewDevice(PreviewDevice.init(rawValue: device.rawValue))
+            .preferredColorScheme(.dark)
+        }
     }
 }

@@ -33,6 +33,14 @@ enum ButtonType: String, CaseIterable, Codable {
     case Team
     case Update
     case Weapon
+    case LineChart
+    case Eye
+    case EyeSlash
+    case Defeated
+    case Wear
+    case Review
+    case Home
+    case User
 }
 
 extension Image {

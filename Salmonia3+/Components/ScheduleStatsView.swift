@@ -20,9 +20,10 @@ struct ScheduleStatsView: View {
 
     var body: some View {
         ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 240), alignment: .top), count: 2), content: {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 220), alignment: .top), count: 2), content: {
                 LazyVStack(alignment: .center, spacing: nil, content: {
                     AbstructView(data: stats.abstructData)
+                    Spacer()
                     ScaleChartView(data: stats.scaleData)
                 })
                 GrizzcoPointCard(data: stats.grizzcoPointData)

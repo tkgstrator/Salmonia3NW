@@ -25,9 +25,12 @@ enum IconList {
                     isPresented.toggle()
                 }, label: {
                     VStack(alignment: .center, spacing: nil, content: {
-                        WebImage(url: account.thumbnailURL)
+                        Image(bundle: .User)
+//                        WebImage(url: account.thumbnailURL)
                             .resizable()
                             .scaledToFit()
+                            .padding()
+                            .background(NSOCircle().fill(SPColor.SplatNet2.SPOrange))
                             .clipShape(NSOCircle())
                         Text(account.nickname)
                             .font(systemName: .Splatfont2, size: 14)
@@ -82,9 +85,10 @@ enum IconList {
         @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
 
         var body: some View {
-            Image(bundle: .WinCount_Tcl_Def_Lv00)
+            Image(bundle: .Review)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .actionCircleButton(
                     localizedText: "TITLE_REVIEW",
                     action: {
@@ -104,9 +108,10 @@ enum IconList {
 
     struct Setting: View {
         var body: some View {
-            Image(bundle: .Mission_Lv02)
+            Image(bundle: .Defeated)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .navigationCircleButton(
                     localizedText: "TITLE_ERASE",
                     destination: {
@@ -117,9 +122,10 @@ enum IconList {
 
     struct Appearance: View {
         var body: some View {
-            Image(bundle: .Mission_Lv03)
+            Image(bundle: .Wear)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .navigationCircleButton(
                     localizedText: "TITLE_APPEARANCE",
                     destination: {
@@ -156,9 +162,10 @@ enum IconList {
 
     struct Chart: View {
         var body: some View {
-            Image(bundle: .WinCount_Tcl_Atk_Lv00)
+            Image(bundle: .LineChart)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .navigationCircleButton(
                     localizedText: "TITLE_CHART",
                     destination: {
@@ -169,32 +176,35 @@ enum IconList {
 
     struct Schedule: View {
         @StateObject var session: Session = Session()
-        @AppStorage("CONFIG_APP_GET_SCHEDULE") var isEnabled: Bool = false
+        @State private var isPresented: Bool = false
 
         var body: some View {
-            Image(bundle: .CoopClearDangerRateMax)
+            Image(bundle: .Arrows)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .actionCircleButton(
                     localizedText: Text(bundle: .StageSchedule_Title),
                     action: {
-                        Task {
-                            let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
-                            DispatchQueue.main.async(execute: {
-                                RealmService.shared.save(schedules)
-                            })
-                            isEnabled.toggle()
-                        }
+                        isPresented.toggle()
                     })
-//                .disabled(isEnabled)
+                .alert(isPresented: $isPresented, title: Text(bundle: .StageSchedule_Title), message: Text(bundle: .Widgets_Loading), confirm: {
+                    Task {
+                        let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
+                        DispatchQueue.main.async(execute: {
+                            RealmService.shared.save(schedules)
+                        })
+                    }
+                })
         }
     }
 
     struct Erase: View {
         var body: some View {
-            Image(bundle: .Mission_Lv02)
+            Image(bundle: .Defeated)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .navigationCircleButton(
                     localizedText: "TITLE_ERASE",
                     destination: {
@@ -240,39 +250,47 @@ enum IconList {
 struct AlertModifier: ViewModifier {
     @Binding var isPresented: Bool
     let confirm: () -> Void
+    let title: Text
+    let message: Text
 
-    init(isPresented: Binding<Bool>, confirm: @escaping () -> Void) {
+    init(isPresented: Binding<Bool>, title: Text, message: Text, confirm: @escaping () -> Void) {
         self._isPresented = isPresented
         self.confirm = confirm
+        self.title = title
+        self.message = message
     }
 
     func body(content: Content) -> some View {
         content
-            .alert(Text(localizedText: "TITLE_CONFIRM_DANGER"), isPresented: $isPresented) {
+            .alert(self.title, isPresented: $isPresented) {
                 Button(role: .destructive, action: {
                     confirm()
                 }, label: {
                     Text(bundle: .Common_Decide)
                 })
             } message: {
-                Text(localizedText: "DESC_DANGER_ERASE")
+                self.message
             }
     }
 }
 
 extension View {
     /// アラートで許可を押した場合に指定した処理を実行
-    func alert(isPresented: Binding<Bool>, confirm: @escaping () -> Void) -> some View {
-        self.modifier(AlertModifier(isPresented: isPresented, confirm: confirm))
+    func alert(
+        isPresented: Binding<Bool>,
+        title: Text = Text(localizedText: "TITLE_CONFIRM_DANGER"),
+        message: Text = Text(localizedText: "DESC_DANGER_ERASE"),
+        confirm: @escaping () -> Void) -> some View {
+        self.modifier(AlertModifier(isPresented: isPresented, title: title, message: message, confirm: confirm))
     }
 }
 
 struct IconList_Previews: PreviewProvider {
     static var previews: some View {
         UserView()
-            .previewLayout(.fixed(width: 400, height: 300))
+            .previewLayout(.fixed(width: 400, height: 600))
         UserView()
-            .previewLayout(.fixed(width: 400, height: 300))
+            .previewLayout(.fixed(width: 400, height: 600))
             .preferredColorScheme(.dark)
     }
 }
