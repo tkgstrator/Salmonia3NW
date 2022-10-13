@@ -10,8 +10,7 @@ import SplatNet3
 import RealmSwift
 
 struct ContentView: View {
-    /// モーダル表示かどうかのフラグ
-    @Environment(\.isModalPresented) var isModalPresented
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
 
@@ -57,6 +56,9 @@ struct ContentView: View {
                 })
             }
             .tag(2)
+        })
+        .fullScreenCover(isPresented: $isFirstLaunch , content: {
+            TutorialView()
         })
         .accentColor(.orange)
         .tabViewStyle(.automatic)

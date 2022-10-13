@@ -126,21 +126,30 @@ class RealmService {
 
     /// リザルト一件書き込み
     func save(_ result: SplatNet2.Result) {
-        /// リザルトからスケジュールを生成
-        let resultSchedule: RealmCoopSchedule = RealmCoopSchedule(from: result)
+        /// スケジュールを生成
+        let target: RealmCoopSchedule = RealmCoopSchedule(from: result)
+        /// リザルト作成
+        let object: RealmCoopResult = RealmCoopResult(from: result)
 
         /// 書き込むべきスケジュール
-        guard let schedule: RealmCoopSchedule = realm.objects(RealmCoopSchedule.self).first(where: { $0 == resultSchedule }) else {
+        guard let schedule: RealmCoopSchedule = realm.objects(RealmCoopSchedule.self).first(where: { $0 == target }) else {
+            /// ないということはプライベートバイトなのでスケジュールとリザルトを書き込む
+            if realm.isInWriteTransaction {
+                realm.add(target)
+                target.results.append(object)
+            } else {
+                realm.beginWrite()
+                realm.add(target)
+                target.results.append(object)
+                try? realm.commitWrite()
+            }
             return
         }
 
         /// リザルト存在チェック
         /// Listへのappendではプライマリーキー制約が判定されない
         /// プライマリーキーが重複していれば既に保存されているので書き込まなくて良い
-        if let _ = realm.object(ofType: RealmCoopResult.self, forPrimaryKey: result.id) {
-            // リザルト作成
-            let object: RealmCoopResult = RealmCoopResult(from: result)
-
+        guard let _ = realm.object(ofType: RealmCoopResult.self, forPrimaryKey: result.id) else {
             // リザルト書き込み
             if realm.isInWriteTransaction {
                 schedule.results.append(object)
@@ -149,6 +158,7 @@ class RealmService {
                 schedule.results.append(object)
                 try? realm.commitWrite()
             }
+            return
         }
     }
 

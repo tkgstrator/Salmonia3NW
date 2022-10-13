@@ -66,46 +66,6 @@ private struct TutorialSignIn: View {
                 .scaledToFit()
                 .frame(width: 140, alignment: .center)
                 .position(geometry.center)
-            #if DEBUG
-            VStack(content: {
-                Button(action: {
-                    isFirstLaunch.toggle()
-                }, label: {
-                    Text("デバッグの強制エラー対策")
-                        .fontWeight(.bold)
-                        .frame(width: 300, height: 60, alignment: .center)
-                        .foregroundColor(SPColor.Theme.SPOrange)
-                        .background(.white)
-                        .cornerRadius(30)
-                })
-                Button(action: {
-                    isPresented.toggle()
-                }, label: {
-                    Text(localizedText: "BUTTON_SIGN_IN")
-                        .fontWeight(.bold)
-                        .frame(width: 300, height: 60, alignment: .center)
-                        .foregroundColor(SPColor.Theme.SPOrange)
-                        .background(.white)
-                        .cornerRadius(30)
-                })
-            })
-            .position(x: geometry.center.x, y: geometry.height - 100)
-            .authorize(isPresented: $isPresented, completion: { result in
-                switch result {
-                case .success((let code, let verifier)):
-                    self.code = code
-                    self.verifier = verifier
-                    isModalPresented.toggle()
-                case .failure(let error):
-                    print(error)
-                }
-            })
-            .fullScreen(isPresented: $isModalPresented, content: {
-                LoadingView(code: $code, verifier: $verifier, onSuccess: {
-                    isFirstLaunch.toggle()
-                })
-            })
-            #else
             Button(action: {
                 isPresented.toggle()
             }, label: {
@@ -132,7 +92,6 @@ private struct TutorialSignIn: View {
                     isFirstLaunch.toggle()
                 })
             })
-            #endif
         })
     }
 }

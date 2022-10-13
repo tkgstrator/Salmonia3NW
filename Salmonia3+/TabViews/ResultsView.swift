@@ -32,7 +32,6 @@ private struct ResultsEmpty: View {
 }
 
 struct ResultsView: View {
-    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
     @StateObject var session: Session = Session()
     @ObservedResults(
         RealmCoopSchedule.self,
@@ -40,8 +39,7 @@ struct ResultsView: View {
         sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
     ) var schedules
     @State private var selection: ModeType = ModeType.CoopHistory_Regular
-    @State private var isPresented: Bool = false
-    @State private var isExpanded: Bool = false
+    @State private var isModalPresented: Bool = false
 
     var body: some View {
         List(content: {
@@ -64,15 +62,12 @@ struct ResultsView: View {
         })
         .refreshable(action: {
             await session.dummy(action: {
-                isPresented.toggle()
+                isModalPresented.toggle()
             })
         })
-        .fullScreen(isPresented: $isPresented, content: {
+        .fullScreen(isPresented: $isModalPresented, content: {
             ResultLoadingView()
-                .environment(\.isModalPresented, $isPresented)
-        })
-        .fullScreenCover(isPresented: $isFirstLaunch , content: {
-            TutorialView()
+                .environment(\.isModalPresented, $isModalPresented)
         })
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
