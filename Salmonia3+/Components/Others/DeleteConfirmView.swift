@@ -20,7 +20,6 @@ struct DeleteConfirmView: View {
             })
         })
         .navigationTitle(Text(localizedText: "TITLE_ERASE"))
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

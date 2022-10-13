@@ -34,7 +34,7 @@ struct ScaleChartView: View {
                     .overlay(
                         Text(bundle: .CoopHistory_Scale)
                             .foregroundColor(SPColor.SplatNet2.SPOrange)
-                            .font(systemName: .Splatfont2, size: 16)
+                            .font(systemName: .Splatfont2, size: 14)
                     )
                 ZStack(alignment: .center, content: {
                     Rectangle()
@@ -46,7 +46,7 @@ struct ScaleChartView: View {
                                 .scaledToFit()
                                 .frame(width: 30, height: 30, alignment: .center)
                             Text(String(format: "x%d", data.bronze))
-                                .font(systemName: .Splatfont2, size: 16)
+                                .font(systemName: .Splatfont2, size: 14)
                         })
                         VStack(alignment: .center, spacing: 0, content: {
                             Image(bundle: .Silver)
@@ -54,7 +54,7 @@ struct ScaleChartView: View {
                                 .scaledToFit()
                                 .frame(width: 30, height: 30, alignment: .center)
                             Text(String(format: "x%d", data.silver))
-                                .font(systemName: .Splatfont2, size: 16)
+                                .font(systemName: .Splatfont2, size: 14)
                         })
                         VStack(alignment: .center, spacing: 0, content: {
                             Image(bundle: .Gold)
@@ -62,7 +62,7 @@ struct ScaleChartView: View {
                                 .scaledToFit()
                                 .frame(width: 30, height: 30, alignment: .center)
                             Text(String(format: "x%d", data.gold))
-                                .font(systemName: .Splatfont2, size: 16)
+                                .font(systemName: .Splatfont2, size: 14)
                         })
                     })
                     .foregroundColor(.white)

@@ -94,7 +94,6 @@ struct DebugView: View {
             }
         })
         .navigationTitle(Text("追加機能"))
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

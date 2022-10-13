@@ -48,8 +48,8 @@ struct SchedulesView: View {
         .onChange(of: selection, perform: { newValue in
             $schedules.filter = NSPredicate(format: "mode = %@", newValue.mode)
         })
-        .navigationTitle(Text(mode: selection))
         .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(Text(mode: selection))
         .listStyle(.plain)
     }
 }

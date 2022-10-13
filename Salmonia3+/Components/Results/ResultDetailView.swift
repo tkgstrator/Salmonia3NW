@@ -25,20 +25,21 @@ struct ResultTabView: View {
 
     var body: some View {
         TabView(selection: selected, content: {
-            ForEach(results) { result in
+            ForEach(results.reversed()) { result in
                 ResultDetailView(result: result, schedule: result.schedule)
                     .environment(\.isNameVisible, isNameVisible)
                     .tag(result.id)
             }
         })
         .navigationTitle(Text(bundle: .CoopHistory_History))
+        .navigationBarTitleDisplayMode(.inline)
         .tabViewStyle(.page(indexDisplayMode: .never))
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
                     isNameVisible.toggle()
                 }, label: {
-                    Image(systemName: isNameVisible ? "eye" : "eye.slash")
+                    Image(bundle: isNameVisible ? .Eye : .EyeSlash)
                         .resizable()
                         .scaledToFit()
                         .font(Font.system(size: 30, weight: .bold))
@@ -98,7 +99,6 @@ struct ResultDetailView: View {
         .background(Image("BackgroundType/SplatNet3", bundle: .main)
             .resizable(resizingMode: .tile)
             .overlay(Color.black.opacity(0.3)))
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -108,6 +108,6 @@ struct ResultDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
         ResultDetailView(result: result, schedule: schedule)
-            .previewLayout(.fixed(width: 390, height: 844))
+//            .previewLayout(.fixed(width: 390, height: 844))
     }
 }

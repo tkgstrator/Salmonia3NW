@@ -34,8 +34,8 @@ struct UserView: View {
                 })
             })
 //        })
-        .navigationTitle(Text(bundle: .Common_Home))
         .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle(Text(bundle: .Common_Home))
     }
 }
 

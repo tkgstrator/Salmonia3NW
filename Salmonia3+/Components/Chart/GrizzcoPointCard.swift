@@ -49,7 +49,7 @@ struct GrizzcoPointCard: View {
                     .overlay(
                         Text(bundle: .CoopHistory_KumaPointCard)
                             .foregroundColor(SPColor.SplatNet2.SPOrange)
-                            .font(systemName: .Splatfont2, size: 16)
+                            .font(systemName: .Splatfont2, size: 14)
                     )
                 ZStack(alignment: .center, content: {
                     Rectangle()
@@ -57,46 +57,40 @@ struct GrizzcoPointCard: View {
                     VStack(alignment: .center, spacing: 6, content: {
                         VStack(alignment: .leading, spacing: nil, content: {
                             Text(bundle: .CoopHistory_RegularPoint)
-                                .foregroundColor(SPColor.SplatNet2.SPYellow)
                                 .font(systemName: .Splatfont2, size: 14)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Text(String(format: "%dp", data.regularPoint))
-                                .foregroundColor(SPColor.SplatNet2.SPYellow)
-                                .font(systemName: .Splatfont2, size: 20)
+                                .font(systemName: .Splatfont2, size: 18)
                                 .frame(maxWidth: .infinity, alignment: .trailing)
                         })
+                        .foregroundColor(SPColor.SplatNet2.SPYellow)
                         .padding(8)
                         .background(RoundedRectangle(cornerRadius: 14).fill(SPColor.SplatNet2.SPBackground))
                         .padding(.top, 8)
                         Group(content: {
                             HStack(alignment: .top, spacing: nil, content: {
                                 Text(bundle: .CoopHistory_PlayCount)
-                                    .font(systemName: .Splatfont2, size: 12)
-                                    .foregroundColor(.black)
                                 Spacer()
                                 Text(String(format: "%d", data.playCount))
-                                    .foregroundColor(.black)
                                     .font(systemName: .Splatfont2, size: 14)
                             })
                             Divider()
                                 .frame(height: 2)
-                                .background(.black)
+                                .background(.gray)
                         })
                         ForEach(data.values, id: \.1.rawValue) { value in
                             Group(content: {
                                 HStack(alignment: .top, spacing: nil, content: {
                                     Text(bundle: value.1)
-                                        .foregroundColor(.black)
                                         .font(systemName: .Splatfont2, size: 12)
+                                        .lineLimit(1)
                                     Spacer()
                                     Text(String(format: "%d", value.0))
-                                        .font(systemName: .Splatfont2, size: 14)
-                                        .foregroundColor(.black)
                                 })
                                 if value.1 != .CoopHistory_TotalPoint {
                                     Divider()
                                         .frame(height: 2)
-                                        .background(.black)
+                                        .background(.gray)
                                 }
                             })
                         }
@@ -104,6 +98,8 @@ struct GrizzcoPointCard: View {
                     })
                     .padding(.horizontal, 8)
                 })
+                .font(systemName: .Splatfont2, size: 13)
+                .foregroundColor(.black)
             })
         })
         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -115,9 +111,9 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
     static let data: GrizzcoPointData = GrizzcoPointData(
         playCount: 99999,
         regularPoint: 999999,
-        goldenIkuraNum: 9999999,
-        ikuraNum: 99999999,
-        bossDefeatedCount: 999999,
+        goldenIkuraNum: 999999,
+        ikuraNum: 999999,
+        bossDefeatedCount: 99999,
         rescueCount: 999999,
         totalPoint: 9999999
     )
@@ -142,6 +138,7 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
                 })
                 GrizzcoPointCard(data: data)
             })
+            .padding([.horizontal])
             .previewDevice(PreviewDevice.init(rawValue: device.rawValue))
             .preferredColorScheme(.dark)
         }

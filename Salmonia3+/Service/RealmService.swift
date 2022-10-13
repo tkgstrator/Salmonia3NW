@@ -44,7 +44,6 @@ class RealmService {
         Task(priority: .background, operation: {
             let session: Session = Session()
             let schedules: [CoopSchedule.Response] = try await session.getCoopSchedule()
-            print(schedules)
         })
     }
 
@@ -92,9 +91,6 @@ class RealmService {
     private func save(_ schedule: CoopSchedule.Response) {
         let result: RealmCoopSchedule = RealmCoopSchedule(from: schedule)
 
-        print("Before", realm.objects(RealmCoopSchedule.self).firstIndex(where: { $0 == result }))
-        print("Before", realm.objects(RealmCoopSchedule.self).firstIndex(of: result))
-
         /// 旧バージョンのスケジュールの開始時刻と終了時刻を上書きする
         if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
             $0.stageId == result.stageId &&
@@ -114,8 +110,6 @@ class RealmService {
                 }
             }
         }
-
-        print("After", realm.objects(RealmCoopSchedule.self).firstIndex(of: result))
 
         /// 書き込もうとしているスケジュールと同じものがなければ書き込む
         guard let _ = realm.objects(RealmCoopSchedule.self).firstIndex(of: result) else {

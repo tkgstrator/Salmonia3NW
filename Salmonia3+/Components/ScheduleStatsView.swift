@@ -68,7 +68,6 @@ struct ScheduleStatsView: View {
             .padding([.horizontal])
         })
         .transition(.identity)
-        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))
     }
 }

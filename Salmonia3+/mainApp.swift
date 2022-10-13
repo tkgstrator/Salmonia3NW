@@ -19,6 +19,7 @@ struct mainApp: SwiftUI.App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(preferredColorScheme ? .dark : .light)
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
