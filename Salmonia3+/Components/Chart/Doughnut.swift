@@ -23,10 +23,19 @@ struct DoughnutData: Identifiable {
 class DoughnutChartData: ObservableObject {
     @Published var values: [DoughnutData] = []
 
+    init(values: [Int]?, colors: [Color]) {
+        guard let values = values else {
+            return
+        }
+        
+        self.values = zip(values, colors).map({ DoughnutData(value: $0.0, color: $0.1) })
+    }
+
     init(values: [Int]?) {
         guard let values = values else {
             return
         }
+        
         let colors: [Color] = Array([
             SPColor.SplatNet3.SPPink,
             SPColor.SplatNet3.SPOrange,

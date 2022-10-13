@@ -23,7 +23,7 @@ class RealmCoopSchedule: Object {
         self.init()
         self.startTime = schedule.startTime
         self.endTime = schedule.endTime
-        self.stageId = schedule.stage
+        self.stageId = schedule.stageId
         self.weaponList.append(objectsIn: schedule.weaponList)
         self.rareWeapon = nil
         self.rule = schedule.rule
@@ -38,7 +38,7 @@ class RealmCoopSchedule: Object {
         }()
         self.init()
         self.startTime = {
-            if let startTime = result.schedule.endTime {
+            if let startTime = result.schedule.startTime {
                 return dateFormatter.date(from: startTime)
             }
             return nil

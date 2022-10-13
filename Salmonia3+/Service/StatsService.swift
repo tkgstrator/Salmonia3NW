@@ -34,8 +34,8 @@ struct WaveStats {
 final class StatsService: ObservableObject {
     /// バイト回数
     @Published var shiftsWorked: Int
-    /// WAVE回数
-    @Published var waveCounts: Int
+//    / WAVE回数
+//    @Published var failureWaves: [Int]
     /// クリア率
     @Published var clearRatio: Double
     /// 平均クリアWAVE
@@ -51,9 +51,7 @@ final class StatsService: ObservableObject {
     /// 各WAVE失敗回数
     @Published var failureWaveCount: [Int]
     /// オカシラシャケ出現数
-    @Published var bossCount: Int
-    /// オカシラシャケ討伐数
-    @Published var bossKillCount: Int
+    @Published var bossCount: [Int]
     /// チームイクラ統計
     @Published var teamIkuraStats: Stats
     /// チーム金イクラ統計
@@ -76,33 +74,67 @@ final class StatsService: ObservableObject {
     @Published var maxGradePoint: Int?
     /// 評価レートの履歴
     @Published var gradePointHistory: [Double]
+    /// クマサンポイントデータ
+    @Published var grizzcoPointData: GrizzcoPointData
+    /// クマサンポイントデータ
+    @Published var abstructData: AbstructData
+    /// ウロコデータ
+    @Published var scaleData: ScaleData
 
     init(startTime: Date) {
+        /// リザルト一覧
         let results: RealmSwift.List<RealmCoopResult> = {
             if let results = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime })?.results {
                 return results
             }
             return RealmSwift.List<RealmCoopResult>()
         }()
+        /// プレイヤー一覧
         let players: RealmSwift.Results<RealmCoopPlayer> = RealmService.shared.objects(ofType: RealmCoopPlayer.self).filter("ANY link.link.startTime=%@ AND isMyself=true", startTime)
+        /// 支給されるブキ一覧
         let weaponList: [WeaponType] = {
             if let schedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime }) {
                 return Array(schedule.weaponList)
             }
             return []
         }()
-
+        /// バイト回数
         let shiftsWorked: Int = results.count
+        /// ウロコの枚数
+        #warning("バグの可能性があるので将来的に修正予定")
+        let scales: (bronze: Int, silver: Int, gold: Int) = {
+            if shiftsWorked == 0 {
+                return (bronze: 0, silver: 0, gold: 0)
+            }
+            let scales: [Int] = results.map({ Array($0.scale) }).transposed().map({ $0.compactMap({ $0 }).reduce(0, +) })
+            return (bronze: scales[0], silver: scales[1], gold: scales[2])
+        }()
+        let failureWaves: (clear: Int, wave1: Int, wave2: Int, wave3: Int) = {
+            let failureWaves: NSCountedSet = NSCountedSet(array: results.map({ $0.failureWave ?? 0 }))
+            return (
+                clear: failureWaves.count(for: 0),
+                wave1: failureWaves.count(for: 1),
+                wave2: failureWaves.count(for: 2),
+                wave3: failureWaves.count(for: 3)
+            )
+        }()
         let shiftsClearWorked: Int = results.filter({ $0.isClear }).count
+        let bossCount: Int = results.compactMap({ $0.isBossDefeated }).count
+        let bossKillCount: Int = results.filter({ $0.isBossDefeated == true }).count
+        let regularPoint: Int = results.sum(ofProperty: "kumaPoint") ?? 0
+        let ikuraNum: Int = results.sum(ofProperty: "ikuraNum") ?? 0
+        let goldenIkuraNum: Int = results.sum(ofProperty: "goldenIkuraNum") ?? 0
+        let rescueCount: Int = players.sum(ofProperty: "helpCount") ?? 0
+
+        let gradeId: GradeType = results.max(ofProperty: "grade") ?? GradeType.Apprentice
+        let gradePointMax: Int = results.max(ofProperty: "gradePoint") ?? 0
+
         self.shiftsWorked = shiftsWorked
-        self.waveCounts = results.map({ $0.waves }).count
         self.clearRatio = Double(shiftsClearWorked) / Double(shiftsWorked)
         self.clearWave = Double(results.map({ $0.waves.count }).reduce(0, +)) / Double(results.count)
-        let bossCount: Int = results.compactMap({ $0.isBossDefeated }).count
-        let bossKillCount: Int = results.filter({ $0.isBossDefeated == true}).count
         self.bossDefeatedRatio = Double(bossKillCount) / Double(bossCount)
-        self.bossCount = bossCount
-        self.bossKillCount = bossKillCount
+        self.bossCount = [bossKillCount, bossCount - bossKillCount]
+//        self.bossKillCount = bossKillCount
         self.specialCounts = {
             // 支給されたスペシャル一覧
             let suppliedSpecialList: [SpecialType] = players.compactMap({ $0.specialId })
@@ -175,6 +207,30 @@ final class StatsService: ObservableObject {
         self.waves = Array(repeating: Array(repeating: WaveStats(count: 0, ikuraStats: stats, goldenIkuraStats: stats, assistIkuraStats: stats), count: 9), count: 3)
         self.maxGradePoint = results.max(ofProperty: "gradePoint")
         self.gradePointHistory = results.compactMap({ $0.gradePoint }).map({ Double($0) })
-        dump(self)
+        self.grizzcoPointData = GrizzcoPointData(
+            playCount: shiftsWorked,
+            regularPoint: regularPoint,
+            goldenIkuraNum: goldenIkuraNum,
+            ikuraNum: ikuraNum,
+            bossDefeatedCount: bossKillCount,
+            rescueCount: rescueCount,
+            totalPoint: 0
+        )
+        self.abstructData = AbstructData(
+            gradeId: gradeId,
+            gradePointMax: gradePointMax,
+            failureWaves: failureWaves
+        )
+        self.scaleData = ScaleData(gold: scales.gold, silver: scales.silver, bronze: scales.bronze)
+    }
+}
+
+extension Collection where Self.Iterator.Element: RandomAccessCollection {
+    // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
+    func transposed() -> [[Self.Iterator.Element.Iterator.Element]] {
+        guard let firstRow = self.first else { return [] }
+        return firstRow.indices.map { index in
+            self.map{ $0[index] }
+        }
     }
 }

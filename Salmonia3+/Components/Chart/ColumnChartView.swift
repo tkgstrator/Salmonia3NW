@@ -65,12 +65,14 @@ struct ColumnChartView: View {
                         Image(bundle: ChartType.Solo)
                             .resizable()
                             .scaledToFit()
+                            .frame(height: 20)
                         ChartValue(maxValue: solo.maxValue, minValue: solo.minValue, avgValue: solo.avgValue)
                     })
                     VStack(alignment: .trailing, spacing: 0, content: {
                         Image(bundle: ChartType.Team)
                             .resizable()
                             .scaledToFit()
+                            .frame(height: 20)
                         ChartValue(maxValue: team.maxValue, minValue: team.minValue, avgValue: team.avgValue)
                     })
                 })
@@ -79,7 +81,6 @@ struct ColumnChartView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             })
         })
-        .padding([.horizontal])
         .aspectRatio(340/130, contentMode: .fit)
     }
 }
@@ -119,10 +120,13 @@ private struct ChartValue: View {
             } else {
                 Text("-")
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(height: 20)
                 Text("-")
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(height: 20)
                 Text("-")
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(height: 20)
             }
         })
         .onAppear(perform: {

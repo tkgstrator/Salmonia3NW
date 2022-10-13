@@ -57,7 +57,7 @@ struct NSOCircleActionModifier: ViewModifier {
                     .foregroundColor(SPColor.Theme.SPOrange)
                     .overlay(content.padding(4))
                 localizedText
-                    .font(systemName: .Splatfont, size: 16)
+                    .font(systemName: .Splatfont2, size: 14)
                     .frame(height: 16)
                     .foregroundColor(.primary)
             })
@@ -97,7 +97,7 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
                         .foregroundColor(SPColor.Theme.SPOrange)
                         .overlay(content.padding(4))
                     localizedText
-                        .font(systemName: .Splatfont, size: 16)
+                        .font(systemName: .Splatfont2, size: 14)
                         .frame(height: 16)
                         .foregroundColor(.primary)
                 })

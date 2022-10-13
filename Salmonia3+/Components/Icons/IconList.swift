@@ -30,7 +30,7 @@ enum IconList {
                             .scaledToFit()
                             .clipShape(NSOCircle())
                         Text(account.nickname)
-                            .font(systemName: .Splatfont, size: 16)
+                            .font(systemName: .Splatfont2, size: 14)
                             .lineLimit(1)
                             .frame(height: 16)
                             .foregroundColor(.primary)
@@ -186,7 +186,7 @@ enum IconList {
                             isEnabled.toggle()
                         }
                     })
-                .disabled(isEnabled)
+//                .disabled(isEnabled)
         }
     }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUICharts
+import SplatNet3
 
 public class SingleData: ObservableObject, Identifiable {
     @Published var maxValue: Int?
@@ -78,6 +79,11 @@ struct SingleChartView: View {
         self.valueSpecifier = valueSpecifier!
     }
 
+    let colors: [Color] = [
+        SPColor.SplatNet3.SPBlue,
+        SPColor.SplatNet3.SPRed
+    ]
+
     var body: some View {
         ZStack(alignment: .center, content: {
             RoundedRectangle(cornerRadius: 20)
@@ -85,20 +91,16 @@ struct SingleChartView: View {
                 .shadow(color: .primary, radius: 4)
             Spacer()
             VStack(alignment: .leading, spacing: 8, content: {
-                GeometryReader(content: { geometry in
-                    Line(data: self.data,
-                         frame: .constant(geometry.frame(in: .local)),
-                         touchLocation: .constant(.zero),
-                         showIndicator: .constant(false),
-                         minDataValue: .constant(nil),
-                         maxDataValue: .constant(nil)
-                    )
-                })
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                self.title
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(.primary)
+                    .padding([.horizontal, .top])
+                Doughnut(data: DoughnutChartData(values: data.onlyPoints().map({ Int($0) })))
+                    .padding()
             })
         })
-        .padding([.horizontal])
-        .aspectRatio(340/160, contentMode: .fit)
+        .aspectRatio(200/240, contentMode: .fit)
     }
 }
 
@@ -123,7 +125,10 @@ extension Image {
 
 struct SingleChartView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleChartView(value: [10, 20, 10, 40, 35, 25, 0], title: Text(bundle: .CoopHistory_JobRatio))
-            .preferredColorScheme(.dark)
+        LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 2), content: {
+            SingleChartView(value: [10, 20, 10, 40, 35, 25, 0], title: Text(bundle: .CoopHistory_JobRatio))
+            SingleChartView(value: [10, 20, 10, 40, 35, 25, 0], title: Text(bundle: .CoopHistory_JobRatio))
+        })
+                .preferredColorScheme(.dark)
     }
 }

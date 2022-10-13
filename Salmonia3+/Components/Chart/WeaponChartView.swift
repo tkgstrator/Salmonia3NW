@@ -70,7 +70,6 @@ struct WeaponChartView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             })
         })
-        .padding([.horizontal])
         .aspectRatio(340/200, contentMode: .fit)
     }
 }

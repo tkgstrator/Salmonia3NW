@@ -93,7 +93,7 @@ class RealmService {
         /// 抜けているステージ情報があるかどうか
         if let schedule = realm.objects(RealmCoopSchedule.self).first(where: {
             // ステージが一致
-            $0.stageId == schedule.stage &&
+            $0.stageId == schedule.stageId &&
             /// 支給ブキが一致
             Array($0.weaponList) == schedule.weaponList &&
             /// プライベートバイトではない

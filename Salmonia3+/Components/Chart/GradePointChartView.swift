@@ -39,14 +39,7 @@ public struct GradePointChartView: View {
                         Spacer()
                         Text(String(format: valueSpecifier, self.data.onlyPoints().max() ?? 0))
                     })
-                    .frame(maxWidth: 180)
-                    Spacer()
-                    HStack(content: {
-                        Text(bundle: .CoopHistory_PlayCount)
-                        Spacer()
-                        Text(String(format: "%d", self.data.onlyPoints().count))
-                    })
-                    .frame(maxWidth: 120)
+                    .frame(maxWidth: 200)
                 })
                 .font(.system(size: 16, design: .monospaced))
                 .padding([.horizontal])
@@ -62,7 +55,6 @@ public struct GradePointChartView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
             })
         })
-        .padding(.horizontal)
         .aspectRatio(340/140, contentMode: .fit)
     }
 }
