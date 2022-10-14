@@ -9,50 +9,6 @@ import SwiftUI
 import SwiftUICharts
 import SplatNet3
 
-public class SingleData: ObservableObject, Identifiable {
-    @Published var maxValue: Int?
-    @Published var minValue: Int?
-    @Published var avgValue: Double?
-
-    var valuesGiven: Bool = false
-    var ID = UUID()
-
-    public init(max: Int?, min: Int?, avg: Double?) {
-        self.maxValue = {
-            if let max = max {
-                return max
-            }
-            return nil
-        }()
-        self.minValue = {
-            if let min = min {
-                return min
-            }
-            return nil
-        }()
-        self.avgValue = {
-            if let avg = avg {
-                return Double(avg)
-            }
-            return nil
-        }()
-    }
-}
-
-struct AnimatableNumberModifier: AnimatableModifier {
-    var number: Double
-
-    var animatableData: Double {
-        get { number }
-        set { number = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .overlay(Text(String(format: "%.1f", number)).font(.system(size: 16, design: .monospaced)), alignment: .trailing)
-    }
-}
-
 enum ChartType: CaseIterable {
     /// 個人記録
     case Solo
