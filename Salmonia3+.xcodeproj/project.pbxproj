@@ -36,7 +36,6 @@
 		100E877528D59261007FCF3C /* ResultScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877428D59261007FCF3C /* ResultScore.swift */; };
 		100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877628D5B687007FCF3C /* ResultSpecial.swift */; };
 		100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877828D5F2D9007FCF3C /* NavigationLinker.swift */; };
-		100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877A28D5F4EF007FCF3C /* TypePicker.swift */; };
 		101726FB28F18DE60040F88B /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101726FA28F18DE60040F88B /* StatsService.swift */; };
 		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
 		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
@@ -171,7 +170,6 @@
 		100E877428D59261007FCF3C /* ResultScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScore.swift; sourceTree = "<group>"; };
 		100E877628D5B687007FCF3C /* ResultSpecial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSpecial.swift; sourceTree = "<group>"; };
 		100E877828D5F2D9007FCF3C /* NavigationLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinker.swift; sourceTree = "<group>"; };
-		100E877A28D5F4EF007FCF3C /* TypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypePicker.swift; sourceTree = "<group>"; };
 		101726FA28F18DE60040F88B /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
 		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
 		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
@@ -505,7 +503,6 @@
 				10A0ACB928DD627F008B332A /* ThemeView.swift */,
 				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
 				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
-				100E877A28D5F4EF007FCF3C /* TypePicker.swift */,
 				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
 				1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */,
 				10343BBF28EF127500D0C78F /* PullToRefresh.swift */,
@@ -816,7 +813,6 @@
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				100E876B28D4FC62007FCF3C /* ResultDefeated.swift in Sources */,
 				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
-				100E877B28D5F4EF007FCF3C /* TypePicker.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
 				10E3191F28F2602A009C6BBC /* CircleChartView.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
