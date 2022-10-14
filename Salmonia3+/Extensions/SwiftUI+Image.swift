@@ -62,7 +62,6 @@ struct ResultType_Previews: PreviewProvider {
     @Environment(\.locale) var locale
 
     static var previews: some View {
-//        ForEach(Locale.availableIdentifiers, id: \.self) { locale in
         LazyVGrid(columns: Array(repeating: .init(.fixed(60)), count: 2), content: {
             Image(bundle: .CLEAR)
                 .resizable()
@@ -73,7 +72,6 @@ struct ResultType_Previews: PreviewProvider {
         })
         .previewLayout(.fixed(width: 200, height: 200))
         .environment(\.locale, .init(identifier: "ja_JP"))
-//        }
     }
 }
 

@@ -135,5 +135,3 @@ extension GradeType: RawRepresentable, PersistableEnum {
 
     public var rawValue: Int { self.id! }
 }
-
-//extension SplatNet2.Rule: PersistableEnum {}

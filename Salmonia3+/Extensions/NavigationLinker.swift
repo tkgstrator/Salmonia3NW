@@ -22,7 +22,7 @@ public struct NavigationLinker<Destination: View, Label: View>: View {
             NavigationLink(destination: destination(), label: {
                 EmptyView()
             })
-                .opacity(0.0)
+            .opacity(0.0)
             label()
         })
     }

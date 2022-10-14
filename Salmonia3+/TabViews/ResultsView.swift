@@ -9,8 +9,72 @@ import SwiftUI
 import RealmSwift
 import SplatNet3
 
+struct ResultsView: View {
+    @StateObject var session: Session = Session()
+    @ObservedResults(
+        RealmCoopSchedule.self,
+        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode),
+        sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
+    ) var schedules
+    @State private var selection: ModeType = ModeType.CoopHistory_Regular
+    @State private var isModalPresented: Bool = false
+
+    var body: some View {
+        List(content: {
+            if !schedules.isEmpty {
+                ForEach(schedules) { schedule in
+                    if !schedule.results.isEmpty {
+                        ScheduleView(schedule: schedule)
+                        ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
+                            NavigationLinker(destination: {
+                                ResultTabView(results: schedule.results)
+                                    .environment(\.selection, .constant(result.id))
+                            }, label: {
+                                ResultView(result: result)
+                            })
+                        }
+                    }
+                }
+            } else {
+                PullToRefreshView()
+            }
+        })
+        .onChange(of: selection, perform: { newValue in
+            /// モードが切り替わったときにフィルターをかける
+            $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
+        })
+        .refreshable(action: {
+            /// リフレッシュ
+            await session.dummy(action: {
+                isModalPresented.toggle()
+            })
+        })
+        .fullScreen(isPresented: $isModalPresented, content: {
+            ResultLoadingView()
+                .environment(\.isModalPresented, $isModalPresented)
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button(action: {
+                    selection.next()
+                }, label: {
+                    Image(bundle: .Update)
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .foregroundColor(.primary)
+                })
+            })
+        })
+        .listStyle(.plain)
+        .navigationTitle(Text(mode: selection))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
 /// リザルトがなにもないときに下スワイプで取得できることを表示する
-private struct ResultsEmpty: View {
+private struct PullToRefreshView: View {
     @State private var value: CGFloat = 0
 
     var body: some View {
@@ -30,62 +94,3 @@ private struct ResultsEmpty: View {
         })
     }
 }
-
-struct ResultsView: View {
-    @StateObject var session: Session = Session()
-    @ObservedResults(
-        RealmCoopSchedule.self,
-        filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode),
-        sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
-    ) var schedules
-    @State private var selection: ModeType = ModeType.CoopHistory_Regular
-    @State private var isModalPresented: Bool = false
-
-    var body: some View {
-        List(content: {
-            ForEach(schedules) { schedule in
-                if !schedule.results.isEmpty {
-                    ScheduleView(schedule: schedule)
-                    ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
-                        NavigationLinker(destination: {
-                            ResultTabView(results: schedule.results)
-                                .environment(\.selection, .constant(result.id))
-                        }, label: {
-                            ResultView(result: result)
-                        })
-                    }
-                }
-            }
-        })
-        .onChange(of: selection, perform: { newValue in
-            $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
-        })
-        .refreshable(action: {
-            await session.dummy(action: {
-                isModalPresented.toggle()
-            })
-        })
-        .fullScreen(isPresented: $isModalPresented, content: {
-            ResultLoadingView()
-                .environment(\.isModalPresented, $isModalPresented)
-        })
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing, content: {
-                Button(action: {
-                    selection.next()
-                }, label: {
-                    Image("ButtonType/Update", bundle: .main)
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(.primary)
-                })
-            })
-        })
-        .listStyle(.plain)
-        .navigationTitle(Text(mode: selection))
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
-

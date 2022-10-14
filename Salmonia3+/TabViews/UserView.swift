@@ -14,26 +14,23 @@ struct UserView: View {
 
     var body: some View {
         ScrollView(content: {
-//            GeometryReader(content: { geometry in
-                LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
-                    IconList.NSO()
-                    IconList.Review()
-                    IconList.Appearance()
-                    IconList.Setting()
-                    IconList.Privacy()
-                    IconList.Schedule()
-                    if isAppDeveloperMode {
-                        IconList.Debug()
-                    }
+            LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
+                IconList.NSO()
+                IconList.Review()
+                IconList.Appearance()
+                IconList.Setting()
+                IconList.Privacy()
+                IconList.Schedule()
+                if isAppDeveloperMode {
+                    IconList.Debug()
+                }
 #if DEBUG
-                    IconList.Status()
-                    IconList.Chart()
-                    IconList.Friends()
-#else
+                IconList.Status()
+                IconList.Chart()
+                IconList.Friends()
 #endif
-                })
             })
-//        })
+        })
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .Common_Home))
     }

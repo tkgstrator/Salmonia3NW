@@ -87,7 +87,6 @@
 		10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB728DD4EE0008B332A /* IconToggle.swift */; };
 		10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB928DD627F008B332A /* ThemeView.swift */; };
 		10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACBB28DD681B008B332A /* Configuration.swift */; };
-		10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A18B28B7A51D0075563F /* WeaponsView.swift */; };
 		10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19128B7A7130075563F /* GoogleMobileAds */; };
 		10A6A19428B7A71E0075563F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19328B7A71E0075563F /* Realm */; };
 		10A6A19628B7A7200075563F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19528B7A7200075563F /* RealmSwift */; };
@@ -224,7 +223,6 @@
 		10A0ACB928DD627F008B332A /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		10A0ACBB28DD681B008B332A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		10A6A18428B7A3D60075563F /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
-		10A6A18B28B7A51D0075563F /* WeaponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponsView.swift; sourceTree = "<group>"; };
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		10A6A19928B7AC240075563F /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -540,7 +538,6 @@
 		10A6A18828B7A4F80075563F /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
-				10A6A18B28B7A51D0075563F /* WeaponsView.swift */,
 				10A6A19728B7AC1B0075563F /* UserView.swift */,
 				10A6A19928B7AC240075563F /* SchedulesView.swift */,
 				100E874D28D4AC66007FCF3C /* ResultsView.swift */,
@@ -802,7 +799,6 @@
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */,
 				1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */,
-				10A6A18C28B7A51D0075563F /* WeaponsView.swift in Sources */,
 				1098543A28F6747800E1E22F /* KingChartView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
 				1098544928F9164600E1E22F /* SingleChartData.swift in Sources */,

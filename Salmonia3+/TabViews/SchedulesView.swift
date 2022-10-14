@@ -36,7 +36,7 @@ struct SchedulesView: View {
                 Button(action: {
                     selection.next()
                 }, label: {
-                    Image("ButtonType/Update", bundle: .main)
+                    Image(bundle: .Update)
                         .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
