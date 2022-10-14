@@ -78,6 +78,7 @@
 		1098544028F70B5300E1E22F /* AbstructView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543F28F70B5300E1E22F /* AbstructView.swift */; };
 		1098544928F9164600E1E22F /* SingleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544828F9164600E1E22F /* SingleChartData.swift */; };
 		1098544B28F9166E00E1E22F /* AnimatableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544A28F9166E00E1E22F /* AnimatableModifier.swift */; };
+		1098544D28F917FC00E1E22F /* DoughnutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544C28F917FC00E1E22F /* DoughnutData.swift */; };
 		109A5D5028F561C1001F8724 /* ColumnChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109A5D4F28F561C1001F8724 /* ColumnChartView.swift */; };
 		109A5D5328F5C237001F8724 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 109A5D5228F5C237001F8724 /* SwiftUICharts */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
@@ -86,7 +87,6 @@
 		10A0ACB628DD42A4008B332A /* IconList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB528DD42A4008B332A /* IconList.swift */; };
 		10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB728DD4EE0008B332A /* IconToggle.swift */; };
 		10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACB928DD627F008B332A /* ThemeView.swift */; };
-		10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACBB28DD681B008B332A /* Configuration.swift */; };
 		10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19128B7A7130075563F /* GoogleMobileAds */; };
 		10A6A19428B7A71E0075563F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19328B7A71E0075563F /* Realm */; };
 		10A6A19628B7A7200075563F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10A6A19528B7A7200075563F /* RealmSwift */; };
@@ -95,7 +95,6 @@
 		10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
-		10E3191928F206B6009C6BBC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191828F206B6009C6BBC /* ChartView.swift */; };
 		10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */; };
 		10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191C28F22A38009C6BBC /* SingleChartView.swift */; };
 		10E3191F28F2602A009C6BBC /* SpecialChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191E28F2602A009C6BBC /* SpecialChartView.swift */; };
@@ -213,6 +212,7 @@
 		1098543F28F70B5300E1E22F /* AbstructView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstructView.swift; sourceTree = "<group>"; };
 		1098544828F9164600E1E22F /* SingleChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartData.swift; sourceTree = "<group>"; };
 		1098544A28F9166E00E1E22F /* AnimatableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableModifier.swift; sourceTree = "<group>"; };
+		1098544C28F917FC00E1E22F /* DoughnutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughnutData.swift; sourceTree = "<group>"; };
 		109A5D4F28F561C1001F8724 /* ColumnChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnChartView.swift; sourceTree = "<group>"; };
 		109A5D5128F5BBE7001F8724 /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ChartView; path = ../ChartView; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
@@ -221,13 +221,11 @@
 		10A0ACB528DD42A4008B332A /* IconList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconList.swift; sourceTree = "<group>"; };
 		10A0ACB728DD4EE0008B332A /* IconToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconToggle.swift; sourceTree = "<group>"; };
 		10A0ACB928DD627F008B332A /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
-		10A0ACBB28DD681B008B332A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		10A6A18428B7A3D60075563F /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		10A6A19928B7AC240075563F /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10E3191228F1EC91009C6BBC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		10E3191828F206B6009C6BBC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStatsView.swift; sourceTree = "<group>"; };
 		10E3191C28F22A38009C6BBC /* SingleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartView.swift; sourceTree = "<group>"; };
 		10E3191E28F2602A009C6BBC /* SpecialChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialChartView.swift; sourceTree = "<group>"; };
@@ -483,23 +481,15 @@
 				105757B328DB22A200833B95 /* LoginProgress.swift */,
 				10320C6D28D4244200666F09 /* RealmService.swift */,
 				101726FA28F18DE60040F88B /* StatsService.swift */,
-				10A0ACBB28DD681B008B332A /* Configuration.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		1098544628F9162700E1E22F /* Doughnut */ = {
-			isa = PBXGroup;
-			children = (
-				10E3192028F2683C009C6BBC /* Doughnut.swift */,
-			);
-			path = Doughnut;
 			sourceTree = "<group>";
 		};
 		1098544728F9163900E1E22F /* ChartData */ = {
 			isa = PBXGroup;
 			children = (
 				1098544828F9164600E1E22F /* SingleChartData.swift */,
+				1098544C28F917FC00E1E22F /* DoughnutData.swift */,
 			);
 			path = ChartData;
 			sourceTree = "<group>";
@@ -549,8 +539,7 @@
 			isa = PBXGroup;
 			children = (
 				1098544728F9163900E1E22F /* ChartData */,
-				1098544628F9162700E1E22F /* Doughnut */,
-				10E3191828F206B6009C6BBC /* ChartView.swift */,
+				10E3192028F2683C009C6BBC /* Doughnut.swift */,
 				10E3191C28F22A38009C6BBC /* SingleChartView.swift */,
 				10E3191E28F2602A009C6BBC /* SpecialChartView.swift */,
 				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
@@ -834,6 +823,7 @@
 				1018B4B128DB0371002BD1F0 /* DebugView.swift in Sources */,
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
 				10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */,
+				1098544D28F917FC00E1E22F /* DoughnutData.swift in Sources */,
 				10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */,
 				1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */,
 				1018B49C28D73352002BD1F0 /* SwiftUI+Text.swift in Sources */,
@@ -855,9 +845,7 @@
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
 				1098543628F5D29000E1E22F /* GradePointChartView.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
-				10E3191928F206B6009C6BBC /* ChartView.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
-				10A0ACBC28DD681B008B332A /* Configuration.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
 				10E3192328F271F9009C6BBC /* Ark.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
