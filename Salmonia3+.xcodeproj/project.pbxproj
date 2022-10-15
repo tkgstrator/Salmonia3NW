@@ -500,10 +500,10 @@
 		10A0ACBD28DD808D008B332A /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
-				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
 				10A0ACB928DD627F008B332A /* ThemeView.swift */,
 				1018B4A628D87B05002BD1F0 /* DeleteConfirmView.swift */,
+				1018B49528D6FD2B002BD1F0 /* TutorialView.swift */,
+				1018B4B028DB0371002BD1F0 /* DebugView.swift */,
 				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
 				1018B48C28D6CC4C002BD1F0 /* LoadingView.swift */,
 				1018B48E28D6E607002BD1F0 /* ResultLoadingView.swift */,

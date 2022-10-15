@@ -12,16 +12,12 @@ struct ResultScore: View {
     let result: RealmCoopResult
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: nil), count: 2), content: {
-                let scale: CGFloat = geometry.width / 400
-                ResultScoreScale(result: result)
-                    .environment(\.scale, scale)
-                ResultScorePoint(result: result)
-                    .environment(\.scale, scale)
-            })
+        LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: nil), count: 2), content: {
+            ResultScoreScale(result: result)
+            ResultScorePoint(result: result)
         })
-        .aspectRatio(400/70, contentMode: .fit)
+        .padding(.horizontal, 10)
+        .padding(.bottom, 15)
     }
 }
 
@@ -30,75 +26,61 @@ private struct ResultScorePoint: View {
     let result: RealmCoopResult
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: 8 * scale, content: {
-            HStack(alignment: .center, spacing: 2 * scale, content: {
-                Text(bundle: .CoopHistory_JobPoint)
-                    .foregroundColor(.gray)
-                    .font(systemName: .Splatfont2, size: 12 * scale)
-                Spacer()
-                if let kumaPoint: Int = result.kumaPoint {
-                    Text(String(format: "%dp", kumaPoint))
-                        .foregroundColor(.white)
-                        .frame(height: 18 * scale)
-                } else {
-                    Text(String(format: "-"))
-                        .foregroundColor(.white)
-                        .frame(height: 18 * scale)
-                }
-            })
-            .font(systemName: .Splatfont2, size: 16 * scale)
-            .frame(height: 18 * scale)
-            Divider()
-                .frame(height: 1.0 * scale)
-                .background(.white)
-            HStack(alignment: .top, spacing: 1 * scale, content: {
-                if let score = result.jobScore,
-                   let rate = result.jobRate,
-                   let bonus = result.jobBonus {
+        ZStack(alignment: .center, content: {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.black.opacity(0.7))
+            VStack(spacing: 2, content: {
+                HStack(spacing: nil, content: {
+                    Text(bundle: .CoopHistory_JobPoint)
+                        .font(systemName: .Splatfont2, size: 12)
                     Spacer()
-                    VStack(alignment: .center, spacing: 1 * scale, content: {
-                        Text(String(format: "%d", score))
-                            .frame(height: 18 * scale)
+                    Text(String(format: "%dp", result.kumaPoint))
+                        .font(systemName: .Splatfont2, size: 19)
+                })
+                .padding(8)
+                .frame(height: 47.5)
+                HStack(spacing: 4, content: {
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%d", result.jobScore))
+                            .font(systemName: .Splatfont2, size: 15)
                         Text(bundle: .CoopHistory_Score)
-                            .foregroundColor(.gray)
-                            .font(systemName: .Splatfont2, size: 10 * scale)
-                            .frame(height: 10 * scale)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .foregroundColor(.white.opacity(0.6))
                     })
                     Text("x")
-                        .padding(.horizontal, 4 * scale)
-                        .padding(.bottom, 3 * scale)
-                        .frame(height: 18 * scale, alignment: .center)
-                    VStack(alignment: .center, spacing: 1 * scale, content: {
-                        Text(String(format: "%.2f", rate))
-                            .frame(height: 18 * scale)
+                        .font(systemName: .Splatfont2, size: 15)
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%.2f", result.jobRate))
+                            .font(systemName: .Splatfont2, size: 15)
                         Text(bundle: .CoopHistory_JobRatio)
-                            .foregroundColor(.gray)
-                            .font(systemName: .Splatfont2, size: 10 * scale)
-                            .frame(height: 10 * scale)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .foregroundColor(.white.opacity(0.6))
                     })
                     Text("+")
-                        .padding(.horizontal, 4 * scale)
-                        .frame(height: 18 * scale, alignment: .center)
-                    VStack(alignment: .center, spacing: 1 * scale, content: {
-                        Text(String(format: "%d", bonus))
-                            .frame(height: 18 * scale)
+                        .font(systemName: .Splatfont2, size: 15)
+                    VStack(alignment: .center, spacing: 0, content: {
+                        Text(String(format: "%d", result.jobBonus))
+                            .font(systemName: .Splatfont2, size: 15)
                         Text(bundle: .CoopHistory_Bonus)
-                            .foregroundColor(.gray)
-                            .font(systemName: .Splatfont2, size: 10 * scale)
-                            .frame(height: 10 * scale)
+                            .font(systemName: .Splatfont2, size: 10)
+                            .foregroundColor(.white.opacity(0.6))
                     })
-                }
+                })
+                .padding(8)
+                .frame(height: 48)
             })
-            .frame(height: 28 * scale)
-            .foregroundColor(.white)
-            .font(systemName: .Splatfont2, size: 16 * scale)
         })
-        .padding(.top, 4 * scale)
-        .padding(.horizontal, 10 * scale)
-        .padding(.bottom, 4 * scale)
-        .frame(height: 70 * scale)
-        .aspectRatio(200/70, contentMode: .fit)
-        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
+        .foregroundColor(.white)
+    }
+}
+
+private extension String {
+    init(format: String, _ arguments: CVarArg?) {
+        if let arguments = arguments {
+            self.init(format: format, arguments)
+        } else {
+            self.init("-")
+        }
     }
 }
 
@@ -107,66 +89,70 @@ private struct ResultScoreScale: View {
     let result: RealmCoopResult
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4 * scale, content: {
-            if let gradeId = result.grade, let gradePoint = result.gradePoint {
-                HStack(content: {
-                    Text(gradeId.localizedText)
-                    Text("\(gradePoint)")
-                    Spacer()
+        ZStack(alignment: .center, content: {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.black.opacity(0.7))
+            VStack(alignment: .leading, spacing: 0, content: {
+                HStack(alignment: .center, spacing: nil, content: {
+                    Text(String(format: "%@", result.grade?.localizedText))
+                    Text(String(format: "%d", result.gradePoint))
                 })
                 .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
-                .frame(height: 18 * scale)
-            } else {
-                HStack(content: {
-                    Spacer()
+                .font(systemName: .Splatfont2, size: 12)
+                .padding(.bottom, 5)
+                ZStack(alignment: .leading, content: {
+                    GeometryReader(content: { geometry in
+                        Rectangle()
+                            .fill(Color.white.opacity(0.2))
+                        Rectangle()
+                            .fill(SPColor.SplatNet3.SPSalmonOrange)
+                            .frame(width: geometry.width * CGFloat(result.gradePoint ?? 0) / (result.grade == .Eggsecutive_VP ? 999 : 100))
+                    })
                 })
-                .frame(height: 18 * scale)
-            }
-            HStack(content: {
-                HStack(spacing: 4 * scale, content: {
-                    Image(bundle: .Golden)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 18 * scale, height: 18 * scale, alignment: .center)
-                    Text("x\(String(format: "%d", result.goldenIkuraNum))")
-                })
-                HStack(spacing: 4 * scale, content: {
-                    Image(bundle: .Power)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 18 * scale, height: 18 * scale, alignment: .center)
-                    Text("x\(String(format: "%d", result.ikuraNum))")
-                })
-            })
-            .foregroundColor(.white)
-            .frame(height: 20 * scale)
-            HStack(content: {
-                ForEach(ScaleType.allCases) { scaleId in
-                    HStack(spacing: 4 * scale, content: {
-                        Image(bundle: scaleId)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .frame(maxWidth: 170)
+                .frame(height: 10)
+                .padding(.bottom, 10)
+                HStack(spacing: nil, content: {
+                    HStack(spacing: 2, content: {
+                        Image(bundle: .GoldenIkura)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 18 * scale, height: 18 * scale, alignment: .center)
-                        if let count: Int = result.scale[scaleId.rawValue] {
-                            Text("x\(count)")
-                                .frame(minWidth: 24 * scale)
-                        } else {
-                            Text("-")
-                                .frame(minWidth: 24 * scale)
-                        }
+                            .frame(height: 16)
+                        Text(String(format: "x%d", result.ikuraNum))
+                            .font(systemName: .Splatfont2, size: 12)
                     })
-                }
+                    HStack(spacing: 2, content: {
+                        Image(bundle: .Ikura)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 16)
+                        Text(String(format: "x%d", result.ikuraNum))
+                            .font(systemName: .Splatfont2, size: 12)
+                    })
+                })
+                .frame(height: 17.5)
+                .padding(.bottom, 5)
+                HStack(spacing: 10, content: {
+                    ForEach(result.scale.indices, id: \.self) { index in
+                        let scale: Int? = result.scale[index]
+                        let type: ScaleType = ScaleType.allCases[index]
+                        HStack(spacing: 2, content: {
+                            Image(bundle: type)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 16)
+                            Text(String(format: "x%d", scale))
+                                .font(systemName: .Splatfont2, size: 12)
+                        })
+                    }
+                })
+                .frame(height: 17.5)
             })
-            .foregroundColor(.white)
-            .frame(height: 20 * scale)
+            .padding(10)
+            .frame(height: 96.5)
         })
-        .font(systemName: .Splatfont2, size: 14 * scale)
-        .padding(.top, 4 * scale)
-        .padding(.horizontal, 10 * scale)
-        .padding(.bottom, 4 * scale)
-        .frame(height: 70 * scale)
-        .aspectRatio(200/70, contentMode: .fit)
-        .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPBackground).overlay(Image(bundle: .WAVE_BACKGROUND).resizable().scaledToFill()).clipped())
+        .foregroundColor(.white)
     }
 }
 
@@ -178,19 +164,8 @@ struct ResultScore_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
-        ResultScorePoint(result: result)
-            .environment(\.scale, 1.0)
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 200, height: 70))
-        ResultScorePoint(result: result)
-            .environment(\.scale, 0.8)
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 160, height: 56))
         ResultScore(result: result)
             .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 400, height: 200))
-        ResultScore(result: result)
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 360, height: 180))
+            .previewLayout(.fixed(width: 360, height: 200))
     }
 }

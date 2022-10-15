@@ -20,6 +20,7 @@ struct ThemeView: View {
             })
             .padding(.horizontal)
         })
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(localizedText: "TITLE_APPEARANCE"))
     }
 }

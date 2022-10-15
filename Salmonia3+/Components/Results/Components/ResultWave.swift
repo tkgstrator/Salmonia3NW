@@ -16,78 +16,79 @@ struct ResultWave: View {
     }
 }
 
+private extension View {
+    func waterLevelSP2(waterLevel: WaterType) -> some View {
+        let height: CGFloat = {
+            switch waterLevel {
+            case .Low_Tide:
+                return 151.98 * (1 - 0.1)
+            case .Middle_Tide:
+                return 151.98 * (1 - 0.24)
+            case .High_Tide:
+                return 151.98 * (1 - 0.45)
+            }
+        }()
+        return self.overlay(Image(bundle: .Wave)
+            .resizable()
+            .opacity(0.2)
+            .offset(x: 0, y: height),
+                     alignment: .bottom)
+    }
+
+    func waterLevelSP3(waterLevel: WaterType) -> some View {
+        let height: CGFloat = {
+            switch waterLevel {
+            case .Low_Tide:
+                return 135 * (1 - 0.10)
+            case .Middle_Tide:
+                return 135 * (1 - 0.30)
+            case .High_Tide:
+                return 135 * (1 - 0.50)
+            }
+        }()
+        return self.overlay(Image(bundle: .Wave)
+            .resizable()
+            .opacity(0.2)
+            .offset(x: 0, y: height),
+                     alignment: .bottom)
+    }
+}
+
 private struct ResultWaveSplatNet2: View {
     let wave: RealmCoopWave
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            let scale: CGFloat = geometry.width / 124
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: 3).fill(SPColor.SplatNet2.SPYellow)
-                    .mask(Hanger().scaledToFill())
-                    .overlay(Image(bundle: .WAVE).resizable().scaledToFill())
-                    .overlay(WaterLevel().fill(.black.opacity(0.2)).offset(x: 0, y: wave.waterLevel.height * scale).clipped())
-                    .clipShape(RoundedRectangle(cornerRadius: 3))
-                VStack(alignment: .center, spacing: 0, content: {
-                    let waveId: LocalizedText = {
-                        switch wave.id {
-                        case 1:
-                            return .CoopHistory_Wave1
-                        case 2:
-                            return .CoopHistory_Wave2
-                        case 3:
-                            return .CoopHistory_Wave3
-                        default:
-                            return .CoopHistory_ExWave
-                        }
-                    }()
-                    Text(bundle: waveId)
-                        .font(systemName: .Splatfont2, size: 17 * scale)
-                        .frame(height: 25 * scale, alignment: .center)
-                        .foregroundColor(.black)
-                    ZStack(content: {
-                        Rectangle().fill(SPColor.SplatNet2.SPBackground)
-                        if let goldenIkuraNum = wave.goldenIkuraNum, let quotaNum = wave.quotaNum {
-                            Text("\(goldenIkuraNum)/\(quotaNum)")
-                                .font(systemName: .Splatfont2, size: 25 * scale)
-                                .frame(height: 36.5 * scale, alignment: .center)
-                                .foregroundColor(.white)
-                        } else {
-                            Text(SakelienType.SakelienGiant.localizedText)
-                                .font(systemName: .Splatfont2, size: 25 * scale)
-                                .frame(height: 36.5 * scale, alignment: .center)
-                                .foregroundColor(.red)
-                        }
-                    })
-                    .padding(.top, 2 * scale)
-                    .frame(height: 36.5 * scale, alignment: .center)
-                    Text(wave.waterLevel.localizedText)
-                        .font(systemName: .Splatfont2, size: 16 * scale)
-                        .foregroundColor(.black)
-                        .frame(height: 16 * scale)
-                        .padding(.top, 8)
-                    Text(wave.eventType.localizedText)
-                        .font(systemName: .Splatfont2, size: 16 * scale)
-                        .foregroundColor(.black)
-                        .frame(height: 16 * scale)
-                        .padding(.top, 8)
-                    HStack(spacing: nil, content: {
-                        Image(bundle: .Golden)
-                            .resizable()
-                            .frame(width: 20 * scale, height: 20 * scale, alignment: .center)
-                        Text("x\(wave.goldenIkuraPopNum)")
-                            .font(systemName: .Splatfont2, size: 16 * scale)
-                            .frame(height: 16 * scale)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 0, x: 1, y: 1)
-                    })
-                    .padding(.top, 4)
+        ZStack(content: {
+            RoundedRectangle(cornerRadius: 3)
+                .fill(SPColor.SplatNet2.SPYellow)
+                .mask(Image(bundle: .Hanger).resizable().scaledToFill().clipped())
+                .overlay(Image(bundle: .WAVE).resizable())
+                .waterLevelSP2(waterLevel: wave.waterLevel)
+            VStack(alignment: .center, spacing: 0, content: {
+                Text(bundle: .CoopHistory_Wave1)
+                    .font(systemName: .Splatfont2, size: 17)
+                    .foregroundColor(.black)
+                    .padding(.bottom, 3)
+                ZStack(alignment: .center, content: {
+                    Rectangle().fill(SPColor.SplatNet2.SPBackground)
+                        .frame(height: 36.5)
+                    if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
+                        Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                            .font(systemName: .Splatfont2, size: 25)
+                    }
                 })
+                .padding(.bottom, 6)
+                Text(wave.waterLevel.localizedText)
+                    .foregroundColor(.black)
+                    .font(systemName: .Splatfont2, size: 14)
+                    .padding(.top, 8)
+                Text(wave.eventType.localizedText)
+                    .foregroundColor(.black)
+                    .font(systemName: .Splatfont2, size: 14)
+                    .padding(.top, 8)
             })
-            .overlay(Image(bundle: wave.isClearWave ? .CLEAR : .FAILURE).resizable().frame(width: 34 * scale, height: 34 * scale, alignment: .topTrailing).offset(x: 12 * scale, y: -17 * scale), alignment: .topTrailing)
         })
-        .aspectRatio(124/160, contentMode: .fit)
-        .padding(.top, 10)
+        .aspectRatio(123.99/151.98, contentMode: .fit)
     }
 }
 
@@ -106,90 +107,73 @@ private struct ResultWaveSplatNet3: View {
     let wave: RealmCoopWave
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            ZStack(alignment: .top, content: {
-                ZStack(content: {
-                    Rectangle()
-                        .fill(SPColor.SplatNet3.SPYellow)
-                    Rectangle()
-                        .fill(Color.clear)
-                        .border(.black, width: 1)
-                    WaterLevel()
-                        .fill(.black.opacity(0.2))
-                        .offset(x: 0, y: wave.waterLevel.height)
+        ZStack(content: {
+            Rectangle()
+                .fill(SPColor.SplatNet3.SPYellow)
+                .waterLevelSP3(waterLevel: wave.waterLevel)
+            VStack(alignment: .center, spacing: 0, content: {
+                Text(bundle: .CoopHistory_Wave1)
+                    .font(systemName: .Splatfont2, size: 13)
+                    .foregroundColor(.black)
+                    .padding(.top, 7)
+                    .padding(.bottom, 4)
+                ZStack(alignment: .center, content: {
+                    Rectangle().fill(Color.black.opacity(0.8))
+                        .frame(height: 25)
+                    if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
+                        Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                            .font(systemName: .Splatfont2, size: 17)
+                    }
                 })
-                VStack(alignment: .center, spacing: 4, content: {
-                    Text(bundle: .CoopHistory_Wave1)
-                        .foregroundColor(.black)
-                        .font(systemName: .Splatfont2, size: 15)
-                        .padding(.top, 8)
-                    Group(content: {
-                        if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
-                            Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
-                                .foregroundColor(.white)
-                        } else {
-                            Text(SakelienType.SakelienGiant.localizedText)
-                                .foregroundColor(.white)
-                        }
-                    })
-                    .font(systemName: .Splatfont2, size: 18)
-                    .padding(.vertical, 4)
-                    .frame(maxWidth: .infinity)
-                    .background(Rectangle().fill(SPColor.SplatNet3.SPBackground))
+                VStack(alignment: .center, spacing: 0, content: {
                     Text(wave.waterLevel.localizedText)
                         .foregroundColor(.black)
-                        .font(systemName: .Splatfont2, size: 13)
+                        .font(systemName: .Splatfont2, size: 12)
+                        .padding(.bottom, 6)
                     Text(wave.eventType.localizedText)
                         .foregroundColor(.black)
-                        .font(systemName: .Splatfont2, size: 13)
-                    Label(title: {
-                        Text(String(format: "x%d", wave.goldenIkuraPopNum))
-                            .foregroundColor(SPColor.SplatNet3.SPBackground)
-                            .font(systemName: .Splatfont2, size: 13)
-                    }, icon: {
+                        .font(systemName: .Splatfont2, size: 12)
+                        .padding(.bottom, 6)
+                })
+                .padding(.vertical, 10)
+                VStack(alignment: .center, spacing: 0, content: {
+                    HStack(alignment: .center, spacing: 2, content: {
                         Image(bundle: .GoldenIkura)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 24, height: 24, alignment: .center)
+                            .frame(width: 16, height: 16, alignment: .center)
+                        Text(String(format: "x%d", wave.goldenIkuraPopNum))
+                            .foregroundColor(Color.black.opacity(0.6))
+                            .font(systemName: .Splatfont2, size: 11)
                     })
+                    Text(bundle: .CoopHistory_Available)
+                        .foregroundColor(Color.black.opacity(0.6))
+                        .font(systemName: .Splatfont2, size: 9)
+                        .padding(.bottom, 5)
                 })
             })
         })
-        .aspectRatio(124/160, contentMode: .fit)
-    }
-}
-
-private extension WaterType {
-    var height: CGFloat {
-        switch self {
-        case .Low_Tide:
-            return 130
-        case .Middle_Tide:
-            return 105
-        case .High_Tide:
-            return 80
-        }
+        .aspectRatio(105/135, contentMode: .fit)
     }
 }
 
 struct CoopWave_Previews: PreviewProvider {
     static var previews: some View {
-        LazyVGrid(columns: Array(repeating: .init(spacing: 0), count: 4), content: {
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1), count: 4), content: {
             ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
             ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
             ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
             ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
         })
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .previewLayout(.fixed(width: 460, height: 250))
+        .previewLayout(.fixed(width: 600, height: 250))
         .preferredColorScheme(.dark)
-        LazyVGrid(columns: Array(repeating: .init(), count: 4), content: {
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 123.99), spacing: 8), count: 4), content: {
             ResultWave(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
             ResultWave(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
             ResultWave(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
             ResultWave(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
         })
-        .previewLayout(.fixed(width: 460, height: 250))
+        .previewLayout(.fixed(width: 600, height: 250))
         .preferredColorScheme(.dark)
     }
 }

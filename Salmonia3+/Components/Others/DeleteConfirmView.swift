@@ -19,6 +19,7 @@ struct DeleteConfirmView: View {
                 IconList.Results()
             })
         })
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(localizedText: "TITLE_ERASE"))
     }
 }

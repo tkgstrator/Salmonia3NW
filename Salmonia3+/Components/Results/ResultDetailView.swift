@@ -66,9 +66,6 @@ struct ResultDetailView: View {
                 ResultHeader(result: result)
                     .scaledToFill()
                 ResultScore(result: result)
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: maxWidth + 60)
                 LazyVGrid(
                     columns: Array(repeating: .init(.flexible(maximum: 120), spacing: 2, alignment: .top), count: result.waves.count),
                     alignment: .center,
@@ -108,6 +105,5 @@ struct ResultDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
         ResultDetailView(result: result, schedule: schedule)
-            .previewLayout(.fixed(width: 390, height: 844))
     }
 }
