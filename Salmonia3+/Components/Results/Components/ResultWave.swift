@@ -74,6 +74,7 @@ private struct ResultWaveSplatNet2: View {
                         .frame(height: 36.5)
                     if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
                         Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                            .foregroundColor(.white)
                             .font(systemName: .Splatfont2, size: 25)
                     }
                 })

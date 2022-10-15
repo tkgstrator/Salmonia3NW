@@ -322,11 +322,11 @@
 		100E875128D4B90E007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				100E875928D4D4DB007FCF3C /* ResultWave.swift */,
+				100E876228D4E8EF007FCF3C /* ResultPlayer.swift */,
 				100E876C28D4FE13007FCF3C /* ResultEgg.swift */,
 				100E877228D506F3007FCF3C /* ResultStatus.swift */,
 				100E875228D4B91A007FCF3C /* ResultHeader.swift */,
-				100E875928D4D4DB007FCF3C /* ResultWave.swift */,
-				100E876228D4E8EF007FCF3C /* ResultPlayer.swift */,
 				100E876628D4EB5C007FCF3C /* ResultWeapon.swift */,
 				100E876A28D4FC62007FCF3C /* ResultDefeated.swift */,
 				100E877028D504C3007FCF3C /* ResultSakelien.swift */,
