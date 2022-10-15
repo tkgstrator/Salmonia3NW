@@ -108,6 +108,6 @@ struct ResultDetailView_Previews: PreviewProvider {
 
     static var previews: some View {
         ResultDetailView(result: result, schedule: schedule)
-//            .previewLayout(.fixed(width: 390, height: 844))
+            .previewLayout(.fixed(width: 390, height: 844))
     }
 }

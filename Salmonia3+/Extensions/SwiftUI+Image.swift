@@ -42,6 +42,8 @@ enum ButtonType: String, CaseIterable, Codable {
     case Home
     case User
     case Privacy
+    case Rescue
+    case Death
 }
 
 extension Image {

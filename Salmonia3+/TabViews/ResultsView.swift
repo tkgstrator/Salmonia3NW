@@ -21,24 +21,21 @@ struct ResultsView: View {
 
     var body: some View {
         List(content: {
-            if !schedules.isEmpty {
-                ForEach(schedules) { schedule in
-                    if !schedule.results.isEmpty {
-                        ScheduleView(schedule: schedule)
-                        ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
-                            NavigationLinker(destination: {
-                                ResultTabView(results: schedule.results)
-                                    .environment(\.selection, .constant(result.id))
-                            }, label: {
-                                ResultView(result: result)
-                            })
-                        }
+            ForEach(schedules) { schedule in
+                if !schedule.results.isEmpty {
+                    ScheduleView(schedule: schedule)
+                    ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
+                        NavigationLinker(destination: {
+                            ResultTabView(results: schedule.results)
+                                .environment(\.selection, .constant(result.id))
+                        }, label: {
+                            ResultView(result: result)
+                        })
                     }
                 }
-            } else {
-                PullToRefreshView()
             }
         })
+        .pullToRefresh(enabled: schedules.isEmpty)
         .onChange(of: selection, perform: { newValue in
             /// モードが切り替わったときにフィルターをかける
             $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
@@ -70,6 +67,12 @@ struct ResultsView: View {
         .listStyle(.plain)
         .navigationTitle(Text(mode: selection))
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private extension View {
+    func pullToRefresh(enabled: Bool) -> some View {
+        self.overlay(enabled ? AnyView(PullToRefreshView()) : AnyView(EmptyView()))
     }
 }
 

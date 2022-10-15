@@ -69,6 +69,7 @@
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		10343BC028EF127500D0C78F /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10343BBF28EF127500D0C78F /* PullToRefresh.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
+		105A9F5728FA40C200F4B3C8 /* ResultPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A9F5628FA40C200F4B3C8 /* ResultPlayers.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
 		1098543628F5D29000E1E22F /* GradePointChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543528F5D29000E1E22F /* GradePointChartView.swift */; };
 		1098543828F66D1700E1E22F /* ScaleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543728F66D1700E1E22F /* ScaleChartView.swift */; };
@@ -203,6 +204,7 @@
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		10343BBF28EF127500D0C78F /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
+		105A9F5628FA40C200F4B3C8 /* ResultPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPlayers.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
 		1098543528F5D29000E1E22F /* GradePointChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePointChartView.swift; sourceTree = "<group>"; };
 		1098543728F66D1700E1E22F /* ScaleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleChartView.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				100E875128D4B90E007FCF3C /* Components */,
 				100E873428D47DD1007FCF3C /* ResultView.swift */,
 				100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */,
+				105A9F5628FA40C200F4B3C8 /* ResultPlayers.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
 				10E3192328F271F9009C6BBC /* Ark.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
+				105A9F5728FA40C200F4B3C8 /* ResultPlayers.swift in Sources */,
 				1018B4AD28DAC394002BD1F0 /* Secrets.swift in Sources */,
 				100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */,
 				100E872F28D47966007FCF3C /* RealmCoopSchedule.swift in Sources */,
@@ -1043,7 +1047,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1061,7 +1065,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1077,7 +1081,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1095,7 +1099,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;

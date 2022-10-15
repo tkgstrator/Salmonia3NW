@@ -18,10 +18,10 @@ struct ResultStatus: View {
             let scale: CGFloat = geometry.width / 160
             HStack(spacing: 3, content: {
                 HStack(spacing: -10, content: {
-                    Image(bundle: .Rescue)
+                    Image(bundle: ButtonType.Rescue)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 33.4 * scale)
+                        .scaledToFit()
+                        .frame(height: 16 * scale)
                     Spacer()
                     Text(String(format: "x%2d", helpCount))
                         .foregroundColor(SPColor.SplatNet2.SPWhite)
@@ -30,10 +30,10 @@ struct ResultStatus: View {
                 .frame(height: 24 * scale)
                 .background(Capsule().fill(Color.black.opacity(0.75)))
                 HStack(spacing: -10, content: {
-                    Image(bundle: .Death)
+                    Image(bundle: ButtonType.Death)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 33.4 * scale)
+                        .scaledToFit()
+                        .frame(height: 16 * scale)
                     Spacer()
                     Text(String(format: "x%2d", deadCount))
                         .foregroundColor(SPColor.SplatNet2.SPWhite)

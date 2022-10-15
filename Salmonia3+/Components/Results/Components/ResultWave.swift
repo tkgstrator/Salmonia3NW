@@ -12,6 +12,14 @@ struct ResultWave: View {
     let wave: RealmCoopWave
 
     var body: some View {
+        ResultWaveSplatNet2(wave: wave)
+    }
+}
+
+private struct ResultWaveSplatNet2: View {
+    let wave: RealmCoopWave
+
+    var body: some View {
         GeometryReader(content: { geometry in
             let scale: CGFloat = geometry.width / 124
             ZStack(content: {
@@ -83,6 +91,74 @@ struct ResultWave: View {
     }
 }
 
+private struct WaveResult: View {
+    let isClear: Bool
+
+    var body: some View {
+        let color: Color = isClear ? SPColor.SplatNet3.SPSalmonGreen : SPColor.SplatNet3.SPSalmonOrange
+        let localizedText: LocalizedText = isClear ? .CoopHistory_Gj : .CoopHistory_Ng
+
+        Text(bundle: localizedText)
+    }
+}
+
+private struct ResultWaveSplatNet3: View {
+    let wave: RealmCoopWave
+
+    var body: some View {
+        GeometryReader(content: { geometry in
+            ZStack(alignment: .top, content: {
+                ZStack(content: {
+                    Rectangle()
+                        .fill(SPColor.SplatNet3.SPYellow)
+                    Rectangle()
+                        .fill(Color.clear)
+                        .border(.black, width: 1)
+                    WaterLevel()
+                        .fill(.black.opacity(0.2))
+                        .offset(x: 0, y: wave.waterLevel.height)
+                })
+                VStack(alignment: .center, spacing: 4, content: {
+                    Text(bundle: .CoopHistory_Wave1)
+                        .foregroundColor(.black)
+                        .font(systemName: .Splatfont2, size: 15)
+                        .padding(.top, 8)
+                    Group(content: {
+                        if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
+                            Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                                .foregroundColor(.white)
+                        } else {
+                            Text(SakelienType.SakelienGiant.localizedText)
+                                .foregroundColor(.white)
+                        }
+                    })
+                    .font(systemName: .Splatfont2, size: 18)
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+                    .background(Rectangle().fill(SPColor.SplatNet3.SPBackground))
+                    Text(wave.waterLevel.localizedText)
+                        .foregroundColor(.black)
+                        .font(systemName: .Splatfont2, size: 13)
+                    Text(wave.eventType.localizedText)
+                        .foregroundColor(.black)
+                        .font(systemName: .Splatfont2, size: 13)
+                    Label(title: {
+                        Text(String(format: "x%d", wave.goldenIkuraPopNum))
+                            .foregroundColor(SPColor.SplatNet3.SPBackground)
+                            .font(systemName: .Splatfont2, size: 13)
+                    }, icon: {
+                        Image(bundle: .GoldenIkura)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24, alignment: .center)
+                    })
+                })
+            })
+        })
+        .aspectRatio(124/160, contentMode: .fit)
+    }
+}
+
 private extension WaterType {
     var height: CGFloat {
         switch self {
@@ -97,8 +173,16 @@ private extension WaterType {
 }
 
 struct CoopWave_Previews: PreviewProvider {
-
     static var previews: some View {
+        LazyVGrid(columns: Array(repeating: .init(spacing: 0), count: 4), content: {
+            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
+            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
+            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
+            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
+        })
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .previewLayout(.fixed(width: 460, height: 250))
+        .preferredColorScheme(.dark)
         LazyVGrid(columns: Array(repeating: .init(), count: 4), content: {
             ResultWave(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
             ResultWave(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
