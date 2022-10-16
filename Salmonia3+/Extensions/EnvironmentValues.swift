@@ -8,25 +8,24 @@
 import Foundation
 import SwiftUI
 
+enum ResultStyle: CaseIterable {
+    case SPLATNET2
+    case SPLATNET3
+}
+
+struct ResultFormatType: EnvironmentKey {
+    typealias Value = ResultStyle
+
+    static var defaultValue: ResultStyle = .SPLATNET3
+}
+
 struct IsNameVisible: EnvironmentKey {
     typealias Value = Bool
 
     static var defaultValue: Bool = true
 }
 
-struct IsFirstLaunch: EnvironmentKey {
-    typealias Value = Binding<Bool>
-
-    static var defaultValue: Binding<Bool> = .constant(true)
-}
-
 struct IsModalPresented: EnvironmentKey {
-    typealias Value = Binding<Bool>
-
-    static var defaultValue: Binding<Bool> = .constant(false)
-}
-
-struct IsOAuthPresented: EnvironmentKey {
     typealias Value = Binding<Bool>
 
     static var defaultValue: Binding<Bool> = .constant(false)
@@ -66,23 +65,16 @@ struct ResultRule: EnvironmentKey {
     typealias Value = ResultRuleAction
 
     static var defaultValue: ResultRuleAction = ResultRuleAction(.CoopHistory_Regular)
-
-}
-
-struct ScaleForView: EnvironmentKey {
-    typealias Value = CGFloat
-
-    static var defaultValue: CGFloat = 1.0
 }
 
 extension EnvironmentValues {
-    /// モーダルが表示されているかどうかを取得する環境変数
-    var resultRule: ResultRuleAction {
+    var resultStyle: ResultStyle {
         get {
-            return self[ResultRule.self]
+            return self[ResultFormatType.self]
         }
+
         set {
-            self[ResultRule.self] = newValue
+            self[ResultFormatType.self] = newValue
         }
     }
 
@@ -93,25 +85,6 @@ extension EnvironmentValues {
         }
         set {
             self[IsModalPresented.self] = newValue
-        }
-    }
-
-    var isOAuthPresented: Binding<Bool> {
-        get {
-            return self[IsOAuthPresented.self]
-        }
-        set {
-            self[IsOAuthPresented.self] = newValue
-        }
-    }
-
-    /// 初回起動かどうかを取得する環境変数
-    var isFirstLaunch: Binding<Bool> {
-        get {
-            return self[IsFirstLaunch.self]
-        }
-        set {
-            self[IsFirstLaunch.self] = newValue
         }
     }
 
@@ -129,14 +102,5 @@ extension EnvironmentValues {
     var selection: Binding<String> {
         get { self[TabSelectionKey.self] }
         set { self[TabSelectionKey.self] = newValue }
-    }
-
-    var scale: CGFloat {
-        get {
-            return self[ScaleForView.self]
-        }
-        set {
-            self[ScaleForView.self] = newValue
-        }
     }
 }

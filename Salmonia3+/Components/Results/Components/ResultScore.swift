@@ -12,7 +12,7 @@ struct ResultScore: View {
     let result: RealmCoopResult
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(), spacing: nil), count: 2), content: {
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 200), spacing: 9), count: 2), content: {
             ResultScoreScale(result: result)
             ResultScorePoint(result: result)
         })
@@ -22,7 +22,6 @@ struct ResultScore: View {
 }
 
 private struct ResultScorePoint: View {
-    @Environment(\.scale) var scale: CGFloat
     let result: RealmCoopResult
 
     var body: some View {
@@ -85,7 +84,6 @@ private extension String {
 }
 
 private struct ResultScoreScale: View {
-    @Environment(\.scale) var scale: CGFloat
     let result: RealmCoopResult
 
     var body: some View {
@@ -119,9 +117,10 @@ private struct ResultScoreScale: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 16)
-                        Text(String(format: "x%d", result.ikuraNum))
+                        Text(String(format: "x%d", result.goldenIkuraNum))
                             .font(systemName: .Splatfont2, size: 12)
                     })
+                    Spacer()
                     HStack(spacing: 2, content: {
                         Image(bundle: .Ikura)
                             .resizable()
@@ -131,9 +130,9 @@ private struct ResultScoreScale: View {
                             .font(systemName: .Splatfont2, size: 12)
                     })
                 })
-                .frame(height: 17.5)
+                .frame(width: 126, height: 17.5)
                 .padding(.bottom, 5)
-                HStack(spacing: 10, content: {
+                HStack(spacing: 6, content: {
                     ForEach(result.scale.indices, id: \.self) { index in
                         let scale: Int? = result.scale[index]
                         let type: ScaleType = ScaleType.allCases[index]
@@ -145,9 +144,10 @@ private struct ResultScoreScale: View {
                             Text(String(format: "x%d", scale))
                                 .font(systemName: .Splatfont2, size: 12)
                         })
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 })
-                .frame(height: 17.5)
+                .frame(width: 126, height: 17.5)
             })
             .padding(10)
             .frame(height: 96.5)

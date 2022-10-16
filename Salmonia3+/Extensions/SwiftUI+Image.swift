@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+enum BackgroundType: String, CaseIterable, Codable {
+    case SPLATNET2 = "SplatNet2"
+    case SPLATNET3 = "SplatNet3"
+}
+
 enum ResultType: Int, CaseIterable, Codable {
     case FAILURE
     case CLEAR
@@ -49,7 +54,11 @@ enum ButtonType: String, CaseIterable, Codable {
 }
 
 extension Image {
-    init(bundle :ButtonType) {
+    init(bundle: BackgroundType) {
+        self.init("BackgroundType/\(bundle.rawValue)", bundle: .main)
+    }
+
+    init(bundle: ButtonType) {
         self.init("ButtonType/\(bundle.rawValue)", bundle: .main)
     }
 

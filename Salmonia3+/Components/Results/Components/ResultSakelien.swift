@@ -20,46 +20,46 @@ struct ResultSakelien: View {
     }
 
     var body: some View {
-        VStack(spacing: 6, content: {
-            ForEach(bossCounts.indices, id: \.self) { index in
-                let bossCount: [Int] = bossCounts[index]
-                let sakelienType: SakelienType = SakelienType.allCases[index]
-                if bossCount[2] != 0 {
-                    HStack(spacing: 10, content: {
-                        Image(bundle: sakelienType)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 40, height: 40, alignment: .center)
-                            .padding(2)
-                            .background(Circle().fill(SPColor.SplatNet3.SPBackground))
-                        Text(sakelienType.localizedText)
-                            .font(systemName: .Splatfont2, size: 18)
-                            .foregroundColor(.white)
-                            .frame(height: 16, alignment: .center)
-                        Spacer()
-                        HStack(alignment: .firstTextBaseline, spacing: 2, content: {
-                            Text(String(format: "%02d", bossCount[0]))
-                                .frame(minWidth: 30)
-                                .font(systemName: .Splatfont2, size: 18)
-                            Text(String(format: "(%02d)", bossCount[1]))
-                                .frame(minWidth: 34)
-                                .font(systemName: .Splatfont2, size: 14)
-                            Text(String(format: "/%02d", bossCount[2]))
-                                .font(systemName: .Splatfont2, size: 18)
-                                .frame(minWidth: 34)
+        LazyVGrid(
+            columns: Array(repeating: .init(.flexible()), count: 1),
+            spacing: 4,
+            content: {
+                ForEach(SakelienType.allCases.indices, id: \.self) { index in
+                    let sakelien: SakelienType = SakelienType.allCases[index]
+                    if bossCounts[index][2] != 0 {
+                        HStack(alignment: .center, spacing: 0, content: {
+                            HStack(alignment: .center, spacing: 0, content: {
+                                Image(bundle: sakelien)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 45, height: 45, alignment: .center)
+                                    .padding(.trailing, 5)
+                                Text(sakelien.localizedText)
+                            })
+                            .frame(maxWidth: 240, alignment: .leading)
+                            .padding(.trailing, 10)
+                            HStack(alignment: .bottom, spacing: 0, content: {
+                                Text(String(format: "%02d", bossCounts[index][0]))
+                                    .frame(minWidth: 24, alignment: .leading)
+                                Text(String(format: "(%02d)", bossCounts[index][1]))
+                                    .frame(minWidth: 26, alignment: .leading)
+                                    .font(systemName: .Splatfont2, size: 11)
+                                Text("/")
+                                    .padding(.horizontal, 5)
+                                Text(String(format: "x%02d", bossCounts[index][2]))
+                                    .frame(minWidth: 32, alignment: .trailing)
+                            })
                         })
-                        .foregroundColor(.white)
-                        .frame(height: 18)
-                    })
-                    if index != bossCounts.count {
-                        Divider()
-                            .frame(height: 1.2)
-                            .background(.white)
                     }
                 }
-            }
-        })
-        .frame(maxWidth: 340)
+                .foregroundColor(Color.white)
+                .font(systemName: .Splatfont2, size: 15)
+            })
+        .padding(.horizontal, 15.2)
+        .padding(.vertical, 10)
+        .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.4)))
+        .frame(maxWidth: 380)
+        .padding(.horizontal, 10)
     }
 }
 

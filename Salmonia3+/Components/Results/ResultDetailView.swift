@@ -26,7 +26,7 @@ struct ResultTabView: View {
     var body: some View {
         TabView(selection: selected, content: {
             ForEach(results.reversed()) { result in
-                ResultDetailView(result: result, schedule: result.schedule)
+                ResultDetailView(result: result)
                     .environment(\.isNameVisible, isNameVisible)
                     .tag(result.id)
             }
@@ -51,51 +51,40 @@ struct ResultTabView: View {
     }
 }
 
-struct ResultDetailView: View {
+private struct ResultDetailView: View {
+    @State private var resultStyle: ResultStyle = .SPLATNET3
     let result: RealmCoopResult
-    let schedule: RealmCoopSchedule
-    let maxWidth: CGFloat = 340
-
-    func refresh(sender: UIRefreshControl) {
-        sender.endRefreshing()
-    }
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
-            VStack(content: {
+            VStack(spacing: 0, content: {
                 ResultHeader(result: result)
-                    .scaledToFill()
                 ResultScore(result: result)
-                LazyVGrid(
-                    columns: Array(repeating: .init(.flexible(maximum: 120), spacing: 2, alignment: .top), count: result.waves.count),
-                    alignment: .center,
-                    spacing: 0,
-                    content: {
-                        ForEach(result.waves, id: \.self) { wave in
-                            VStack(content: {
-                                ResultWave(wave: wave)
-                                ResultSpecial(result: wave)
-                            })
-                        }
-                    })
-                LazyVGrid(
-                    columns: Array(repeating: .init(.flexible(), spacing: nil), count: 1),
-                    alignment: .center,
-                    spacing: nil,
-                    content: {
-                        ForEach(result.players, id: \.self) { player in
-                            ResultPlayer(result: player)
-                                .frame(maxWidth: maxWidth)
-                        }
-                    })
-                .padding(.horizontal)
+                ResultWaves(result: result)
+                    .environment(\.resultStyle, resultStyle)
+                ResultPlayers(result: result)
+                    .environment(\.resultStyle, resultStyle)
                 ResultSakelien(result: result)
-                    .padding(.horizontal)
             })
         })
-        .background(Image("BackgroundType/SplatNet3", bundle: .main)
-            .resizable(resizingMode: .tile)
-            .overlay(Color.black.opacity(0.3)))
+        .background(ResultBackground())
+    }
+}
+
+#warning("ここ、ちょっと改良したい")
+private struct ResultBackground: View {
+    var body: some View {
+        ZStack(alignment: .top, content: {
+            Color(hex: "292E35")
+//                .ignoresSafeArea()
+//            Color(hex: "141212")
+                .ignoresSafeArea()
+//                .frame(maxHeight: 540)
+//            Image(bundle: BackgroundType.SPLATNET3)
+//                .resizable(resizingMode: .tile)
+//                .frame(maxHeight: 540)
+//                .opacity(0.35)
+        })
     }
 }
 
@@ -104,6 +93,6 @@ struct ResultDetailView_Previews: PreviewProvider {
     static private let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
 
     static var previews: some View {
-        ResultDetailView(result: result, schedule: schedule)
+        ResultDetailView(result: result)
     }
 }

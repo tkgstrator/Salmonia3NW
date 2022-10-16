@@ -7,44 +7,36 @@
 
 import SwiftUI
 import SplatNet3
+import RealmSwift
 
-struct ResultPlayer: View {
-    @AppStorage("IS_USE_NAMEPLATE") var isUseNamePlate: Bool = false
-    @Environment(\.isNameVisible) var isNameVisible: Bool
-    let result: RealmCoopPlayer
+struct ResultPlayers: View {
+    @Environment(\.resultStyle) var resultStyle
+    let result: RealmCoopResult
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            let scale: CGFloat = geometry.width / 356
-            ZStack(alignment: .bottom, content: {
-                Salmon()
-                    .fill(SPColor.SplatNet2.SPOrange)
-                HStack(alignment: .bottom, spacing: 0, content: {
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Text((isNameVisible || result.isMyself) ? result.name : "-")
-                            .font(systemName: .Splatfont2, size: 17 * scale)
-                            .foregroundColor(.white)
-                            .shadow(color: .black, radius: 0 * scale, x: 1 * scale, y: 1 * scale)
-                            .frame(height: 18 * scale)
-                        ResultWeapon(weaponList: result.weaponList, specialWeapon: result.specialId)
-                        ResultDefeated(bossKillCountsTotal: result.bossKillCountsTotal)
-                    })
-                    .padding(.leading, 12 * scale)
-                    VStack(alignment: .trailing, spacing: 2 * scale, content: {
-                        ResultEgg(ikuraNum: result.ikuraNum, goldenIkuraNum: result.goldenIkuraNum, goldenIkuraAssistNum: result.goldenIkuraAssistNum)
-                        ResultStatus(deadCount: result.deadCount, helpCount: result.helpCount)
-                    })
-                    .frame(width: 160 * scale, height: 51 * scale)
-                    .padding(.trailing, 16 * scale)
-                })
-                .padding(.bottom, 4 * scale)
+        let spacing: CGFloat = resultStyle == .SPLATNET2 ? 9 : 1
+        let maximum: CGFloat = resultStyle == .SPLATNET2 ? 356 : 420
+        LazyVGrid(
+            columns: Array(repeating: .init(.flexible(maximum: maximum)), count: 1),
+            alignment: .center,
+            spacing: spacing,
+            content: {
+                ForEach(result.players) { player in
+                    switch resultStyle {
+                    case .SPLATNET2:
+                        ResultPlayerSplatNet2(result: player)
+                    case .SPLATNET3:
+                        ResultPlayerSplatNet3(result: player)
+                            .cornerRadius(10, corners: result.players.corner(of: player))
+                    }
+                }
             })
-        })
-        .aspectRatio(356/99.5, contentMode: .fit)
+        .padding(.horizontal, 10)
+        .padding(.bottom, 15)
     }
 }
 
-struct ResultPlayerSplatNet2: View {
+private struct ResultPlayerSplatNet2: View {
     let result: RealmCoopPlayer
 
     var body: some View {
@@ -62,7 +54,7 @@ struct ResultPlayerSplatNet2: View {
                             .frame(height: 18)
                     })
                     .frame(height: 43)
-                    LazyVGrid(columns: Array(repeating: .init(.fixed(28), spacing: 2), count: 5), content: {
+                    LazyVGrid(columns: Array(repeating: .init(.fixed(28), spacing: 2), count: result.weaponList.count + 1), content: {
                         ForEach(result.weaponList.indices, id: \.self) { index in
                             let weapon: WeaponType = result.weaponList[index]
                             Image(bundle: weapon)
@@ -87,8 +79,8 @@ struct ResultPlayerSplatNet2: View {
                     .shadow(color: .black, radius: 0, x: 1, y: 1)
                     .frame(height: 11)
                 })
-                .frame(width: 172)
                 .padding(.leading, 12)
+                .frame(width: 172)
                 Spacer()
                 LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 78.5), spacing: 3), count: 2), spacing: 3, content: {
                     ZStack(content: {
@@ -159,7 +151,7 @@ struct ResultPlayerSplatNet2: View {
     }
 }
 
-struct ResultPlayerSplatNet3: View {
+private struct ResultPlayerSplatNet3: View {
     @AppStorage("IS_USE_NAMEPLATE") var isUseNamePlate: Bool = false
     @Environment(\.isNameVisible) var isNameVisible: Bool
     let result: RealmCoopPlayer
@@ -171,13 +163,14 @@ struct ResultPlayerSplatNet3: View {
                 .frame(height: 53.8)
             HStack(alignment: .center, spacing: 0, content: {
                 VStack(alignment: .leading, spacing: 0, content: {
-                    Text(result.name)
+                    Text((isNameVisible || result.isMyself) ? result.name : "-")
                         .foregroundColor(.white)
                         .font(systemName: .Splatfont2, size: 15)
                     HStack(alignment: .center, spacing: 0, content: {
                         Text(bundle: .CoopHistory_Enemy)
                         Text(String(format: "x%d", result.bossKillCountsTotal))
                     })
+                    .shadow(color: Color.black.opacity(0.25), radius: 0, x: 1, y: 1)
                     .foregroundColor(Color.white.opacity(0.7))
                     .font(systemName: .Splatfont2, size: 11)
                 })
@@ -202,52 +195,60 @@ struct ResultPlayerSplatNet3: View {
                 })
                 .frame(width: 58, height: 38, alignment: .center)
                 .padding(.trailing, 8)
-                ZStack(alignment: .center, content: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.black.opacity(0.7))
-                    LazyVGrid(columns: Array(repeating: .init(.fixed(58.3), spacing: 2), count: 2), alignment: .leading, spacing: 5, content: {
-                        HStack(alignment: .center, spacing: 2, content: {
-                            Image(bundle: .GoldenIkura)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22, height: 16, alignment: .center)
+                LazyVGrid(
+                    columns: [.init(.flexible(minimum: 72, maximum: 80)), .init(.fixed(58.3))],
+                    alignment: .leading,
+                    spacing: 5,
+                    content: {
+                    HStack(alignment: .center, spacing: 0, content: {
+                        Image(bundle: .GoldenIkura)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 16, alignment: .center)
+                            .padding(.trailing, 2)
+                        HStack(alignment: .bottom, spacing: 0, content: {
                             Text(String(format: "x%d", result.goldenIkuraNum))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            Text(String(format: "<%d>", result.goldenIkuraAssistNum))
+                                .font(systemName: .Splatfont2, size: 10)
+                                .foregroundColor(Color.white.opacity(0.5))
                         })
-                        .frame(width: 58.3, height: 16, alignment: .center)
-                        HStack(alignment: .center, spacing: 2, content: {
-                            Image(bundle: ButtonType.Rescue)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 16, alignment: .center)
-                            Text(String(format: "x%d", result.helpCount))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                        })
-                        .frame(width: 58.3, height: 16, alignment: .center)
-                        HStack(alignment: .center, spacing: 2, content: {
-                            Image(bundle: .Ikura)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22, height: 16, alignment: .center)
-                            Text(String(format: "x%d", result.ikuraNum))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                        })
-                        .frame(width: 58.3, height: 16, alignment: .center)
-                        HStack(alignment: .center, spacing: 2, content: {
-                            Image(bundle: ButtonType.Death)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 32, height: 16, alignment: .center)
-                            Text(String(format: "x%d", 2))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                        })
-                        .frame(width: 58.3, height: 16, alignment: .center)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     })
-                    .frame(width: 118.18, height: 45, alignment: .center)
-                    .foregroundColor(Color.white)
-                    .font(systemName: .Splatfont2, size: 12)
+                    .lineLimit(1)
+                    .frame(minWidth: 72, maxWidth: 78.0)
+                    HStack(alignment: .center, spacing: 2, content: {
+                        Image(bundle: ButtonType.Rescue)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 16, alignment: .center)
+                        Text(String(format: "x%d", result.helpCount))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    })
+                    .frame(width: 58.3, height: 16, alignment: .center)
+                    HStack(alignment: .center, spacing: 0, content: {
+                        Image(bundle: .Ikura)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 16, alignment: .center)
+                            .padding(.trailing, 2)
+                        Text(String(format: "x%d", result.ikuraNum))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
+                    .frame(minWidth: 72, maxWidth: 78.0)
+                    HStack(alignment: .center, spacing: 2, content: {
+                        Image(bundle: ButtonType.Death)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 16, alignment: .center)
+                        Text(String(format: "x%d", result.deadCount))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    })
+                    .frame(width: 58.3, height: 16, alignment: .center)
                 })
-                .frame(width: 128.93, height: 45, alignment: .center)
+                .padding(4)
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.7)))
+                .foregroundColor(Color.white)
+                .font(systemName: .Splatfont2, size: 12)
             })
             .padding(.trailing, 8)
         })
@@ -255,12 +256,22 @@ struct ResultPlayerSplatNet3: View {
     }
 }
 
+private extension RealmSwift.List where Element == RealmCoopPlayer {
+    func corner(of target: RealmCoopPlayer) -> UIRectCorner {
+        self.firstIndex(of: target) == 0 ? [.topLeft, .topRight] : self.firstIndex(of: target) == self.count - 1 ? [.bottomLeft, .bottomRight] : []
+    }
+}
+
+
 struct ResultPlayer_Previews: PreviewProvider {
-    static let result: RealmCoopPlayer = RealmCoopPlayer(dummy: true)
+    static let result: RealmCoopResult = RealmCoopResult(dummy: true)
+
     static var previews: some View {
-        ResultPlayerSplatNet2(result: result)
-            .previewLayout(.fixed(width: 356, height: 120))
-        ResultPlayerSplatNet3(result: result)
-            .previewLayout(.fixed(width: 356, height: 80))
+        ResultPlayers(result: result)
+            .environment(\.resultStyle, .SPLATNET2)
+            .previewLayout(.fixed(width: 360, height: 500))
+        ResultPlayers(result: result)
+            .environment(\.resultStyle, .SPLATNET3)
+            .previewLayout(.fixed(width: 360, height: 500))
     }
 }

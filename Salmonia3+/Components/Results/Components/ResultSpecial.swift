@@ -9,6 +9,7 @@ import SwiftUI
 import SplatNet3
 
 struct ResultSpecial: View {
+    @Environment(\.resultStyle) var resultStyle
     let specialUsage: [SpecialType]
 
     init(result: RealmCoopWave) {
@@ -26,14 +27,18 @@ struct ResultSpecial: View {
     }
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 30), spacing: 2), count: 4), alignment: .center, spacing: 3, content: {
+        let size: CGFloat = resultStyle == .SPLATNET2 ? 22 : 18
+        let borderRadius: CGFloat = resultStyle == .SPLATNET2 ? 11 : 4.7988
+        LazyVGrid(columns: Array(repeating: .init(.fixed(size), spacing: 3), count: 4),
+                  alignment: .center,
+                  spacing: 3,
+                  content: {
             ForEach(specialUsage.indices, id: \.self) { index in
                 let specialType: SpecialType = specialUsage[index]
                 Image(bundle: specialType)
                     .resizable()
                     .scaledToFit()
-                    .padding(2)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color.black))
+                    .background(RoundedRectangle(cornerRadius: borderRadius).fill(Color.black))
             }
         })
     }

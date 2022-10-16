@@ -7,12 +7,39 @@
 
 import SwiftUI
 import SplatNet3
+import RealmSwift
 
-struct ResultWave: View {
-    let wave: RealmCoopWave
+struct ResultWaves: View {
+    @Environment(\.resultStyle) var resultStyle
+    let result: RealmCoopResult
 
     var body: some View {
-        ResultWaveSplatNet2(wave: wave)
+        let spacing: CGFloat = resultStyle == .SPLATNET2 ? 8 : 1
+        let maximum: CGFloat = resultStyle == .SPLATNET2 ? 123.99 : 105
+        LazyVGrid(
+            columns: Array(repeating: .init(.flexible(maximum: maximum), spacing: spacing, alignment: .top), count: result.waves.count),
+            alignment: .center,
+            spacing: spacing,
+            content: {
+            ForEach(result.waves) { wave in
+                switch resultStyle {
+                case .SPLATNET2:
+                    VStack(alignment: .center, spacing: 0, content: {
+                        ResultWaveSplatNet2(wave: wave)
+                        ResultSpecial(result: wave)
+                    })
+                case .SPLATNET3:
+                    VStack(alignment: .center, spacing: 5, content: {
+                        ResultWaveSplatNet3(wave: wave)
+                            .cornerRadius(10, corners: result.waves.corner(of: wave))
+                            .overlay(WaveResult(isClear: wave.isClearWave).offset(x: -2, y: -7), alignment: .topTrailing)
+                        ResultSpecial(result: wave)
+                    })
+                }
+            }
+        })
+        .padding(.bottom, 15)
+        .padding(.horizontal, 10)
     }
 }
 
@@ -33,6 +60,7 @@ private extension View {
             .opacity(0.2)
             .offset(x: 0, y: height),
                      alignment: .bottom)
+            .clipped()
     }
 
     func waterLevelSP3(waterLevel: WaterType) -> some View {
@@ -51,6 +79,7 @@ private extension View {
             .opacity(0.2)
             .offset(x: 0, y: height),
                      alignment: .bottom)
+            .clipped()
     }
 }
 
@@ -65,7 +94,7 @@ private struct ResultWaveSplatNet2: View {
                 .overlay(Image(bundle: .WAVE).resizable())
                 .waterLevelSP2(waterLevel: wave.waterLevel)
             VStack(alignment: .center, spacing: 0, content: {
-                Text(bundle: .CoopHistory_Wave1)
+                Text(bundle: wave.localizedText)
                     .font(systemName: .Splatfont2, size: 17)
                     .foregroundColor(.black)
                     .padding(.bottom, 3)
@@ -76,6 +105,10 @@ private struct ResultWaveSplatNet2: View {
                         Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
                             .foregroundColor(.white)
                             .font(systemName: .Splatfont2, size: 25)
+                    } else {
+                        Text(bundle: .CoopHistory_KingSakelien3)
+                            .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
+                            .font(systemName: .Splatfont2, size: 17)
                     }
                 })
                 .padding(.bottom, 6)
@@ -97,10 +130,15 @@ private struct WaveResult: View {
     let isClear: Bool
 
     var body: some View {
-        let color: Color = isClear ? SPColor.SplatNet3.SPSalmonGreen : SPColor.SplatNet3.SPSalmonOrange
+        let color: Color = isClear ? SPColor.SplatNet3.SPGreen : SPColor.SplatNet3.SPSalmonOrange
         let localizedText: LocalizedText = isClear ? .CoopHistory_Gj : .CoopHistory_Ng
 
         Text(bundle: localizedText)
+            .foregroundColor(color)
+            .font(systemName: .Splatfont, size: 12)
+            .frame(height: 12 * 1.4)
+            .padding(.horizontal, 4)
+            .background(RoundedRectangle(cornerRadius: 30).fill(Color.black.opacity(0.8)))
     }
 }
 
@@ -113,19 +151,24 @@ private struct ResultWaveSplatNet3: View {
                 .fill(SPColor.SplatNet3.SPYellow)
                 .waterLevelSP3(waterLevel: wave.waterLevel)
             VStack(alignment: .center, spacing: 0, content: {
-                Text(bundle: .CoopHistory_Wave1)
+                Text(bundle: wave.localizedText)
                     .font(systemName: .Splatfont2, size: 13)
                     .foregroundColor(.black)
                     .padding(.top, 7)
                     .padding(.bottom, 4)
                 ZStack(alignment: .center, content: {
                     Rectangle().fill(Color.black.opacity(0.8))
-                        .frame(height: 25)
                     if let goldenIkuraNum: Int = wave.goldenIkuraNum, let quotaNum: Int = wave.quotaNum {
                         Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                            .foregroundColor(.white)
+                            .font(systemName: .Splatfont2, size: 17)
+                    } else {
+                        Text(bundle: .CoopHistory_KingSakelien3)
+                            .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
                             .font(systemName: .Splatfont2, size: 17)
                     }
                 })
+                .frame(height: 25)
                 VStack(alignment: .center, spacing: 0, content: {
                     Text(wave.waterLevel.localizedText)
                         .foregroundColor(.black)
@@ -136,7 +179,7 @@ private struct ResultWaveSplatNet3: View {
                         .font(systemName: .Splatfont2, size: 12)
                         .padding(.bottom, 6)
                 })
-                .padding(.vertical, 10)
+                .padding(.top, 4)
                 VStack(alignment: .center, spacing: 0, content: {
                     HStack(alignment: .center, spacing: 2, content: {
                         Image(bundle: .GoldenIkura)
@@ -158,23 +201,36 @@ private struct ResultWaveSplatNet3: View {
     }
 }
 
+private extension RealmCoopWave {
+    var localizedText: LocalizedText {
+        switch self.id {
+        case 1:
+            return LocalizedText.CoopHistory_Wave1
+        case 2:
+            return LocalizedText.CoopHistory_Wave2
+        case 3:
+            return LocalizedText.CoopHistory_Wave3
+        default:
+            return LocalizedText.CoopHistory_ExWave
+        }
+    }
+}
+
+private extension RealmSwift.List where Element == RealmCoopWave {
+    func corner(of target: RealmCoopWave) -> UIRectCorner {
+        self.firstIndex(of: target) == 0 ? [.topLeft, .bottomLeft] : self.firstIndex(of: target) == self.count - 1 ? [.topRight, .bottomRight] : []
+    }
+}
+
 struct CoopWave_Previews: PreviewProvider {
+    static let result: RealmCoopResult = RealmCoopResult(dummy: true)
+
     static var previews: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1), count: 4), content: {
-            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
-            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
-            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
-            ResultWaveSplatNet3(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
-        })
-        .previewLayout(.fixed(width: 600, height: 250))
-        .preferredColorScheme(.dark)
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 123.99), spacing: 8), count: 4), content: {
-            ResultWave(wave: RealmCoopWave(dummy: true, id: 1, eventType: EventType.Goldie_Seeking, waterLevel: .High_Tide))
-            ResultWave(wave: RealmCoopWave(dummy: true, id: 2, eventType: EventType.Goldie_Seeking, waterLevel: .Middle_Tide))
-            ResultWave(wave: RealmCoopWave(dummy: true, id: 3, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
-            ResultWave(wave: RealmCoopWave(dummy: true, id: 4, eventType: EventType.Goldie_Seeking, waterLevel: .Low_Tide))
-        })
-        .previewLayout(.fixed(width: 600, height: 250))
-        .preferredColorScheme(.dark)
+        ResultWaves(result: result)
+            .environment(\.resultStyle, .SPLATNET2)
+            .previewLayout(.fixed(width: 600, height: 200))
+        ResultWaves(result: result)
+            .environment(\.resultStyle, .SPLATNET3)
+            .previewLayout(.fixed(width: 600, height: 200))
     }
 }

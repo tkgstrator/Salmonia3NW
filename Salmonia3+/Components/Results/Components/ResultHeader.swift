@@ -30,70 +30,86 @@ struct ResultHeader: View {
         self.result = result
     }
 
+    let dateFormatter: DateFormatter = {
+        let formatter: DateFormatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = LocalizedText.Widgets_StagesYearDatetimeFormat.localized
+        return formatter
+    }()
+
     var body: some View {
-        GeometryReader(content: { geometry in
-            let width: CGFloat = geometry.width
-            let height: CGFloat = geometry.height
-            ZStack(content: {
-                Image(bundle: schedule.stageId)
-                    .resizable()
-                HStack(alignment: .center, spacing: nil, content: {
-                    Spacer()
-                    ZStack(alignment: .bottom, content: {
-                        let smellMeter: CGFloat = {
-                            if let smellMeter = result.smellMeter {
-                                return 1 - (CGFloat(smellMeter) / 5)
-                            }
-                            return 1
-                        }()
-                        Rectangle()
-                            .fill(.black)
-                        Rectangle()
-                            .fill(.red.opacity(0.8))
-                            .offset(x: 0, y: height * smellMeter)
-                    })
-                    .scaledToFit()
+        ZStack(alignment: .bottom, content: {
+            ZStack(alignment: .center, content: {
+                Rectangle()
+                    .frame(height: 75)
+                    .overlay(Image(bundle: schedule.stageId).resizable().scaledToFill(), alignment: .center)
                     .clipped()
-                    .mask(
-                        Image(bundle: .SakelienGiant)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(8 * scale)
-                    )
-                })
-                VStack(alignment: .center, spacing: 6 * scale, content: {
+                ZStack(alignment: .center, content: {
                     Text(bundle: result.isClear ? .CoopHistory_Clear : .CoopHistory_Failure)
-                        .font(systemName: .Splatfont, size: 22 * scale)
-                        .frame(height: 20 * scale)
-                        .shadow(color: .black, radius: 0, x: 1 * scale, y: 1 * scale)
-                        .foregroundColor(.green)
-                    HStack(spacing: nil, content: {
-                        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: min(60, 36 * scale)), spacing: 0), count: schedule.weaponList.count),
-                                  alignment: .center,
-                                  content: {
-                            ForEach(schedule.weaponList.indices, id: \.self) { index in
-                                let weaponType: WeaponType = schedule.weaponList[index]
-                                Image(bundle: weaponType)
-                                    .resizable()
-                                    .scaledToFit()
-                            }
+                        .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
+                        .font(systemName: .Splatfont, size: 25)
+                        .shadow(color: .black, radius: 0, x: 1, y: 1)
+                    HStack(alignment: .top, spacing: nil, content: {
+                        Text(String(format: "%@", dateFormatter.string(from: result.playTime)))
+                            .foregroundColor(Color(hex: "dbdbdb"))
+                            .font(systemName: .Splatfont2, size: 12)
+                            .padding(.horizontal, 5)
+                            .background(Color.black)
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 0, content: {
+                            Text(schedule.stageId.localizedText)
+                                .foregroundColor(Color.white)
+                                .font(systemName: .Splatfont2, size: 10)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 3)
+                                .background(Color.black)
+                            Image(bundle: .SakelienGiant)
+                                .resizable()
+                                .renderingMode(.template)
+                                .scaledToFit()
+                                .foregroundColor(Color.black)
+                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                         })
-                        Text(String(format: "%.0f%%", result.dangerRate * 100))
-                            .foregroundColor(.white)
-                            .font(systemName: .Splatfont, size: 18 * scale)
                     })
-                    .frame(width: min(200, geometry.width * 0.5), height: min(40, 30 * scale))
-                    .background(RoundedRectangle(cornerRadius: 40 * scale).fill(Color.black.opacity(0.8)))
+                    .frame(maxWidth: 440)
+                    .padding(.horizontal, 5)
                 })
             })
-            .onChange(of: geometry.size.height, perform: { newValue in
-                scale = min(1.5, newValue / 75)
-            })
-            .onAppear(perform: {
-                scale = min(1.5, geometry.size.height / 75)
-            })
+            .frame(height: 75)
+            .padding(.bottom, 15)
+            ResultWeapon(schedule: schedule, result: result)
         })
-        .aspectRatio(400/75, contentMode: .fit)
+        .padding(.bottom, 15)
+    }
+}
+
+private struct ResultWeapon: View {
+    let schedule: RealmCoopSchedule
+    let result: RealmCoopResult
+
+    var body: some View {
+        LazyHStack(alignment: .center, spacing: 0, content: {
+            LazyVGrid(columns: Array(repeating: .init(.fixed(25), spacing: 0), count: 4), content: {
+                ForEach(schedule.weaponList.indices, id: \.self) { index in
+                    let weaponId: WeaponType = schedule.weaponList[index]
+                    Image(bundle: weaponId)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25, alignment: .center)
+                }
+            })
+            .padding(.trailing, 15)
+            Text(bundle: .CoopHistory_DangerRatio)
+                .foregroundColor(Color.white.opacity(0.6))
+                .font(systemName: .Splatfont2, size: 10)
+            Text(String(format: "%.1f%%", result.dangerRate * 100))
+                .foregroundColor(Color.white)
+                .font(systemName: .Splatfont, size: 15)
+                .padding(.leading, 4)
+        })
+        .frame(height: 30)
+        .padding(.horizontal, 14)
+        .background(RoundedRectangle(cornerRadius: 14).fill(Color(hex: "240f09")))
     }
 }
 
@@ -101,11 +117,13 @@ struct ResultHeader_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
-        ResultDetailView(result: result, schedule: schedule)
-            .previewLayout(.fixed(width: 400, height: 800))
+        ResultWeapon(schedule: schedule, result: result)
+            .previewLayout(.fixed(width: 400, height: 100))
+        ResultHeader(schedule: schedule)
+            .previewLayout(.fixed(width: 400, height: 100))
             .preferredColorScheme(.dark)
         ResultHeader(schedule: schedule)
-            .previewLayout(.fixed(width: 400, height: 75))
+            .previewLayout(.fixed(width: 600, height: 100))
             .preferredColorScheme(.dark)
     }
 }

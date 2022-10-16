@@ -102,6 +102,7 @@ final class RealmCoopResult: Object, Identifiable {
         self.jobScore = 999
         self.kumaPoint = 9999
         self.jobBonus = 999
+        self.playTime = Date()
         self.scale.append(objectsIn: [99, 99, 99])
         self.bossCounts.append(objectsIn: Array(repeating: 99, count: 15))
         self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))

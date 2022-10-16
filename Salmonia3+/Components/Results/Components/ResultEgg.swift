@@ -10,52 +10,43 @@ import SwiftUI
 import SplatNet3
 
 struct ResultEgg: View {
-    let ikuraNum: Int
-    let goldenIkuraNum: Int
-    let goldenIkuraAssistNum: Int
+    let result: RealmCoopResult
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            let scale: CGFloat = geometry.width / 160
-            HStack(spacing: 3 * scale, content: {
-                HStack(spacing: 0, content: {
-                    Image(bundle: .Golden)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 18 * scale)
-                    Spacer()
-                    HStack(alignment: .firstTextBaseline, spacing: 0, content: {
-                        Text(String(format: "x%2d", goldenIkuraNum))
-                            .foregroundColor(SPColor.SplatNet2.SPWhite)
-                    })
-                })
-                .padding(.horizontal, 6 * scale)
-                .frame(height: 24 * scale)
-                .background(Capsule().fill(Color.black.opacity(0.75)))
-                HStack(spacing: 0, content: {
-                    Image(bundle: .Power)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 18 * scale)
-                    Spacer()
-                    Text(String(format: "x%4d", ikuraNum))
-                        .foregroundColor(SPColor.SplatNet2.SPWhite)
-                })
-                .padding(.horizontal, 6 * scale)
-                .frame(height: 24 * scale)
-                .background(Capsule().fill(Color.black.opacity(0.75)))
+        LazyVGrid(columns: Array(repeating: .init(.fixed(78.5)), count: 2), content: {
+            HStack(alignment: .center, spacing: 0, content: {
+                Image(bundle: .Golden)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18, alignment: .center)
+                Spacer()
+                Text(String(format: "x%d", result.goldenIkuraNum))
+                    .foregroundColor(SPColor.SplatNet2.SPWhite)
             })
-            .font(systemName: .Splatfont2, size: 14 * scale)
+            .padding(.horizontal, 6)
+            .frame(width: 78.5, height: 24, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 12).fill(SPColor.SplatNet2.SPBackground))
+            HStack(alignment: .center, spacing: 0, content: {
+                Image(bundle: .Ikura)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 18, height: 18, alignment: .center)
+                Spacer()
+                Text(String(format: "x%d", result.ikuraNum))
+                    .foregroundColor(SPColor.SplatNet2.SPWhite)
+            })
+            .padding(.horizontal, 6)
+            .frame(width: 78.5, height: 24, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 12).fill(SPColor.SplatNet2.SPBackground))
         })
-        .aspectRatio(160/24, contentMode: .fit)
+        .font(systemName: .Splatfont2, size: 13)
     }
 }
 
 struct ResultEgg_Previews: PreviewProvider {
+    static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static var previews: some View {
-        ResultEgg(ikuraNum: 9999, goldenIkuraNum: 999, goldenIkuraAssistNum: 99)
-            .previewLayout(.fixed(width: 320, height: 47))
-        ResultEgg(ikuraNum: 9999, goldenIkuraNum: 999, goldenIkuraAssistNum: 99)
-            .previewLayout(.fixed(width: 160, height: 23.5))
+        ResultEgg(result: result)
+            .previewLayout(.fixed(width: 200, height: 47))
     }
 }

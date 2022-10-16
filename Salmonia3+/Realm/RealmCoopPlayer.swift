@@ -61,7 +61,7 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.ikuraNum = 9999
         self.deadCount = 99
         self.helpCount = 99
-        self.goldenIkuraAssistNum = 999
+        self.goldenIkuraAssistNum = 99
         self.specialId = SpecialType.SpUltraShot
         self.specialCounts.append(objectsIn: Array(repeating: 1, count: 3))
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))

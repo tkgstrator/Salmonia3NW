@@ -28,10 +28,7 @@ struct ResultView: View {
                         .foregroundColor(result.isClear ? .green : .orange)
                         .frame(height: 20 * scale)
                     Spacer()
-                    ResultEgg(
-                        ikuraNum: result.ikuraNum,
-                        goldenIkuraNum: result.goldenIkuraNum,
-                        goldenIkuraAssistNum: result.goldenIkuraAssistNum)
+                    ResultEgg(result: result)
                 })
                 .frame(height: 30 * scale)
                 HStack(alignment: .center, spacing: nil, content: {
