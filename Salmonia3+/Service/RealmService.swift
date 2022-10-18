@@ -39,6 +39,11 @@ class RealmService {
 
     init() {}
 
+    /// JSONに変換して出力するやつ
+    func exportToJSON() -> [JSONCoopResult] {
+        realm.objects(RealmCoopResult.self).map({ JSONCoopResult(result: $0) })
+    }
+
     /// スケジュールを取得して書き込む
     func getCoopRegularSchedule() {
         Task(priority: .background, operation: {

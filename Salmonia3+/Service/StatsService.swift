@@ -76,10 +76,6 @@ final class StatsService: ObservableObject {
     @Published var gradePointHistory: [Double]
     /// クマサンポイントデータ
     @Published var grizzcoPointData: GrizzcoPointData
-    /// クマサンポイントデータ
-    @Published var abstructData: AbstructData
-    /// ウロコデータ
-    @Published var scaleData: ScaleData
 
     init(startTime: Date) {
         /// リザルト一覧
@@ -126,7 +122,7 @@ final class StatsService: ObservableObject {
         let goldenIkuraNum: Int = results.sum(ofProperty: "goldenIkuraNum") ?? 0
         let rescueCount: Int = players.sum(ofProperty: "helpCount") ?? 0
 
-        let gradeId: GradeType = results.max(ofProperty: "grade") ?? GradeType.Apprentice
+        let gradeIdMax: GradeType = results.max(ofProperty: "grade") ?? GradeType.Apprentice
         let gradePointMax: Int = results.max(ofProperty: "gradePoint") ?? 0
 
         self.shiftsWorked = shiftsWorked
@@ -209,19 +205,18 @@ final class StatsService: ObservableObject {
         self.gradePointHistory = results.compactMap({ $0.gradePoint }).map({ Double($0) })
         self.grizzcoPointData = GrizzcoPointData(
             playCount: shiftsWorked,
+            maxGrade: gradeIdMax,
+            maxGradePoint: gradePointMax,
+            failureWaves: failureWaves,
             regularPoint: regularPoint,
             goldenIkuraNum: goldenIkuraNum,
             ikuraNum: ikuraNum,
             bossDefeatedCount: bossKillCount,
+            bossCount: bossCount,
             rescueCount: rescueCount,
-            totalPoint: 0
+            totalPoint: 0,
+            scales: scales
         )
-        self.abstructData = AbstructData(
-            gradeId: gradeId,
-            gradePointMax: gradePointMax,
-            failureWaves: failureWaves
-        )
-        self.scaleData = ScaleData(gold: scales.gold, silver: scales.silver, bronze: scales.bronze)
     }
 }
 

@@ -37,6 +37,7 @@ struct ResultPlayers: View {
 }
 
 private struct ResultPlayerSplatNet2: View {
+    @Environment(\.isNameVisible) var isNameVisible: Bool
     let result: RealmCoopPlayer
 
     var body: some View {
@@ -47,7 +48,7 @@ private struct ResultPlayerSplatNet2: View {
                 VStack(alignment: .center, spacing: 0, content: {
                     VStack(alignment: .center, spacing: 0, content: {
                         Spacer()
-                        Text(result.name)
+                        Text((isNameVisible || result.isMyself) ? result.name : "-")
                             .foregroundColor(.white)
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                             .font(systemName: .Splatfont2, size: 17)

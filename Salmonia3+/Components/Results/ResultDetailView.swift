@@ -39,12 +39,11 @@ struct ResultTabView: View {
                 Button(action: {
                     isNameVisible.toggle()
                 }, label: {
-                    Image(bundle: isNameVisible ? .Eye : .EyeSlash)
+                    Image(bundle: .Eye)
+                        .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
-                        .font(Font.system(size: 30, weight: .bold))
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(.primary)
+                        .foregroundColor(isNameVisible ? .primary : SPColor.SplatNet3.SPCoop)
                 })
             })
         })
@@ -52,6 +51,8 @@ struct ResultTabView: View {
 }
 
 private struct ResultDetailView: View {
+    @StateObject var session: Session = Session()
+    @State private var isModalPresented: Bool = false
     @State private var resultStyle: ResultStyle = .SPLATNET3
     let result: RealmCoopResult
 
@@ -67,7 +68,17 @@ private struct ResultDetailView: View {
                 ResultSakelien(result: result)
             })
         })
-        .background(ResultBackground())
+        .refreshable(action: {
+            /// リフレッシュ
+            await session.dummy(action: {
+                isModalPresented.toggle()
+            })
+        })
+        .backgroundForResult()
+        .fullScreen(isPresented: $isModalPresented, content: {
+            ResultLoadingView()
+                .environment(\.isModalPresented, $isModalPresented)
+        })
     }
 }
 
@@ -85,6 +96,12 @@ private struct ResultBackground: View {
 //                .frame(maxHeight: 540)
 //                .opacity(0.35)
         })
+    }
+}
+
+extension View {
+    func backgroundForResult() -> some View {
+        self.background(ResultBackground())
     }
 }
 

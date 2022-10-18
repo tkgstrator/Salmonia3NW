@@ -20,6 +20,7 @@ struct ContentView: View {
                 ResultsView()
             })
             .navigationViewStyle(.split)
+            .navigationBarBackButtonHidden()
             .withGoogleMobileAds()
             .tabItem {
                 Label(title: {
@@ -33,6 +34,7 @@ struct ContentView: View {
                 SchedulesView()
             })
             .navigationViewStyle(.split)
+            .navigationBarBackButtonHidden()
             .withGoogleMobileAds()
             .tabItem {
                 Label(title: {
@@ -46,6 +48,7 @@ struct ContentView: View {
                 UserView()
             })
             .navigationViewStyle(.split)
+            .navigationBarBackButtonHidden()
             .withGoogleMobileAds()
             .tabItem {
                 Label(title: {

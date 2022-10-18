@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-private enum FontLocaleType: Int, CaseIterable {
+enum FontLocaleType: Int, CaseIterable {
     case JP = 0
     case CN = 1
     case TW = 2
@@ -19,7 +19,7 @@ enum FontStyle: CaseIterable {
     case Splatfont2
 }
 
-private enum FontType: String, CaseIterable {
+enum FontType: String, CaseIterable {
     case Splatfont1JP = "splatoon1jpja"
     case Splatfont1CN = "splatoon1chzh"
     case Splatfont1TW = "splatoon1twzh"

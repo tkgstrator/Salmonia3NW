@@ -19,14 +19,30 @@ struct LoginProgress: Identifiable {
 
         // バージョン取得のやつは更に冗長なので修正
         self.path = {
+            // GraphQL以外はここで対応できる
             if let value: SPEndpoint = SPEndpoint(rawValue: path) {
                 return value
             }
+            // WebVersionはここで対応
             if path.contains("static/js") {
                 return .WEB_VERSION
             }
             return .UNKNOWN
         }()
+    }
+
+    init<T: GraphQL>(request: T) {
+        let hash: SHA256Hash = request.hash
+        switch hash {
+        case .StageScheduleQuery:
+            self.path = .COOP_SCHEDULE
+        case .CoopHistoryDetailQuery:
+            self.path = .COOP_RESULT
+        case .CoopHistoryQuery:
+            self.path = .COOP_SUMMARY
+        default:
+            self.path = .UNKNOWN
+        }
     }
 
     init(_ endpoint: SPEndpoint) {

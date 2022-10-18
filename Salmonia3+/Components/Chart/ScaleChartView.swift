@@ -78,13 +78,18 @@ struct ScaleChartView: View {
 
 struct ScaleChartView_Previews: PreviewProvider {
     static let data: GrizzcoPointData = GrizzcoPointData(
-        playCount: 99999,
-        regularPoint: 999999,
-        goldenIkuraNum: 9999999,
-        ikuraNum: 99999999,
-        bossDefeatedCount: 999999,
-        rescueCount: 999999,
-        totalPoint: 9999999
+        playCount: 999,
+        maxGrade: GradeType.Eggsecutive_VP,
+        maxGradePoint: 999,
+        failureWaves: (clear: 999, wave1: 10, wave2: 10, wave3: 10),
+        regularPoint: 99999,
+        goldenIkuraNum: 99999,
+        ikuraNum: 999999,
+        bossDefeatedCount: 9999,
+        bossCount: 99,
+        rescueCount: 999,
+        totalPoint: 999,
+        scales: (bronze: 999, silver: 999, gold: 999)
     )
 
     static let record: AbstructData = AbstructData(

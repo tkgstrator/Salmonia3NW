@@ -108,7 +108,7 @@ private struct ResultWaveSplatNet2: View {
                     } else {
                         Text(bundle: .CoopHistory_KingSakelien3)
                             .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
-                            .font(systemName: .Splatfont2, size: 17)
+                            .font(systemName: .Splatfont2, size: 25)
                     }
                 })
                 .padding(.bottom, 6)
@@ -135,7 +135,7 @@ private struct WaveResult: View {
 
         Text(bundle: localizedText)
             .foregroundColor(color)
-            .font(systemName: .Splatfont, size: 12)
+            .font(systemName: .Splatfont2, size: 12)
             .frame(height: 12 * 1.4)
             .padding(.horizontal, 4)
             .background(RoundedRectangle(cornerRadius: 30).fill(Color.black.opacity(0.8)))

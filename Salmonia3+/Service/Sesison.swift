@@ -30,6 +30,15 @@ class Session: SplatNet3, ObservableObject {
         super.init(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
     }
 
+    override func publish<T>(_ request: T) async throws -> T.ResponseType where T: GraphQL {
+        let progress: LoginProgress = LoginProgress(request: request)
+        print(progress, progress.path, lists[progress.path])
+        if lists[progress.path] {
+            throw Failure.API(error: NXError.API.response)
+        }
+        return try await super.publish(request)
+    }
+
     /// Versionリクエスト
     override func request(_ request: Version) async throws -> Version.Response {
         // 進行具合に合わせて追加する

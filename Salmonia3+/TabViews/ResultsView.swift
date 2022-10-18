@@ -71,6 +71,7 @@ struct ResultsView: View {
 }
 
 private extension View {
+    /// 下に引っ張って更新を表示する
     func pullToRefresh(enabled: Bool) -> some View {
         self.overlay(enabled ? AnyView(PullToRefreshView()) : AnyView(EmptyView()))
     }

@@ -15,18 +15,13 @@ struct ResultHeader: View {
     let schedule: RealmCoopSchedule
     let result: RealmCoopResult
 
-    init(schedule: RealmCoopSchedule) {
-        self.result = RealmCoopResult(dummy: true)
-        self.schedule = schedule
-    }
-
     init(result: RealmCoopResult) {
-        self.result = result
         self.schedule = result.schedule
+        self.result = result
     }
 
-    init(result: RealmCoopResult, schedule: RealmCoopSchedule) {
-        self.schedule = result.schedule
+    private init(result: RealmCoopResult, schedule: RealmCoopSchedule) {
+        self.schedule = schedule
         self.result = result
     }
 
@@ -52,8 +47,9 @@ struct ResultHeader: View {
                     HStack(alignment: .top, spacing: nil, content: {
                         Text(String(format: "%@", dateFormatter.string(from: result.playTime)))
                             .foregroundColor(Color(hex: "dbdbdb"))
-                            .font(systemName: .Splatfont2, size: 12)
+                            .font(systemName: .Splatfont2, size: 10)
                             .padding(.horizontal, 5)
+                            .padding(.vertical, 3)
                             .background(Color.black)
                         Spacer()
                         VStack(alignment: .trailing, spacing: 0, content: {
@@ -119,10 +115,10 @@ struct ResultHeader_Previews: PreviewProvider {
     static var previews: some View {
         ResultWeapon(schedule: schedule, result: result)
             .previewLayout(.fixed(width: 400, height: 100))
-        ResultHeader(schedule: schedule)
+        ResultWeapon(schedule: schedule, result: result)
             .previewLayout(.fixed(width: 400, height: 100))
             .preferredColorScheme(.dark)
-        ResultHeader(schedule: schedule)
+        ResultWeapon(schedule: schedule, result: result)
             .previewLayout(.fixed(width: 600, height: 100))
             .preferredColorScheme(.dark)
     }

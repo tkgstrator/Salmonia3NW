@@ -18,28 +18,15 @@ enum IconList {
         @State private var isPresented: Bool = false
         @AppStorage("CONFIG_APP_DEVELOPER_MODE") var isAppDeveloperMode: Bool = true
 
-
         var body: some View {
             if let account = session.account {
-                Button(action: {
-                    IconList.generator.notificationOccurred(.success)
-                    isAppDeveloperMode.toggle()
-                }, label: {
-                    VStack(alignment: .center, spacing: nil, content: {
-                        Image(bundle: .User)
-                            .resizable()
-                            .scaledToFit()
-                            .padding()
-                            .background(NSOCircle().fill(SPColor.SplatNet2.SPOrange))
-                            .clipShape(NSOCircle())
-                        Text(account.nickname)
-                            .font(systemName: .Splatfont2, size: 14)
-                            .lineLimit(1)
-                            .frame(height: 16)
-                            .foregroundColor(.primary)
+                Image(bundle: .User)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .actionCircleButton(localizedText: Text(account.nickname), action: {
+                        isAppDeveloperMode.toggle()
                     })
-                })
-                .frame(maxWidth: 100)
             } else {
                 EmptyView()
             }
@@ -158,11 +145,36 @@ enum IconList {
                 .resizable()
                 .scaledToFit()
                 .padding()
-                .navigationCircleButton(
-                    localizedText: "TITLE_CHART",
-                    destination: {
-                        EmptyView()
-                    })
+                .actionCircleButton(localizedText: "TITLE_CHART", action: {
+                    let encoder: JSONEncoder = {
+                        let encoder: JSONEncoder = JSONEncoder()
+                        encoder.keyEncodingStrategy = .convertToSnakeCase
+//                        encoder.outputFormatting = .prettyPrinted
+                        return encoder
+                    }()
+                    let results: [JSONCoopResult] = RealmService.shared.exportToJSON()
+                    print(results.count)
+                    do {
+                        let data = try encoder.encode(results)
+                        let fileName: String = {
+                            let formatter: DateFormatter = DateFormatter()
+                            formatter.dateFormat = "yyyymmddHHMMss"
+                            return formatter.string(from: Date())
+                        }()
+                        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+                            return
+                        }
+                        let filePath: URL = dir.appendingPathComponent(fileName).appendingPathExtension("json")
+                        /// データ書き込み
+                        try data.write(to: filePath, options: .atomic)
+                        let items = [filePath]
+                        let activity: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                        let vc: UIViewController? = UIApplication.shared.windows.first?.rootViewController
+                        vc?.present(activity, animated: true)
+                    } catch {
+
+                    }
+                })
         }
     }
 
@@ -209,9 +221,10 @@ enum IconList {
         @State private var isPresented: Bool = false
 
         var body: some View {
-            Image("ButtonType/Salmon", bundle: .main)
+            Image(bundle: .Salmon)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .actionCircleButton(localizedText: "TITLE_ERASE_RESULTS", action: {
                     isPresented.toggle()
                 })
@@ -226,9 +239,10 @@ enum IconList {
         @State private var isPresented: Bool = false
 
         var body: some View {
-            Image("TabType/Ika1", bundle: .main)
+            Image(bundle: .Review)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .actionCircleButton(localizedText: "TITLE_ERASE_ACCOUNTS", action: {
                     isPresented.toggle()
                 })

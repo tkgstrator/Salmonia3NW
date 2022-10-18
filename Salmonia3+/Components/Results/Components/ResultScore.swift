@@ -12,7 +12,7 @@ struct ResultScore: View {
     let result: RealmCoopResult
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 200), spacing: 9), count: 2), content: {
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 205.5), spacing: 9), count: 2), content: {
             ResultScoreScale(result: result)
             ResultScorePoint(result: result)
         })
@@ -25,54 +25,72 @@ private struct ResultScorePoint: View {
     let result: RealmCoopResult
 
     var body: some View {
-        ZStack(alignment: .center, content: {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.black.opacity(0.7))
-            VStack(spacing: 2, content: {
-                HStack(spacing: nil, content: {
-                    Text(bundle: .CoopHistory_JobPoint)
-                        .font(systemName: .Splatfont2, size: 12)
-                    Spacer()
-                    Text(String(format: "%dp", result.kumaPoint))
-                        .font(systemName: .Splatfont2, size: 19)
-                })
-                .padding(8)
-                .frame(height: 47.5)
-                HStack(spacing: 4, content: {
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Text(String(format: "%d", result.jobScore))
-                            .font(systemName: .Splatfont2, size: 15)
-                        Text(bundle: .CoopHistory_Score)
-                            .font(systemName: .Splatfont2, size: 10)
-                            .foregroundColor(.white.opacity(0.6))
-                            .minimumScaleFactor(0.8)
-                    })
-                    Text("x")
-                        .font(systemName: .Splatfont2, size: 15)
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Text(String(format: "%.2f", result.jobRate))
-                            .font(systemName: .Splatfont2, size: 15)
-                        Text(bundle: .CoopHistory_JobRatio)
-                            .font(systemName: .Splatfont2, size: 10)
-                            .foregroundColor(.white.opacity(0.6))
-                            .minimumScaleFactor(0.8)
-                    })
-                    Text("+")
-                        .font(systemName: .Splatfont2, size: 15)
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Text(String(format: "%d", result.jobBonus))
-                            .font(systemName: .Splatfont2, size: 15)
-                        Text(bundle: .CoopHistory_Bonus)
-                            .font(systemName: .Splatfont2, size: 10)
-                            .foregroundColor(.white.opacity(0.6))
-                            .minimumScaleFactor(0.8)
-                    })
-                })
-                .padding(8)
-                .frame(height: 48)
+        VStack(alignment: .center, spacing: 1, content: {
+            HStack(spacing: nil, content: {
+                Text(bundle: .CoopHistory_JobPoint)
+                    .font(systemName: .Splatfont2, size: 12)
+                Spacer()
+                Text(String(format: "%dp", result.kumaPoint))
+                    .font(systemName: .Splatfont2, size: 19)
             })
+            .foregroundColor(.white)
+            .frame(height: 18)
+            .padding(10)
+            .padding(.vertical, 4.75)
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(10, corners: [.topRight, .topLeft])
+            LazyVGrid(columns: [
+                .init(.flexible(), spacing: 0),
+                .init(.fixed(6.94), spacing: 0),
+                .init(.flexible(), spacing: 0),
+                .init(.fixed(9.94), spacing: 0),
+                .init(.flexible(), spacing: 0),
+            ], content: {
+                VStack(alignment: .center, spacing: 0, content: {
+                    Text(String(format: "%d", result.jobScore))
+                        .font(systemName: .Splatfont2, size: 15)
+                        .frame(height: 15)
+                    Text(bundle: .CoopHistory_Score)
+                        .font(systemName: .Splatfont2, size: 10)
+                        .foregroundColor(.white.opacity(0.6))
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
+                })
+                .frame(height: 28)
+                Text("x")
+                    .font(systemName: .Splatfont2, size: 15)
+                    .frame(width: 6.94, height: 15, alignment: .center)
+                VStack(alignment: .center, spacing: 0, content: {
+                    Text(String(format: "%.2f", result.jobRate))
+                        .font(systemName: .Splatfont2, size: 15)
+                        .frame(height: 15)
+                    Text(bundle: .CoopHistory_JobRatio)
+                        .font(systemName: .Splatfont2, size: 10)
+                        .foregroundColor(.white.opacity(0.6))
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
+                })
+                .frame(height: 28)
+                Text("+")
+                    .font(systemName: .Splatfont2, size: 15)
+                    .frame(width: 9.94, height: 15, alignment: .center)
+                VStack(alignment: .center, spacing: 0, content: {
+                    Text(String(format: "%d", result.jobBonus))
+                        .font(systemName: .Splatfont2, size: 15)
+                        .frame(height: 15)
+                    Text(bundle: .CoopHistory_Bonus)
+                        .font(systemName: .Splatfont2, size: 10)
+                        .foregroundColor(.white.opacity(0.6))
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(1)
+                })
+                .frame(height: 28)
+            })
+            .padding(10)
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            .foregroundColor(.white)
         })
-        .foregroundColor(.white)
     }
 }
 
@@ -111,7 +129,7 @@ private struct ResultScoreScale: View {
                     })
                 })
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                .frame(maxWidth: 170)
+                .frame(maxWidth: 185.5)
                 .frame(height: 10)
                 .padding(.bottom, 10)
                 HStack(spacing: nil, content: {
@@ -168,7 +186,10 @@ struct ResultScore_Previews: PreviewProvider {
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
         ResultScore(result: result)
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 500, height: 200))
+        ResultScore(result: result)
+//            .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 360, height: 200))
     }
 }

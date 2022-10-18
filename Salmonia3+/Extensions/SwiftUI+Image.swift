@@ -26,6 +26,7 @@ enum MaskType: Int, CaseIterable, Codable {
 
 enum ButtonType: String, CaseIterable, Codable {
     case Arrows
+    case BackArrow
     case Chart
     case Circle
     case Flag
