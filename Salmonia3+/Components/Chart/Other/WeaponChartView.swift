@@ -38,39 +38,16 @@ struct WeaponChartView: View {
 
     var body: some View {
         ZStack(alignment: .center, content: {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(self.colorScheme == .dark ? .black : .white)
-                .shadow(color: .primary, radius: 2, x: 0, y: 0)
-            VStack(alignment: .leading, content: {
-                VStack(alignment: .leading, spacing: 8, content: {
-                    self.title
-                        .font(.title3)
-                        .bold()
-                        .lineLimit(1)
-                        .foregroundColor(.primary)
-                })
-                .padding([.leading, .top])
-                Spacer()
-                HStack(alignment: .center, spacing: 0, content: {
-                    LazyHGrid(rows: Array(repeating: .init(.flexible(maximum: 40)), count: 4), content: {
-                        ForEach(weaponList, id: \.rawValue) { weaponId in
-                            let index: Int = weaponList.firstIndex(of: weaponId) ?? 0
-                            Image(bundle: weaponId)
-                                .resizable()
-                                .scaledToFit()
-                                .background(RoundedRectangle(cornerRadius: 4).fill(colors[index]))
-                        }
-                    })
-                    Spacer()
-                    Doughnut(data: data)
-                })
-                .font(.callout)
-                .padding([.horizontal, .bottom])
-                .padding(.top, 8)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+            Color.primary.opacity(0.3)
+            HStack(content: {
+                Doughnut(data: data)
+                    .padding(.top, 27)
+                    .padding(.bottom, 8)
             })
         })
-        .aspectRatio(340/200, contentMode: .fit)
+        .frame(width: 300, height: 160, alignment: .center)
+        .mask(Image(bundle: .Card))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 

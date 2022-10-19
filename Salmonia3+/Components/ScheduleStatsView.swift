@@ -29,6 +29,7 @@ struct ScheduleStatsView: View {
             })
         })
         .padding(.horizontal)
+        .refreshableResultScroll()
         .backgroundForResult()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))

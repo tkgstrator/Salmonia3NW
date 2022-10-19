@@ -10,14 +10,12 @@ import RealmSwift
 import SplatNet3
 
 struct ResultsView: View {
-    @StateObject var session: Session = Session()
     @ObservedResults(
         RealmCoopSchedule.self,
         filter: NSPredicate(format: "mode = %@", ModeType.CoopHistory_Regular.mode),
         sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
     ) var schedules
     @State private var selection: ModeType = ModeType.CoopHistory_Regular
-    @State private var isModalPresented: Bool = false
 
     var body: some View {
         List(content: {
@@ -41,16 +39,7 @@ struct ResultsView: View {
             /// モードが切り替わったときにフィルターをかける
             $schedules.filter = NSPredicate(format: "mode = %@", selection.mode)
         })
-        .refreshable(action: {
-            /// リフレッシュ
-            await session.dummy(action: {
-                isModalPresented.toggle()
-            })
-        })
-        .fullScreen(isPresented: $isModalPresented, content: {
-            ResultLoadingView()
-                .environment(\.isModalPresented, $isModalPresented)
-        })
+        .refreshableResult()
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {

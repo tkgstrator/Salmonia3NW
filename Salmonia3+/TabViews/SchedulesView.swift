@@ -31,6 +31,10 @@ struct SchedulesView: View {
                 }
             }
         })
+        .onChange(of: selection, perform: { newValue in
+            $schedules.filter = NSPredicate(format: "mode = %@", newValue.mode)
+        })
+        .refreshableResult()
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
@@ -44,9 +48,6 @@ struct SchedulesView: View {
                         .foregroundColor(.primary)
                 })
             })
-        })
-        .onChange(of: selection, perform: { newValue in
-            $schedules.filter = NSPredicate(format: "mode = %@", newValue.mode)
         })
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(mode: selection))

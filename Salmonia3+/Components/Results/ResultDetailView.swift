@@ -51,8 +51,6 @@ struct ResultTabView: View {
 }
 
 private struct ResultDetailView: View {
-    @StateObject var session: Session = Session()
-    @State private var isModalPresented: Bool = false
     @State private var resultStyle: ResultStyle = .SPLATNET3
     let result: RealmCoopResult
 
@@ -68,17 +66,8 @@ private struct ResultDetailView: View {
                 ResultSakelien(result: result)
             })
         })
-        .refreshable(action: {
-            /// リフレッシュ
-            await session.dummy(action: {
-                isModalPresented.toggle()
-            })
-        })
         .backgroundForResult()
-        .fullScreen(isPresented: $isModalPresented, content: {
-            ResultLoadingView()
-                .environment(\.isModalPresented, $isModalPresented)
-        })
+        .refreshableResultScroll()
     }
 }
 

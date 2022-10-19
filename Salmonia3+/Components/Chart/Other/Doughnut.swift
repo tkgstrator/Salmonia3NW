@@ -19,6 +19,7 @@ struct Doughnut: View {
                 ForEach(data.values) { value in
                     let index: Int = data.values.firstIndex(where: { $0.id == value.id }) ?? 0
                     ZStack(content: {
+//                        Arc(from: index == 0 ? 0.0 : data.values[index - 1].percent, to: value.percent)
                         Circle()
                             .trim(from: index == 0 ? 0.0 : data.values[index - 1].percent, to: value.percent)
                             .stroke(value.color, lineWidth: width)
