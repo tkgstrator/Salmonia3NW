@@ -127,12 +127,8 @@ enum Grizzco {
 
 
 final class StatsService: ObservableObject {
-    /// バイト回数
-    @Published var shiftsWorked: Int
     /// クリア率
     @Published var clearRatio: Double
-    /// 平均クリアWAVE
-    @Published var clearWave: Double
     /// オカシラシャケ討伐率
     @Published var bossDefeatedRatio: Double
     /// 各スペシャル支給回数
@@ -237,22 +233,23 @@ final class StatsService: ObservableObject {
         let bossKillCount: Int = results.filter({ $0.isBossDefeated == true }).count
 
         /// クマサンポイント
-        let regularPoint: Int = results.sum(ofProperty: "kumaPoint") ?? 0
+        let regularPoint: Int? = results.sum(ofProperty: "kumaPoint")
 
         /// チームの合計イクラ数
-        let ikuraNum: Int = results.sum(ofProperty: "ikuraNum") ?? 0
+        let ikuraNum: Int? = results.sum(ofProperty: "ikuraNum")
+        print(ikuraNum)
 
         /// チームの合計金イクラ数
-        let goldenIkuraNum: Int = results.sum(ofProperty: "goldenIkuraNum") ?? 0
+        let goldenIkuraNum: Int? = results.sum(ofProperty: "goldenIkuraNum")
 
         /// チームの救助数/被救助数合計
-        let rescueCount: Int = players.sum(ofProperty: "helpCount") ?? 0
+        let rescueCount: Int? = players.sum(ofProperty: "helpCount")
 
         /// 最高評価
-        let gradeIdMax: GradeType = results.max(ofProperty: "grade") ?? GradeType.Apprentice
+        let gradeIdMax: GradeType? = results.max(ofProperty: "grade")
 
         /// 最高レート
-        let gradePointMax: Int = results.max(ofProperty: "gradePoint") ?? 0
+        let gradePointMax: Int? = results.max(ofProperty: "gradePoint")
 
         /// 仮データ
         let stats: Stats = Stats(summation: 0, maximum: 0, minimum: 0, average: 0)
@@ -285,10 +282,13 @@ final class StatsService: ObservableObject {
             return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
         }()
 
-        self.shiftsWorked = shiftsWorked
         self.clearRatio = Double(shiftsClearWorked) / Double(shiftsWorked)
-        let clearWave = Double(results.map({ $0.waves.count }).reduce(0, +)) / Double(results.count)
-        self.clearWave = clearWave
+        let clearWave: Double? = {
+            if results.count == .zero {
+                return nil
+            }
+            return Double(results.map({ min(3, $0.waves.count) }).reduce(0, +)) / Double(results.count)
+        }()
         self.bossDefeatedRatio = Double(bossKillCount) / Double(bossCount)
         self.bossCount = [bossKillCount, bossCount - bossKillCount]
         self.specialCounts = {
@@ -348,13 +348,13 @@ final class StatsService: ObservableObject {
             deadCount: deathStats.average
         )
         self.point = Grizzco.PointData(
-            playCount: shiftsWorked,
-            ikuraNum: ikuraNum,
-            goldenIkuraNum: goldenIkuraNum,
-            bossKillCount: bossKillCount,
-            regularPoint: regularPoint,
+            playCount: shiftsWorked == .zero ? nil : shiftsWorked,
+            ikuraNum: ikuraNum == .zero ? nil : ikuraNum,
+            goldenIkuraNum: goldenIkuraNum == .zero ? nil : goldenIkuraNum,
+            bossKillCount: bossKillCount == .zero ? nil : bossKillCount,
+            regularPoint: regularPoint == .zero ? nil : regularPoint,
             regularPointTotal: nil,
-            rescueCount: rescueCount
+            rescueCount: rescueCount == .zero ? nil : rescueCount
         )
         self.scale = Grizzco.ScaleData(gold: scales.gold, silver: scales.silver, bronze: scales.bronze)
         self.maximum = Grizzco.HighData(
