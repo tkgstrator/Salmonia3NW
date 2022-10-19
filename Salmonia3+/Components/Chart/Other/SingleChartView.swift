@@ -52,8 +52,6 @@ struct SingleChartView: View {
                     .bold()
                     .foregroundColor(.primary)
                     .padding([.horizontal, .top])
-                Doughnut(data: DoughnutChartData(values: data.onlyPoints().map({ Int($0) })))
-                    .padding()
             })
         })
         .aspectRatio(200/240, contentMode: .fit)

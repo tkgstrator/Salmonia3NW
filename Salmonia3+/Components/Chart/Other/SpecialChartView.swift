@@ -12,8 +12,6 @@ import SplatNet3
 struct SpecialChartView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @ObservedObject var data: DoughnutChartData
-    @State private var scale: Double = .zero
-    public var title: Text
 
     public var valueSpecifier: String
 
@@ -29,55 +27,46 @@ struct SpecialChartView: View {
 
     public init(
         data: [Int]?,
-        title: Text,
-        legend: String? = nil,
         valueSpecifier: String? = "%.1f") {
-            self.data = DoughnutChartData(values: data)
-            self.title = title
+            self.data = DoughnutChartData(values: data, colors: colors)
             self.valueSpecifier = valueSpecifier!
         }
 
     var body: some View {
         ZStack(alignment: .center, content: {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(self.colorScheme == .dark ? .black : .white)
-                .shadow(color: .primary, radius: 2, x: 0, y: 0)
-            VStack(alignment: .leading, content: {
-                VStack(alignment: .leading, spacing: 8, content: {
-                    self.title
-                        .font(.title3)
-                        .bold()
-                        .lineLimit(1)
-                        .foregroundColor(.primary)
-                })
-                .padding([.leading, .top])
-                Spacer()
-                HStack(alignment: .center, spacing: 0, content: {
-                    LazyHGrid(rows: Array(repeating: .init(.flexible(maximum: 40)), count: 4), content: {
-                        ForEach(SpecialType.allCases.dropFirst(), id: \.rawValue) { specialId in
-                            let index: Int = SpecialType.allCases.dropFirst().firstIndex(of: specialId) ?? 0
+            Color.black.opacity(0.7)
+            VStack(alignment: .center, spacing: 0, content: {
+                Text(bundle: .MyOutfits_Special)
+                    .font(systemName: .Splatfont, size: 13)
+                HStack(alignment: .center, content: {
+                    LazyHGrid(rows: Array(repeating: .init(.fixed(23)), count: 4), content: {
+                    let specialList: [SpecialType] = Array(SpecialType.allCases.dropFirst())
+                        ForEach(specialList, id: \.rawValue) { specialId in
+                            let color: Color = colors[specialList.firstIndex(of: specialId) ?? 0]
                             Image(bundle: specialId)
                                 .resizable()
                                 .scaledToFit()
-                                .background(RoundedRectangle(cornerRadius: 4).fill(colors[index - 1]))
+                                .frame(width: 23, height: 23, alignment: .center)
+                                .background(RoundedRectangle(cornerRadius: 4).fill(color))
                         }
                     })
                     Spacer()
                     Doughnut(data: data)
                 })
-                .font(.callout)
-                .padding([.horizontal, .bottom])
-                .padding(.top, 8)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
             })
+            .padding(.top, 27)
+            .padding(.bottom, 15)
+            .padding(.horizontal)
         })
-        .aspectRatio(340/200, contentMode: .fit)
+        .frame(width: 300, height: 180, alignment: .center)
+        .mask(Image(bundle: .Card).resizable().scaledToFill())
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
 struct CircleChartView_Previews: PreviewProvider {
     static var previews: some View {
-        SpecialChartView(data: [10, 20, 30, 40, 50, 60, 70], title: Text("Special Weapon"))
+        SpecialChartView(data: [10, 20, 30, 40, 50, 60, 70])
             .preferredColorScheme(.dark)
     }
 }

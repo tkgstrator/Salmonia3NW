@@ -16,7 +16,7 @@ struct ScheduleStatsView: View {
     }
 
     var body: some View {
-        ScrollView(content: {
+        ScrollView(showsIndicators: false, content: {
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
                 GrizzcoCard(average: stats.average)
             })
@@ -26,6 +26,10 @@ struct ScheduleStatsView: View {
                     GrizzcoScaleCard(scale: stats.scale)
                 })
                 GrizzcoPointCard(point: stats.point)
+            })
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
+                SpecialChartView(data: stats.specialCounts)
+                WeaponChartView(data: stats.weaponCounts, weaponList: stats.weaponList)
             })
         })
         .padding(.horizontal)

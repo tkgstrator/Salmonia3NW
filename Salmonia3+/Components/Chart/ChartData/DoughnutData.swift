@@ -32,24 +32,6 @@ class DoughnutChartData: ObservableObject {
         self.values = zip(values, colors).map({ DoughnutData(value: $0.0, color: $0.1) })
     }
 
-    init(values: [Int]?) {
-        guard let values = values else {
-            return
-        }
-
-        let colors: [Color] = Array([
-            SPColor.SplatNet3.SPPink,
-            SPColor.SplatNet3.SPOrange,
-            SPColor.SplatNet3.SPYellow,
-            SPColor.SplatNet3.SPSalmonGreen,
-            SPColor.SplatNet3.SPGreen,
-            SPColor.SplatNet3.SPBlue,
-            SPColor.SplatNet3.SPPurple,
-        ].prefix(values.count))
-
-        self.values = zip(values, colors).map({ DoughnutData(value: $0.0, color: $0.1) })
-    }
-
     func calc() {
         let total: Double = Double(values.map({ $0.value }).reduce(0, +))
         var sum: Double = .zero
