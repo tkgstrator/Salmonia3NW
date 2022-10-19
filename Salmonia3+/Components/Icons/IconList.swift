@@ -153,7 +153,6 @@ enum IconList {
                         return encoder
                     }()
                     let results: [JSONCoopResult] = RealmService.shared.exportToJSON()
-                    print(results.count)
                     do {
                         let data = try encoder.encode(results)
                         let fileName: String = {

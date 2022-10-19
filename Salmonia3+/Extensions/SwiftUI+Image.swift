@@ -52,6 +52,7 @@ enum ButtonType: String, CaseIterable, Codable {
     case Death
     case Wave
     case Hanger
+    case Card
 }
 
 extension Image {

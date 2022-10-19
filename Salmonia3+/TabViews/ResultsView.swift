@@ -31,6 +31,7 @@ struct ResultsView: View {
                         }, label: {
                             ResultView(result: result)
                         })
+                        .listRowSeparatorTint(.primary)
                     }
                 }
             }

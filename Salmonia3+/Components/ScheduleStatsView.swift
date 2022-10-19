@@ -16,10 +16,19 @@ struct ScheduleStatsView: View {
     }
 
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true, content: {
-            GrizzcoPointCardView(data: stats.grizzcoPointData)
-                .padding(.horizontal, 10)
+        ScrollView(content: {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
+                GrizzcoCard(average: stats.average)
+            })
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
+                LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
+                    GrizzcoHighCard(maximum: stats.maximum)
+                    GrizzcoScaleCard(scale: stats.scale)
+                })
+                GrizzcoPointCard(point: stats.point)
+            })
         })
+        .padding(.horizontal)
         .backgroundForResult()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))

@@ -32,7 +32,6 @@ class Session: SplatNet3, ObservableObject {
 
     override func publish<T>(_ request: T) async throws -> T.ResponseType where T: GraphQL {
         let progress: LoginProgress = LoginProgress(request: request)
-        print(progress, progress.path, lists[progress.path])
         if lists[progress.path] {
             throw Failure.API(error: NXError.API.response)
         }

@@ -63,6 +63,11 @@
 		1031878028FE2B53005AFBB9 /* RefreshableScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877F28FE2B53005AFBB9 /* RefreshableScroll.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
 		1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878528FE9EAE005AFBB9 /* JSONCoopResult.swift */; };
+		1031F65E28FF8C8D00E15E8D /* GrizzcoHighCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */; };
+		1031F66028FF8C9A00E15E8D /* GrizzcoScalesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */; };
+		1031F66228FF8E6C00E15E8D /* GrizzcoAverageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */; };
+		1031F66428FF8F2B00E15E8D /* GrizzcoScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */; };
+		1031F66828FF90C800E15E8D /* SwiftUI+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66728FF90C800E15E8D /* SwiftUI+String.swift */; };
 		10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10320C6028D40A3100666F09 /* SplatNet3 */; };
 		10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6328D40D0A00666F09 /* RealmCoopResult.swift */; };
 		10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6528D4131200666F09 /* RealmCoopWave.swift */; };
@@ -78,7 +83,6 @@
 		1098543A28F6747800E1E22F /* KingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543928F6747800E1E22F /* KingChartView.swift */; };
 		1098543C28F67E7E00E1E22F /* FailureChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543B28F67E7E00E1E22F /* FailureChartView.swift */; };
 		1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */; };
-		1098544028F70B5300E1E22F /* AbstructView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543F28F70B5300E1E22F /* AbstructView.swift */; };
 		1098544928F9164600E1E22F /* SingleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544828F9164600E1E22F /* SingleChartData.swift */; };
 		1098544B28F9166E00E1E22F /* AnimatableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544A28F9166E00E1E22F /* AnimatableModifier.swift */; };
 		1098544D28F917FC00E1E22F /* DoughnutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544C28F917FC00E1E22F /* DoughnutData.swift */; };
@@ -201,6 +205,11 @@
 		1031877F28FE2B53005AFBB9 /* RefreshableScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableScroll.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		1031878528FE9EAE005AFBB9 /* JSONCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoopResult.swift; sourceTree = "<group>"; };
+		1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoHighCard.swift; sourceTree = "<group>"; };
+		1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoScalesCard.swift; sourceTree = "<group>"; };
+		1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoAverageCard.swift; sourceTree = "<group>"; };
+		1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoScheduleCard.swift; sourceTree = "<group>"; };
+		1031F66728FF90C800E15E8D /* SwiftUI+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+String.swift"; sourceTree = "<group>"; };
 		10320C6328D40D0A00666F09 /* RealmCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
 		10320C6528D4131200666F09 /* RealmCoopWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopWave.swift; sourceTree = "<group>"; };
 		10320C6728D4147100666F09 /* RealmCoopPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopPlayer.swift; sourceTree = "<group>"; };
@@ -215,7 +224,6 @@
 		1098543928F6747800E1E22F /* KingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingChartView.swift; sourceTree = "<group>"; };
 		1098543B28F67E7E00E1E22F /* FailureChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureChartView.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointCard.swift; sourceTree = "<group>"; };
-		1098543F28F70B5300E1E22F /* AbstructView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstructView.swift; sourceTree = "<group>"; };
 		1098544828F9164600E1E22F /* SingleChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartData.swift; sourceTree = "<group>"; };
 		1098544A28F9166E00E1E22F /* AnimatableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableModifier.swift; sourceTree = "<group>"; };
 		1098544C28F917FC00E1E22F /* DoughnutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughnutData.swift; sourceTree = "<group>"; };
@@ -472,6 +480,35 @@
 			path = UINavigationController;
 			sourceTree = "<group>";
 		};
+		1031F65928FF8C3300E15E8D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1098544A28F9166E00E1E22F /* AnimatableModifier.swift */,
+				10E3192028F2683C009C6BBC /* Doughnut.swift */,
+				10E3191C28F22A38009C6BBC /* SingleChartView.swift */,
+				10E3191E28F2602A009C6BBC /* SpecialChartView.swift */,
+				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
+				109A5D4F28F561C1001F8724 /* ColumnChartView.swift */,
+				1098543528F5D29000E1E22F /* GradePointChartView.swift */,
+				1098543728F66D1700E1E22F /* ScaleChartView.swift */,
+				1098543928F6747800E1E22F /* KingChartView.swift */,
+				1098543B28F67E7E00E1E22F /* FailureChartView.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		1031F65A28FF8C4300E15E8D /* Grizzco */ = {
+			isa = PBXGroup;
+			children = (
+				1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */,
+				1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */,
+				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
+				1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */,
+				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
+			);
+			path = Grizzco;
+			sourceTree = "<group>";
+		};
 		10320C6228D40CF700666F09 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,13 +525,14 @@
 			isa = PBXGroup;
 			children = (
 				1031878428FE81AA005AFBB9 /* UINavigationController */,
-				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
-				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				10FA715228E44DF1001549B9 /* SwiftUI+Image.swift */,
 				100E875728D4BFBB007FCF3C /* SwiftUI+View.swift */,
 				100E875B28D4D7EA007FCF3C /* SwiftUI+Color.swift */,
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
 				1018B49B28D73352002BD1F0 /* SwiftUI+Text.swift */,
+				1031F66728FF90C800E15E8D /* SwiftUI+String.swift */,
+				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
+				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
 				10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */,
@@ -563,19 +601,9 @@
 		10E3191728F206AA009C6BBC /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				1031F65A28FF8C4300E15E8D /* Grizzco */,
+				1031F65928FF8C3300E15E8D /* Other */,
 				1098544728F9163900E1E22F /* ChartData */,
-				10E3192028F2683C009C6BBC /* Doughnut.swift */,
-				10E3191C28F22A38009C6BBC /* SingleChartView.swift */,
-				10E3191E28F2602A009C6BBC /* SpecialChartView.swift */,
-				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
-				109A5D4F28F561C1001F8724 /* ColumnChartView.swift */,
-				1098543528F5D29000E1E22F /* GradePointChartView.swift */,
-				1098543728F66D1700E1E22F /* ScaleChartView.swift */,
-				1098543928F6747800E1E22F /* KingChartView.swift */,
-				1098543B28F67E7E00E1E22F /* FailureChartView.swift */,
-				1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */,
-				1098543F28F70B5300E1E22F /* AbstructView.swift */,
-				1098544A28F9166E00E1E22F /* AnimatableModifier.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -816,6 +844,7 @@
 				1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */,
 				1098543A28F6747800E1E22F /* KingChartView.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
+				1031F65E28FF8C8D00E15E8D /* GrizzcoHighCard.swift in Sources */,
 				1098544928F9164600E1E22F /* SingleChartData.swift in Sources */,
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
@@ -832,6 +861,7 @@
 				1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */,
 				101AACBE28B77C750030B56C /* ContentView.swift in Sources */,
 				100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */,
+				1031F66428FF8F2B00E15E8D /* GrizzcoScheduleCard.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
@@ -839,7 +869,6 @@
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
 				1098543828F66D1700E1E22F /* ScaleChartView.swift in Sources */,
-				1098544028F70B5300E1E22F /* AbstructView.swift in Sources */,
 				1031878028FE2B53005AFBB9 /* RefreshableScroll.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,
 				10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */,
@@ -870,15 +899,18 @@
 				1098544B28F9166E00E1E22F /* AnimatableModifier.swift in Sources */,
 				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
+				1031F66228FF8E6C00E15E8D /* GrizzcoAverageCard.swift in Sources */,
 				1098543628F5D29000E1E22F /* GradePointChartView.swift in Sources */,
 				1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
 				10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */,
 				10E3192328F271F9009C6BBC /* Ark.swift in Sources */,
+				1031F66028FF8C9A00E15E8D /* GrizzcoScalesCard.swift in Sources */,
 				10320C6E28D4244200666F09 /* RealmService.swift in Sources */,
 				1018B4AD28DAC394002BD1F0 /* Secrets.swift in Sources */,
 				100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */,
+				1031F66828FF90C800E15E8D /* SwiftUI+String.swift in Sources */,
 				100E872F28D47966007FCF3C /* RealmCoopSchedule.swift in Sources */,
 				10FA715328E44DF1001549B9 /* SwiftUI+Image.swift in Sources */,
 				10E3192128F2683C009C6BBC /* Doughnut.swift in Sources */,
@@ -1071,7 +1103,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1105,7 +1137,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

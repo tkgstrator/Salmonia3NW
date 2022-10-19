@@ -77,37 +77,39 @@ struct ScaleChartView: View {
 }
 
 struct ScaleChartView_Previews: PreviewProvider {
-    static let data: GrizzcoPointData = GrizzcoPointData(
+    static let point: Grizzco.PointData = Grizzco.PointData(
         playCount: 999,
-        maxGrade: GradeType.Eggsecutive_VP,
-        maxGradePoint: 999,
-        failureWaves: (clear: 999, wave1: 10, wave2: 10, wave3: 10),
-        regularPoint: 99999,
-        goldenIkuraNum: 99999,
         ikuraNum: 999999,
-        bossDefeatedCount: 9999,
-        bossCount: 99,
-        rescueCount: 999,
-        totalPoint: 999,
-        scales: (bronze: 999, silver: 999, gold: 999)
+        goldenIkuraNum: 99999,
+        bossKillCount: 999,
+        regularPoint: 999999,
+        regularPointTotal: nil,
+        rescueCount: 9999
     )
 
-    static let record: AbstructData = AbstructData(
-        gradeId: .Eggsecutive_VP,
-        gradePointMax: 999,
-        failureWaves: (clear: 999, wave1: 9, wave2: 9, wave3: 99)
+    static let maximum: Grizzco.HighData = Grizzco.HighData(
+        maxGrade: .Eggsecutive_VP,
+        maxGradePoint: 600,
+        averageWaveCleared: 2.75
     )
 
-    static let scale: ScaleData = ScaleData(gold: 100, silver: 100, bronze: 100)
+    static let scale: Grizzco.ScaleData = Grizzco.ScaleData(
+        gold: 999,
+        silver: 999,
+        bronze: 999
+    )
+
+    static let average: Grizzco.AverageData = Grizzco.AverageData(
+        weaponList: Array(WeaponType.allCases.shuffled().prefix(4)),
+        rareWeapon: WeaponType.Stringer_Bear_Coop,
+        ikuraNum: 9999.9,
+        goldenIkuraNum: 999.9,
+        helpCount: 99.9,
+        deadCount: 99.9
+    )
 
     static var previews: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 240), alignment: .top), count: 2), content: {
-            LazyVStack(alignment: .center, spacing: nil, content: {
-                AbstructView(data: record)
-                ScaleChartView(data: scale)
-            })
-            GrizzcoPointCard(data: data)
-        })
+        EmptyView()
         .previewLayout(.fixed(width: 600, height: 800))
         .preferredColorScheme(.dark)
     }
