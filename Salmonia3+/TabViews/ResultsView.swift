@@ -41,6 +41,9 @@ struct ResultsView: View {
         })
         .refreshableResult()
         .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading, content: {
+                SPWebButton()
+            })
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 Button(action: {
                     selection.next()

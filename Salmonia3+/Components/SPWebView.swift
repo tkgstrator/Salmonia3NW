@@ -126,19 +126,21 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
 
         /// Console.Logをキャッチする
         let source = "function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); } window.console.log = captureLog;"
-        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        self.webView.configuration.userContentController.addUserScript(script)
-        self.webView.configuration.userContentController.add(self, name: "logHandler")
-        /// Cookieの設定
-        let cookie = HTTPCookie(properties: [
-            HTTPCookiePropertyKey.name: "_gtoken",
-            HTTPCookiePropertyKey.value: gtoken,
-            HTTPCookiePropertyKey.domain: URL(string: "https://api.lp1.av5ja.srv.nintendo.net/")!.host!,
-            HTTPCookiePropertyKey.path: "/"])!
-        config.websiteDataStore.httpCookieStore.setCookie(cookie) { [weak self] in
-            guard let self = self else { return }
-            self.webView.load(request)
-        }
+        DispatchQueue.main.async(execute: {
+            let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+            self.webView.configuration.userContentController.addUserScript(script)
+            self.webView.configuration.userContentController.add(self, name: "logHandler")
+            /// Cookieの設定
+            let cookie = HTTPCookie(properties: [
+                HTTPCookiePropertyKey.name: "_gtoken",
+                HTTPCookiePropertyKey.value: gtoken,
+                HTTPCookiePropertyKey.domain: URL(string: "https://api.lp1.av5ja.srv.nintendo.net/")!.host!,
+                HTTPCookiePropertyKey.path: "/"])!
+            config.websiteDataStore.httpCookieStore.setCookie(cookie) { [weak self] in
+                guard let self = self else { return }
+                self.webView.load(request)
+            }
+        })
     }
 
     override func loadView() {

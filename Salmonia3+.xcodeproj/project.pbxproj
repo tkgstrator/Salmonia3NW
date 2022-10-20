@@ -69,6 +69,7 @@
 		1031F66828FF90C800E15E8D /* SwiftUI+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66728FF90C800E15E8D /* SwiftUI+String.swift */; };
 		1031F66B28FFF1F100E15E8D /* ResultRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66A28FFF1F100E15E8D /* ResultRefreshable.swift */; };
 		1031F6A52901538300E15E8D /* SPWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A42901538300E15E8D /* SPWebView.swift */; };
+		1031F6A7290164B800E15E8D /* SPWebButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A6290164B800E15E8D /* SPWebButton.swift */; };
 		10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10320C6028D40A3100666F09 /* SplatNet3 */; };
 		10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6328D40D0A00666F09 /* RealmCoopResult.swift */; };
 		10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6528D4131200666F09 /* RealmCoopWave.swift */; };
@@ -211,6 +212,7 @@
 		1031F66728FF90C800E15E8D /* SwiftUI+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+String.swift"; sourceTree = "<group>"; };
 		1031F66A28FFF1F100E15E8D /* ResultRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRefreshable.swift; sourceTree = "<group>"; };
 		1031F6A42901538300E15E8D /* SPWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPWebView.swift; sourceTree = "<group>"; };
+		1031F6A6290164B800E15E8D /* SPWebButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPWebButton.swift; sourceTree = "<group>"; };
 		10320C6328D40D0A00666F09 /* RealmCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
 		10320C6528D4131200666F09 /* RealmCoopWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopWave.swift; sourceTree = "<group>"; };
 		10320C6728D4147100666F09 /* RealmCoopPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopPlayer.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				100E873128D47DAB007FCF3C /* Results */,
 				10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */,
 				1031F6A42901538300E15E8D /* SPWebView.swift */,
+				1031F6A6290164B800E15E8D /* SPWebButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				100E877128D504C3007FCF3C /* ResultSakelien.swift in Sources */,
 				1031F66828FF90C800E15E8D /* SwiftUI+String.swift in Sources */,
 				100E872F28D47966007FCF3C /* RealmCoopSchedule.swift in Sources */,
+				1031F6A7290164B800E15E8D /* SPWebButton.swift in Sources */,
 				10FA715328E44DF1001549B9 /* SwiftUI+Image.swift in Sources */,
 				10E3192128F2683C009C6BBC /* Doughnut.swift in Sources */,
 			);
@@ -1111,7 +1115,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1145,7 +1149,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

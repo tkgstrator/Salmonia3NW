@@ -223,6 +223,13 @@ final class StatsService: ObservableObject {
             )
         }()
 
+        let clearWave: Double? = {
+            if results.count == .zero {
+                return nil
+            }
+            return Double(failureWaves.clear * 3 + failureWaves.wave3 * 2 + failureWaves.wave2 * 1) / Double(results.count)
+        }()
+
         /// クリアしたWAVE回数
         let shiftsClearWorked: Int = results.filter({ $0.isClear }).count
 
@@ -237,7 +244,6 @@ final class StatsService: ObservableObject {
 
         /// チームの合計イクラ数
         let ikuraNum: Int? = results.sum(ofProperty: "ikuraNum")
-        print(ikuraNum)
 
         /// チームの合計金イクラ数
         let goldenIkuraNum: Int? = results.sum(ofProperty: "goldenIkuraNum")
@@ -283,12 +289,6 @@ final class StatsService: ObservableObject {
         }()
 
         self.clearRatio = Double(shiftsClearWorked) / Double(shiftsWorked)
-        let clearWave: Double? = {
-            if results.count == .zero {
-                return nil
-            }
-            return Double(results.map({ min(3, $0.waves.count) }).reduce(0, +)) / Double(results.count)
-        }()
         self.bossDefeatedRatio = Double(bossKillCount) / Double(bossCount)
         self.bossCount = [bossKillCount, bossCount - bossKillCount]
         self.specialCounts = {
