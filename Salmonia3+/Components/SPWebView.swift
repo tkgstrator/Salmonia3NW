@@ -12,6 +12,7 @@ import Common
 import Alamofire
 #if !os(macOS)
 import UIKit
+import SplatNet3
 #endif
 
 struct SPWebView: UIViewControllerRepresentable {
@@ -26,9 +27,13 @@ struct SPWebView: UIViewControllerRepresentable {
         }
 
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            webView.isHidden = true
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                webView.isHidden = false
+            })
         }
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -50,6 +55,7 @@ struct SPWebView: UIViewControllerRepresentable {
 }
 
 final class WebViewController: UIViewController, WKScriptMessageHandler {
+    @Environment(\.locale) var locale
     enum NSScriptMessage: String, CaseIterable {
         case closeWebView
         case reloadExtension
@@ -108,6 +114,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
         case .Valid:
             self.loadWithGToken(gtoken: gtoken)
         case .Expired:
+            /// 仮に適当に表示
             delegate.parent.session.refresh(account.credential, for: Alamofire.Session(), completion: { value in
                 switch value {
                 case .success(let credential):
@@ -121,7 +128,17 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
     }
 
     private func loadWithGToken(gtoken: String) {
-        let request: URLRequest = URLRequest(url: URL(unsafeString: "https://api.lp1.av5ja.srv.nintendo.net/"))
+        var baseURL: URL = URL(unsafeString: "https://api.lp1.av5ja.srv.nintendo.net/")
+
+        if let languageCode: String = Locale.preferredLanguages.first {
+            let queryItems: [URLQueryItem] = [
+                URLQueryItem(name: "lang", value: languageCode),
+                URLQueryItem(name: "na_country", value: languageCode),
+                URLQueryItem(name: "na_lang", value: languageCode),
+            ]
+            baseURL.queryItems(queryItems)
+        }
+        let request: URLRequest = URLRequest(url: baseURL)
         let config: WKWebViewConfiguration = WKWebViewConfiguration()
 
         /// Console.Logをキャッチする
@@ -146,7 +163,6 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
     override func loadView() {
         self.webView.navigationDelegate = self.delegate
         self.webView.uiDelegate = self.delegate
-        self.webView.translatesAutoresizingMaskIntoConstraints = false
         self.view = webView
     }
 
@@ -175,5 +191,19 @@ struct SPWebView_Previews: PreviewProvider {
         SPWebView()
             .preferredColorScheme(.dark)
 //            .ignoresSafeArea()
+    }
+}
+
+
+extension URL {
+    mutating func queryItems(_ items: [URLQueryItem])  {
+        guard var request: URLComponents = URLComponents(url: self, resolvingAgainstBaseURL: true) else {
+            return
+        }
+        request.queryItems = items
+        guard let url: URL = request.url else {
+            return
+        }
+        self = url
     }
 }
