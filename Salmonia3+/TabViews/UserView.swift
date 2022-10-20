@@ -22,11 +22,11 @@ struct UserView: View {
                 IconList.Privacy()
                 IconList.Schedule()
                 IconList.Chart()
+                IconList.Status()
                 if isAppDeveloperMode {
                     IconList.Debug()
                 }
 #if DEBUG
-                IconList.Status()
                 IconList.Friends()
 #endif
             })

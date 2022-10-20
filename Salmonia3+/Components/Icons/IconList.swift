@@ -134,7 +134,7 @@ enum IconList {
                 .navigationCircleButton(
                     localizedText: "TITLE_STATUS",
                     destination: {
-                        EmptyView()
+                        SPWebView()
                     })
         }
     }
