@@ -130,14 +130,10 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
     private func loadWithGToken(gtoken: String) {
         var baseURL: URL = URL(unsafeString: "https://api.lp1.av5ja.srv.nintendo.net/")
 
-        if let languageCode: String = Locale.preferredLanguages.first {
-            let queryItems: [URLQueryItem] = [
-                URLQueryItem(name: "lang", value: languageCode),
-                URLQueryItem(name: "na_country", value: languageCode),
-                URLQueryItem(name: "na_lang", value: languageCode),
-            ]
-            baseURL.queryItems(queryItems)
-        }
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "lang", value: Locale.languageSP3Code),
+        ]
+        baseURL.queryItems(queryItems)
         let request: URLRequest = URLRequest(url: baseURL)
         let config: WKWebViewConfiguration = WKWebViewConfiguration()
 
@@ -193,7 +189,6 @@ struct SPWebView_Previews: PreviewProvider {
 //            .ignoresSafeArea()
     }
 }
-
 
 extension URL {
     mutating func queryItems(_ items: [URLQueryItem])  {

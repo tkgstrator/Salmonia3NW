@@ -124,8 +124,6 @@ enum Grizzco {
     }
 }
 
-
-
 final class StatsService: ObservableObject {
     /// クリア率
     @Published var clearRatio: Double
@@ -255,7 +253,12 @@ final class StatsService: ObservableObject {
         let gradeIdMax: GradeType? = results.max(ofProperty: "grade")
 
         /// 最高レート
-        let gradePointMax: Int? = results.max(ofProperty: "gradePoint")
+        let gradePointMax: Int? = {
+            guard let gradeIdMax = gradeIdMax else {
+                return nil
+            }
+            return results.filter("grade=%@", gradeIdMax).max(ofProperty: "gradePoint")
+        }()
 
         /// 仮データ
         let stats: Stats = Stats(summation: 0, maximum: 0, minimum: 0, average: 0)
@@ -336,8 +339,7 @@ final class StatsService: ObservableObject {
             return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
         }()
         self.waves = Array(repeating: Array(repeating: WaveStats(count: 0, ikuraStats: stats, goldenIkuraStats: stats, assistIkuraStats: stats), count: 9), count: 3)
-        let maxGradePoint: Int? = results.max(ofProperty: "gradePoint")
-        self.maxGradePoint = maxGradePoint
+        self.maxGradePoint = gradePointMax
         self.gradePointHistory = results.compactMap({ $0.gradePoint }).map({ Double($0) })
         self.average = Grizzco.AverageData(
             weaponList: weaponList,
@@ -359,7 +361,7 @@ final class StatsService: ObservableObject {
         self.scale = Grizzco.ScaleData(gold: scales.gold, silver: scales.silver, bronze: scales.bronze)
         self.maximum = Grizzco.HighData(
             maxGrade: gradeIdMax,
-            maxGradePoint: maxGradePoint,
+            maxGradePoint: gradePointMax,
             averageWaveCleared: clearWave
         )
     }

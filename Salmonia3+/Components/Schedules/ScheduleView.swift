@@ -34,8 +34,9 @@ struct ScheduleView: View {
                 Spacer()
                 HStack(content: {
                     if let grade = schedule.grade, let gradePoint = schedule.gradePoint {
-                        VStack(alignment: .leading, content: {
-                            Text(grade.localizedText) + Text("\(gradePoint)")
+                        HStack(alignment: .center, spacing: 8, content: {
+                            Text(grade.localizedText)
+                            Text(" \(gradePoint)")
                         })
                         .font(systemName: .Splatfont2, size: 12 * scale)
                     }
@@ -55,7 +56,14 @@ fileprivate extension RealmCoopSchedule {
     }
 
     var gradePoint: Int? {
-        self.results.max(ofProperty: "gradePoint")
+        let gradeIdMax: GradeType? = self.grade
+        let gradePointMax: Int? = {
+            guard let gradeIdMax = gradeIdMax else {
+                return nil
+            }
+            return results.filter("grade=%@", gradeIdMax).max(ofProperty: "gradePoint")
+        }()
+        return gradePointMax
     }
 
     func ikuraNum() -> Int? {
