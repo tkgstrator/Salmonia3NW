@@ -27,8 +27,8 @@ private struct CustomBackButton: ViewModifier {
                         return .Splatfont1TW
                     }
                 }()
-                nvc.navigationController?.hidesBarsOnTap = true
-                nvc.navigationController?.hidesBarsOnSwipe = true
+//                nvc.navigationController?.hidesBarsOnTap = true
+//                nvc.navigationController?.hidesBarsOnSwipe = true
                 /// フォントの切り替え
                 nvc.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: fontName.rawValue, size: 16)!]
                 /// 戻るボタンの切り替え

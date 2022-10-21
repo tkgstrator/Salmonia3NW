@@ -18,8 +18,9 @@ struct GrizzcoMainCard: View {
                 ForEach(weapon.weaponList.indices, id: \.self) { index in
                     let weaponData: Grizzco.WeaponData.WeaponDataType = weapon.weaponList[index]
                     Label(title: {
-                        Text(String(format: "%.1f%%", weaponData.percent * 100))
+                        Text(String(format: "%.2f%%", weaponData.percent * 100))
                             .foregroundColor(weaponData.color)
+                            .font(systemName: .Splatfont2, size: 12)
                     }, icon: {
                         Image(bundle:weaponData.weaponId)
                             .resizable()

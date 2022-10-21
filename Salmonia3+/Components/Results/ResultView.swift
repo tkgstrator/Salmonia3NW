@@ -85,6 +85,7 @@ private struct ResultSplatNet3: View {
         })
         .padding(.leading)
         .padding(.trailing, 8)
+        .padding(.vertical, 4)
         .background(result.isClear ? SPColor.SplatNet3.SPSalmonOrange : SPColor.SplatNet3.SPSalmonOrangeDarker)
         .padding(.bottom, 2)
     }

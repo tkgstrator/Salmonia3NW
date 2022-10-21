@@ -125,6 +125,7 @@ enum Grizzco {
     }
 
 
+    /// メインウエポンデータ
     class WeaponData: ObservableObject {
         @Published var weaponList: [WeaponDataType]
 
@@ -148,12 +149,14 @@ enum Grizzco {
         }
     }
 
+    /// スペシャルウェポンデータ
     struct SpecialData: Hashable, Equatable {
         let color: Color
-        let weaponId: WeaponType
-        let percent: Double
+        let specialId: SpecialType
+        let percent: Double?
     }
 
+    /// WAVEデータ
     struct WaveData: Hashable, Equatable {
         /// イベント
         let eventType: EventType
@@ -162,9 +165,33 @@ enum Grizzco {
         /// 出現回数
         let count: Int
         /// 最大金イクラ数
-        let goldenIkuraMax: Int
+        let goldenIkuraMax: Int?
         /// 平均金イクラ数
-        let goldenIkuraAvg: Double
+        let goldenIkuraAvg: Double?
+        /// クリア率
+        let clearRatio: Double?
+    }
+
+    /// オオモノシャケデータ
+    struct SakelienData: Hashable, Equatable {
+        /// オオモノの種類
+        let sakelienType: SakelienType
+        /// オオモノ出現数
+        let bossCount: Int
+        /// オオモノ討伐合計
+        let bossKillCount: Int
+        /// チームオオモノ討伐合計
+        let bossTeamKillCount: Int
+    }
+
+    class TeamData: ObservableObject {
+        @Published var maxValue: Int?
+        @Published var avgValue: Double?
+
+        init(maxValue: Int?, avgValue: Double?) {
+            self.maxValue = maxValue
+            self.avgValue = avgValue
+        }
     }
 }
 
@@ -181,6 +208,22 @@ final class StatsService: ObservableObject {
     @Published var weapon: Grizzco.WeaponData
     /// クマサンWAVEデータ
     @Published var waves: [Grizzco.WaveData]
+    /// クマサンスペシャルデータ
+    @Published var specials: [Grizzco.SpecialData]
+    /// クマサンシャケデータ
+    @Published var sakelien: [Grizzco.SakelienData]
+    /// イクラデータ
+    @Published var ikuraNum: Grizzco.TeamData
+    /// イクラデータ
+    @Published var goldenIkuraNum: Grizzco.TeamData
+    /// イクラデータ
+    @Published var teamIkuraNum: Grizzco.TeamData
+    /// イクラデータ
+    @Published var teamGoldenIkuraNum: Grizzco.TeamData
+    /// イクラデータ
+    @Published var defeatedNum: Grizzco.TeamData
+    /// イクラデータ
+    @Published var teamDefeatedNum: Grizzco.TeamData
 
     init(startTime: Date) {
         /// リザルト一覧
@@ -192,6 +235,9 @@ final class StatsService: ObservableObject {
         }()
         /// プレイヤー一覧
         let players: RealmSwift.Results<RealmCoopPlayer> = RealmService.shared.objects(ofType: RealmCoopPlayer.self).filter("ANY link.link.startTime=%@ AND isMyself=true", startTime)
+        /// WAVE一覧
+        let waves: RealmSwift.Results<RealmCoopWave> = RealmService.shared.objects(ofType: RealmCoopWave.self).filter("ANY link.link.startTime=%@", startTime)
+
         /// 支給されるブキ一覧
         let weaponList: [WeaponType] = {
             if let schedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime }) {
@@ -263,10 +309,10 @@ final class StatsService: ObservableObject {
         self.average = Grizzco.AverageData(
             weaponList: weaponList,
             rareWeapon: rareWeapon,
-            ikuraNum: results.average(ofProperty: "ikuraNum"),
-            goldenIkuraNum: results.average(ofProperty: "goldenIkuraNum"),
-            helpCount: results.average(ofProperty: "helpCount"),
-            deadCount: results.average(ofProperty: "deathCount")
+            ikuraNum: players.average(ofProperty: "ikuraNum"),
+            goldenIkuraNum: players.average(ofProperty: "goldenIkuraNum"),
+            helpCount: players.average(ofProperty: "helpCount"),
+            deadCount: players.average(ofProperty: "deadCount")
         )
         self.point = Grizzco.PointData(
             playCount: shiftsWorked == .zero ? nil : shiftsWorked,
@@ -284,7 +330,52 @@ final class StatsService: ObservableObject {
             averageWaveCleared: clearWave
         )
         self.weapon = Grizzco.WeaponData(weaponList: weaponCounts)
-        self.waves = []
+        self.waves = EventType.allCases.flatMap({ eventType in
+            return WaterType.allCases.map({ waterLevel in
+                let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("waterLevel=%@ AND eventType=%@", waterLevel, eventType)
+                let count: Int = waves.count
+                let goldenIkuraMax: Int? = waves.max(ofProperty: "goldenIkuraNum")
+                let goldenIkuraAvg: Double? = waves.average(ofProperty: "goldenIkuraNum")
+                return Grizzco.WaveData(
+                    eventType: eventType,
+                    waterLevel: waterLevel,
+                    count: count,
+                    goldenIkuraMax: goldenIkuraMax,
+                    goldenIkuraAvg: goldenIkuraAvg,
+                    clearRatio: nil
+                )
+            })
+        })
+        self.specials = SpecialType.allCases.dropFirst().map({ specialId in
+            let count: Int = players.filter("specialId=%@", specialId).count
+            let percent: Double? = shiftsWorked == .zero ? nil : 100 * Double(count) / Double(shiftsWorked)
+            return Grizzco.SpecialData(color: Color.black, specialId: specialId, percent: percent)
+        })
+        self.sakelien = []
+        self.ikuraNum = Grizzco.TeamData(
+            maxValue: players.max(ofProperty: "ikuraNum"),
+            avgValue: players.average(ofProperty: "ikuraNum")
+        )
+        self.goldenIkuraNum = Grizzco.TeamData(
+            maxValue: players.max(ofProperty: "goldenIkuraNum"),
+            avgValue: players.average(ofProperty: "goldenIkuraNum")
+        )
+        self.teamIkuraNum = Grizzco.TeamData(
+            maxValue: results.max(ofProperty: "ikuraNum"),
+            avgValue: results.average(ofProperty: "ikuraNum")
+        )
+        self.teamGoldenIkuraNum = Grizzco.TeamData(
+            maxValue: results.max(ofProperty: "goldenIkuraNum"),
+            avgValue: results.average(ofProperty: "goldenIkuraNum")
+        )
+        self.defeatedNum = Grizzco.TeamData(
+            maxValue: players.max(ofProperty: "bossKillCountsTotal"),
+            avgValue: players.average(ofProperty: "bossKillCountsTotal")
+        )
+        self.teamDefeatedNum = Grizzco.TeamData(
+            maxValue: players.max(ofProperty: "bossKillCountsTotal"),
+            avgValue: players.average(ofProperty: "bossKillCountsTotal")
+        )
     }
 }
 

@@ -62,8 +62,8 @@
             filePath = "Salmonia3+/Service/StatsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "init(startTime:)"
             landmarkType = "7">
          </BreakpointContent>

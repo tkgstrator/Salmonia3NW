@@ -20,7 +20,8 @@ struct ScheduleStatsView: View {
         ScrollView(showsIndicators: false, content: {
             TabView(content: {
                 GrizzcoCard(average: stats.average)
-//                GrizzcoSPCard(data: stats.specialCounts)
+                GrizzcoSPCard(specials: stats.specials)
+                GrizzcoWaveCard(waves: stats.waves)
             })
             .frame(width: .infinity, height: 160, alignment: .bottom)
             .overlay(TabSideArray())
@@ -32,17 +33,13 @@ struct ScheduleStatsView: View {
                     GrizzcoMainCard(weapon: stats.weapon)
                 })
                 GrizzcoPointCard(point: stats.point)
+                GrizzcoTeamCardView(stats: stats)
             })
-            LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
-                ForEach(SakelienType.allCases, id: \.hashValue) { sakelienId in
-                    SakelienChart(sakelienId: sakelienId)
-                }
-            })
-//                SpecialChartView(data: stats.specialCounts)
         })
         .padding(.horizontal)
         .refreshableResultScroll()
         .backgroundForResult()
+        .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))
     }
