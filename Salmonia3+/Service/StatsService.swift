@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 import SplatNet3
+import SwiftUI
 
 struct Stats {
     /// 和
@@ -122,45 +123,52 @@ enum Grizzco {
             self.bronze = bronze
         }
     }
+
+
+    class WeaponData: ObservableObject {
+        @Published var weaponList: [WeaponDataType]
+
+        struct WeaponDataType {
+            let color: Color
+            let weaponId: WeaponType
+            let percent: Double
+        }
+
+        init(weaponList: [(WeaponType, Int)]) {
+            let colors: [Color] = [
+                SPColor.SplatNet3.SPPink,
+                SPColor.SplatNet3.SPOrange,
+                SPColor.SplatNet3.SPYellow,
+                SPColor.SplatNet3.SPSalmonGreen
+            ]
+
+            let summation: Int = weaponList.map({ $0.1 }).reduce(0, +)
+
+            self.weaponList = zip(weaponList, colors).map({ WeaponDataType(color: $0.1, weaponId: $0.0.0, percent: Double($0.0.1) / Double(summation)) })
+        }
+    }
+
+    struct SpecialData: Hashable, Equatable {
+        let color: Color
+        let weaponId: WeaponType
+        let percent: Double
+    }
+
+    struct WaveData: Hashable, Equatable {
+        /// イベント
+        let eventType: EventType
+        /// 潮位
+        let waterLevel: WaterType
+        /// 出現回数
+        let count: Int
+        /// 最大金イクラ数
+        let goldenIkuraMax: Int
+        /// 平均金イクラ数
+        let goldenIkuraAvg: Double
+    }
 }
 
 final class StatsService: ObservableObject {
-    /// クリア率
-    @Published var clearRatio: Double
-    /// オカシラシャケ討伐率
-    @Published var bossDefeatedRatio: Double
-    /// 各スペシャル支給回数
-    @Published var specialCounts: [Int]
-    /// 支給ブキ
-    @Published var weaponList: [WeaponType]
-    /// 各ブキ支給回数
-    @Published var weaponCounts: [Int]
-    /// 各WAVE失敗回数
-    @Published var failureWaveCount: [Int]
-    /// オカシラシャケ出現数
-    @Published var bossCount: [Int]
-    /// チームイクラ統計
-    @Published var teamIkuraStats: Stats
-    /// チーム金イクラ統計
-    @Published var teamGoldenIkuraStats: Stats
-    /// イクラ統計
-    @Published var ikuraStats: Stats
-    /// 金イクラ統計
-    @Published var goldenIkuraStats: Stats
-    /// 金イクラアシスト統計
-    @Published var assistIkuraStats: Stats
-    /// 救助数
-    @Published var helpStats: Stats
-    /// 被救助数
-    @Published var deathStats: Stats
-    /// オオモノ討伐数
-    @Published var defeatedStats: Stats
-    /// 各WAVEの統計
-    @Published var waves: [[WaveStats]]
-    /// 最高評価レート
-    @Published var maxGradePoint: Int?
-    /// 評価レートの履歴
-    @Published var gradePointHistory: [Double]
     /// クマサンポイントデータ
     @Published var point: Grizzco.PointData
     /// クマサンカードデータ
@@ -169,6 +177,10 @@ final class StatsService: ObservableObject {
     @Published var scale: Grizzco.ScaleData
     /// クマサン最高データ
     @Published var maximum: Grizzco.HighData
+    /// クマサンブキデータ
+    @Published var weapon: Grizzco.WeaponData
+    /// クマサンWAVEデータ
+    @Published var waves: [Grizzco.WaveData]
 
     init(startTime: Date) {
         /// リザルト一覧
@@ -178,10 +190,8 @@ final class StatsService: ObservableObject {
             }
             return RealmSwift.List<RealmCoopResult>()
         }()
-
         /// プレイヤー一覧
         let players: RealmSwift.Results<RealmCoopPlayer> = RealmService.shared.objects(ofType: RealmCoopPlayer.self).filter("ANY link.link.startTime=%@ AND isMyself=true", startTime)
-
         /// 支給されるブキ一覧
         let weaponList: [WeaponType] = {
             if let schedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime }) {
@@ -189,17 +199,14 @@ final class StatsService: ObservableObject {
             }
             return []
         }()
-
         /// レアブキ
         let rareWeapon: WeaponType? = {
             /// 支給されたブキの一覧
             let weaponList: Set<WeaponType> = Set(RealmService.shared.objects(ofType: RealmCoopPlayer.self).filter("ANY link.link.startTime=%@", startTime).flatMap({ $0.weaponList }))
             return weaponList.first(where: { $0.rawValue >= 20000 })
         }()
-
         /// バイト回数
         let shiftsWorked: Int = results.count
-
 #warning("バグの可能性があるので将来的に修正予定")
         /// ウロコの枚数
         let scales: (bronze: Int, silver: Int, gold: Int) = {
@@ -209,7 +216,6 @@ final class StatsService: ObservableObject {
             let scales: [Int] = results.map({ Array($0.scale) }).transposed().map({ $0.compactMap({ $0 }).reduce(0, +) })
             return (bronze: scales[0], silver: scales[1], gold: scales[2])
         }()
-
         /// 失敗したWAVE
         let failureWaves: (clear: Int, wave1: Int, wave2: Int, wave3: Int) = {
             let failureWaves: NSCountedSet = NSCountedSet(array: results.map({ $0.failureWave ?? 0 }))
@@ -220,38 +226,25 @@ final class StatsService: ObservableObject {
                 wave3: failureWaves.count(for: 3)
             )
         }()
-
+        /// 平均クリアWAVE
         let clearWave: Double? = {
             if results.count == .zero {
                 return nil
             }
             return Double(failureWaves.clear * 3 + failureWaves.wave3 * 2 + failureWaves.wave2 * 1) / Double(results.count)
         }()
-
-        /// クリアしたWAVE回数
-        let shiftsClearWorked: Int = results.filter({ $0.isClear }).count
-
-        /// オカシラシャケの出現数
-        let bossCount: Int = results.compactMap({ $0.isBossDefeated }).count
-
         /// オカシラシャケの討伐数
         let bossKillCount: Int = results.filter({ $0.isBossDefeated == true }).count
-
         /// クマサンポイント
         let regularPoint: Int? = results.sum(ofProperty: "kumaPoint")
-
         /// チームの合計イクラ数
         let ikuraNum: Int? = results.sum(ofProperty: "ikuraNum")
-
         /// チームの合計金イクラ数
         let goldenIkuraNum: Int? = results.sum(ofProperty: "goldenIkuraNum")
-
         /// チームの救助数/被救助数合計
         let rescueCount: Int? = players.sum(ofProperty: "helpCount")
-
         /// 最高評価
         let gradeIdMax: GradeType? = results.max(ofProperty: "grade")
-
         /// 最高レート
         let gradePointMax: Int? = {
             guard let gradeIdMax = gradeIdMax else {
@@ -260,94 +253,20 @@ final class StatsService: ObservableObject {
             return results.filter("grade=%@", gradeIdMax).max(ofProperty: "gradePoint")
         }()
 
-        /// 仮データ
-        let stats: Stats = Stats(summation: 0, maximum: 0, minimum: 0, average: 0)
-        let ikuraStats: Stats = {
-            let summation: Int? = players.sum(ofProperty: "ikuraNum")
-            let maximum: Int? = players.max(ofProperty: "ikuraNum")
-            let minimum: Int? = players.min(ofProperty: "ikuraNum")
-            let average: Double? = players.average(ofProperty: "ikuraNum")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        let goldenIkuraStats: Stats = {
-            let summation: Int? = players.sum(ofProperty: "goldenIkuraNum")
-            let maximum: Int? = players.max(ofProperty: "goldenIkuraNum")
-            let minimum: Int? = players.min(ofProperty: "goldenIkuraNum")
-            let average: Double? = players.average(ofProperty: "goldenIkuraNum")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        let helpStats: Stats = {
-            let summation: Int? = players.sum(ofProperty: "helpCount")
-            let maximum: Int? = players.max(ofProperty: "helpCount")
-            let minimum: Int? = players.min(ofProperty: "helpCount")
-            let average: Double? = players.average(ofProperty: "helpCount")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        let deathStats: Stats = {
-            let summation: Int? = players.sum(ofProperty: "deadCount")
-            let maximum: Int? = players.max(ofProperty: "deadCount")
-            let minimum: Int? = players.min(ofProperty: "deadCount")
-            let average: Double? = players.average(ofProperty: "deadCount")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-
-        self.clearRatio = Double(shiftsClearWorked) / Double(shiftsWorked)
-        self.bossDefeatedRatio = Double(bossKillCount) / Double(bossCount)
-        self.bossCount = [bossKillCount, bossCount - bossKillCount]
-        self.specialCounts = {
-            // 支給されたスペシャル一覧
-            let suppliedSpecialList: [SpecialType] = players.compactMap({ $0.specialId })
-            return SpecialType.allCases.dropFirst().map({ id in suppliedSpecialList.filter({ $0 == id }).count })
-        }()
-        self.weaponList = weaponList
-        self.weaponCounts = {
+        let weaponCounts: [(WeaponType, Int)] = {
             // 支給されたブキ一覧
             let suppliedWeaponList: [WeaponType] = players.flatMap({ $0.weaponList })
-            return weaponList.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
+            let suppliedWeaponCount: [Int] = weaponList.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
+            return Array(zip(suppliedWeaponList, suppliedWeaponCount))
         }()
-        self.failureWaveCount = Array(repeating: 0, count: 4)
-        self.teamIkuraStats = {
-            let summation: Int? = results.sum(ofProperty: "ikuraNum")
-            let maximum: Int? = results.max(ofProperty: "ikuraNum")
-            let minimum: Int? = results.min(ofProperty: "ikuraNum")
-            let average: Double? = results.average(ofProperty: "ikuraNum")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        self.teamGoldenIkuraStats = {
-            let summation: Int? = results.sum(ofProperty: "goldenIkuraNum")
-            let maximum: Int? = results.max(ofProperty: "goldenIkuraNum")
-            let minimum: Int? = results.min(ofProperty: "goldenIkuraNum")
-            let average: Double? = results.average(ofProperty: "goldenIkuraNum")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        self.assistIkuraStats = {
-            let summation: Int? = results.sum(ofProperty: "goldenIkuraAssistNum")
-            let maximum: Int? = results.max(ofProperty: "goldenIkuraAssistNum")
-            let minimum: Int? = results.min(ofProperty: "goldenIkuraAssistNum")
-            let average: Double? = results.average(ofProperty: "goldenIkuraAssistNum")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        self.ikuraStats = ikuraStats
-        self.goldenIkuraStats = goldenIkuraStats
-        self.helpStats = helpStats
-        self.deathStats = deathStats
-        self.defeatedStats = {
-            let summation: Int? = players.sum(ofProperty: "bossKillCountsTotal")
-            let maximum: Int? = players.max(ofProperty: "bossKillCountsTotal")
-            let minimum: Int? = players.min(ofProperty: "bossKillCountsTotal")
-            let average: Double? = players.average(ofProperty: "bossKillCountsTotal")
-            return Stats(summation: summation, maximum: maximum, minimum: minimum, average: average)
-        }()
-        self.waves = Array(repeating: Array(repeating: WaveStats(count: 0, ikuraStats: stats, goldenIkuraStats: stats, assistIkuraStats: stats), count: 9), count: 3)
-        self.maxGradePoint = gradePointMax
-        self.gradePointHistory = results.compactMap({ $0.gradePoint }).map({ Double($0) })
+
         self.average = Grizzco.AverageData(
             weaponList: weaponList,
             rareWeapon: rareWeapon,
-            ikuraNum: ikuraStats.average,
-            goldenIkuraNum: goldenIkuraStats.average,
-            helpCount: helpStats.average,
-            deadCount: deathStats.average
+            ikuraNum: results.average(ofProperty: "ikuraNum"),
+            goldenIkuraNum: results.average(ofProperty: "goldenIkuraNum"),
+            helpCount: results.average(ofProperty: "helpCount"),
+            deadCount: results.average(ofProperty: "deathCount")
         )
         self.point = Grizzco.PointData(
             playCount: shiftsWorked == .zero ? nil : shiftsWorked,
@@ -364,6 +283,8 @@ final class StatsService: ObservableObject {
             maxGradePoint: gradePointMax,
             averageWaveCleared: clearWave
         )
+        self.weapon = Grizzco.WeaponData(weaponList: weaponCounts)
+        self.waves = []
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 import SplatNet3
 
-struct SpecialChartView: View {
+struct GrizzcoSPCard: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @ObservedObject var data: DoughnutChartData
 
@@ -34,39 +34,40 @@ struct SpecialChartView: View {
 
     var body: some View {
         ZStack(alignment: .center, content: {
-            Color.black.opacity(0.7)
+            SPColor.SplatNet2.SPRed
             VStack(alignment: .center, spacing: 0, content: {
                 Text(bundle: .MyOutfits_Special)
-                    .font(systemName: .Splatfont, size: 13)
+                    .font(systemName: .Splatfont2, size: 13)
+                    .foregroundColor(.white)
+                    .shadow(color: Color.black, radius: 0, x: 1, y: 1)
+                Spacer()
                 HStack(alignment: .center, content: {
-                    LazyHGrid(rows: Array(repeating: .init(.fixed(23)), count: 4), content: {
+                    LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
                     let specialList: [SpecialType] = Array(SpecialType.allCases.dropFirst())
                         ForEach(specialList, id: \.rawValue) { specialId in
                             let color: Color = colors[specialList.firstIndex(of: specialId) ?? 0]
-                            Image(bundle: specialId)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 23, height: 23, alignment: .center)
-                                .background(RoundedRectangle(cornerRadius: 4).fill(color))
+                            Label(title: {
+                                Text(String(format: "%.2f%%", 99.99))
+                                    .font(systemName: .Splatfont2, size: 14)
+                                    .foregroundColor(SPColor.SplatNet2.SPWhite)
+                                    .shadow(color: Color.black, radius: 0, x: 1, y: 1)
+                            }, icon: {
+                                Image(bundle: specialId)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 23, height: 23, alignment: .center)
+                                    .background(RoundedRectangle(cornerRadius: 4).fill(color))
+                            })
                         }
                     })
-                    Spacer()
-                    Doughnut(data: data)
                 })
             })
             .padding(.top, 27)
             .padding(.bottom, 15)
             .padding(.horizontal)
         })
-        .frame(width: 300, height: 180, alignment: .center)
+        .frame(width: 300, height: 160, alignment: .center)
         .mask(Image(bundle: .Card).resizable().scaledToFill())
         .clipShape(RoundedRectangle(cornerRadius: 20))
-    }
-}
-
-struct CircleChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        SpecialChartView(data: [10, 20, 30, 40, 50, 60, 70])
-            .preferredColorScheme(.dark)
     }
 }

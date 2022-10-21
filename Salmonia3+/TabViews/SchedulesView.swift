@@ -26,8 +26,10 @@ struct SchedulesView: View {
                     }, label: {
                         ScheduleView(schedule: schedule)
                     })
+                    .listRowInsets(EdgeInsets())
                 } else {
                     ScheduleView(schedule: schedule)
+                        .listRowInsets(EdgeInsets())
                 }
             }
         })

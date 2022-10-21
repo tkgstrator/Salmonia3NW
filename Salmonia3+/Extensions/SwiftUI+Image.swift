@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 enum BackgroundType: String, CaseIterable, Codable {
-    case SPLATNET2 = "SplatNet2"
-    case SPLATNET3 = "SplatNet3"
+    case SPLATNET2  = "SplatNet2"
+    case SPLATNET3  = "SplatNet3"
+    case MOCK       = "Mock"
 }
 
 enum ResultType: Int, CaseIterable, Codable {

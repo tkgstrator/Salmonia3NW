@@ -33,7 +33,6 @@ public struct SplitNavigationViewStyle: NavigationViewStyle {
                     svc.preferredSplitBehavior = .tile
                     svc.maximumPrimaryColumnWidth = 375
                     svc.preferredPrimaryColumnWidth = 375
-                    print(svc.primaryColumnWidth)
                 }
             }
 

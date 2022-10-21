@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUICharts
+import SplatNet3
 
 struct ScheduleStatsView: View {
     @StateObject var stats: StatsService
@@ -17,20 +18,27 @@ struct ScheduleStatsView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
+            TabView(content: {
                 GrizzcoCard(average: stats.average)
+//                GrizzcoSPCard(data: stats.specialCounts)
             })
+            .frame(width: .infinity, height: 160, alignment: .bottom)
+            .overlay(TabSideArray())
+            .tabViewStyle(.page(indexDisplayMode: .never))
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
                     GrizzcoHighCard(maximum: stats.maximum)
                     GrizzcoScaleCard(scale: stats.scale)
+                    GrizzcoMainCard(weapon: stats.weapon)
                 })
                 GrizzcoPointCard(point: stats.point)
             })
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
-                SpecialChartView(data: stats.specialCounts)
-                WeaponChartView(data: stats.weaponCounts, weaponList: stats.weaponList)
+            LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
+                ForEach(SakelienType.allCases, id: \.hashValue) { sakelienId in
+                    SakelienChart(sakelienId: sakelienId)
+                }
             })
+//                SpecialChartView(data: stats.specialCounts)
         })
         .padding(.horizontal)
         .refreshableResultScroll()

@@ -1,62 +1,42 @@
 //
-//  GrizzcoScalesCard.swift
+//  GrizzcoSPCard.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/10/19.
+//  Created by devonly on 2022/10/21.
 //
 
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoScaleCard: View {
-    @ObservedObject var scale: Grizzco.ScaleData
+struct GrizzcoMainCard: View {
+    let weapon: Grizzco.WeaponData
 
     var body: some View {
         ZStack(alignment: .center, content: {
             Color.black.opacity(0.7)
-            VStack(alignment: .leading, spacing: 0, content: {
-                Text(bundle: .CoopHistory_Scale)
-                    .font(systemName: .Splatfont, size: 12)
-                    .frame(maxWidth: .infinity, height: 12, alignment: .leading)
-                LazyVGrid(columns: Array(repeating: .init(.fixed(34)), count: 3), content: {
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Image(bundle: ScaleType.Bronze)
+            LazyHGrid(rows: Array(repeating: .init(.fixed(24)), count: 2), content: {
+                ForEach(weapon.weaponList.indices, id: \.self) { index in
+                    let weaponData: Grizzco.WeaponData.WeaponDataType = weapon.weaponList[index]
+                    Label(title: {
+                        Text(String(format: "%.1f%%", weaponData.percent * 100))
+                            .foregroundColor(weaponData.color)
+                    }, icon: {
+                        Image(bundle:weaponData.weaponId)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.bronze))
-                            .padding(.top, 2)
+                            .frame(width: 22, height: 22, alignment: .center)
+                            .background(RoundedRectangle(cornerRadius: 4).fill(weaponData.color))
                     })
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Image(bundle: ScaleType.Silver)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.silver))
-                            .padding(.top, 2)
-                    })
-                    VStack(alignment: .center, spacing: 0, content: {
-                        Image(bundle: ScaleType.Gold)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.gold))
-                            .padding(.top, 2)
-                    })
-                })
-                .padding(.top, 8)
-                .padding(.bottom, 2)
+                }
             })
-            .padding(.vertical, 6)
-            .padding(.horizontal, 10)
+            .padding(8)
         })
-        .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
-        .font(systemName: .Splatfont2, size: 12)
+        .font(systemName: .Splatfont2, size: 13)
         .cornerRadius(10, corners: .allCorners)
     }
 }
 
-struct GrizzcoScales_Previews: PreviewProvider {
+struct GrizzcoSPCard_Previews: PreviewProvider {
     static let point: Grizzco.PointData = Grizzco.PointData(
         playCount: 999,
         ikuraNum: 999999,
@@ -88,6 +68,15 @@ struct GrizzcoScales_Previews: PreviewProvider {
         deadCount: 99.9
     )
 
+    static let weapon: Grizzco.WeaponData = Grizzco.WeaponData(
+        weaponList: [
+            (WeaponType.Maneuver_Dual, 100),
+            (WeaponType.Maneuver_Short, 200),
+            (WeaponType.Maneuver_Gallon, 300),
+            (WeaponType.Maneuver_Stepper, 400)
+        ]
+    )
+
     enum XcodePreviewDevice: String, CaseIterable {
         case iPhone13Pro = "iPhone 13 Pro"
         case iPadPro = "iPad Pro"
@@ -102,6 +91,7 @@ struct GrizzcoScales_Previews: PreviewProvider {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
                     GrizzcoHighCard(maximum: maximum)
                     GrizzcoScaleCard(scale: scale)
+                    GrizzcoMainCard(weapon: weapon)
                 })
                 GrizzcoPointCard(point: point)
             })

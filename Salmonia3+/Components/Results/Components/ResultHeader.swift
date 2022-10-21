@@ -59,12 +59,22 @@ struct ResultHeader: View {
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 3)
                                 .background(Color.black)
-                            Image(bundle: .SakelienGiant)
-                                .resizable()
-                                .renderingMode(.template)
-                                .scaledToFit()
-                                .foregroundColor(Color.black)
-                                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                            if let smellMeter = result.smellMeter {
+                                ZStack(alignment: .bottom, content: {
+                                    Color.black
+                                    SPColor.SplatNet3.SPSalmonOrange
+                                        .frame(width: 42, height: 38 * Double(smellMeter) / Double(5), alignment: .bottom)
+                                })
+                                .frame(width: 42, height: 38, alignment: .bottom)
+                                .mask({
+                                    Image(bundle: .SakelienGiant)
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .scaledToFit()
+                                        .foregroundColor(Color.black)
+                                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                                })
+                            }
                         })
                     })
                     .frame(maxWidth: 440)
@@ -113,6 +123,8 @@ struct ResultHeader_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
+        ResultHeader(result: result)
+            .previewLayout(.fixed(width: 400, height: 100))
         ResultWeapon(schedule: schedule, result: result)
             .previewLayout(.fixed(width: 400, height: 100))
         ResultWeapon(schedule: schedule, result: result)

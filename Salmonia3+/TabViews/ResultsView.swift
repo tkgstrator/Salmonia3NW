@@ -21,7 +21,19 @@ struct ResultsView: View {
         List(content: {
             ForEach(schedules) { schedule in
                 if !schedule.results.isEmpty {
-                    ScheduleView(schedule: schedule)
+                    if let startTime = schedule.startTime {
+                        NavigationLinker(destination: {
+                            ScheduleStatsView(startTime: startTime)
+                        }, label: {
+                            ScheduleView(schedule: schedule)
+                        })
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+                    } else {
+                        ScheduleView(schedule: schedule)
+                            .listRowInsets(EdgeInsets())
+                            .listRowSeparator(.hidden)
+                    }
                     ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
                         NavigationLinker(destination: {
                             ResultTabView(results: schedule.results)
@@ -31,7 +43,6 @@ struct ResultsView: View {
                         })
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
-//                        .listRowSeparatorTint(.primary)
                     }
                 }
             }

@@ -28,7 +28,8 @@ private struct ResultSplatNet3: View {
                 if let gradeId = result.grade, let gradePoint = result.gradePoint {
                     HStack(alignment: .center, spacing: 2, content: {
                         Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
-                        Text(String(format: "%@", result.gradeArrow))
+                        Text(String(format: "%@", result.gradeArrow.rawValue))
+                            .foregroundColor(result.gradeArrow.color)
                     })
                     .foregroundColor(Color.white)
                     .font(systemName: .Splatfont, size: 14)
@@ -42,7 +43,7 @@ private struct ResultSplatNet3: View {
                     .scaledToFit()
                     .foregroundColor(isBossDefeated ? SPColor.SplatNet3.SPYellow : SPColor.SplatNet3.SPRed)
                     .frame(height: 40)
-                    .padding(.trailing, 4)
+                    .padding(.trailing, 8)
             }
             ZStack(alignment: .center, content: {
                 RoundedRectangle(cornerRadius: 10)
@@ -102,7 +103,8 @@ private struct ResultSpletNet2: View {
                 if let gradeId = result.grade, let gradePoint = result.gradePoint {
                     HStack(alignment: .center, spacing: 2, content: {
                         Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
-                        Text(String(format: "%@", result.gradeArrow))
+                        Text(String(format: "%@", result.gradeArrow.rawValue))
+                            .foregroundColor(result.gradeArrow.color)
                     })
                     .font(systemName: .Splatfont, size: 16)
                 }
@@ -143,15 +145,32 @@ private struct ResultSpletNet2: View {
     }
 }
 
+enum GradeArrow: String, CaseIterable {
+    case UP     = "↑"
+    case STAY   = "→"
+    case DOWN   = "↓"
+
+    var color: Color {
+        switch self {
+        case .UP:
+            return Color.white
+        case .STAY:
+            return Color.gray
+        case .DOWN:
+            return Color.gray
+        }
+    }
+}
+
 fileprivate extension RealmCoopResult {
-    var gradeArrow: String {
+    var gradeArrow: GradeArrow {
         switch self.waves.count {
         case 3:
-            return self.isClear ? "↑" :"→"
+            return self.isClear ? .UP : .STAY
         case 4:
-            return "↑"
+            return .UP
         default:
-            return "↓"
+            return .DOWN
         }
     }
 }

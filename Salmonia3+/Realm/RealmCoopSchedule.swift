@@ -60,6 +60,7 @@ class RealmCoopSchedule: Object {
         self.init()
         self.stageId = StageType.Shakespiral
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))
+        self.results.append(RealmCoopResult(dummy: true))
         self.rule = Common.Rule.REGULAR
         self.rareWeapon = nil
     }

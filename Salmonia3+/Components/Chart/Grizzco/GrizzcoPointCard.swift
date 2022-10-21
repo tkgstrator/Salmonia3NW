@@ -177,25 +177,6 @@ struct GrizzcoPointCard: View {
     }
 }
 
-struct GrizzcoPointCardView: View {
-    let data: StatsService
-
-    var body: some View {
-        ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
-//                GrizzcoCard(data: data.grizzcoAverageData)
-            })
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
-                LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-//                    GrizzcoDataCard(data: data.grizzcoPointData)
-//                    GrizzcoScaleCard(data: data.grizzcoPointData)
-                })
-                GrizzcoPointCard(point: data.point)
-            })
-        })
-    }
-}
-
 struct GrizzcoPointCard_Previews: PreviewProvider {
     static let point: Grizzco.PointData = Grizzco.PointData(
         playCount: 999,
@@ -235,9 +216,13 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
 
     static var previews: some View {
         ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 300), alignment: .top), count: 1), content: {
+            TabView(content: {
+                GrizzcoCard(average: average)
                 GrizzcoCard(average: average)
             })
+            .frame(width: .infinity, height: 160, alignment: .bottom)
+            .overlay(TabSideArray())
+            .tabViewStyle(.page(indexDisplayMode: .never))
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
                     GrizzcoHighCard(maximum: maximum)
@@ -246,5 +231,18 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
                 GrizzcoPointCard(point: point)
             })
         })
+//        .preferredColorScheme(.dark)
+    }
+}
+
+struct TabSideArray: View {
+    var body: some View {
+        HStack(alignment: .center, spacing: nil, content: {
+            Text("←")
+            Spacer()
+            Text("→")
+        })
+        .font(systemName: .Splatfont, size: 22)
+        .frame(maxWidth: 400)
     }
 }

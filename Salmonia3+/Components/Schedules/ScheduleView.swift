@@ -13,39 +13,46 @@ struct ScheduleView: View {
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = "MM/dd HH:mm:ss"
+        formatter.dateFormat = LocalizedText.Widgets_StagesYearDatetimeFormat.localized
         return formatter
     }()
 
+    init(schedule: RealmCoopSchedule) {
+        self.schedule = schedule
+    }
+
     var body: some View {
-        GeometryReader(content: { geometry in
-            let scale: CGFloat = geometry.width / 270
-            VStack(alignment: .leading, content: {
-                HStack(content: {
+        ZStack(alignment: .center, content: {
+            Color.black
+            VStack(alignment: .leading, spacing: 0, content: {
+                HStack(alignment: .center, spacing: 0, content: {
                     Text(schedule.stageId.localizedText)
                     Spacer()
                     if let startTime = schedule.startTime {
                         Text(dateFormatter.string(from: startTime))
-                            .font(systemName: .Splatfont2, size: 12 * scale)
                     }
                 })
-                .font(systemName: .Splatfont2, size: 15 * scale)
-                .frame(height: 15 * scale)
-                Spacer()
-                HStack(content: {
-                    if let grade = schedule.grade, let gradePoint = schedule.gradePoint {
-                        HStack(alignment: .center, spacing: 8, content: {
-                            Text(grade.localizedText)
-                            Text(" \(gradePoint)")
-                        })
-                        .font(systemName: .Splatfont2, size: 12 * scale)
+                .font(systemName: .Splatfont2, size: 14)
+                HStack(alignment: .center, spacing: 0, content: {
+                    if let gradeId = schedule.grade, let gradePoint = schedule.gradePoint {
+                        Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
                     }
                     Spacer()
-                    ScheduleWeapon(schedule: schedule)
+                    ForEach(schedule.weaponList.indices, id: \.self) { index in
+                        let weaponId: WeaponType = schedule.weaponList[index]
+                        Image(bundle: weaponId)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 30, height: 30, alignment: .center)
+                    }
                 })
+                .font(systemName: .Splatfont2, size: 14)
             })
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+            .padding(.top, 4)
         })
-        .aspectRatio(400/80, contentMode: .fit)
+        .foregroundColor(.white)
     }
 }
 
@@ -79,6 +86,10 @@ struct ScheduleView_Previews: PreviewProvider {
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
     static var previews: some View {
         ScheduleView(schedule: schedule)
-            .previewLayout(.fixed(width: 400, height: 80))
+            .previewLayout(.fixed(width: 450, height: 60))
+        ScheduleView(schedule: schedule)
+            .previewLayout(.fixed(width: 400, height: 60))
+        ScheduleView(schedule: schedule)
+            .previewLayout(.fixed(width: 375, height: 60))
     }
 }
