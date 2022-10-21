@@ -36,7 +36,9 @@ struct SPWebView: UIViewControllerRepresentable {
             })
         }
 
+        /// エラーが発生したら自動で閉じる
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
         }
     }
 
@@ -114,7 +116,6 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
         case .Valid:
             self.loadWithGToken(gtoken: gtoken)
         case .Expired:
-            /// 仮に適当に表示
             delegate.parent.session.refresh(account.credential, for: Alamofire.Session(), completion: { value in
                 switch value {
                 case .success(let credential):

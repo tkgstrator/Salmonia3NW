@@ -23,6 +23,7 @@ struct SPWebButton: View {
         })
         .fullScreenCover(isPresented: $isPresented, content: {
             SPWebView()
+                .preferredColorScheme(.dark)
         })
     }
 }
