@@ -29,7 +29,9 @@ struct ResultsView: View {
                         }, label: {
                             ResultView(result: result)
                         })
-                        .listRowSeparatorTint(.primary)
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+//                        .listRowSeparatorTint(.primary)
                     }
                 }
             }

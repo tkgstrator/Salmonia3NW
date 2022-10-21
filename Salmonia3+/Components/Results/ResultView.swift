@@ -10,66 +10,149 @@ import SplatNet3
 
 struct ResultView: View {
     let result: RealmCoopResult
+
+    var body: some View {
+        ResultSplatNet3(result: result)
+    }
+}
+
+private struct ResultSplatNet3: View {
+    let result: RealmCoopResult
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 0, content: {
+            VStack(alignment: .leading, spacing: 0, content: {
+                Text(bundle: result.isClear ? .CoopHistory_Clear : .CoopHistory_Failure)
+                    .foregroundColor(result.isClear ? SPColor.SplatNet2.SPYellow : Color.white)
+                    .font(systemName: .Splatfont, size: 14)
+                if let gradeId = result.grade, let gradePoint = result.gradePoint {
+                    HStack(alignment: .center, spacing: 2, content: {
+                        Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
+                        Text(String(format: "%@", result.gradeArrow))
+                    })
+                    .foregroundColor(Color.white)
+                    .font(systemName: .Splatfont, size: 14)
+                }
+            })
+            Spacer()
+            if let isBossDefeated = result.isBossDefeated {
+                Image(bundle: .SakelienGiant)
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(isBossDefeated ? SPColor.SplatNet3.SPYellow : SPColor.SplatNet3.SPRed)
+                    .frame(height: 40)
+                    .padding(.trailing, 4)
+            }
+            ZStack(alignment: .center, content: {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.black.opacity(0.7))
+                VStack(alignment: .center, spacing: 0, content: {
+                    Label(title: {
+                        Text(String(format: "x%d", result.goldenIkuraNum))
+                            .lineLimit(1)
+                            .foregroundColor(SPColor.SplatNet2.SPWhite)
+                            .frame(minWidth: 40, alignment: .trailing)
+//                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }, icon: {
+                        Image(bundle: .GoldenIkura)
+                            .resizable()
+                            .scaleEffect()
+                            .frame(width: 18, height: 18, alignment: .center)
+                            .padding(.trailing, 2.5)
+                    })
+                    Label(title: {
+                        Text(String(format: "x%d", result.ikuraNum))
+                            .lineLimit(1)
+                            .foregroundColor(SPColor.SplatNet2.SPWhite)
+                            .frame(minWidth: 40, alignment: .trailing)
+//                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }, icon: {
+                        Image(bundle: .Ikura)
+                            .resizable()
+                            .scaleEffect()
+                            .frame(width: 20.5, height: 15, alignment: .center)
+                            .padding(.trailing, 2.5)
+                    })
+                })
+                .padding(.horizontal, 4)
+                .font(systemName: .Splatfont2, size: 12)
+            })
+            .frame(maxWidth: 78)
+            .frame(maxHeight: 48)
+            .padding(.vertical, 2)
+        })
+        .padding(.leading)
+        .padding(.trailing, 8)
+        .background(result.isClear ? SPColor.SplatNet3.SPSalmonOrange : SPColor.SplatNet3.SPSalmonOrangeDarker)
+        .padding(.bottom, 2)
+    }
+}
+
+private struct ResultSpletNet2: View {
+    let result: RealmCoopResult
     let fontSize: CGFloat = 14
 
     var body: some View {
-        GeometryReader(content: { geometry in
-            let foregroundColor: Color = {
-                if let isBossDefeated: Bool = result.isBossDefeated {
-                    return isBossDefeated ? SPColor.SplatNet3.SPSalmonGreen : SPColor.SplatNet3.SPSalmonGreen
-                }
-                return Color.clear
-            }()
-            let scale: CGFloat = min(1.0, geometry.height / 60)
+        HStack(alignment: .center, spacing: 0, content: {
             VStack(alignment: .leading, spacing: 0, content: {
-                HStack(alignment: .center, spacing: 0, content: {
-                    Text(bundle: result.isClear ? .CoopHistory_Clear : .CoopHistory_Failure)
-                        .font(systemName: .Splatfont, size: 16 * scale)
-                        .foregroundColor(result.isClear ? .green : .orange)
-                        .frame(height: 20 * scale)
-                    Spacer()
-                    ResultEgg(result: result)
-                })
-                .frame(height: 30 * scale)
-                HStack(alignment: .center, spacing: nil, content: {
-                    if let grade = result.grade, let gradePoint = result.gradePoint {
-                        Group(content: {
-                            Text(grade.localizedText)
-                            Text("\(gradePoint)")
-                        })
-                        Group(content: {
-                            if result.isClear && gradePoint != 999 {
-                                Text("↑")
-                                    .foregroundColor(.orange)
-                            }
-                            if result.isClear && gradePoint == 999 {
-                                Text("→")
-                            }
-                            if !result.isClear && result.waves.count == 3 {
-                                Text("→")
-                            }
-                            if !result.isClear && result.waves.count != 3 {
-                                Text("↓")
-                                    .foregroundColor(.gray)
-                            }
-                        })
-                        Spacer()
-                        if result.waves.count == 4 {
-                            Image(bundle: .SakelienGiant)
-                                .renderingMode(.template)
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(foregroundColor)
-                                .rotation3DEffect(.degrees(180), axis: (0, 1, 0))
-                                .padding(.trailing, 4 * scale)
-                        }
-                    }
-                })
-                .font(systemName: .Splatfont, size: 16 * scale)
-                .frame(height: 30 * scale)
+                Text(bundle: result.isClear ? .CoopHistory_Clear : .CoopHistory_Failure)
+                    .foregroundColor(SPColor.SplatNet2.SPGreen)
+                    .font(systemName: .Splatfont, size: 14)
+                if let gradeId = result.grade, let gradePoint = result.gradePoint {
+                    HStack(alignment: .center, spacing: 2, content: {
+                        Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
+                        Text(String(format: "%@", result.gradeArrow))
+                    })
+                    .font(systemName: .Splatfont, size: 16)
+                }
             })
+            Spacer()
+            VStack(alignment: .leading, spacing: 4, content: {
+                HStack(spacing: 4, content: {
+                    Image(bundle: .GoldenIkura)
+                        .resizable()
+                        .scaleEffect()
+                        .frame(width: 18, height: 18, alignment: .center)
+                        .padding(.trailing, 2.5)
+                    Text(String(format: "x%d", result.goldenIkuraNum))
+                        .lineLimit(1)
+                        .frame(width: 48, alignment: .leading)
+                        .foregroundColor(SPColor.SplatNet2.SPWhite)
+                })
+                HStack(spacing: 4, content: {
+                    Image(bundle: .Ikura)
+                        .resizable()
+                        .scaleEffect()
+                        .frame(width: 20.5, height: 15, alignment: .center)
+                    Text(String(format: "x%d", result.ikuraNum))
+                        .lineLimit(1)
+                        .frame(width: 48, alignment: .leading)
+                        .foregroundColor(SPColor.SplatNet2.SPWhite)
+                })
+            })
+            .font(systemName: .Splatfont2, size: 16)
         })
-        .frame(minHeight: 60)
+        .frame(height: 48)
+        .foregroundColor(Color.white)
+        .padding(.leading, 20)
+        .padding(.trailing, 10)
+        .background(RoundedRectangle(cornerRadius: 24).fill(Color.black.opacity(0.75)))
+        .padding(.bottom, 8)
+        .padding(.horizontal, 8)
+    }
+}
+
+fileprivate extension RealmCoopResult {
+    var gradeArrow: String {
+        switch self.waves.count {
+        case 3:
+            return self.isClear ? "↑" :"→"
+        case 4:
+            return "↑"
+        default:
+            return "↓"
+        }
     }
 }
 
@@ -77,10 +160,10 @@ struct ResultView_Previews: PreviewProvider {
     static let result: RealmCoopResult = RealmCoopResult(dummy: true)
     static var previews: some View {
         ResultView(result: result)
-            .previewLayout(.fixed(width: 400, height: 80))
-            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 450, height: 60))
         ResultView(result: result)
-            .previewLayout(.fixed(width: 200, height: 40))
-            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 400, height: 60))
+        ResultView(result: result)
+            .previewLayout(.fixed(width: 375, height: 60))
     }
 }
