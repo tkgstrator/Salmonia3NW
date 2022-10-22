@@ -218,7 +218,13 @@ private extension RealmCoopWave {
 
 private extension RealmSwift.List where Element == RealmCoopWave {
     func corner(of target: RealmCoopWave) -> UIRectCorner {
-        self.firstIndex(of: target) == 0 ? [.topLeft, .bottomLeft] : self.firstIndex(of: target) == self.count - 1 ? [.topRight, .bottomRight] : []
+        if self.firstIndex(of: target) == 0 {
+            return self.lastIndex(of: target) == self.count - 1 ? .allCorners : [.topLeft, .bottomLeft]
+        }
+        if self.lastIndex(of: target) == self.count - 1 {
+            return [.topRight, .bottomRight]
+        }
+        return []
     }
 }
 

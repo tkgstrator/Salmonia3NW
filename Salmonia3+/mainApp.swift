@@ -33,7 +33,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         /// Firebase
         FirebaseApp.configure()
 
-        let schemeVersion: UInt64 = 4
+        let schemeVersion: UInt64 = 5
         #if DEBUG
         let config = Realm.Configuration(
             schemaVersion: schemeVersion,
@@ -43,6 +43,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            newValue["species"] = SpeciesType.INKLING
                             if let byname: String = oldValue["byname"] as? String,
                                let nameId: String = oldValue["nameId"] as? String,
                                let isMyself: Bool = oldValue["isMyself"] as? Bool {
@@ -100,6 +101,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
                         // 超適当なマイグレーションいろんな人に怒られますよ、これ
                         if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
+                            newValue["species"] = SpeciesType.INKLING
                             if let byname: String = oldValue["byname"] as? String,
                                let nameId: String = oldValue["nameId"] as? String,
                                let isMyself: Bool = oldValue["isMyself"] as? Bool {
@@ -146,13 +148,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     })
                 }
             },
-            deleteRealmIfMigrationNeeded: true
+            deleteRealmIfMigrationNeeded: false
             )
         #endif
         Realm.Configuration.defaultConfiguration = config
         do {
             let _ =  try Realm(configuration: config)
         } catch (let error) {
+            /// エラー発生時はデータを全て消去する
+            let config: Realm.Configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
             let _ = try! Realm(configuration: config)
         }
 

@@ -22,6 +22,7 @@ final class RealmCoopPlayer: Object, Identifiable {
     @Persisted var ikuraNum: Int
     @Persisted var goldenIkuraAssistNum: Int
     @Persisted var specialId: SpecialType?
+    @Persisted var species: SpeciesType
     @Persisted var bossKillCountsTotal: Int
     @Persisted var bossKillCounts: List<Int>
     @Persisted var specialCounts: List<Int>
@@ -44,6 +45,7 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.helpCount = result.helpCount
         self.goldenIkuraAssistNum = result.goldenIkuraAssistNum
         self.specialId = result.special
+        self.species = result.species
         self.specialCounts.append(objectsIn: result.specialCounts)
         self.weaponList.append(objectsIn: result.weaponList)
         self.bossKillCounts.append(objectsIn: result.bossKillCounts)
@@ -63,6 +65,7 @@ final class RealmCoopPlayer: Object, Identifiable {
         self.helpCount = 99
         self.goldenIkuraAssistNum = 99
         self.specialId = SpecialType.SpUltraShot
+        self.species = SpeciesType.INKLING
         self.specialCounts.append(objectsIn: Array(repeating: 1, count: 3))
         self.weaponList.append(objectsIn: Array(repeating: WeaponType.Saber_Normal, count: 4))
         self.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
@@ -75,6 +78,8 @@ final class RealmCoopPlayer: Object, Identifiable {
 extension BadgeType: PersistableEnum {}
 
 extension NamePlateType: PersistableEnum {}
+
+extension SpeciesType: PersistableEnum {}
 
 extension SpecialType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {

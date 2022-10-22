@@ -21,13 +21,19 @@ struct ResultPlayers: View {
             alignment: .center,
             spacing: spacing,
             content: {
-                ForEach(result.players) { player in
+                let players: [RealmCoopPlayer] = {
+                    guard let player: RealmCoopPlayer = result.players.first else {
+                        return []
+                    }
+                    return [player] + Array(result.players.dropFirst().sorted(by: { $0.pid < $1.pid }))
+                }()
+                ForEach(players) { player in
                     switch resultStyle {
                     case .SPLATNET2:
                         ResultPlayerSplatNet2(result: player)
                     case .SPLATNET3:
                         ResultPlayerSplatNet3(result: player)
-                            .cornerRadius(10, corners: result.players.corner(of: player))
+                            .cornerRadius(10, corners: players.corner(of: player))
                     }
                 }
             })
@@ -218,7 +224,7 @@ private struct ResultPlayerSplatNet3: View {
                     .lineLimit(1)
                     .frame(minWidth: 72, maxWidth: 78.0)
                     HStack(alignment: .center, spacing: 2, content: {
-                        Image(bundle: ButtonType.Rescue)
+                        Image(bundle: result.species == .INKLING ? RescueType.Inkling : RescueType.Octoling)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 16, alignment: .center)
@@ -237,7 +243,7 @@ private struct ResultPlayerSplatNet3: View {
                     })
                     .frame(minWidth: 72, maxWidth: 78.0)
                     HStack(alignment: .center, spacing: 2, content: {
-                        Image(bundle: ButtonType.Death)
+                        Image(bundle: result.species == .INKLING ? DeathType.Inkling : DeathType.Octoling)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 16, alignment: .center)
@@ -257,7 +263,7 @@ private struct ResultPlayerSplatNet3: View {
     }
 }
 
-private extension RealmSwift.List where Element == RealmCoopPlayer {
+private extension Array where Element == RealmCoopPlayer {
     func corner(of target: RealmCoopPlayer) -> UIRectCorner {
         self.firstIndex(of: target) == 0 ? [.topLeft, .topRight] : self.firstIndex(of: target) == self.count - 1 ? [.bottomLeft, .bottomRight] : []
     }

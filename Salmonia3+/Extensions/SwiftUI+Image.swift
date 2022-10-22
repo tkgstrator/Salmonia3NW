@@ -25,6 +25,16 @@ enum MaskType: Int, CaseIterable, Codable {
     case WAVE_BACKGROUND
 }
 
+enum DeathType: String, CaseIterable, Codable {
+    case Inkling
+    case Octoling
+}
+
+enum RescueType: String, CaseIterable, Codable {
+    case Inkling
+    case Octoling
+}
+
 enum ButtonType: String, CaseIterable, Codable {
     case Arrows
     case BackArrow
@@ -58,6 +68,14 @@ enum ButtonType: String, CaseIterable, Codable {
 }
 
 extension Image {
+    init(bundle: RescueType) {
+        self.init("RescueType/\(bundle.rawValue)", bundle: .main)
+    }
+
+    init(bundle: DeathType) {
+        self.init("DeathType/\(bundle.rawValue)", bundle: .main)
+    }
+
     init(bundle: BackgroundType) {
         self.init("BackgroundType/\(bundle.rawValue)", bundle: .main)
     }

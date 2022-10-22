@@ -242,6 +242,7 @@ struct TabSideArray: View {
             Spacer()
             Text("→")
         })
+        .foregroundColor(Color.white)
         .font(systemName: .Splatfont, size: 22)
         .frame(maxWidth: 400)
     }

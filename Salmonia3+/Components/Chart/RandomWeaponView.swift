@@ -28,6 +28,7 @@ struct RandomWeaponView: View {
                 }
             })
         })
+        .navigationBarBackButtonHidden()
         .navigationTitle(Text(bundle: .Record_WeaponRecord))
     }
 }

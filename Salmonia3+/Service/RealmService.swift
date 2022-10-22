@@ -13,7 +13,7 @@ import SwiftUI
 class RealmService {
     public static let shared = RealmService()
 
-    private let schemeVersion: UInt64 = 4
+    private let schemeVersion: UInt64 = 5
 
     internal var realm: Realm {
         get {

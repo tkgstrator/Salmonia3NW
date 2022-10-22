@@ -59,13 +59,15 @@ struct ResultHeader: View {
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 3)
                                 .background(Color.black)
+                            Spacer()
                             if let smellMeter = result.smellMeter {
+                                let scale: CGFloat = 1.3
                                 ZStack(alignment: .bottom, content: {
                                     Color.black
                                     SPColor.SplatNet3.SPSalmonOrange
-                                        .frame(width: 42, height: 38 * Double(smellMeter) / Double(5), alignment: .bottom)
+                                        .frame(width: 42 * scale, height: 38 * scale * Double(smellMeter) / Double(5), alignment: .bottom)
                                 })
-                                .frame(width: 42, height: 38, alignment: .bottom)
+                                .frame(width: 42 * scale, height: 38 * scale, alignment: .bottom)
                                 .mask({
                                     Image(bundle: .SakelienGiant)
                                         .resizable()
@@ -75,8 +77,10 @@ struct ResultHeader: View {
                                         .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                                 })
                             }
+                            Spacer()
                         })
                     })
+                    .padding(.top, 6)
                     .frame(maxWidth: 440)
                     .padding(.horizontal, 5)
                 })
