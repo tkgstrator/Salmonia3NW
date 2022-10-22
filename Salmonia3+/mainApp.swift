@@ -146,7 +146,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     })
                 }
             },
-            deleteRealmIfMigrationNeeded: false
+            deleteRealmIfMigrationNeeded: true
             )
         #endif
         Realm.Configuration.defaultConfiguration = config

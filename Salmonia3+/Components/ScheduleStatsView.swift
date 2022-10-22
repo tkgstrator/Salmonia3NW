@@ -30,7 +30,16 @@ struct ScheduleStatsView: View {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
                     GrizzcoHighCard(maximum: stats.maximum)
                     GrizzcoScaleCard(scale: stats.scale)
-                    GrizzcoMainCard(weapon: stats.weapon)
+                    switch stats.isRandomShift {
+                    case true:
+                        NavigationLink(destination: {
+                            RandomWeaponView(randoms: stats.randoms)
+                        }, label: {
+                            GrizzcoMainCard(weapon: stats.weapon)
+                        })
+                    case false:
+                        GrizzcoMainCard(weapon: stats.weapon)
+                    }
                 })
                 GrizzcoPointCard(point: stats.point)
                 GrizzcoTeamCardView(stats: stats)

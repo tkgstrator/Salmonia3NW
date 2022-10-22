@@ -124,28 +124,18 @@ enum Grizzco {
         }
     }
 
-
     /// メインウエポンデータ
     class WeaponData: ObservableObject {
-        @Published var weaponList: [WeaponDataType]
+        @Published var color: Color
+        @Published var weaponId: WeaponType
+        @Published var percent: Double?
+        @Published var count: Int?
 
-        struct WeaponDataType {
-            let color: Color
-            let weaponId: WeaponType
-            let percent: Double
-        }
-
-        init(weaponList: [(WeaponType, Int)]) {
-            let colors: [Color] = [
-                SPColor.SplatNet3.SPPink,
-                SPColor.SplatNet3.SPOrange,
-                SPColor.SplatNet3.SPYellow,
-                SPColor.SplatNet3.SPSalmonGreen
-            ]
-
-            let summation: Int = weaponList.map({ $0.1 }).reduce(0, +)
-
-            self.weaponList = zip(weaponList, colors).map({ WeaponDataType(color: $0.1, weaponId: $0.0.0, percent: Double($0.0.1) / Double(summation)) })
+        init(color: Color, weaponId: WeaponType, count: Int?, percent: Double?) {
+            self.color = color
+            self.weaponId = weaponId
+            self.percent = percent
+            self.count = count
         }
     }
 
@@ -205,7 +195,9 @@ final class StatsService: ObservableObject {
     /// クマサン最高データ
     @Published var maximum: Grizzco.HighData
     /// クマサンブキデータ
-    @Published var weapon: Grizzco.WeaponData
+    @Published var weapon: [Grizzco.WeaponData]
+    /// クマサンブキデータ
+    @Published var randoms: [Grizzco.WeaponData]
     /// クマサンWAVEデータ
     @Published var waves: [Grizzco.WaveData]
     /// クマサンスペシャルデータ
@@ -224,8 +216,14 @@ final class StatsService: ObservableObject {
     @Published var defeatedNum: Grizzco.TeamData
     /// イクラデータ
     @Published var teamDefeatedNum: Grizzco.TeamData
+    /// ランダムシフトかどうか
+    @Published var isRandomShift: Bool
 
     init(startTime: Date) {
+        #warning("アプリがクラッシュするのでちょっとまずいが、まあヨシ")
+        guard let schedule: RealmCoopSchedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime }) else {
+            fatalError()
+        }
         /// リザルト一覧
         let results: RealmSwift.List<RealmCoopResult> = {
             if let results = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime })?.results {
@@ -253,7 +251,7 @@ final class StatsService: ObservableObject {
         }()
         /// バイト回数
         let shiftsWorked: Int = results.count
-#warning("バグの可能性があるので将来的に修正予定")
+        #warning("バグの可能性があるので将来的に修正予定")
         /// ウロコの枚数
         let scales: (bronze: Int, silver: Int, gold: Int) = {
             if shiftsWorked == 0 {
@@ -299,13 +297,33 @@ final class StatsService: ObservableObject {
             return results.filter("grade=%@", gradeIdMax).max(ofProperty: "gradePoint")
         }()
 
-        let weaponCounts: [(WeaponType, Int)] = {
+        let weaponCounts: [(WeaponType, Int?)] = {
+            if schedule.weaponList.contains(where: { $0.rawValue == -1 }) {
+                return Array(zip(Array(repeating: WeaponType.Random_Green, count: 4), Array(repeating: nil, count: 4)))
+            }
             // 支給されたブキ一覧
             let suppliedWeaponList: [WeaponType] = players.flatMap({ $0.weaponList })
             let suppliedWeaponCount: [Int] = weaponList.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
-            return Array(zip(suppliedWeaponList, suppliedWeaponCount))
+            return Array(zip(weaponList, suppliedWeaponCount))
         }()
 
+        print(weaponCounts)
+
+        let randomWeaponCounts: [(WeaponType, Int)] = {
+            let suppliedWeaponList: [WeaponType] = players.flatMap({ $0.weaponList })
+            /// 支給されるブキ+支給されるクマサンブキを抽出
+            let allWeapons: [WeaponType] = {
+                let base: [WeaponType] = WeaponType.allCases.filter({ $0.rawValue >= 0 && $0.rawValue <= 20000 })
+                if let rare: WeaponType = suppliedWeaponList.first(where: { $0.rawValue >= 20000 }) {
+                    return base + [rare]
+                }
+                return base
+            }()
+            let suppliedWeaponCount: [Int] = allWeapons.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
+            return Array(zip(allWeapons, suppliedWeaponCount))
+        }()
+
+        self.isRandomShift = schedule.weaponList.contains(WeaponType.Random_Green)
         self.average = Grizzco.AverageData(
             weaponList: weaponList,
             rareWeapon: rareWeapon,
@@ -329,11 +347,47 @@ final class StatsService: ObservableObject {
             maxGradePoint: gradePointMax,
             averageWaveCleared: clearWave
         )
-        self.weapon = Grizzco.WeaponData(weaponList: weaponCounts)
+        self.weapon = {
+            let colors: [Color] = [
+                SPColor.SplatNet3.SPPink,
+                SPColor.SplatNet3.SPOrange,
+                SPColor.SplatNet3.SPYellow,
+                SPColor.SplatNet3.SPSalmonGreen
+            ]
+
+            let summation: Int = weaponCounts.compactMap({ $0.1 }).reduce(0, +)
+            return zip(colors, weaponCounts).map({ color, weaponData in
+                let percent: Double? = {
+                    if summation == .zero {
+                        return nil
+                    }
+                    if let count = weaponData.1 {
+                        return Double(count) / Double(summation) * 100
+                    }
+                    return nil
+                }()
+                return Grizzco.WeaponData(color: color, weaponId: weaponData.0, count: weaponData.1, percent: percent)
+            })
+        }()
+        self.randoms = {
+            let colors: [Color] = Array(repeating: .black, count: randomWeaponCounts.count)
+            let summation: Int = randomWeaponCounts.compactMap({ $0.1 }).reduce(0, +)
+            return zip(colors, randomWeaponCounts).map({ color, weaponData in
+                let percent: Double? = {
+                    if summation == .zero {
+                        return nil
+                    }
+                    return Double(weaponData.1) / Double(summation) * 100
+                }()
+                return Grizzco.WeaponData(color: color, weaponId: weaponData.0, count: weaponData.1, percent: percent)
+            })
+        }()
+
         self.waves = EventType.allCases.flatMap({ eventType in
             return WaterType.allCases.map({ waterLevel in
                 let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("waterLevel=%@ AND eventType=%@", waterLevel, eventType)
                 let count: Int = waves.count
+                let clearCount: Int = waves.filter({ $0.isClearWave }).count
                 let goldenIkuraMax: Int? = waves.max(ofProperty: "goldenIkuraNum")
                 let goldenIkuraAvg: Double? = waves.average(ofProperty: "goldenIkuraNum")
                 return Grizzco.WaveData(
@@ -342,7 +396,7 @@ final class StatsService: ObservableObject {
                     count: count,
                     goldenIkuraMax: goldenIkuraMax,
                     goldenIkuraAvg: goldenIkuraAvg,
-                    clearRatio: nil
+                    clearRatio: count == .zero ? nil :Double(clearCount) / Double(count) * 100
                 )
             })
         })

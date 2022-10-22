@@ -68,6 +68,7 @@ extension View {
                 }
             })
             refreshControl.addAction(action, for: .valueChanged)
+            uiScrollView.invalidateIntrinsicContentSize()
             uiScrollView.refreshControl = refreshControl
         })
     }

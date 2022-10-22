@@ -29,7 +29,7 @@ struct WaveChartView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 150)), count: 3), content: {
                 ForEach(waves, id: \.self) { wave in
                     WaveChart(wave: wave)
                         .isInvalidWave(wave: wave)
@@ -69,12 +69,14 @@ private struct WaveChart: View {
     var count: Int
     var goldenIkuraMax: Int?
     var goldenIkuraAvg: Double?
+    var scale: Double?
     let offset: CGFloat
 
     init(wave: Grizzco.WaveData) {
         self.init(eventType: wave.eventType, waterLevel: wave.waterLevel)
         self.goldenIkuraAvg = wave.goldenIkuraAvg
         self.goldenIkuraMax = wave.goldenIkuraMax
+        self.scale = wave.clearRatio
         self.count = wave.count
     }
 
@@ -84,14 +86,15 @@ private struct WaveChart: View {
         self.goldenIkuraMax = 999
         self.goldenIkuraAvg = 999.99
         self.count = 99
+        self.scale = 1.0
         self.offset = {
             switch waterLevel {
             case .Low_Tide:
-                return 110
+                return 120
             case .Middle_Tide:
-                return 95
+                return 105
             case .High_Tide:
-                return 80
+                return 90
             }
         }()
     }
@@ -111,7 +114,7 @@ private struct WaveChart: View {
 //                    Text(String(format: "x%d", count))
 //                        .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                 })
-                .font(systemName: .Splatfont2, size: 11)
+                .font(systemName: .Splatfont2, size: 12)
                 Spacer()
                 HStack(content: {
                     HStack(alignment: .center, spacing: 0, content: {
@@ -136,15 +139,16 @@ private struct WaveChart: View {
                 })
                 .padding(.bottom, 4)
                 ZStack(alignment: .center, content: {
-                    let randomValue: Double = Double.random(in: 0...1)
                     GeometryReader(content: { geometry in
                         Rectangle()
                             .fill(Color.black.opacity(0.6))
-                        Rectangle()
-                            .fill(SPColor.SplatNet3.SPSalmonOrange)
-                            .frame(width: geometry.width * randomValue)
+                        if let scale = scale {
+                            Rectangle()
+                                .fill(SPColor.SplatNet3.SPSalmonOrange)
+                                .frame(width: geometry.width * scale / 100)
+                        }
                     })
-                    Text(String(format: "%.1f%%", randomValue * 100))
+                    Text(String(format: "%.1f%%", scale))
                         .font(systemName: .Splatfont2, size: 10)
                         .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                 })
@@ -152,7 +156,7 @@ private struct WaveChart: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             })
             .foregroundColor(Color.white)
-            .font(systemName: .Splatfont2, size: 12)
+            .font(systemName: .Splatfont2, size: 13)
             .padding(.top, 2)
             .padding(.all, 8)
         })

@@ -9,27 +9,29 @@ import SwiftUI
 import SplatNet3
 
 struct GrizzcoMainCard: View {
-    let weapon: Grizzco.WeaponData
+    let weapon: [Grizzco.WeaponData]
 
     var body: some View {
         ZStack(alignment: .center, content: {
             Color.black.opacity(0.7)
-            LazyHGrid(rows: Array(repeating: .init(.fixed(24)), count: 2), content: {
-                ForEach(weapon.weaponList.indices, id: \.self) { index in
-                    let weaponData: Grizzco.WeaponData.WeaponDataType = weapon.weaponList[index]
-                    Label(title: {
-                        Text(String(format: "%.2f%%", weaponData.percent * 100))
-                            .foregroundColor(weaponData.color)
-                            .font(systemName: .Splatfont2, size: 12)
-                    }, icon: {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(), alignment: .top), count: 2), content: {
+                ForEach(weapon.indices, id: \.self) { index in
+                    let weaponData: Grizzco.WeaponData = weapon[index]
+                    HStack(content: {
                         Image(bundle:weaponData.weaponId)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 22, height: 22, alignment: .center)
                             .background(RoundedRectangle(cornerRadius: 4).fill(weaponData.color))
+                        Spacer()
+                        Text(String(format: "%.2f%%", weaponData.percent))
+                            .lineLimit(1)
+                            .foregroundColor(weaponData.color)
+                            .font(systemName: .Splatfont2, size: 13)
                     })
                 }
             })
+            .minimumScaleFactor(0.8)
             .padding(8)
         })
         .font(systemName: .Splatfont2, size: 13)
@@ -69,14 +71,12 @@ struct GrizzcoSPCard_Previews: PreviewProvider {
         deadCount: 99.9
     )
 
-    static let weapon: Grizzco.WeaponData = Grizzco.WeaponData(
-        weaponList: [
-            (WeaponType.Maneuver_Dual, 100),
-            (WeaponType.Maneuver_Short, 200),
-            (WeaponType.Maneuver_Gallon, 300),
-            (WeaponType.Maneuver_Stepper, 400)
-        ]
-    )
+    static let weapon: [Grizzco.WeaponData] = [
+        Grizzco.WeaponData(color: SPColor.SplatNet3.SPBlue, weaponId: .Random_Green, count: nil, percent: nil),
+        Grizzco.WeaponData(color: SPColor.SplatNet3.SPBlue, weaponId: .Random_Green, count: nil, percent: nil),
+        Grizzco.WeaponData(color: SPColor.SplatNet3.SPBlue, weaponId: .Random_Green, count: nil, percent: nil),
+        Grizzco.WeaponData(color: SPColor.SplatNet3.SPBlue, weaponId: .Random_Green, count: nil, percent: nil)
+    ]
 
     enum XcodePreviewDevice: String, CaseIterable {
         case iPhone13Pro = "iPhone 13 Pro"
