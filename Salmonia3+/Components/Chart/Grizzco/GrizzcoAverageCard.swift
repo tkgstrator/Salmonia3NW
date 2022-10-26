@@ -84,7 +84,7 @@ private struct GrizzcoAverageView: View {
                     })
                     Spacer()
                     Group(content: {
-                        Image(bundle: ButtonType.Rescue)
+                        Image(bundle: RescueType.Inkling)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 41.75, height: 16, alignment: .center)
@@ -94,7 +94,7 @@ private struct GrizzcoAverageView: View {
                     })
                     Spacer()
                     Group(content: {
-                        Image(bundle: ButtonType.Death)
+                        Image(bundle: DeathType.Inkling)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 41.75, height: 16, alignment: .center)

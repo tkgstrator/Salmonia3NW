@@ -18,7 +18,7 @@ struct GrizzcoMainCard: View {
                 ForEach(weapon.indices, id: \.self) { index in
                     let weaponData: Grizzco.WeaponData = weapon[index]
                     HStack(content: {
-                        Image(bundle:weaponData.weaponId)
+                        Image(bundle: weaponData.weaponId)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 22, height: 22, alignment: .center)
