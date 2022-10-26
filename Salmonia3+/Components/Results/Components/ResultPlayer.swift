@@ -276,9 +276,9 @@ struct ResultPlayer_Previews: PreviewProvider {
     static var previews: some View {
         ResultPlayers(result: result)
             .environment(\.resultStyle, .SPLATNET2)
-            .previewLayout(.fixed(width: 360, height: 500))
+            .previewLayout(.fixed(width: 375, height: 500))
         ResultPlayers(result: result)
             .environment(\.resultStyle, .SPLATNET3)
-            .previewLayout(.fixed(width: 360, height: 500))
+            .previewLayout(.fixed(width: 375, height: 500))
     }
 }

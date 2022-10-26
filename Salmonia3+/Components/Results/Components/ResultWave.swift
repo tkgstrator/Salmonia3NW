@@ -131,9 +131,9 @@ private struct WaveResult: View {
 
     var body: some View {
         let color: Color = isClear ? SPColor.SplatNet3.SPGreen : SPColor.SplatNet3.SPSalmonOrange
-        let localizedText: LocalizedText = isClear ? .CoopHistory_Gj : .CoopHistory_Ng
+        let localizedType: LocalizedType = isClear ? .CoopHistory_Gj : .CoopHistory_Ng
 
-        Text(bundle: localizedText)
+        Text(bundle: localizedType)
             .foregroundColor(color)
             .font(systemName: .Splatfont2, size: 12)
             .frame(height: 12 * 1.4)
@@ -202,16 +202,16 @@ private struct ResultWaveSplatNet3: View {
 }
 
 private extension RealmCoopWave {
-    var localizedText: LocalizedText {
+    var localizedText: LocalizedType {
         switch self.id {
         case 1:
-            return LocalizedText.CoopHistory_Wave1
+            return LocalizedType.CoopHistory_Wave1
         case 2:
-            return LocalizedText.CoopHistory_Wave2
+            return LocalizedType.CoopHistory_Wave2
         case 3:
-            return LocalizedText.CoopHistory_Wave3
+            return LocalizedType.CoopHistory_Wave3
         default:
-            return LocalizedText.CoopHistory_ExWave
+            return LocalizedType.CoopHistory_ExWave
         }
     }
 }

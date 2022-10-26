@@ -13,7 +13,7 @@ struct ScheduleView: View {
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.timeZone = TimeZone.current
-        formatter.dateFormat = LocalizedText.Widgets_StagesYearDatetimeFormat.localized
+        formatter.dateFormat = LocalizedType.Widgets_StagesYearDatetimeFormat.localized
         return formatter
     }()
 

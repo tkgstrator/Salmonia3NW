@@ -22,7 +22,7 @@ struct FailureChartView: View {
         SPColor.SplatNet3.SPSalmonGreen,
     ]
 
-    let titles: [LocalizedText] = [
+    let titles: [LocalizedType] = [
         .CoopHistory_Gj,
         .CoopHistory_Wave1,
         .CoopHistory_Wave2,
@@ -62,7 +62,7 @@ struct FailureChartView: View {
                 Spacer()
                 HStack(alignment: .center, spacing: 0, content: {
                     VStack(alignment: .leading, spacing: nil, content: {
-                        let titles: [LocalizedText] = [
+                        let titles: [LocalizedType] = [
                             .CoopHistory_Clear,
                             .CoopHistory_Wave1,
                             .CoopHistory_Wave2,
