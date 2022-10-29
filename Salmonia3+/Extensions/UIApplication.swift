@@ -19,6 +19,7 @@ extension UIApplication {
             .first?
             .rootViewController
     }
+
     /// Pop to Root View in NavigationView
     internal func popToRootView() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

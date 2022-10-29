@@ -103,7 +103,7 @@ struct FullScreen<Content: View>: UIViewControllerRepresentable {
             hosting.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
             hosting.presentationController?.delegate = coordinator as UIAdaptivePresentationControllerDelegate
 
-            if let isBeingPresented = presentedViewController?.isBeingPresented {} else {
+            if let _ = presentedViewController?.isBeingPresented {} else {
                 present(hosting, animated: true, completion: nil)
             }
         }
