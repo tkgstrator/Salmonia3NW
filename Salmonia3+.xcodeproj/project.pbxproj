@@ -64,6 +64,7 @@
 		10305F8A290D5242004103CD /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F89290D5242004103CD /* ChartType.swift */; };
 		10305F8C290D618E004103CD /* Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8B290D618E004103CD /* Rainbow.swift */; };
 		10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8E290D81BC004103CD /* PullToRefresh.swift */; };
+		10305F92290D87E1004103CD /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 10305F91290D87E1004103CD /* SwiftUIX */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
@@ -258,6 +259,7 @@
 				1009735428E4AC280032BB84 /* FirebaseAnalytics in Frameworks */,
 				1018B48628D6C83C002BD1F0 /* SDWebImageSwiftUI in Frameworks */,
 				10A6A19628B7A7200075563F /* RealmSwift in Frameworks */,
+				10305F92290D87E1004103CD /* SwiftUIX in Frameworks */,
 				10A6A19428B7A71E0075563F /* Realm in Frameworks */,
 				1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */,
 				10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */,
@@ -636,6 +638,7 @@
 				1009735328E4AC280032BB84 /* FirebaseAnalytics */,
 				1009735528E4AC280032BB84 /* FirebaseAuth */,
 				10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */,
+				10305F91290D87E1004103CD /* SwiftUIX */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -727,6 +730,7 @@
 				1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				10305F90290D87E1004103CD /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 101AACB928B77C750030B56C /* Products */;
 			projectDirPath = "";
@@ -1295,6 +1299,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		10305F90290D87E1004103CD /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		10A6A17828B7890C0075563F /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
@@ -1333,6 +1345,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1018B48428D6C83C002BD1F0 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		10305F91290D87E1004103CD /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10305F90290D87E1004103CD /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 		10320C6028D40A3100666F09 /* SplatNet3 */ = {
 			isa = XCSwiftPackageProductDependency;

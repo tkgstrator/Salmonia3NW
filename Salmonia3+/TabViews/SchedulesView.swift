@@ -20,17 +20,9 @@ struct SchedulesView: View {
     var body: some View {
         List(content: {
             ForEach(schedules) { schedule in
-                if let startTime = schedule.startTime {
-                    NavigationLinker(destination: {
-                        ScheduleStatsView(startTime: startTime)
-                    }, label: {
-                        ScheduleView(schedule: schedule)
-                    })
+                ScheduleView(schedule: schedule)
                     .listRowInsets(EdgeInsets())
-                } else {
-                    ScheduleView(schedule: schedule)
-                        .listRowInsets(EdgeInsets())
-                }
+                    .listRowSeparator(.hidden)
             }
         })
         .onChange(of: selection, perform: { newValue in

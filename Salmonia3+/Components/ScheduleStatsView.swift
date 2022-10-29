@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SplatNet3
+import SwiftUIX
 
 struct ScheduleStatsView: View {
     @StateObject var stats: StatsService
@@ -16,12 +17,14 @@ struct ScheduleStatsView: View {
     }
 
     var body: some View {
-        ScrollView(showsIndicators: false, content: {
-            TabView(content: {
+        ScrollView(content: {
+            PaginationView(axis: .horizontal, showsIndicators: false, content: {
                 GrizzcoCard(average: stats.average)
                 GrizzcoSPCard(specials: stats.specials)
                 GrizzcoWaveCard(waves: stats.waves)
             })
+            .cyclesPages(true)
+            .menuIndicator(.hidden)
             .frame(width: .infinity, height: 160, alignment: .bottom)
             .overlay(TabSideArray())
             .tabViewStyle(.page(indexDisplayMode: .never))
