@@ -63,6 +63,7 @@
 		102D15F3290385E40092E8E6 /* RandomWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F2290385E40092E8E6 /* RandomWeaponView.swift */; };
 		10305F8A290D5242004103CD /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F89290D5242004103CD /* ChartType.swift */; };
 		10305F8C290D618E004103CD /* Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8B290D618E004103CD /* Rainbow.swift */; };
+		10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8E290D81BC004103CD /* PullToRefresh.swift */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
@@ -201,6 +202,7 @@
 		102D15F2290385E40092E8E6 /* RandomWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWeaponView.swift; sourceTree = "<group>"; };
 		10305F89290D5242004103CD /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		10305F8B290D618E004103CD /* Rainbow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rainbow.swift; sourceTree = "<group>"; };
+		10305F8E290D81BC004103CD /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangle.swift; sourceTree = "<group>"; };
 		1031877D28FC0066005AFBB9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
@@ -285,8 +287,9 @@
 		100E873028D47DA5007FCF3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				10305F8D290D65C6004103CD /* WKWebView */,
 				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
+				10305F8E290D81BC004103CD /* PullToRefresh.swift */,
+				10305F8D290D65C6004103CD /* WKWebView */,
 				100E875D28D4E428007FCF3C /* Shape */,
 				10F01B4D28EC363400F7A7E2 /* FullScreen */,
 				1031878328FE526C005AFBB9 /* Screens */,
@@ -341,6 +344,7 @@
 		100E875D28D4E428007FCF3C /* Shape */ = {
 			isa = PBXGroup;
 			children = (
+				1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */,
 				100E875E28D4E47B007FCF3C /* Hanger.swift */,
 				100E876028D4E6F9007FCF3C /* WaterLevel.swift */,
 				100E876428D4E92D007FCF3C /* Salmon.swift */,
@@ -536,14 +540,14 @@
 				100E876828D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift */,
 				1018B49B28D73352002BD1F0 /* SwiftUI+Text.swift */,
 				1031F66728FF90C800E15E8D /* SwiftUI+String.swift */,
-				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
 				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
+				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
+				10305F89290D5242004103CD /* ChartType.swift */,
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
 				10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */,
 				1076273328DF7C520034F9A4 /* NSTrackingView.swift */,
 				10E3191228F1EC91009C6BBC /* UIApplication.swift */,
-				1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -590,7 +594,6 @@
 				1031F6AA2902AC0200E15E8D /* Sakelien */,
 				1031F65A28FF8C4300E15E8D /* Grizzco */,
 				102D15F2290385E40092E8E6 /* RandomWeaponView.swift */,
-				10305F89290D5242004103CD /* ChartType.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				1031F6A9290291D600E15E8D /* GrizzcoMainCard.swift in Sources */,
 				1031F65E28FF8C8D00E15E8D /* GrizzcoHighCard.swift in Sources */,
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
+				10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,

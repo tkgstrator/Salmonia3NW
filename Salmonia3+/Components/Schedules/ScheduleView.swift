@@ -10,16 +10,34 @@ import SplatNet3
 
 struct ScheduleView: View {
     let schedule: RealmCoopSchedule
+
+    var body: some View {
+        switch schedule.results.isEmpty {
+        case true:
+            EmptyView()
+        case false:
+            if let startTime = schedule.startTime {
+                NavigationLinker(destination: {
+                    ScheduleStatsView(startTime: startTime)
+                }, label: {
+                    ScheduleViewWrapper(schedule: schedule)
+                })
+            } else {
+                ScheduleViewWrapper(schedule: schedule)
+            }
+        }
+    }
+}
+
+private struct ScheduleViewWrapper: View {
+    let schedule: RealmCoopSchedule
+
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
         formatter.timeZone = TimeZone.current
         formatter.dateFormat = LocalizedType.Widgets_StagesYearDatetimeFormat.localized
         return formatter
     }()
-
-    init(schedule: RealmCoopSchedule) {
-        self.schedule = schedule
-    }
 
     var body: some View {
         ZStack(alignment: .center, content: {

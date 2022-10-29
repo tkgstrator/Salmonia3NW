@@ -204,17 +204,17 @@ final class StatsService: ObservableObject {
     @Published var specials: [Grizzco.SpecialData]
     /// クマサンシャケデータ
     @Published var sakelien: [Grizzco.SakelienData]
-    /// イクラデータ
+    /// 個人イクラ
     @Published var ikuraNum: Grizzco.TeamData
-    /// イクラデータ
+    /// 個人イクラ
     @Published var goldenIkuraNum: Grizzco.TeamData
-    /// イクラデータ
+    /// チームイクラ
     @Published var teamIkuraNum: Grizzco.TeamData
-    /// イクラデータ
+    /// チーム金イクラ
     @Published var teamGoldenIkuraNum: Grizzco.TeamData
-    /// イクラデータ
+    /// 個人討伐数
     @Published var defeatedNum: Grizzco.TeamData
-    /// イクラデータ
+    /// チーム討伐数
     @Published var teamDefeatedNum: Grizzco.TeamData
     /// ランダムシフトかどうか
     @Published var isRandomShift: Bool
@@ -306,8 +306,6 @@ final class StatsService: ObservableObject {
             let suppliedWeaponCount: [Int] = weaponList.map({ id in suppliedWeaponList.filter({ $0 == id }).count })
             return Array(zip(weaponList, suppliedWeaponCount))
         }()
-
-        print(weaponCounts)
 
         let randomWeaponCounts: [(WeaponType, Int)] = {
             let suppliedWeaponList: [WeaponType] = players.flatMap({ $0.weaponList })
@@ -427,8 +425,8 @@ final class StatsService: ObservableObject {
             avgValue: players.average(ofProperty: "bossKillCountsTotal")
         )
         self.teamDefeatedNum = Grizzco.TeamData(
-            maxValue: players.max(ofProperty: "bossKillCountsTotal"),
-            avgValue: players.average(ofProperty: "bossKillCountsTotal")
+            maxValue: results.map({ $0.bossKillCounts.sum() }).max(),
+            avgValue: shiftsWorked == .zero ? nil : Double(results.map({ $0.bossKillCounts.sum() }).reduce(0, +)) / Double(shiftsWorked)
         )
     }
 }

@@ -20,30 +20,18 @@ struct ResultsView: View {
     var body: some View {
         List(content: {
             ForEach(schedules) { schedule in
-                if !schedule.results.isEmpty {
-                    if let startTime = schedule.startTime {
-                        NavigationLinker(destination: {
-                            ScheduleStatsView(startTime: startTime)
-                        }, label: {
-                            ScheduleView(schedule: schedule)
-                        })
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                    } else {
-                        ScheduleView(schedule: schedule)
-                            .listRowInsets(EdgeInsets())
-                            .listRowSeparator(.hidden)
-                    }
-                    ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
-                        NavigationLinker(destination: {
-                            ResultTabView(results: schedule.results)
-                                .environment(\.selection, .constant(result.id))
-                        }, label: {
-                            ResultView(result: result)
-                        })
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
-                    }
+                ScheduleView(schedule: schedule)
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+                ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
+                    NavigationLinker(destination: {
+                        ResultTabView(results: schedule.results)
+                            .environment(\.selection, .constant(result.id))
+                    }, label: {
+                        ResultView(result: result)
+                    })
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
                 }
             }
         })
@@ -76,31 +64,3 @@ struct ResultsView: View {
     }
 }
 
-private extension View {
-    /// 下に引っ張って更新を表示する
-    func pullToRefresh(enabled: Bool) -> some View {
-        self.overlay(enabled ? AnyView(PullToRefreshView()) : AnyView(EmptyView()))
-    }
-}
-
-/// リザルトがなにもないときに下スワイプで取得できることを表示する
-private struct PullToRefreshView: View {
-    @State private var value: CGFloat = 0
-
-    var body: some View {
-        GeometryReader(content: { geometry in
-            Text("↓")
-                .font(systemName: .Splatfont, size: 34)
-                .position(x: geometry.center.x, y: 80 + value)
-            Text(bundle: .Common_PullToRefresh)
-                .font(systemName: .Splatfont, size: 24)
-                .multilineTextAlignment(.center)
-                .position(x: geometry.center.x, y: 180)
-        })
-        .onAppear(perform: {
-            withAnimation(.easeInOut(duration: 0.5).repeatForever()) {
-                value = 50
-            }
-        })
-    }
-}

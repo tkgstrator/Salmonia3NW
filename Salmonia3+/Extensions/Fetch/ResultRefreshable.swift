@@ -62,6 +62,9 @@ extension View {
             let refreshControl: UIRefreshControl = UIRefreshControl()
             let action: UIAction = UIAction(handler: { handler in
                 let sender = handler.sender as? UIRefreshControl
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    uiScrollView.contentInset = UIEdgeInsets()
+                }
                 sender?.endRefreshing()
                 Task {
                     await action()
