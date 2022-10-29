@@ -68,6 +68,17 @@ enum ButtonType: String, CaseIterable, Codable {
 }
 
 extension Image {
+    init(bundle: ChartType) {
+        switch bundle {
+        case .Solo:
+            self.init(bundle: ButtonType.Solo)
+        case .Team:
+            self.init(bundle: ButtonType.Team)
+        case .None:
+            self.init(bundle: ButtonType.Solo)
+        }
+    }
+
     init(bundle: RescueType) {
         self.init("RescueType/\(bundle.rawValue)", bundle: .main)
     }

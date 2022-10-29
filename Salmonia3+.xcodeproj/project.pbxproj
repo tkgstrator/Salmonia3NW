@@ -61,6 +61,7 @@
 		102D15EF2902D99B0092E8E6 /* GrizzcoTeamCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */; };
 		102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */; };
 		102D15F3290385E40092E8E6 /* RandomWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F2290385E40092E8E6 /* RandomWeaponView.swift */; };
+		10305F8A290D5242004103CD /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F89290D5242004103CD /* ChartType.swift */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
@@ -85,16 +86,10 @@
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		105A9F5928FB0FA100F4B3C8 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A9F5828FB0FA100F4B3C8 /* Preference.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
-		1098543628F5D29000E1E22F /* GradePointChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543528F5D29000E1E22F /* GradePointChartView.swift */; };
-		1098543828F66D1700E1E22F /* ScaleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543728F66D1700E1E22F /* ScaleChartView.swift */; };
-		1098543A28F6747800E1E22F /* KingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543928F6747800E1E22F /* KingChartView.swift */; };
-		1098543C28F67E7E00E1E22F /* FailureChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543B28F67E7E00E1E22F /* FailureChartView.swift */; };
 		1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */; };
 		1098544928F9164600E1E22F /* SingleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544828F9164600E1E22F /* SingleChartData.swift */; };
 		1098544B28F9166E00E1E22F /* AnimatableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544A28F9166E00E1E22F /* AnimatableModifier.swift */; };
 		1098544D28F917FC00E1E22F /* DoughnutData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544C28F917FC00E1E22F /* DoughnutData.swift */; };
-		109A5D5028F561C1001F8724 /* ColumnChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109A5D4F28F561C1001F8724 /* ColumnChartView.swift */; };
-		109A5D5328F5C237001F8724 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 109A5D5228F5C237001F8724 /* SwiftUICharts */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -110,11 +105,9 @@
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
 		10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */; };
-		10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191C28F22A38009C6BBC /* SingleChartView.swift */; };
 		10E3191F28F2602A009C6BBC /* GrizzcoSPCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */; };
 		10E3192128F2683C009C6BBC /* Doughnut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192028F2683C009C6BBC /* Doughnut.swift */; };
 		10E3192328F271F9009C6BBC /* Ark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192228F271F9009C6BBC /* Ark.swift */; };
-		10E3192528F2847D009C6BBC /* WeaponChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192428F2847D009C6BBC /* WeaponChartView.swift */; };
 		10F01B4728EB1B1A00F7A7E2 /* splatoon1chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4428EB157D00F7A7E2 /* splatoon1chzh.ttf */; };
 		10F01B4828EB1B1A00F7A7E2 /* splatoon1jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */; };
 		10F01B4928EB1B1A00F7A7E2 /* splatoon1twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4528EB157D00F7A7E2 /* splatoon1twzh.ttf */; };
@@ -210,6 +203,7 @@
 		102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoTeamCard.swift; sourceTree = "<group>"; };
 		102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoWaveCard.swift; sourceTree = "<group>"; };
 		102D15F2290385E40092E8E6 /* RandomWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWeaponView.swift; sourceTree = "<group>"; };
+		10305F89290D5242004103CD /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
 		1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangle.swift; sourceTree = "<group>"; };
 		1031877D28FC0066005AFBB9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
@@ -233,16 +227,10 @@
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		105A9F5828FB0FA100F4B3C8 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
-		1098543528F5D29000E1E22F /* GradePointChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePointChartView.swift; sourceTree = "<group>"; };
-		1098543728F66D1700E1E22F /* ScaleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleChartView.swift; sourceTree = "<group>"; };
-		1098543928F6747800E1E22F /* KingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingChartView.swift; sourceTree = "<group>"; };
-		1098543B28F67E7E00E1E22F /* FailureChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureChartView.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointCard.swift; sourceTree = "<group>"; };
 		1098544828F9164600E1E22F /* SingleChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartData.swift; sourceTree = "<group>"; };
 		1098544A28F9166E00E1E22F /* AnimatableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableModifier.swift; sourceTree = "<group>"; };
 		1098544C28F917FC00E1E22F /* DoughnutData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughnutData.swift; sourceTree = "<group>"; };
-		109A5D4F28F561C1001F8724 /* ColumnChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnChartView.swift; sourceTree = "<group>"; };
-		109A5D5128F5BBE7001F8724 /* ChartView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ChartView; path = ../ChartView; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -255,11 +243,9 @@
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10E3191228F1EC91009C6BBC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStatsView.swift; sourceTree = "<group>"; };
-		10E3191C28F22A38009C6BBC /* SingleChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartView.swift; sourceTree = "<group>"; };
 		10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoSPCard.swift; sourceTree = "<group>"; };
 		10E3192028F2683C009C6BBC /* Doughnut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doughnut.swift; sourceTree = "<group>"; };
 		10E3192228F271F9009C6BBC /* Ark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ark.swift; sourceTree = "<group>"; };
-		10E3192428F2847D009C6BBC /* WeaponChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChartView.swift; sourceTree = "<group>"; };
 		10F01B4128EB157C00F7A7E2 /* splatoon2twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2twzh.ttf; sourceTree = "<group>"; };
 		10F01B4228EB157D00F7A7E2 /* splatoon2chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2chzh.ttf; sourceTree = "<group>"; };
 		10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1jpja.ttf; sourceTree = "<group>"; };
@@ -284,7 +270,6 @@
 				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
 				10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1009735628E4AC280032BB84 /* FirebaseAuth in Frameworks */,
-				109A5D5328F5C237001F8724 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,13 +485,6 @@
 			children = (
 				10E3192028F2683C009C6BBC /* Doughnut.swift */,
 				1098544A28F9166E00E1E22F /* AnimatableModifier.swift */,
-				10E3191C28F22A38009C6BBC /* SingleChartView.swift */,
-				10E3192428F2847D009C6BBC /* WeaponChartView.swift */,
-				109A5D4F28F561C1001F8724 /* ColumnChartView.swift */,
-				1098543528F5D29000E1E22F /* GradePointChartView.swift */,
-				1098543728F66D1700E1E22F /* ScaleChartView.swift */,
-				1098543928F6747800E1E22F /* KingChartView.swift */,
-				1098543B28F67E7E00E1E22F /* FailureChartView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -611,7 +589,6 @@
 			isa = PBXGroup;
 			children = (
 				10A6A18428B7A3D60075563F /* SplatNet */,
-				109A5D5128F5BBE7001F8724 /* ChartView */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -641,6 +618,7 @@
 				1031F65928FF8C3300E15E8D /* Other */,
 				1098544728F9163900E1E22F /* ChartData */,
 				102D15F2290385E40092E8E6 /* RandomWeaponView.swift */,
+				10305F89290D5242004103CD /* ChartType.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -683,7 +661,6 @@
 				1009735328E4AC280032BB84 /* FirebaseAnalytics */,
 				1009735528E4AC280032BB84 /* FirebaseAuth */,
 				10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */,
-				109A5D5228F5C237001F8724 /* SwiftUICharts */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -869,16 +846,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A6A19A28B7AC240075563F /* SchedulesView.swift in Sources */,
-				109A5D5028F561C1001F8724 /* ColumnChartView.swift in Sources */,
 				101726FB28F18DE60040F88B /* StatsService.swift in Sources */,
 				10A0ACB628DD42A4008B332A /* IconList.swift in Sources */,
 				10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */,
 				100E876328D4E8EF007FCF3C /* ResultPlayer.swift in Sources */,
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
-				10E3191D28F22A38009C6BBC /* SingleChartView.swift in Sources */,
 				1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */,
 				1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */,
-				1098543A28F6747800E1E22F /* KingChartView.swift in Sources */,
 				1031F66B28FFF1F100E15E8D /* ResultRefreshable.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
 				1031F6A9290291D600E15E8D /* GrizzcoMainCard.swift in Sources */,
@@ -887,7 +861,6 @@
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
-				10E3192528F2847D009C6BBC /* WeaponChartView.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
 				1001B4DE28E7022500A370FD /* FullScreenView.swift in Sources */,
 				100E876928D4ECBF007FCF3C /* SwiftUI+GeometryReader.swift in Sources */,
@@ -906,7 +879,6 @@
 				10E3191F28F2602A009C6BBC /* GrizzcoSPCard.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
-				1098543828F66D1700E1E22F /* ScaleChartView.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,
 				102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */,
 				10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */,
@@ -925,7 +897,6 @@
 				100E875328D4B91A007FCF3C /* ResultHeader.swift in Sources */,
 				1018B4B328DB121C002BD1F0 /* AppStorage.swift in Sources */,
 				100E875028D4B8F8007FCF3C /* ResultDetailView.swift in Sources */,
-				1098543C28F67E7E00E1E22F /* FailureChartView.swift in Sources */,
 				102D15EF2902D99B0092E8E6 /* GrizzcoTeamCard.swift in Sources */,
 				10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */,
 				1031877E28FC0066005AFBB9 /* Line.swift in Sources */,
@@ -940,8 +911,8 @@
 				1018B49828D708A3002BD1F0 /* GoogleMobileAds.swift in Sources */,
 				100E876D28D4FE13007FCF3C /* ResultEgg.swift in Sources */,
 				1031F66228FF8E6C00E15E8D /* GrizzcoAverageCard.swift in Sources */,
+				10305F8A290D5242004103CD /* ChartType.swift in Sources */,
 				1031F6AC2902AC1B00E15E8D /* SakelienChart.swift in Sources */,
-				1098543628F5D29000E1E22F /* GradePointChartView.swift in Sources */,
 				1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,
@@ -1363,7 +1334,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
 				kind = exactVersion;
-				version = 10.30.0;
+				version = 10.32.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1392,10 +1363,6 @@
 		10320C6028D40A3100666F09 /* SplatNet3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SplatNet3;
-		};
-		109A5D5228F5C237001F8724 /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftUICharts;
 		};
 		10A6A19128B7A7130075563F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
