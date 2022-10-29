@@ -10,6 +10,15 @@ import UIKit
 import SwiftUI
 
 extension UIApplication {
+    internal var rootViewController: UIViewController? {
+        UIApplication.shared.connectedScenes
+            .filter({ $0.activationState == .foregroundActive })
+            .compactMap({ $0 as? UIWindowScene })
+            .first?
+            .windows
+            .first?
+            .rootViewController
+    }
     /// Pop to Root View in NavigationView
     internal func popToRootView() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

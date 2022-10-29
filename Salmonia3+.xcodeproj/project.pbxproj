@@ -62,6 +62,7 @@
 		102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */; };
 		102D15F3290385E40092E8E6 /* RandomWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F2290385E40092E8E6 /* RandomWeaponView.swift */; };
 		10305F8A290D5242004103CD /* ChartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F89290D5242004103CD /* ChartType.swift */; };
+		10305F8C290D618E004103CD /* Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8B290D618E004103CD /* Rainbow.swift */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
@@ -84,7 +85,6 @@
 		10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */; };
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
-		105A9F5928FB0FA100F4B3C8 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105A9F5828FB0FA100F4B3C8 /* Preference.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
 		1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */; };
 		1098544928F9164600E1E22F /* SingleChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098544828F9164600E1E22F /* SingleChartData.swift */; };
@@ -204,6 +204,7 @@
 		102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoWaveCard.swift; sourceTree = "<group>"; };
 		102D15F2290385E40092E8E6 /* RandomWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWeaponView.swift; sourceTree = "<group>"; };
 		10305F89290D5242004103CD /* ChartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartType.swift; sourceTree = "<group>"; };
+		10305F8B290D618E004103CD /* Rainbow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rainbow.swift; sourceTree = "<group>"; };
 		1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangle.swift; sourceTree = "<group>"; };
 		1031877D28FC0066005AFBB9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
@@ -225,7 +226,6 @@
 		10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
-		105A9F5828FB0FA100F4B3C8 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointCard.swift; sourceTree = "<group>"; };
 		1098544828F9164600E1E22F /* SingleChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChartData.swift; sourceTree = "<group>"; };
@@ -304,6 +304,7 @@
 				10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */,
 				1031F6A42901538300E15E8D /* SPWebView.swift */,
 				1031F6A6290164B800E15E8D /* SPWebButton.swift */,
+				10305F8B290D618E004103CD /* Rainbow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -314,7 +315,6 @@
 				100E875128D4B90E007FCF3C /* Components */,
 				100E873428D47DD1007FCF3C /* ResultView.swift */,
 				100E874F28D4B8F8007FCF3C /* ResultDetailView.swift */,
-				105A9F5828FB0FA100F4B3C8 /* Preference.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -884,7 +884,6 @@
 				10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */,
 				10A6A19828B7AC1B0075563F /* UserView.swift in Sources */,
 				1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */,
-				105A9F5928FB0FA100F4B3C8 /* Preference.swift in Sources */,
 				100E875C28D4D7EA007FCF3C /* SwiftUI+Color.swift in Sources */,
 				1018B4B128DB0371002BD1F0 /* DebugView.swift in Sources */,
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
@@ -913,6 +912,7 @@
 				1031F66228FF8E6C00E15E8D /* GrizzcoAverageCard.swift in Sources */,
 				10305F8A290D5242004103CD /* ChartType.swift in Sources */,
 				1031F6AC2902AC1B00E15E8D /* SakelienChart.swift in Sources */,
+				10305F8C290D618E004103CD /* Rainbow.swift in Sources */,
 				1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */,
 				1018B48328D6B78A002BD1F0 /* Sesison.swift in Sources */,
 				10A0ACB828DD4EE0008B332A /* IconToggle.swift in Sources */,

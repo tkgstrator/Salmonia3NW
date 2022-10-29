@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUICharts
 import SplatNet3
 
 struct ScheduleStatsView: View {

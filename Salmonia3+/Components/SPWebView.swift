@@ -38,7 +38,7 @@ struct SPWebView: UIViewControllerRepresentable {
 
         /// エラーが発生したら自動で閉じる
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
+            UIApplication.shared.rootViewController?.dismiss(animated: true)
         }
     }
 
@@ -72,14 +72,13 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(message.body)
         guard let message: NSScriptMessage = NSScriptMessage(message: message) else {
             return
         }
 
         switch message {
         case .closeWebView:
-            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true)
+            UIApplication.shared.rootViewController?.dismiss(animated: true)
         case .reloadExtension:
             break
         case .completeLoading:
@@ -121,7 +120,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler {
                 case .success(let credential):
                     let gtoken: String = credential.gameWebToken
                     self.loadWithGToken(gtoken: gtoken)
-                case .failure(let error):
+                case .failure(_):
                     break
                 }
             })

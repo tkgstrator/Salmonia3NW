@@ -168,7 +168,7 @@ enum IconList {
                         try data.write(to: filePath, options: .atomic)
                         let items = [filePath]
                         let activity: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                        let vc: UIViewController? = UIApplication.shared.windows.first?.rootViewController
+                        let vc: UIViewController? = UIApplication.shared.rootViewController
                         vc?.present(activity, animated: true)
                     } catch {
 
