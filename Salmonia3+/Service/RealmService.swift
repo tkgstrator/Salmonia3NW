@@ -11,31 +11,10 @@ import SplatNet3
 import SwiftUI
 
 class RealmService {
+    @Environment(\.realm) var realm
     public static let shared = RealmService()
 
     private let schemeVersion: UInt64 = 5
-
-    internal var realm: Realm {
-        get {
-            #if DEBUG
-            let config = Realm.Configuration(
-                schemaVersion: schemeVersion,
-                deleteRealmIfMigrationNeeded: false
-            )
-            #else
-            let config = Realm.Configuration(
-                schemaVersion: schemeVersion,
-                deleteRealmIfMigrationNeeded: true
-            )
-            #endif
-            Realm.Configuration.defaultConfiguration = config
-            do {
-                return try Realm()
-            } catch (let error) {
-                return try! Realm(configuration: config)
-            }
-        }
-    }
 
     init() {}
 
