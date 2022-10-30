@@ -8,9 +8,21 @@
 import SwiftUI
 import SplatNet3
 
+struct GrizzcoPointView: View {
+    @ObservedObject var data: Grizzco.Chart.Point
+
+    var body: some View {
+        ChartView(destination: {
+            EmptyView()
+        }, content: {
+            GrizzcoPointContent(data: data)
+        })
+    }
+}
+
 /// イカリング3形式の黄色いポイントカード
-struct GrizzcoPointCard: View {
-    @ObservedObject var point: Grizzco.ChartEntry.Point
+private struct GrizzcoPointContent: View {
+    @ObservedObject var data: Grizzco.Chart.Point
 
     var body: some View {
         VStack(alignment: .center, spacing: 0, content: {
@@ -31,7 +43,7 @@ struct GrizzcoPointCard: View {
                             Text(bundle: .CoopHistory_RegularPoint)
                                 .font(systemName: .Splatfont2, size: 11)
                                 .frame(maxWidth: .infinity, height: 11, alignment: .leading)
-                            Text(String(format: "%dp", point.regularPoint))
+                            Text(String(format: "%dp", data.regularPoint))
                                 .font(systemName: .Splatfont2, size: 20)
                                 .frame(maxWidth: .infinity, height: 24, alignment: .trailing)
                         })
@@ -52,7 +64,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.playCount))
+                            Text(String(format: "%d", data.playCount))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)
@@ -73,7 +85,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.goldenIkuraNum))
+                            Text(String(format: "%d", data.goldenIkuraNum))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)
@@ -94,7 +106,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.ikuraNum))
+                            Text(String(format: "%d", data.ikuraNum))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)
@@ -115,7 +127,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.bossKillCount))
+                            Text(String(format: "%d", data.bossKillCount))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)
@@ -136,7 +148,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.helpCount))
+                            Text(String(format: "%d", data.helpCount))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)

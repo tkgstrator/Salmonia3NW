@@ -527,12 +527,12 @@
 		1031F65A28FF8C4300E15E8D /* Grizzco */ = {
 			isa = PBXGroup;
 			children = (
+				1031F6A8290291D600E15E8D /* GrizzcoMainCard.swift */,
 				1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */,
 				1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */,
 				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
 				1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */,
 				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
-				1031F6A8290291D600E15E8D /* GrizzcoMainCard.swift */,
 				10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */,
 				102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */,
 				102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */,

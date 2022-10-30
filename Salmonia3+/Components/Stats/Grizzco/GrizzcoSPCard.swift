@@ -10,7 +10,7 @@ import SplatNet3
 
 struct GrizzcoSPCard: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let specials: [Grizzco.ChartEntry.SpecialWeapons]
+    let specials: [Grizzco.Chart.SpecialWeapons]
     
     var body: some View {
         ZStack(alignment: .center, content: {

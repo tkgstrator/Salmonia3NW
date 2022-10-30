@@ -10,9 +10,21 @@ import SplatNet3
 import SwiftUIX
 
 struct ScheduleStatsView: View {
+    @ObservedObject var stats: StatsService
+
+    init(startTime: Date) {
+        self.stats = StatsService(startTime: startTime)
+    }
+
     var body: some View {
         ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5)), count: 2)) {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2)) {
+                LazyVGrid(columns: [.init(.flexible())], content: {
+                    GrizzcoMaximumView(data: stats.maximum)
+                    GrizzcoScaleView(data: stats.scales)
+                    GrizzcoWeaponView(data: stats.weapons)
+                })
+                GrizzcoPointView(data: stats.points)
             }
         })
         .padding(.horizontal)

@@ -9,7 +9,7 @@ import SwiftUI
 import SplatNet3
 
 struct GrizzcoCard: View {
-    let average: Grizzco.ChartEntry.Average
+    let average: Grizzco.Chart.Average
 
     var body: some View {
         ZStack(alignment: .center, content: {
@@ -29,7 +29,7 @@ struct GrizzcoCard: View {
 }
 
 private struct GrizzcoScheduleView: View {
-    let average: Grizzco.ChartEntry.Average
+    let average: Grizzco.Chart.Average
 
     var body: some View {
         VStack(alignment: .center, spacing: 0, content: {
@@ -59,7 +59,7 @@ private struct GrizzcoScheduleView: View {
 }
 
 private struct GrizzcoAverageView: View {
-    let average: Grizzco.ChartEntry.Average
+    let average: Grizzco.Chart.Average
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {

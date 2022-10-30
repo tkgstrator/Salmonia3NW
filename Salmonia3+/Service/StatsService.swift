@@ -11,9 +11,11 @@ import SplatNet3
 import SwiftUI
 
 final class StatsService: ObservableObject {
-    @Published var average: Grizzco.ChartEntry.Average = Grizzco.ChartEntry.Average()
-    @Published var maximum: Grizzco.ChartEntry.Maximum = Grizzco.ChartEntry.Maximum()
-    @Published var weapons: Grizzco.ChartEntry.Weapons = Grizzco.ChartEntry.Weapons()
+    @Published var average: Grizzco.Chart.Average = Grizzco.Chart.Average()
+    @Published var maximum: Grizzco.Chart.Maximum = Grizzco.Chart.Maximum()
+    @Published var weapons: Grizzco.Chart.Weapons = Grizzco.Chart.Weapons()
+    @Published var points: Grizzco.Chart.Point = Grizzco.Chart.Point()
+    @Published var scales: Grizzco.Chart.Scale = Grizzco.Chart.Scale()
 
     init(startTime: Date?) {
         guard let startTime = startTime,
@@ -24,22 +26,25 @@ final class StatsService: ObservableObject {
         let players: RealmSwift.Results<RealmCoopPlayer> = RealmService.shared.objects(ofType: RealmCoopPlayer.self)
             .filter("ANY link.link.startTime=%@ AND isMyself=true", startTime)
 
-        self.average = Grizzco.ChartEntry.Average(schedule: schedule, players: players)
-        self.maximum = Grizzco.ChartEntry.Maximum(results: schedule.results)
+        self.average = Grizzco.Chart.Average(schedule: schedule, players: players)
+        self.maximum = Grizzco.Chart.Maximum(results: schedule.results)
+        self.weapons = Grizzco.Chart.Weapons(schedule: schedule, players: players)
+        self.points = Grizzco.Chart.Point(results: schedule.results, players: players)
+        self.scales = Grizzco.Chart.Scale(results: schedule.results)
     }
 }
 
-extension Array where Element: BinaryFloatingPoint {
-    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
-        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
-    }
-}
-
-extension Array where Element: BinaryInteger {
-    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
-        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
-    }
-}
+//extension Array where Element: BinaryFloatingPoint {
+//    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
+//        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
+//    }
+//}
+//
+//extension Array where Element: BinaryInteger {
+//    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
+//        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
+//    }
+//}
 
 extension RealmCoopResult {
     var gradePointCrew: Double? {

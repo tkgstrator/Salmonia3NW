@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RandomWeaponView: View {
-    let randoms: [Grizzco.ChartEntry.Weapons]
+    let randoms: [Grizzco.Chart.Weapons]
     let columnSize: Int = UIDevice.current.userInterfaceIdiom == .pad ? 5 : 4
 
     var body: some View {

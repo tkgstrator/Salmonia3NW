@@ -8,34 +8,32 @@
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoHighCard: View {
-    let startTime: Date
-    @ObservedObject var data: Grizzco.ChartEntry.Maximum
+struct GrizzcoMaximumView: View {
+    @ObservedObject var data: Grizzco.Chart.Maximum
 
     var body: some View {
         ChartView(destination: {
             EmptyView()
         }, content: {
-            GrizzcoGradeContent(maximum: data)
-        })
-        .onAppear(perform: {
-            print(startTime)
+            GrizzcoGradeContent(data: data)
         })
     }
 }
 
 /// イカリング3形式の最高値表示カード
-struct GrizzcoGradeContent: View {
-    let maximum: Grizzco.ChartEntry.Maximum
+private struct GrizzcoGradeContent: View {
+    let data: Grizzco.Chart.Maximum
     
     var body: some View {
         ZStack(alignment: .center, content: {
             Color.black.opacity(0.7)
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 0, content: {
-                    if let maxGradePoint = maximum.maxGradePoint, let maxGrade = maximum.maxGrade {
+                    if let maxGradePoint = data.maxGradePoint, let maxGrade = data.maxGrade {
                         Text(maxGrade.localizedText)
                         Text(String(format: " %d", maxGradePoint))
+                    } else {
+                        Text("-")
                     }
                     Spacer()
                 })
@@ -44,7 +42,7 @@ struct GrizzcoGradeContent: View {
                     GeometryReader(content: { geometry in
                         RoundedRectangle(cornerRadius: 5)
                             .fill(Color.white.opacity(0.3))
-                        if let maxGradePoint = maximum.maxGradePoint, let maxGrade = maximum.maxGrade {
+                        if let maxGradePoint = data.maxGradePoint, let maxGrade = data.maxGrade {
                             Rectangle()
                                 .fill(SPColor.SplatNet3.SPCoop)
                                 .frame(width: geometry.width * (Double(maxGradePoint) / Double(maxGrade == GradeType.Eggsecutive_VP ? 999 : 100)))
@@ -55,7 +53,7 @@ struct GrizzcoGradeContent: View {
                 .frame(height: 10)
                 .padding(.bottom, 15)
                 Text(bundle: .CoopHistory_AverageClearWaves)
-                Text(String(format: " %.2f", maximum.averageWaveCleared))
+                Text(String(format: " %.2f", data.averageWaveCleared))
                     .font(systemName: .Splatfont2, size: 20)
                     .frame(maxWidth: .infinity, height: 20, alignment: .trailing)
             })

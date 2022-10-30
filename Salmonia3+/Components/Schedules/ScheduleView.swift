@@ -18,8 +18,7 @@ struct ScheduleView: View {
         case false:
             if let startTime = schedule.startTime {
                 NavigationLinker(destination: {
-                    ScheduleStatsView()
-                        .environment(\.startTime, startTime)
+                    ScheduleStatsView(startTime: startTime)
                 }, label: {
                     ScheduleViewElement(schedule: schedule)
                 })

@@ -8,27 +8,40 @@
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoMainCard: View {
-    let weapon: [Grizzco.ChartEntry.Weapons]
+struct GrizzcoWeaponView: View {
+    @ObservedObject var data: Grizzco.Chart.Weapons
+
+    var body: some View {
+        ChartView(destination: {
+            EmptyView()
+        }, content: {
+            GrizzcoWeaponContent(data: data)
+        })
+    }
+}
+
+private struct GrizzcoWeaponContent: View {
+    @ObservedObject var data: Grizzco.Chart.Weapons
+    typealias Entry = Grizzco.Chart.Weapons.WeaponEntry
 
     var body: some View {
         ZStack(alignment: .center, content: {
             Color.black.opacity(0.7)
             LazyVGrid(columns: Array(repeating: .init(.flexible(), alignment: .top), count: 2), content: {
-                ForEach(weapon.indices, id: \.self) { index in
-//                    let weaponData: Grizzco.WeaponData = weapon[index]
-//                    HStack(content: {
-//                        Image(bundle: weaponData.weaponId)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 22, height: 22, alignment: .center)
-//                            .background(RoundedRectangle(cornerRadius: 4).fill(weaponData.color))
-//                        Spacer()
-//                        Text(String(format: "%.2f%%", weaponData.percent))
-//                            .lineLimit(1)
-//                            .foregroundColor(weaponData.color)
-//                            .font(systemName: .Splatfont2, size: 13)
-//                    })
+                ForEach(data.entries.indices, id: \.self) { index in
+                    let entry: Entry = data.entries[index]
+                    HStack(content: {
+                        Image(bundle: entry.id)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 22, height: 22, alignment: .center)
+                            .background(RoundedRectangle(cornerRadius: 4).fill(SPColor.SplatNet3.SPSalmonOrangeDarker))
+                        Spacer()
+                        Text(String(format: "%.2f%%", entry.percent))
+                            .lineLimit(1)
+                            .foregroundColor(SPColor.SplatNet2.SPWhite)
+                            .font(systemName: .Splatfont2, size: 13)
+                    })
                 }
             })
             .minimumScaleFactor(0.8)

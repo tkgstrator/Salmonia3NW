@@ -8,8 +8,20 @@
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoScaleCard: View {
-    @ObservedObject var scale: Grizzco.ChartEntry.Scale
+struct GrizzcoScaleView: View {
+    @ObservedObject var data: Grizzco.Chart.Scale
+
+    var body: some View {
+        ChartView(destination: {
+            EmptyView()
+        }, content: {
+            GrizzcoScaleContent(data: data)
+        })
+    }
+}
+
+private struct GrizzcoScaleContent: View {
+    @ObservedObject var data: Grizzco.Chart.Scale
 
     var body: some View {
         ZStack(alignment: .center, content: {
@@ -24,7 +36,7 @@ struct GrizzcoScaleCard: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.bronze))
+                        Text(String(format: "x%d", data.bronze))
                             .padding(.top, 2)
                     })
                     VStack(alignment: .center, spacing: 0, content: {
@@ -32,7 +44,7 @@ struct GrizzcoScaleCard: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.silver))
+                        Text(String(format: "x%d", data.silver))
                             .padding(.top, 2)
                     })
                     VStack(alignment: .center, spacing: 0, content: {
@@ -40,7 +52,7 @@ struct GrizzcoScaleCard: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 25, height: 25, alignment: .center)
-                        Text(String(format: "x%d", scale.gold))
+                        Text(String(format: "x%d", data.gold))
                             .padding(.top, 2)
                     })
                 })

@@ -9,52 +9,22 @@ import SwiftUI
 import Charts
 import SplatNet3
 
-struct LineChartEntry: Identifiable {
-    let id: LocalizedType
-    let data: [ChartEntry]
-
-    init(id: LocalizedType) {
-        self.id = id
-        self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
-    }
-
-    init(id: LocalizedType, data: [ChartEntry]) {
-        self.id = id
-        self.data = data
-    }
-}
-
-struct ChartEntry: Identifiable {
-    let id: UUID = UUID()
-    let count: Int
-    let value: Double
-
-    init<T: BinaryInteger>(count: Int, value: T) {
-        self.count = count
-        self.value = Double(value)
-    }
-
-    init<T: BinaryFloatingPoint>(count: Int, value: T) {
-        self.count = count
-        self.value = Double(value)
-    }
-}
-
 @available(iOS 16.0, *)
 struct LineChartView: View {
+    typealias ChartEntry = Grizzco.LineChartEntry
     @Environment(\.colorScheme) var colorScheme
-    let chartData: [LineChartEntry]
+    let chartData: [ChartEntry]
     let method: InterpolationMethod = .stepCenter
 
     init(method: InterpolationMethod = .stepCenter) {
         self.chartData = []
     }
 
-    init(chartData: [LineChartEntry]) {
+    init(chartData: [ChartEntry]) {
         self.chartData = chartData
     }
 
-    init(chartData: LineChartEntry) {
+    init(chartData: ChartEntry) {
         self.chartData = []
     }
 
@@ -81,9 +51,11 @@ struct LineChartView: View {
 
 @available(iOS 16.0, *)
 struct LineChartView_Previews: PreviewProvider {
-    static let chartData: [LineChartEntry] = [
-        LineChartEntry(id: .CoopHistory_JobRatio),
-        LineChartEntry(id: .CoopHistory_Score),
+    typealias ChartEntry = Grizzco.LineChartEntry
+
+    static let chartData: [ChartEntry] = [
+        ChartEntry(id: .CoopHistory_JobRatio),
+        ChartEntry(id: .CoopHistory_Score),
     ]
 
     static var previews: some View {

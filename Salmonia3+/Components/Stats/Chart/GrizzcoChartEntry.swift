@@ -10,7 +10,38 @@ import RealmSwift
 import SplatNet3
 
 enum Grizzco {
-    enum ChartEntry {
+    class LineChartEntry: ObservableObject, Identifiable {
+        @Published var id: LocalizedType
+        @Published var data: [ChartEntry]
+
+        init(id: LocalizedType) {
+            self.id = id
+            self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
+        }
+
+        init(id: LocalizedType, data: [ChartEntry]) {
+            self.id = id
+            self.data = data
+        }
+    }
+
+    struct ChartEntry: Identifiable {
+        let id: UUID = UUID()
+        let count: Int
+        let value: Double
+
+        init<T: BinaryInteger>(count: Int, value: T) {
+            self.count = count
+            self.value = Double(value)
+        }
+
+        init<T: BinaryFloatingPoint>(count: Int, value: T) {
+            self.count = count
+            self.value = Double(value)
+        }
+    }
+
+    enum Chart {
         class Average: ObservableObject {
             @Published var weaponList: [WeaponType] = []
             @Published var rareWeapon: WeaponType? = nil
@@ -41,14 +72,14 @@ enum Grizzco {
 
             init() {}
 
-            init(results: RealmSwift.List<RealmCoopResult>) {
+            init(results: RealmSwift.List<RealmCoopResult>, players: RealmSwift.Results<RealmCoopPlayer>) {
                 if results.count == .zero { return }
                 self.playCount = results.count
                 self.goldenIkuraNum = results.sum(ofProperty: "goldenIkuraNum")
                 self.ikuraNum = results.sum(ofProperty: "ikuraNum")
                 self.bossKillCount = results.filter({ $0.isBossDefeated == true }).count
                 self.regularPoint = results.sum(ofProperty: "kumaPoint")
-                self.helpCount = results.sum(ofProperty: "helpCount")
+                self.helpCount = players.sum(ofProperty: "helpCount")
             }
         }
 
@@ -91,6 +122,16 @@ enum Grizzco {
             @Published var estimateCompleteCount: Int?
             /// データ
             @Published var entries: [WeaponEntry] = []
+            /// ランダム編成かどうか
+            @Published var isRandom: Bool = false
+
+            init() {}
+
+            init(schedule: RealmCoopSchedule, players: RealmSwift.Results<RealmCoopPlayer>) {
+                self.isRandom = schedule.weaponList.contains(.Random_Green)
+                self.suppliedWeaponCount = players.suppliedWeapons.count
+                self.entries = self.isRandom ? [] : players.suppliedWeaponEntry
+            }
 
             struct WeaponEntry: Identifiable {
                 let id: WeaponType
@@ -103,7 +144,7 @@ enum Grizzco {
             @Published var entries: [WeaponEntry] = []
 
             init() {}
-            
+
             struct WeaponEntry: Identifiable {
                 let id: WeaponType
                 let count: Int? = nil
@@ -122,9 +163,15 @@ enum Grizzco {
             }
         }
 
-        class Player: ObservableObject {
-            @Published var maxValue: Int? = nil
-            @Published var avgValue: Double? = nil
+        class Values: ObservableObject {
+            @Published var entries: [ValueEntry] = []
+
+            struct ValueEntry {
+                let id: ChartType = .Solo
+                let maxValue: Int? = nil
+                let avgValue: Double? = nil
+                let charts: [LineChartEntry]
+            }
         }
 
         class Wave: ObservableObject {
@@ -166,8 +213,25 @@ extension RealmSwift.List where Element == RealmCoopResult {
     }
 }
 
+extension Array where Element: Hashable {
+    func count() -> [(element: Element, count: Int)] {
+        let elements: Set<Element> = Set(self)
+        return elements.map({ self.count($0) })
+    }
+
+    func count(_ element: Element) -> (element: Element, count: Int) {
+        (element: element, self.filter({ $0 == element }).count)
+    }
+}
+
 extension RealmSwift.Results where Element == RealmCoopPlayer {
+    typealias Entry = Grizzco.Chart.Weapons.WeaponEntry
     fileprivate var suppliedWeapons: Set<WeaponType> {
         Set(self.flatMap({ Array($0.weaponList) }))
+    }
+
+    fileprivate var suppliedWeaponEntry: [Entry] {
+        let suppliedWeapons: [WeaponType] = self.flatMap({ Array($0.weaponList) })
+        return suppliedWeapons.count().map({ Entry(id: $0.element) })
     }
 }
