@@ -218,19 +218,15 @@ final class StatsService: ObservableObject {
     @Published var teamDefeatedNum: Grizzco.TeamData
     /// ランダムシフトかどうか
     @Published var isRandomShift: Bool
+    @Published var gradePoint: [LineChartEntry]
 
     init(startTime: Date) {
-        #warning("アプリがクラッシュするのでちょっとまずいが、まあヨシ")
+#warning("アプリがクラッシュするのでちょっとまずいが、まあヨシ")
         guard let schedule: RealmCoopSchedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime }) else {
             fatalError()
         }
         /// リザルト一覧
-        let results: RealmSwift.List<RealmCoopResult> = {
-            if let results = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime })?.results {
-                return results
-            }
-            return RealmSwift.List<RealmCoopResult>()
-        }()
+        let results: RealmSwift.List<RealmCoopResult> = schedule.results
         /// プレイヤー一覧
         let players: RealmSwift.Results<RealmCoopPlayer> = RealmService.shared.objects(ofType: RealmCoopPlayer.self).filter("ANY link.link.startTime=%@ AND isMyself=true", startTime)
         /// WAVE一覧
@@ -251,7 +247,7 @@ final class StatsService: ObservableObject {
         }()
         /// バイト回数
         let shiftsWorked: Int = results.count
-        #warning("バグの可能性があるので将来的に修正予定")
+#warning("バグの可能性があるので将来的に修正予定")
         /// ウロコの枚数
         let scales: (bronze: Int, silver: Int, gold: Int) = {
             if shiftsWorked == 0 {
@@ -428,6 +424,34 @@ final class StatsService: ObservableObject {
             maxValue: results.map({ $0.bossKillCounts.sum() }).max(),
             avgValue: shiftsWorked == .zero ? nil : Double(results.map({ $0.bossKillCounts.sum() }).reduce(0, +)) / Double(shiftsWorked)
         )
+        self.gradePoint = [
+            results.compactMap({ $0.gradePoint }).asLineChartEntry(id: .CoopHistory_JobRatio),
+            results.compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .CoopHistory_Score)
+        ]
+
+        print(gradePoint)
+    }
+}
+
+extension Array where Element: BinaryFloatingPoint {
+    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
+        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
+    }
+}
+
+extension Array where Element: BinaryInteger {
+    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
+        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
+    }
+}
+
+extension RealmCoopResult {
+    var gradePointCrew: Double? {
+        guard let grade = self.grade,
+              let gradePoint = self.gradePoint else {
+            return nil
+        }
+        return (self.dangerRate * 100 * 5 * 4 - Double(grade.rawValue * 100 + gradePoint)) / 3 - Double(grade.rawValue * 100)
     }
 }
 
