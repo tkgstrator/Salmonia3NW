@@ -90,7 +90,7 @@ struct GrizzcoSPCard_Previews: PreviewProvider {
             })
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-                    GrizzcoHighCard(maximum: maximum)
+//                    GrizzcoHighCard(maximum: maximum)
                     GrizzcoScaleCard(scale: scale)
                     GrizzcoMainCard(weapon: weapon)
                 })

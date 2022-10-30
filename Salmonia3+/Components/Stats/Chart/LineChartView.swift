@@ -43,6 +43,7 @@ struct ChartEntry: Identifiable {
 
 @available(iOS 16.0, *)
 struct LineChartView: View {
+    @Environment(\.colorScheme) var colorScheme
     let chartData: [LineChartEntry]
     let method: InterpolationMethod = .stepCenter
 
@@ -75,6 +76,7 @@ struct LineChartView: View {
         })
         .padding()
         .frame(height: 300)
+        .preferredColorScheme(colorScheme)
     }
 }
 

@@ -30,15 +30,7 @@ struct ScheduleStatsView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-                    if #available(iOS 16.0, *) {
-                        NavigationLink(destination: {
-                            LineChartView(chartData: stats.gradePoint)
-                        }, label: {
-                            GrizzcoHighCard(maximum: stats.maximum)
-                        })
-                    } else {
-                        GrizzcoHighCard(maximum: stats.maximum)
-                    }
+                    GrizzcoHighCard(maximum: stats.maximum, gradePoint: stats.gradePoint)
                     GrizzcoScaleCard(scale: stats.scale)
                     switch stats.isRandomShift {
                     case true:

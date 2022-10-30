@@ -7,10 +7,34 @@
 
 import SwiftUI
 import SplatNet3
-import MetricKit
+
+struct GrizzcoHighCard: View {
+    @State private var isPresented: Bool = false
+    let maximum: Grizzco.HighData
+    let gradePoint: [LineChartEntry]
+
+    var body: some View {
+        if #available(iOS 16.0, *) {
+            Button(action: {
+                isPresented.toggle()
+            }, label: {
+                GrizzcoHighCardWrapper(maximum: maximum)
+            })
+            .fullScreen(isPresented: $isPresented, transitionStyle: .flipHorizontal, backgroundColor: .clear, content: {
+                LineChartView(chartData: gradePoint)
+                    .preferredColorScheme(.dark)
+                    .onTapGesture(perform: {
+                        isPresented.toggle()
+                    })
+            })
+        } else {
+            GrizzcoHighCardWrapper(maximum: maximum)
+        }
+    }
+}
 
 /// イカリング3形式の最高値表示カード
-struct GrizzcoHighCard: View {
+private struct GrizzcoHighCardWrapper: View {
     let maximum: Grizzco.HighData
     
     var body: some View {

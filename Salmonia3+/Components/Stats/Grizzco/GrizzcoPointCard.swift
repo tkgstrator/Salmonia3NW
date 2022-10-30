@@ -225,7 +225,7 @@ struct GrizzcoPointCard_Previews: PreviewProvider {
             .tabViewStyle(.page(indexDisplayMode: .never))
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
                 LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-                    GrizzcoHighCard(maximum: maximum)
+//                    GrizzcoHighCard(maximum: maximum)
                     GrizzcoScaleCard(scale: scale)
                 })
                 GrizzcoPointCard(point: point)
