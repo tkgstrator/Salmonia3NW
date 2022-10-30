@@ -26,6 +26,7 @@ struct ScheduleStatsView: View {
                     GrizzcoWeaponView(data: stats.weapons)
                 })
                 GrizzcoPointView(data: stats.points)
+                GrizzcoTeamView(data: stats.values)
             }
         })
         .padding(.horizontal)

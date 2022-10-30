@@ -10,17 +10,21 @@ import SwiftUIX
 
 struct GrizzcoOverview: View {
     @ObservedObject var stats: StatsService
+    @State private var selection: Int = 0
 
     var body: some View {
-        PaginationView(axis: .horizontal, showsIndicators: false, content: {
+        TabView(selection: $selection, content: {
             GrizzcoAverageView(data: stats.average)
                 .tag(0)
             GrizzcoSpecialView(data: stats.special)
                 .tag(1)
         })
-        .cyclesPages(true)
-        .initialPageIndex(0)
-        .frame(maxWidth: .infinity, height: 160, alignment: .bottom)
+        .frame(height: 160, alignment: .bottom)
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        ////        PaginationView(axis: .horizontal, showsIndicators: false, content: {
+////        })
+//        .cyclesPages(true)
+//        .menuIndicator(.hidden)
     }
 }
 

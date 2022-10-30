@@ -9,24 +9,24 @@ import Foundation
 import RealmSwift
 import SplatNet3
 
-enum Grizzco {
-    class LineChartEntry: ObservableObject, Identifiable {
-        @Published var id: LocalizedType
-        @Published var data: [ChartEntry]
+public enum Grizzco {
+    public class ChartEntrySet: ObservableObject, Identifiable {
+        @Published var title: LocalizedType = .CoopHistory_Title
+        @Published var data: [ChartEntry] = []
 
-        init(id: LocalizedType) {
-            self.id = id
+        init(title: LocalizedType) {
+            self.title = title
             self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
         }
 
-        init(id: LocalizedType, data: [ChartEntry]) {
-            self.id = id
+        init(title: LocalizedType, data: [ChartEntry]) {
+            self.title = title
             self.data = data
         }
     }
 
-    struct ChartEntry: Identifiable {
-        let id: UUID = UUID()
+    public struct ChartEntry: Identifiable {
+        public let id: UUID = UUID()
         let count: Int
         let value: Double
 
@@ -41,7 +41,7 @@ enum Grizzco {
         }
     }
 
-    enum Chart {
+    public enum Chart {
         class Average: ObservableObject {
             @Published var weaponList: [WeaponType] = []
             @Published var rareWeapon: WeaponType? = nil
@@ -69,6 +69,7 @@ enum Grizzco {
             @Published var bossKillCount: Int? = nil
             @Published var regularPoint: Int? = nil
             @Published var helpCount: Int? = nil
+            @Published var charts: [Grizzco.ChartEntrySet] = []
 
             init() {}
 
@@ -80,6 +81,9 @@ enum Grizzco {
                 self.bossKillCount = results.filter({ $0.isBossDefeated == true }).count
                 self.regularPoint = results.sum(ofProperty: "kumaPoint")
                 self.helpCount = players.sum(ofProperty: "helpCount")
+                self.charts = [
+                    results.map({ $0.dangerRate * 100 }).asLineChartEntry(id: .CoopHistory_DangerRatio)
+                ]
             }
         }
 
@@ -87,6 +91,7 @@ enum Grizzco {
             @Published var maxGrade: GradeType? = nil
             @Published var maxGradePoint: Int? = nil
             @Published var averageWaveCleared: Double? = nil
+            @Published var charts: [Grizzco.ChartEntrySet] = []
 
             init() {}
 
@@ -96,6 +101,10 @@ enum Grizzco {
                 self.maxGrade = maxGrade
                 self.maxGradePoint = results.filter("grade=%@", maxGrade).max(ofProperty: "gradePoint")
                 self.averageWaveCleared = results.averageWaveCleared
+                self.charts = [
+                    results.compactMap({ $0.gradePoint }).asLineChartEntry(id: .CoopHistory_JobRatio),
+                    results.compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .CoopHistory_Score)
+                ]
             }
         }
 
@@ -173,14 +182,64 @@ enum Grizzco {
             }
         }
 
-        class Values: ObservableObject {
-            @Published var entries: [ValueEntry] = []
+        public class Values: ObservableObject {
+            @Published var goldenIkuraNum: [ValueEntry] = []
+            @Published var ikuraNum: [ValueEntry] = []
+            @Published var helpCount: [ValueEntry] = []
+            @Published var deadCount: [ValueEntry] = []
 
-            struct ValueEntry {
-                let id: ChartType = .Solo
-                let maxValue: Int? = nil
-                let avgValue: Double? = nil
-                let charts: [LineChartEntry]
+            init() {}
+
+            init(results: RealmSwift.List<RealmCoopResult>,players: RealmSwift.Results<RealmCoopPlayer>) {
+                self.goldenIkuraNum = [
+                    ValueEntry(title: .CoopHistory_GoldenDeliverCount, id: .Solo, icon: .GoldenIkura, values: players.map({ $0.goldenIkuraNum })),
+                    ValueEntry(title: .CoopHistory_GoldenDeliverCount, id: .Team, icon: .GoldenIkura, values: results.map({ $0.goldenIkuraNum }))
+                ]
+                self.ikuraNum = [
+                    ValueEntry(title: .CoopHistory_DeliverCount, id: .Solo, icon: .Ikura, values: players.map({ $0.ikuraNum })),
+                    ValueEntry(title: .CoopHistory_DeliverCount, id: .Team, icon: .Ikura, values: results.map({ $0.ikuraNum }))
+                ]
+                self.helpCount = [
+                    ValueEntry(title: .CoopHistory_RescueCount, id: .Solo, icon: .Ikura, values: players.map({ $0.helpCount }))
+                ]
+                self.deadCount = [
+                    ValueEntry(title: .CoopHistory_RescuedCount, id: .Solo, icon: .Ikura, values: players.map({ $0.deadCount }))
+                ]
+            }
+
+            public class ValueEntry: ObservableObject, Identifiable {
+                @Published public var id: UUID = UUID()
+                @Published var type: ChartType = .Solo
+                @Published var icon: ChartIconType = .GoldenIkura
+                @Published var maxValue: Int? = nil
+                @Published var avgValue: Double? = nil
+                @Published var charts: Grizzco.ChartEntrySet
+
+                init<T: BinaryInteger>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T]) {
+                    self.type = id
+                    self.icon = icon
+                    self.maxValue = {
+                        if let maxValue = values.max() {
+                            return Int(maxValue)
+                        }
+                        return nil
+                    }()
+                    self.avgValue = values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    self.charts = values.asLineChartEntry(id: title)
+                }
+
+                init<T: BinaryFloatingPoint>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T]) {
+                    self.type = id
+                    self.icon = icon
+                    self.maxValue = {
+                        if let maxValue = values.max() {
+                            return Int(maxValue)
+                        }
+                        return nil
+                    }()
+                    self.avgValue = values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    self.charts = values.asLineChartEntry(id: title)
+                }
             }
         }
 
@@ -254,5 +313,17 @@ extension RealmSwift.Results where Element == RealmCoopPlayer {
             return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: nil, percent: nil) })
         }
         return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: $0.count, percent: Double($0.count) / Double(suppliedSpecials.count) * 100) })
+    }
+}
+
+extension Array where Element: BinaryFloatingPoint {
+    func asLineChartEntry(id: LocalizedType) -> Grizzco.ChartEntrySet {
+        Grizzco.ChartEntrySet(title: id, data: self.enumerated().map({ Grizzco.ChartEntry(count: $0.offset, value: $0.element) }))
+    }
+}
+
+extension Array where Element: BinaryInteger {
+    func asLineChartEntry(id: LocalizedType) -> Grizzco.ChartEntrySet {
+        Grizzco.ChartEntrySet(title: id, data: self.enumerated().map({ Grizzco.ChartEntry(count: $0.offset, value: $0.element) }))
     }
 }

@@ -11,10 +11,12 @@ import SplatNet3
 
 @available(iOS 16.0, *)
 struct LineChartView: View {
-    typealias ChartEntry = Grizzco.LineChartEntry
+    typealias ChartEntry = Grizzco.ChartEntrySet
     @Environment(\.colorScheme) var colorScheme
     let chartData: [ChartEntry]
     let method: InterpolationMethod = .stepCenter
+    private var xAxis: [Double] = []
+    private var yAxis: [Double] = []
 
     init(method: InterpolationMethod = .stepCenter) {
         self.chartData = []
@@ -22,14 +24,18 @@ struct LineChartView: View {
 
     init(chartData: [ChartEntry]) {
         self.chartData = chartData
+        if let series = chartData.first {
+            self.xAxis = stride(from: 0, through: Double(series.data.count), by: Double(series.data.count) / 5).map({ $0 })
+            self.yAxis = stride(from: chartData.minValue, through: chartData.maxValue, by: (chartData.maxValue - chartData.minValue) / 5).map({ $0 })
+        }
     }
 
     init(chartData: ChartEntry) {
-        self.chartData = []
+        self.chartData = [chartData]
     }
 
     var body: some View {
-        GroupBox(label: Text(bundle: .CoopHistory_JobRatio), content: {
+        GroupBox(label: Text(bundle: .Carousel_CoopHistory), content: {
             Chart(content: {
                 ForEach(chartData, id: \.id) { series in
                     ForEach(series.data) { item in
@@ -39,9 +45,15 @@ struct LineChartView: View {
                         )
                         .interpolationMethod(.stepStart)
                     }
-                    .foregroundStyle(by: .value("Type", series.id.localized))
+                    .foregroundStyle(by: .value("Type", series.title.localized))
                 }
             })
+//            .chartXAxis {
+//                AxisMarks(values: xAxis)
+//            }
+//            .chartYAxis {
+//                AxisMarks(values: yAxis)
+//            }
         })
         .padding()
         .frame(height: 300)
@@ -51,11 +63,11 @@ struct LineChartView: View {
 
 @available(iOS 16.0, *)
 struct LineChartView_Previews: PreviewProvider {
-    typealias ChartEntry = Grizzco.LineChartEntry
+    typealias ChartEntry = Grizzco.ChartEntrySet
 
     static let chartData: [ChartEntry] = [
-        ChartEntry(id: .CoopHistory_JobRatio),
-        ChartEntry(id: .CoopHistory_Score),
+        ChartEntry(title: .CoopHistory_JobRatio),
+        ChartEntry(title: .CoopHistory_Score),
     ]
 
     static var previews: some View {
@@ -64,5 +76,15 @@ struct LineChartView_Previews: PreviewProvider {
             LineChartView()
         })
         .preferredColorScheme(.dark)
+    }
+}
+
+extension Array where Element == Grizzco.ChartEntrySet {
+    var maxValue: Double {
+        return self.flatMap({ $0.data.map({ $0.value })}).max() ?? .zero
+    }
+
+    var minValue: Double {
+        return self.flatMap({ $0.data.map({ $0.value })}).min() ?? .zero
     }
 }

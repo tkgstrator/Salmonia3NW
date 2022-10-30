@@ -79,6 +79,10 @@ extension Image {
         }
     }
 
+    init(chart bundle: ChartIconType) {
+        self.init("ChartIconType/\(bundle.rawValue)", bundle: .main)
+    }
+
     init(bundle: RescueType) {
         self.init("RescueType/\(bundle.rawValue)", bundle: .main)
     }

@@ -12,11 +12,15 @@ struct GrizzcoMaximumView: View {
     @ObservedObject var data: Grizzco.Chart.Maximum
 
     var body: some View {
-        ChartView(destination: {
-            EmptyView()
-        }, content: {
+        if #available(iOS 16.0, *) {
+            ChartView(destination: {
+                LineChartView(chartData: data.charts)
+            }, content: {
+                GrizzcoGradeContent(data: data)
+            })
+        } else {
             GrizzcoGradeContent(data: data)
-        })
+        }
     }
 }
 

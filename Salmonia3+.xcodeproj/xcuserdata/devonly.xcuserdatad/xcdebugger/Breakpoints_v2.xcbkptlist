@@ -84,5 +84,117 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "55B026D1-EB8D-4F97-969E-38BEDB7CF04B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
+            landmarkName = "asLineChartEntry(id:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "55B026D1-EB8D-4F97-969E-38BEDB7CF04B - c4aaf50dc6a79125"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swift.Array&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.BinaryFloatingPoint&gt;.asLineChartEntry(id: SplatNet3.LocalizedType) -&gt; Salmonia3_1.Grizzco.ChartEntrySet"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/Salmonia3NW/Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "55B026D1-EB8D-4F97-969E-38BEDB7CF04B - e0c6d92f650c8570"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((offset: Swift.Int, element: &#x3c4;_0_0)) -&gt; Salmonia3_1.Grizzco.ChartEntry in Swift.Array&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.BinaryFloatingPoint&gt;.asLineChartEntry(id: SplatNet3.LocalizedType) -&gt; Salmonia3_1.Grizzco.ChartEntrySet"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/Salmonia3NW/Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F228052C-05D6-4E00-B756-651B4204D0E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "asLineChartEntry(id:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F228052C-05D6-4E00-B756-651B4204D0E2 - cf5db7f439cf196c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swift.Array&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.BinaryInteger&gt;.asLineChartEntry(id: SplatNet3.LocalizedType) -&gt; Salmonia3_1.Grizzco.ChartEntrySet"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/Salmonia3NW/Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "F228052C-05D6-4E00-B756-651B4204D0E2 - c71adf4872cebf58"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((offset: Swift.Int, element: &#x3c4;_0_0)) -&gt; Salmonia3_1.Grizzco.ChartEntry in Swift.Array&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.BinaryInteger&gt;.asLineChartEntry(id: SplatNet3.LocalizedType) -&gt; Salmonia3_1.Grizzco.ChartEntrySet"
+                  moduleName = "Salmonia3.1"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/Salmonia3NW/Salmonia3+/Components/Stats/Chart/GrizzcoChartEntry.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "327"
+                  endingLineNumber = "327"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5CFE77AF-3D10-4E37-9FA1-EF5D462FCC1E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia3+/Components/Stats/Chart/LineChartView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "init(chartData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

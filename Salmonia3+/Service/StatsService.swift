@@ -17,6 +17,7 @@ final class StatsService: ObservableObject {
     @Published var special: Grizzco.Chart.SpecialWeapons = Grizzco.Chart.SpecialWeapons()
     @Published var points: Grizzco.Chart.Point = Grizzco.Chart.Point()
     @Published var scales: Grizzco.Chart.Scale = Grizzco.Chart.Scale()
+    @Published var values: Grizzco.Chart.Values = Grizzco.Chart.Values()
 
     init(startTime: Date?) {
         guard let startTime = startTime,
@@ -33,20 +34,10 @@ final class StatsService: ObservableObject {
         self.points = Grizzco.Chart.Point(results: schedule.results, players: players)
         self.scales = Grizzco.Chart.Scale(results: schedule.results)
         self.special = Grizzco.Chart.SpecialWeapons(players: players)
+        self.values = Grizzco.Chart.Values(results: schedule.results, players: players)
+        print(self.values)
     }
 }
-
-//extension Array where Element: BinaryFloatingPoint {
-//    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
-//        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
-//    }
-//}
-//
-//extension Array where Element: BinaryInteger {
-//    func asLineChartEntry(id: LocalizedType) -> LineChartEntry {
-//        LineChartEntry(id: id, data: self.enumerated().map({ ChartEntry(count: $0.offset, value: $0.element) }))
-//    }
-//}
 
 extension RealmCoopResult {
     var gradePointCrew: Double? {

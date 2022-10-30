@@ -33,6 +33,7 @@
 		100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877828D5F2D9007FCF3C /* NavigationLinker.swift */; };
 		101726FB28F18DE60040F88B /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101726FA28F18DE60040F88B /* StatsService.swift */; };
 		1017C1FA290E9C2A00C238F5 /* GrizzcoOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */; };
+		1017C1FC290EB75200C238F5 /* ChartIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017C1FB290EB75200C238F5 /* ChartIconType.swift */; };
 		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
 		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
 		1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B47B28D665BF002BD1F0 /* Introspect */; };
@@ -174,6 +175,7 @@
 		100E877828D5F2D9007FCF3C /* NavigationLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinker.swift; sourceTree = "<group>"; };
 		101726FA28F18DE60040F88B /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
 		1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoOverview.swift; sourceTree = "<group>"; };
+		1017C1FB290EB75200C238F5 /* ChartIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartIconType.swift; sourceTree = "<group>"; };
 		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
 		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		1018B48228D6B78A002BD1F0 /* Sesison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sesison.swift; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 				1018B4B228DB121C002BD1F0 /* AppStorage.swift */,
 				100E877828D5F2D9007FCF3C /* NavigationLinker.swift */,
 				10F01B4E28EC726000F7A7E2 /* RuleType.swift */,
+				1017C1FB290EB75200C238F5 /* ChartIconType.swift */,
 				10305F89290D5242004103CD /* ChartType.swift */,
 				10A0ACA928DC730F008B332A /* SDWebImage.swift */,
 				10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */,
@@ -902,6 +905,7 @@
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,
+				1017C1FC290EB75200C238F5 /* ChartIconType.swift in Sources */,
 				102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */,
 				10320C6B28D41B8700666F09 /* SplitNavigationViewStyle.swift in Sources */,
 				10A6A19828B7AC1B0075563F /* UserView.swift in Sources */,
