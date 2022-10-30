@@ -10,45 +10,12 @@ import SplatNet3
 import SwiftUIX
 
 struct ScheduleStatsView: View {
-    @StateObject var stats: StatsService
-
-    init(startTime: Date) {
-        self._stats = StateObject(wrappedValue: StatsService(startTime: startTime))
-    }
-
     var body: some View {
         ScrollView(content: {
-            PaginationView(axis: .horizontal, showsIndicators: false, content: {
-                GrizzcoCard(average: stats.average)
-                GrizzcoSPCard(specials: stats.specials)
-                GrizzcoWaveCard(waves: stats.waves)
-            })
-            .cyclesPages(true)
-            .menuIndicator(.hidden)
-            .frame(width: .infinity, height: 160, alignment: .bottom)
-            .overlay(TabSideArray())
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
-                LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-                    GrizzcoHighCard(maximum: stats.maximum, gradePoint: stats.gradePoint)
-                    GrizzcoScaleCard(scale: stats.scale)
-                    switch stats.isRandomShift {
-                    case true:
-                        NavigationLink(destination: {
-                            RandomWeaponView(randoms: stats.randoms)
-                        }, label: {
-                            GrizzcoMainCard(weapon: stats.weapon)
-                        })
-                    case false:
-                        GrizzcoMainCard(weapon: stats.weapon)
-                    }
-                })
-                GrizzcoPointCard(point: stats.point)
-                GrizzcoTeamCardView(stats: stats)
-            })
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5)), count: 2)) {
+            }
         })
         .padding(.horizontal)
-        .refreshableResultScroll()
         .backgroundForResult()
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)

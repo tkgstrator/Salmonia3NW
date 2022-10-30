@@ -18,18 +18,19 @@ struct ScheduleView: View {
         case false:
             if let startTime = schedule.startTime {
                 NavigationLinker(destination: {
-                    ScheduleStatsView(startTime: startTime)
+                    ScheduleStatsView()
+                        .environment(\.startTime, startTime)
                 }, label: {
-                    ScheduleViewWrapper(schedule: schedule)
+                    ScheduleViewElement(schedule: schedule)
                 })
             } else {
-                ScheduleViewWrapper(schedule: schedule)
+                ScheduleViewElement(schedule: schedule)
             }
         }
     }
 }
 
-private struct ScheduleViewWrapper: View {
+private struct ScheduleViewElement: View {
     let schedule: RealmCoopSchedule
 
     let dateFormatter: DateFormatter = {

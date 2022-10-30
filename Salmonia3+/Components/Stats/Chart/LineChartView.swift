@@ -25,7 +25,6 @@ struct LineChartEntry: Identifiable {
 }
 
 struct ChartEntry: Identifiable {
-
     let id: UUID = UUID()
     let count: Int
     let value: Double

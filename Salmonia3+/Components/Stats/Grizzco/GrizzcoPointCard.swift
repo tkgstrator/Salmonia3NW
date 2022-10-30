@@ -10,7 +10,7 @@ import SplatNet3
 
 /// イカリング3形式の黄色いポイントカード
 struct GrizzcoPointCard: View {
-    @ObservedObject var point: Grizzco.PointData
+    @ObservedObject var point: Grizzco.ChartEntry.Point
 
     var body: some View {
         VStack(alignment: .center, spacing: 0, content: {
@@ -136,7 +136,7 @@ struct GrizzcoPointCard: View {
                                 .padding(.bottom, 3)
                                 .frame(height: 30, alignment: .top)
                             Spacer()
-                            Text(String(format: "%d", point.rescueCount))
+                            Text(String(format: "%d", point.helpCount))
                                 .font(systemName: .Splatfont2, size: 13)
                                 .foregroundColor(Color.black)
                                 .frame(height: 30, alignment: .bottom)
@@ -147,91 +147,33 @@ struct GrizzcoPointCard: View {
                             .foregroundColor(Color.black.opacity(0.3))
                             .frame(height: 2)
                     })
-                    Group(content: {
-                        HStack(alignment: .bottom, spacing: 0, content: {
-                            Text(bundle: .CoopHistory_TotalPoint)
-                                .font(systemName: .Splatfont2, size: 11)
-                                .foregroundColor(Color.black.opacity(0.6))
-                                .lineLimit(1)
-                                .padding(.trailing, 4)
-                                .padding(.bottom, 3)
-                                .frame(height: 30, alignment: .top)
-                            Spacer()
-                            Text(String(format: "%d", point.regularPointTotal))
-                                .font(systemName: .Splatfont2, size: 13)
-                                .foregroundColor(Color.black)
-                                .frame(height: 30, alignment: .bottom)
-                        })
-                        .padding(.horizontal, 3)
-                        DashedLine()
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [4]))
-                            .foregroundColor(Color.black.opacity(0.3))
-                            .frame(height: 2)
-                    })
+//                    Group(content: {
+//                        HStack(alignment: .bottom, spacing: 0, content: {
+//                            Text(bundle: .CoopHistory_TotalPoint)
+//                                .font(systemName: .Splatfont2, size: 11)
+//                                .foregroundColor(Color.black.opacity(0.6))
+//                                .lineLimit(1)
+//                                .padding(.trailing, 4)
+//                                .padding(.bottom, 3)
+//                                .frame(height: 30, alignment: .top)
+//                            Spacer()
+//                            Text(String(format: "%d", point.regularPointTotal))
+//                                .font(systemName: .Splatfont2, size: 13)
+//                                .foregroundColor(Color.black)
+//                                .frame(height: 30, alignment: .bottom)
+//                        })
+//                        .padding(.horizontal, 3)
+//                        DashedLine()
+//                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [4]))
+//                            .foregroundColor(Color.black.opacity(0.3))
+//                            .frame(height: 2)
+//                    })
                 })
                 .padding(6)
                 .padding(.bottom, 20)
             })
             .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
         })
-    }
-}
-
-struct GrizzcoPointCard_Previews: PreviewProvider {
-    static let point: Grizzco.PointData = Grizzco.PointData(
-        playCount: 999,
-        ikuraNum: 999999,
-        goldenIkuraNum: 99999,
-        bossKillCount: 999,
-        regularPoint: 999999,
-        regularPointTotal: nil,
-        rescueCount: 9999
-    )
-
-    static let maximum: Grizzco.HighData = Grizzco.HighData(
-        maxGrade: .Eggsecutive_VP,
-        maxGradePoint: 600,
-        averageWaveCleared: 2.75
-    )
-
-    static let scale: Grizzco.ScaleData = Grizzco.ScaleData(
-        gold: 999,
-        silver: 999,
-        bronze: 999
-    )
-
-    static let average: Grizzco.AverageData = Grizzco.AverageData(
-        weaponList: Array(WeaponType.allCases.shuffled().prefix(4)),
-        rareWeapon: WeaponType.Stringer_Bear_Coop,
-        ikuraNum: 9999.9,
-        goldenIkuraNum: 999.9,
-        helpCount: 99.9,
-        deadCount: 99.9
-    )
-
-    enum XcodePreviewDevice: String, CaseIterable {
-        case iPhone13Pro = "iPhone 13 Pro"
-        case iPadPro = "iPad Pro"
-    }
-
-    static var previews: some View {
-        ScrollView(content: {
-            TabView(content: {
-                GrizzcoCard(average: average)
-                GrizzcoCard(average: average)
-            })
-            .frame(width: .infinity, height: 160, alignment: .bottom)
-            .overlay(TabSideArray())
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2), content: {
-                LazyVGrid(columns: [.init(.flexible())], spacing: 10, content: {
-//                    GrizzcoHighCard(maximum: maximum)
-                    GrizzcoScaleCard(scale: scale)
-                })
-                GrizzcoPointCard(point: point)
-            })
-        })
-//        .preferredColorScheme(.dark)
     }
 }
 

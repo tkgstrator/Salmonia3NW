@@ -89,7 +89,7 @@ struct FullScreen<Content: View>: UIViewControllerRepresentable {
     }
 
     // This custom view controller
-    final class ViewController<Content: View>: UIViewController {
+    final class ViewController<Content: View>: UIViewController, UIGestureRecognizerDelegate {
         let coordinator: FullScreen<Content>.Coordinator
         let hosting: UIHostingController<Content>
         let transitionStyle: UIModalTransitionStyle
@@ -113,6 +113,10 @@ struct FullScreen<Content: View>: UIViewControllerRepresentable {
             self.userInterfaceStyle = colorScheme
             super.init(nibName: nil, bundle: .main)
             self.isModalInPresentation = isModalInPresentation
+        }
+
+        @objc func tapped(sender: UITapGestureRecognizer) {
+            coordinator.parent.isPresented.toggle()
         }
 
         required init?(coder: NSCoder) {
@@ -139,6 +143,11 @@ struct FullScreen<Content: View>: UIViewControllerRepresentable {
             hosting.view.backgroundColor = backgroundColor
             hosting.overrideUserInterfaceStyle = userInterfaceStyle
             hosting.presentationController?.delegate = coordinator as UIAdaptivePresentationControllerDelegate
+
+            // 個別の設定
+            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+            gesture.delegate = self
+            hosting.view.addGestureRecognizer(gesture)
 
             if let _ = presentedViewController?.isBeingPresented {} else {
                 present(hosting, animated: true, completion: nil)

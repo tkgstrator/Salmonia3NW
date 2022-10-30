@@ -10,11 +10,7 @@ import SplatNet3
 
 struct GrizzcoSPCard: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let specials: [Grizzco.SpecialData]
-
-    public init(specials: [Grizzco.SpecialData]) {
-        self.specials = specials
-    }
+    let specials: [Grizzco.ChartEntry.SpecialWeapons]
     
     var body: some View {
         ZStack(alignment: .center, content: {
@@ -26,20 +22,20 @@ struct GrizzcoSPCard: View {
                     .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                 Spacer()
                 LazyVGrid(columns: Array(repeating: .init(.flexible(), alignment: .leading), count: 3), content: {
-                    ForEach(specials, id: \.specialId) { special in
-                        HStack(content: {
-                            Image(bundle: special.specialId)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 23, height: 23, alignment: .center)
-                                .background(RoundedRectangle(cornerRadius: 4).fill(special.color))
-                            Spacer()
-                            Text(String(format: "%.2f%%", special.percent))
-                                .font(systemName: .Splatfont2, size: 14)
-                                .foregroundColor(SPColor.SplatNet2.SPWhite)
-                                .shadow(color: Color.black, radius: 0, x: 1, y: 1)
-                        })
-                    }
+//                    ForEach(specials, id: \.specialId) { special in
+//                        HStack(content: {
+//                            Image(bundle: special.specialId)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 23, height: 23, alignment: .center)
+//                                .background(RoundedRectangle(cornerRadius: 4).fill(special.color))
+//                            Spacer()
+//                            Text(String(format: "%.2f%%", special.percent))
+//                                .font(systemName: .Splatfont2, size: 14)
+//                                .foregroundColor(SPColor.SplatNet2.SPWhite)
+//                                .shadow(color: Color.black, radius: 0, x: 1, y: 1)
+//                        })
+//                    }
                 })
             })
             .padding(.top, 27)

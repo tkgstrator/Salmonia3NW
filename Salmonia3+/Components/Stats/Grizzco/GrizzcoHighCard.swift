@@ -9,33 +9,24 @@ import SwiftUI
 import SplatNet3
 
 struct GrizzcoHighCard: View {
-    @State private var isPresented: Bool = false
-    let maximum: Grizzco.HighData
-    let gradePoint: [LineChartEntry]
+    let startTime: Date
+    @ObservedObject var data: Grizzco.ChartEntry.Maximum
 
     var body: some View {
-        if #available(iOS 16.0, *) {
-            Button(action: {
-                isPresented.toggle()
-            }, label: {
-                GrizzcoHighCardWrapper(maximum: maximum)
-            })
-            .fullScreen(isPresented: $isPresented, transitionStyle: .flipHorizontal, backgroundColor: .clear, content: {
-                LineChartView(chartData: gradePoint)
-                    .preferredColorScheme(.dark)
-                    .onTapGesture(perform: {
-                        isPresented.toggle()
-                    })
-            })
-        } else {
-            GrizzcoHighCardWrapper(maximum: maximum)
-        }
+        ChartView(destination: {
+            EmptyView()
+        }, content: {
+            GrizzcoGradeContent(maximum: data)
+        })
+        .onAppear(perform: {
+            print(startTime)
+        })
     }
 }
 
 /// イカリング3形式の最高値表示カード
-private struct GrizzcoHighCardWrapper: View {
-    let maximum: Grizzco.HighData
+struct GrizzcoGradeContent: View {
+    let maximum: Grizzco.ChartEntry.Maximum
     
     var body: some View {
         ZStack(alignment: .center, content: {

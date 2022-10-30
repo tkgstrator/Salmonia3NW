@@ -13,6 +13,18 @@ enum ResultStyle: CaseIterable {
     case SPLATNET3
 }
 
+struct ModalTransitionStyleKey: EnvironmentKey {
+    typealias Value = UIModalTransitionStyle
+
+    static var defaultValue: UIModalTransitionStyle = .coverVertical
+}
+
+struct StartTimeKey: EnvironmentKey {
+    typealias Value = Date?
+
+    static var defaultValue: Date? = nil
+}
+
 struct ResultFormatType: EnvironmentKey {
     typealias Value = ResultStyle
 
@@ -102,5 +114,15 @@ extension EnvironmentValues {
     var selection: Binding<String> {
         get { self[TabSelectionKey.self] }
         set { self[TabSelectionKey.self] = newValue }
+    }
+
+    var startTime: Date? {
+        get { self[StartTimeKey.self] }
+        set { self[StartTimeKey.self] = newValue }
+    }
+
+    var transitionStyle: UIModalTransitionStyle {
+        get { self[ModalTransitionStyleKey.self] }
+        set { self[ModalTransitionStyleKey.self] = newValue }
     }
 }

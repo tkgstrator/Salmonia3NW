@@ -67,6 +67,8 @@
 		10305F92290D87E1004103CD /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 10305F91290D87E1004103CD /* SwiftUIX */; };
 		10305F98290D9703004103CD /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F97290D9703004103CD /* LineChartView.swift */; };
 		10305F9A290DFFF9004103CD /* GradePointChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F99290DFFF9004103CD /* GradePointChart.swift */; };
+		10305F9F290E6995004103CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F9E290E6995004103CD /* ChartView.swift */; };
+		10305FA1290E71F5004103CD /* GrizzcoChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
@@ -208,6 +210,8 @@
 		10305F8E290D81BC004103CD /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		10305F97290D9703004103CD /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		10305F99290DFFF9004103CD /* GradePointChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePointChart.swift; sourceTree = "<group>"; };
+		10305F9E290E6995004103CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoChartEntry.swift; sourceTree = "<group>"; };
 		1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangle.swift; sourceTree = "<group>"; };
 		1031877D28FC0066005AFBB9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
@@ -474,6 +478,7 @@
 				10305F95290D96B4004103CD /* Chart */,
 				1031F6AA2902AC0200E15E8D /* Sakelien */,
 				1031F65A28FF8C4300E15E8D /* Grizzco */,
+				10305F9E290E6995004103CD /* ChartView.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 			children = (
 				10305F97290D9703004103CD /* LineChartView.swift */,
 				10305F99290DFFF9004103CD /* GradePointChart.swift */,
+				10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -878,6 +884,7 @@
 				1018B49A28D71B64002BD1F0 /* NSOCircle.swift in Sources */,
 				1001B4E228E702BB00A370FD /* DismissModalAction.swift in Sources */,
 				10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */,
+				10305FA1290E71F5004103CD /* GrizzcoChartEntry.swift in Sources */,
 				10305F98290D9703004103CD /* LineChartView.swift in Sources */,
 				100E874E28D4AC66007FCF3C /* ResultsView.swift in Sources */,
 				1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */,
@@ -913,6 +920,7 @@
 				10F01B4F28EC726000F7A7E2 /* RuleType.swift in Sources */,
 				1018B4A728D87B05002BD1F0 /* DeleteConfirmView.swift in Sources */,
 				1018B4A928D9F1FC002BD1F0 /* SalmonLogo.swift in Sources */,
+				10305F9F290E6995004103CD /* ChartView.swift in Sources */,
 				1001B4E028E7023000A370FD /* FullScreenViewModifier.swift in Sources */,
 				1018B48F28D6E607002BD1F0 /* ResultLoadingView.swift in Sources */,
 				100E875F28D4E47B007FCF3C /* Hanger.swift in Sources */,
