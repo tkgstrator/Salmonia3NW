@@ -8,16 +8,16 @@
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoCard: View {
-    let average: Grizzco.Chart.Average
+struct GrizzcoAverageView: View {
+    @ObservedObject var data: Grizzco.Chart.Average
 
     var body: some View {
         ZStack(alignment: .center, content: {
             SPColor.SplatNet2.SPRed
             VStack(alignment: .center, spacing: 0, content: {
-                GrizzcoScheduleView(average: average)
+                GrizzcoScheduleView(data: data)
                 Spacer()
-                GrizzcoAverageView(average: average)
+                GrizzcoAverageContent(data: data)
             })
             .padding(.top, 27)
             .padding(.bottom, 15)
@@ -29,7 +29,7 @@ struct GrizzcoCard: View {
 }
 
 private struct GrizzcoScheduleView: View {
-    let average: Grizzco.Chart.Average
+    @ObservedObject var data: Grizzco.Chart.Average
 
     var body: some View {
         VStack(alignment: .center, spacing: 0, content: {
@@ -38,16 +38,16 @@ private struct GrizzcoScheduleView: View {
                 .foregroundColor(Color.white)
                 .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                 .padding(.bottom, 8)
-            let count: Int = average.rareWeapon == nil ? 4 : 5
+            let count: Int = data.rareWeapon == nil ? 4 : 5
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 36)), count: count), content: {
-                ForEach(average.weaponList.indices, id: \.self) { index in
-                    let weaponId: WeaponType = average.weaponList[index]
+                ForEach(data.weaponList.indices, id: \.self) { index in
+                    let weaponId: WeaponType = data.weaponList[index]
                     Image(bundle: weaponId)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 36, height: 36, alignment: .center)
                 }
-                if let rareWeapon = average.rareWeapon {
+                if let rareWeapon = data.rareWeapon {
                     Image(bundle: rareWeapon)
                         .resizable()
                         .scaledToFit()
@@ -58,8 +58,8 @@ private struct GrizzcoScheduleView: View {
     }
 }
 
-private struct GrizzcoAverageView: View {
-    let average: Grizzco.Chart.Average
+private struct GrizzcoAverageContent: View {
+    @ObservedObject var data: Grizzco.Chart.Average
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
@@ -79,7 +79,7 @@ private struct GrizzcoAverageView: View {
                             .scaledToFit()
                             .frame(width: 18, height: 18, alignment: .center)
                             .frame(maxWidth: 24)
-                        Text(String(format: "x%.1f", average.goldenIkuraNum))
+                        Text(String(format: "x%.1f", data.goldenIkuraNum))
                             .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                     })
                     Spacer()
@@ -89,7 +89,7 @@ private struct GrizzcoAverageView: View {
                             .scaledToFit()
                             .frame(width: 41.75, height: 16, alignment: .center)
                             .frame(maxWidth: 41.75)
-                        Text(String(format: "x%.1f", average.helpCount))
+                        Text(String(format: "x%.1f", data.helpCount))
                             .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                     })
                     Spacer()
@@ -99,7 +99,7 @@ private struct GrizzcoAverageView: View {
                             .scaledToFit()
                             .frame(width: 41.75, height: 16, alignment: .center)
                             .frame(maxWidth: 41.75)
-                        Text(String(format: "x%.1f", average.deadCount))
+                        Text(String(format: "x%.1f", data.deadCount))
                             .shadow(color: Color.black, radius: 0, x: 1, y: 1)
                     })
                 })

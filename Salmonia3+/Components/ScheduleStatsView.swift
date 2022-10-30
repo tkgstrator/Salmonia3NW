@@ -18,6 +18,7 @@ struct ScheduleStatsView: View {
 
     var body: some View {
         ScrollView(content: {
+            GrizzcoOverview(stats: stats)
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2)) {
                 LazyVGrid(columns: [.init(.flexible())], content: {
                     GrizzcoMaximumView(data: stats.maximum)

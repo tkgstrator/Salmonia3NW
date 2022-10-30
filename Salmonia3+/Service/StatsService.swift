@@ -14,6 +14,7 @@ final class StatsService: ObservableObject {
     @Published var average: Grizzco.Chart.Average = Grizzco.Chart.Average()
     @Published var maximum: Grizzco.Chart.Maximum = Grizzco.Chart.Maximum()
     @Published var weapons: Grizzco.Chart.Weapons = Grizzco.Chart.Weapons()
+    @Published var special: Grizzco.Chart.SpecialWeapons = Grizzco.Chart.SpecialWeapons()
     @Published var points: Grizzco.Chart.Point = Grizzco.Chart.Point()
     @Published var scales: Grizzco.Chart.Scale = Grizzco.Chart.Scale()
 
@@ -31,6 +32,7 @@ final class StatsService: ObservableObject {
         self.weapons = Grizzco.Chart.Weapons(schedule: schedule, players: players)
         self.points = Grizzco.Chart.Point(results: schedule.results, players: players)
         self.scales = Grizzco.Chart.Scale(results: schedule.results)
+        self.special = Grizzco.Chart.SpecialWeapons(players: players)
     }
 }
 

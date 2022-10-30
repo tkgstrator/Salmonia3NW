@@ -32,6 +32,7 @@
 		100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877628D5B687007FCF3C /* ResultSpecial.swift */; };
 		100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100E877828D5F2D9007FCF3C /* NavigationLinker.swift */; };
 		101726FB28F18DE60040F88B /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101726FA28F18DE60040F88B /* StatsService.swift */; };
+		1017C1FA290E9C2A00C238F5 /* GrizzcoOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */; };
 		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
 		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
 		1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B47B28D665BF002BD1F0 /* Introspect */; };
@@ -108,7 +109,7 @@
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
 		10E3191B28F226D0009C6BBC /* ScheduleStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */; };
-		10E3191F28F2602A009C6BBC /* GrizzcoSPCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */; };
+		10E3191F28F2602A009C6BBC /* GrizzcoSpecialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191E28F2602A009C6BBC /* GrizzcoSpecialView.swift */; };
 		10E3192328F271F9009C6BBC /* Ark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3192228F271F9009C6BBC /* Ark.swift */; };
 		10F01B4728EB1B1A00F7A7E2 /* splatoon1chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4428EB157D00F7A7E2 /* splatoon1chzh.ttf */; };
 		10F01B4828EB1B1A00F7A7E2 /* splatoon1jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10F01B4328EB157D00F7A7E2 /* splatoon1jpja.ttf */; };
@@ -172,6 +173,7 @@
 		100E877628D5B687007FCF3C /* ResultSpecial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSpecial.swift; sourceTree = "<group>"; };
 		100E877828D5F2D9007FCF3C /* NavigationLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinker.swift; sourceTree = "<group>"; };
 		101726FA28F18DE60040F88B /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
+		1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoOverview.swift; sourceTree = "<group>"; };
 		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
 		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		1018B48228D6B78A002BD1F0 /* Sesison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sesison.swift; sourceTree = "<group>"; };
@@ -247,7 +249,7 @@
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10E3191228F1EC91009C6BBC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStatsView.swift; sourceTree = "<group>"; };
-		10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoSPCard.swift; sourceTree = "<group>"; };
+		10E3191E28F2602A009C6BBC /* GrizzcoSpecialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoSpecialView.swift; sourceTree = "<group>"; };
 		10E3192228F271F9009C6BBC /* Ark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ark.swift; sourceTree = "<group>"; };
 		10F01B4128EB157C00F7A7E2 /* splatoon2twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2twzh.ttf; sourceTree = "<group>"; };
 		10F01B4228EB157D00F7A7E2 /* splatoon2chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2chzh.ttf; sourceTree = "<group>"; };
@@ -533,9 +535,10 @@
 				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
 				1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */,
 				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
-				10E3191E28F2602A009C6BBC /* GrizzcoSPCard.swift */,
+				10E3191E28F2602A009C6BBC /* GrizzcoSpecialView.swift */,
 				102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */,
 				102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */,
+				1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */,
 			);
 			path = Grizzco;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */,
 				10305F9A290DFFF9004103CD /* GradePointChart.swift in Sources */,
+				1017C1FA290E9C2A00C238F5 /* GrizzcoOverview.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
 				100E877928D5F2D9007FCF3C /* NavigationLinker.swift in Sources */,
@@ -894,7 +898,7 @@
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
 				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
-				10E3191F28F2602A009C6BBC /* GrizzcoSPCard.swift in Sources */,
+				10E3191F28F2602A009C6BBC /* GrizzcoSpecialView.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,

@@ -121,7 +121,7 @@ enum Grizzco {
             /// 推定コンプリート回数
             @Published var estimateCompleteCount: Int?
             /// データ
-            @Published var entries: [WeaponEntry] = []
+            @Published var entries: [Entry] = []
             /// ランダム編成かどうか
             @Published var isRandom: Bool = false
 
@@ -133,7 +133,7 @@ enum Grizzco {
                 self.entries = self.isRandom ? [] : players.suppliedWeaponEntry
             }
 
-            struct WeaponEntry: Identifiable {
+            struct Entry: Identifiable {
                 let id: WeaponType
                 let count: Int? = nil
                 let percent: Double? = nil
@@ -141,14 +141,24 @@ enum Grizzco {
         }
 
         class SpecialWeapons: ObservableObject {
-            @Published var entries: [WeaponEntry] = []
+            @Published var entries: [Entry] = []
 
             init() {}
 
-            struct WeaponEntry: Identifiable {
-                let id: WeaponType
-                let count: Int? = nil
-                let percent: Double? = nil
+            init(players: RealmSwift.Results<RealmCoopPlayer>) {
+                self.entries = players.suppliedSpecialEntry
+            }
+
+            struct Entry: Identifiable {
+                let id: SpecialType
+                let count: Int?
+                let percent: Double?
+
+                init(id: SpecialType, count: Int? = nil, percent: Double? = nil) {
+                    self.id = id
+                    self.count = count
+                    self.percent = percent
+                }
             }
         }
 
@@ -225,13 +235,24 @@ extension Array where Element: Hashable {
 }
 
 extension RealmSwift.Results where Element == RealmCoopPlayer {
-    typealias Entry = Grizzco.Chart.Weapons.WeaponEntry
+    typealias WeaponEntry = Grizzco.Chart.Weapons.Entry
+    typealias SpecialEntry = Grizzco.Chart.SpecialWeapons.Entry
+
     fileprivate var suppliedWeapons: Set<WeaponType> {
         Set(self.flatMap({ Array($0.weaponList) }))
     }
 
-    fileprivate var suppliedWeaponEntry: [Entry] {
+    fileprivate var suppliedWeaponEntry: [WeaponEntry] {
         let suppliedWeapons: [WeaponType] = self.flatMap({ Array($0.weaponList) })
-        return suppliedWeapons.count().map({ Entry(id: $0.element) })
+        return suppliedWeapons.count().map({ WeaponEntry(id: $0.element) })
+    }
+
+    fileprivate var suppliedSpecialEntry: [SpecialEntry] {
+        let specialList: [SpecialType] = Array(SpecialType.allCases.dropFirst())
+        let suppliedSpecials: [SpecialType] = self.compactMap({ $0.specialId })
+        if suppliedSpecials.count == .zero {
+            return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: nil, percent: nil) })
+        }
+        return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: $0.count, percent: Double($0.count) / Double(suppliedSpecials.count) * 100) })
     }
 }

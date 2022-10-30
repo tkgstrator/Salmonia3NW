@@ -22,7 +22,7 @@ struct GrizzcoWeaponView: View {
 
 private struct GrizzcoWeaponContent: View {
     @ObservedObject var data: Grizzco.Chart.Weapons
-    typealias Entry = Grizzco.Chart.Weapons.WeaponEntry
+    typealias Entry = Grizzco.Chart.Weapons.Entry
 
     var body: some View {
         ZStack(alignment: .center, content: {
