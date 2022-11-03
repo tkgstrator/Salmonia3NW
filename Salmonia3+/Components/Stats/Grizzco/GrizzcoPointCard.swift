@@ -12,7 +12,7 @@ struct GrizzcoPointView: View {
     @ObservedObject var data: Grizzco.Chart.Point
 
     var body: some View {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *), !data.charts.isEmpty {
             ChartView(destination: {
                 LineChartView(chartData: data.charts)
             }, content: {

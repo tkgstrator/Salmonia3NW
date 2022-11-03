@@ -46,6 +46,8 @@ struct LineChartView: View {
                         .interpolationMethod(.stepStart)
                     }
                     .foregroundStyle(by: .value("Type", series.title.localized))
+//                    RuleMark(y: .value("Average", series.average()))
+//                        .foregroundStyle(.red)
                 }
             })
 //            .chartXAxis {

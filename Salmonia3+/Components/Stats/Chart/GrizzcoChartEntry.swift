@@ -14,6 +14,10 @@ public enum Grizzco {
         @Published var title: LocalizedType = .CoopHistory_Title
         @Published var data: [ChartEntry] = []
 
+        func average() -> Double {
+            self.data.compactMap({ $0.value }).reduce(0, +) / Double(data.count)
+        }
+
         init(title: LocalizedType) {
             self.title = title
             self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
@@ -102,7 +106,7 @@ public enum Grizzco {
                 self.maxGradePoint = results.filter("grade=%@", maxGrade).max(ofProperty: "gradePoint")
                 self.averageWaveCleared = results.averageWaveCleared
                 self.charts = [
-                    results.compactMap({ $0.gradePoint }).asLineChartEntry(id: .CoopHistory_JobRatio),
+                    results.compactMap({ $0.dangerRate == .zero ? nil : $0.gradePoint }).asLineChartEntry(id: .CoopHistory_JobRatio),
                     results.compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .CoopHistory_Score)
                 ]
             }
@@ -192,12 +196,29 @@ public enum Grizzco {
 
             init(results: RealmSwift.List<RealmCoopResult>,players: RealmSwift.Results<RealmCoopPlayer>) {
                 self.goldenIkuraNum = [
-                    ValueEntry(title: .CoopHistory_GoldenDeliverCount, id: .Solo, icon: .GoldenIkura, values: players.map({ $0.goldenIkuraNum })),
-                    ValueEntry(title: .CoopHistory_GoldenDeliverCount, id: .Team, icon: .GoldenIkura, values: results.map({ $0.goldenIkuraNum }))
+                    ValueEntry(
+                        title: .CoopHistory_GoldenDeliverCount,
+                        id: .Solo,
+                        icon: .GoldenIkura,
+                        values: players.map({ $0.goldenIkuraNumPerWave })
+                    ),
+                    ValueEntry(
+                        title: .CoopHistory_GoldenDeliverCount,
+                        id: .Team,
+                        icon: .GoldenIkura,
+                        values: results.map({ $0.goldenIkuraNumPerWave }))
                 ]
                 self.ikuraNum = [
-                    ValueEntry(title: .CoopHistory_DeliverCount, id: .Solo, icon: .Ikura, values: players.map({ $0.ikuraNum })),
-                    ValueEntry(title: .CoopHistory_DeliverCount, id: .Team, icon: .Ikura, values: results.map({ $0.ikuraNum }))
+                    ValueEntry(
+                        title: .CoopHistory_DeliverCount,
+                        id: .Solo,
+                        icon: .Ikura,
+                        values: players.map({ $0.ikuraNumPerWave })),
+                    ValueEntry(
+                        title: .CoopHistory_DeliverCount,
+                        id: .Team,
+                        icon: .Ikura,
+                        values: results.map({ $0.ikuraNumPerWave }))
                 ]
                 self.helpCount = [
                     ValueEntry(title: .CoopHistory_RescueCount, id: .Solo, icon: .Ikura, values: players.map({ $0.helpCount }))
@@ -215,9 +236,10 @@ public enum Grizzco {
                 @Published var avgValue: Double? = nil
                 @Published var charts: Grizzco.ChartEntrySet
 
-                init<T: BinaryInteger>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T]) {
+                init<T: BinaryInteger>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T?]) {
                     self.type = id
                     self.icon = icon
+                    let values: [T] = values.compactMap({ $0 })
                     self.maxValue = {
                         if let maxValue = values.max() {
                             return Int(maxValue)
@@ -228,9 +250,10 @@ public enum Grizzco {
                     self.charts = values.asLineChartEntry(id: title)
                 }
 
-                init<T: BinaryFloatingPoint>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T]) {
+                init<T: BinaryFloatingPoint>(title: LocalizedType, id: ChartType, icon: ChartIconType, values: [T?]) {
                     self.type = id
                     self.icon = icon
+                    let values: [T] = values.compactMap({ $0 })
                     self.maxValue = {
                         if let maxValue = values.max() {
                             return Int(maxValue)
@@ -325,5 +348,52 @@ extension Array where Element: BinaryFloatingPoint {
 extension Array where Element: BinaryInteger {
     func asLineChartEntry(id: LocalizedType) -> Grizzco.ChartEntrySet {
         Grizzco.ChartEntrySet(title: id, data: self.enumerated().map({ Grizzco.ChartEntry(count: $0.offset, value: $0.element) }))
+    }
+}
+
+extension RealmCoopPlayer {
+    var goldenIkuraNumPerWave: Double? {
+        if self.specialCounts.count == .zero {
+            return nil
+        }
+        return Double(self.goldenIkuraNum) * 3 / Double(self.specialCounts.count)
+    }
+
+    var ikuraNumPerWave: Double? {
+        if self.specialCounts.count == .zero {
+            return nil
+        }
+        let ikuraNum: Double = Double(self.ikuraNum) * 3 / Double(self.specialCounts.count)
+        print(self.ikuraNum, ikuraNum, self.specialCounts.count)
+        return ikuraNum
+    }
+}
+
+extension RealmCoopResult {
+    var goldenIkuraNumPerWave: Double? {
+        if self.waves.count == .zero {
+            return nil
+        }
+        return Double(self.goldenIkuraNum) * 3 / Double(self.waves.count)
+    }
+
+    var ikuraNumPerWave: Double? {
+        if self.waves.count == .zero {
+            return nil
+        }
+        return Double(self.ikuraNum) * 3 / Double(self.waves.count)
+    }
+}
+
+extension RealmCoopResult {
+    var gradePointCrew: Double? {
+        guard let grade = self.grade,
+              let gradePoint = self.gradePoint else {
+            return nil
+        }
+        if self.dangerRate == .zero {
+            return nil
+        }
+        return (self.dangerRate * 100 * 5 * 4 - Double(grade.rawValue * 100 + gradePoint)) / 3 - Double(grade.rawValue * 100)
     }
 }

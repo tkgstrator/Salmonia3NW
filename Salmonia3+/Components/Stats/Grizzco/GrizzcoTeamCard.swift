@@ -14,7 +14,7 @@ struct GrizzcoTeamView: View {
     var body: some View {
         Group(content: {
             ForEach(data.ikuraNum) { value in
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
                     ChartView(destination: {
                         LineChartView(chartData: value.charts)
                     }, content: {
@@ -25,7 +25,7 @@ struct GrizzcoTeamView: View {
                 }
             }
             ForEach(data.goldenIkuraNum) { value in
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
                     ChartView(destination: {
                         LineChartView(chartData: value.charts)
                     }, content: {

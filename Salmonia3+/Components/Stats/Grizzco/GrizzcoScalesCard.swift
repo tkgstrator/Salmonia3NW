@@ -12,7 +12,7 @@ struct GrizzcoScaleView: View {
     @ObservedObject var data: Grizzco.Chart.Scale
 
     var body: some View {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *), false {
             ChartView(destination: {
                 EmptyView()
             }, content: {

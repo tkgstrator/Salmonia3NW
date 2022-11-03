@@ -12,7 +12,7 @@ struct GrizzcoMaximumView: View {
     @ObservedObject var data: Grizzco.Chart.Maximum
 
     var body: some View {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *), !data.charts.isEmpty {
             ChartView(destination: {
                 LineChartView(chartData: data.charts)
             }, content: {

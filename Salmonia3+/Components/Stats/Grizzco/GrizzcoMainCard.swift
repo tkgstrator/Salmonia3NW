@@ -12,7 +12,7 @@ struct GrizzcoWeaponView: View {
     @ObservedObject var data: Grizzco.Chart.Weapons
 
     var body: some View {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *), !data.entries.isEmpty {
             ChartView(destination: {
                 EmptyView()
             }, content: {

@@ -35,20 +35,8 @@ final class StatsService: ObservableObject {
         self.scales = Grizzco.Chart.Scale(results: schedule.results)
         self.special = Grizzco.Chart.SpecialWeapons(players: players)
         self.values = Grizzco.Chart.Values(results: schedule.results, players: players)
-        print(self.values)
     }
 }
-
-extension RealmCoopResult {
-    var gradePointCrew: Double? {
-        guard let grade = self.grade,
-              let gradePoint = self.gradePoint else {
-            return nil
-        }
-        return (self.dangerRate * 100 * 5 * 4 - Double(grade.rawValue * 100 + gradePoint)) / 3 - Double(grade.rawValue * 100)
-    }
-}
-
 
 extension Collection where Self.Iterator.Element: RandomAccessCollection {
     // PRECONDITION: `self` must be rectangular, i.e. every row has equal size.
