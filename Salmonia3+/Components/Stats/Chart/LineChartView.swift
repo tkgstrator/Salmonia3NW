@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import Charts
 import SplatNet3
+import Charts
 
 @available(iOS 16.0, *)
 struct LineChartView: View {
