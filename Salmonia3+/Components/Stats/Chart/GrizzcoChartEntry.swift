@@ -18,6 +18,14 @@ public enum Grizzco {
             self.data.compactMap({ $0.value }).reduce(0, +) / Double(data.count)
         }
 
+        func max() -> Double {
+            self.data.compactMap({ $0.value }).max(by: { $0 < $1 }) ?? .zero
+        }
+
+        func min() -> Double {
+            self.data.compactMap({ $0.value }).min(by: { $0 < $1 }) ?? .zero
+        }
+
         init(title: LocalizedType) {
             self.title = title
             self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
@@ -148,8 +156,14 @@ public enum Grizzco {
 
             struct Entry: Identifiable {
                 let id: WeaponType
-                let count: Int? = nil
-                let percent: Double? = nil
+                let count: Int?
+                let percent: Double?
+
+                init(id: WeaponType, count: Int? = nil, percent: Double? = nil) {
+                    self.id = id
+                    self.count = count
+                    self.percent = percent
+                }
             }
         }
 
@@ -216,7 +230,7 @@ public enum Grizzco {
                         id: .Solo,
                         icon: .Ikura,
                         values: players.map({ $0.ikuraNum }),
-                            waves: players.map({ $0.ikuraNumPerWave })),
+                        waves: players.map({ $0.ikuraNumPerWave })),
                     ValueEntry(
                         title: .CoopHistory_DeliverCount,
                         id: .Team,
@@ -258,7 +272,10 @@ public enum Grizzco {
                         return nil
                     }()
                     let values: [S] = waves.compactMap({ $0 })
-                    self.avgValue = values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    self.avgValue = {
+                        if values.isEmpty { return nil }
+                        return values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    }()
                     self.charts = values.asLineChartEntry(id: title)
                 }
 
@@ -272,7 +289,10 @@ public enum Grizzco {
                         }
                         return nil
                     }()
-                    self.avgValue = values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    self.avgValue = {
+                        if values.isEmpty { return nil }
+                        return values.map({ Double($0) }).reduce(0, +) / Double(values.count)
+                    }()
                     self.charts = values.asLineChartEntry(id: title)
                 }
             }
@@ -338,7 +358,13 @@ extension RealmSwift.Results where Element == RealmCoopPlayer {
 
     fileprivate var suppliedWeaponEntry: [WeaponEntry] {
         let suppliedWeapons: [WeaponType] = self.flatMap({ Array($0.weaponList) })
-        return suppliedWeapons.count().map({ WeaponEntry(id: $0.element) })
+        let count: Int = suppliedWeapons.count
+        return suppliedWeapons.count().map({
+            WeaponEntry(
+                id: $0.element,
+                count: $0.count,
+                percent:  $0.count == .zero ? nil : Double($0.count) / Double(count) * 100)
+        })
     }
 
     fileprivate var suppliedSpecialEntry: [SpecialEntry] {
@@ -375,9 +401,7 @@ extension RealmCoopPlayer {
         if self.specialCounts.count == .zero {
             return nil
         }
-        let ikuraNum: Double = Double(self.ikuraNum) * 3 / Double(self.specialCounts.count)
-        print(self.ikuraNum, ikuraNum, self.specialCounts.count)
-        return ikuraNum
+        return Double(self.ikuraNum) * 3 / Double(self.specialCounts.count)
     }
 }
 

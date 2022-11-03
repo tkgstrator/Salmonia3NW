@@ -50,6 +50,8 @@ struct LineChartView: View {
 //                        .foregroundStyle(.red)
                 }
             })
+            .chartYScale(domain: chartData.minValue ... chartData.maxValue)
+            .chartXScale(domain: 0 ... (chartData.first?.data.count ?? 0))
 //            .chartXAxis {
 //                AxisMarks(values: xAxis)
 //            }
