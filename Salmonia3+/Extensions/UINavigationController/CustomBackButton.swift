@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SplatNet3
 import Introspect
 
 private struct CustomBackButton: ViewModifier {
@@ -35,7 +36,7 @@ private struct CustomBackButton: ViewModifier {
                 nvc.navigationBar.backIndicatorImage = UIImage()
                 nvc.navigationBar.backIndicatorTransitionMaskImage = UIImage()
                 nvc.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(named: "ButtonType/BackArrow"), primaryAction: nil, menu: nil)
-                nvc.navigationBar.tintColor = colorScheme == .dark ? .white : .black
+                nvc.navigationBar.tintColor = UIColor(SPColor.SplatNet2.SPOrange)
             })
     }
 }

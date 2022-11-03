@@ -41,7 +41,7 @@ private struct ResultSplatNet3: View {
                     .renderingMode(.template)
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(isBossDefeated ? SPColor.SplatNet3.SPYellow : SPColor.SplatNet3.SPRed)
+                    .foregroundColor(isBossDefeated ? SPColor.SplatNet3.SPYellow : SPColor.SplatNet2.SPWhite)
                     .frame(height: 40)
                     .padding(.trailing, 8)
             }

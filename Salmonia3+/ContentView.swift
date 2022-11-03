@@ -64,7 +64,7 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $isFirstLaunch , content: {
             TutorialView()
         })
-        .accentColor(.orange)
+        .accentColor(SPColor.SplatNet2.SPOrange)
         .tabViewStyle(.automatic)
     }
 }

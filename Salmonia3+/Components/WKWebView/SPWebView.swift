@@ -203,6 +203,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
 
     /// GTokenを利用してイカリング3を読み込む
     private func loadWithGToken(gtoken: String) {
+        print(gtoken)
         var baseURL: URL = URL(unsafeString: "https://api.lp1.av5ja.srv.nintendo.net/")
 
         let queryItems: [URLQueryItem] = [
