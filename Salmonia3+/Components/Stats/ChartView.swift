@@ -8,6 +8,7 @@
 import SwiftUI
 
 /// チャートにジャンプできるView
+@available(iOS 16.0, *)
 struct ChartView<Content: View, Destination: View>: View {
     @State private var isPresented: Bool = false
     let destination: () -> Destination
