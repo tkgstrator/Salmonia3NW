@@ -194,9 +194,7 @@ enum IconList {
                 .alert(isPresented: $isPresented, title: Text(bundle: .StageSchedule_Title), message: Text(bundle: .Widgets_Loading), confirm: {
                     Task {
                         let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
-                        DispatchQueue.main.async(execute: {
-                            RealmService.shared.save(schedules)
-                        })
+                        RealmService.shared.save(schedules)
                     }
                 })
         }

@@ -12,19 +12,14 @@ struct ScheduleView: View {
     let schedule: RealmCoopSchedule
 
     var body: some View {
-        switch schedule.results.isEmpty {
-        case true:
-            EmptyView()
-        case false:
-            if let startTime = schedule.startTime {
-                NavigationLinker(destination: {
-                    ScheduleStatsView(startTime: startTime)
-                }, label: {
-                    ScheduleViewElement(schedule: schedule)
-                })
-            } else {
+        if let startTime = schedule.startTime {
+            NavigationLinker(destination: {
+                ScheduleStatsView(startTime: startTime)
+            }, label: {
                 ScheduleViewElement(schedule: schedule)
-            }
+            })
+        } else {
+            ScheduleViewElement(schedule: schedule)
         }
     }
 }

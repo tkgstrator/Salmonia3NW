@@ -20,18 +20,20 @@ struct ResultsView: View {
     var body: some View {
         List(content: {
             ForEach(schedules) { schedule in
-                ScheduleView(schedule: schedule)
-                    .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
-                ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
-                    NavigationLinker(destination: {
-                        ResultTabView(results: schedule.results)
-                            .environment(\.selection, .constant(result.id))
-                    }, label: {
-                        ResultView(result: result)
-                    })
-                    .listRowInsets(EdgeInsets())
-                    .listRowSeparator(.hidden)
+                if !schedule.results.isEmpty {
+                    ScheduleView(schedule: schedule)
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+                    ForEach(schedule.results.sorted(byKeyPath: "playTime", ascending: false)) { result in
+                        NavigationLinker(destination: {
+                            ResultTabView(results: schedule.results)
+                                .environment(\.selection, .constant(result.id))
+                        }, label: {
+                            ResultView(result: result)
+                        })
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+                    }
                 }
             }
         })
