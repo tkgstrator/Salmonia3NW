@@ -35,6 +35,17 @@ struct GrizzcoTeamView: View {
                     GrizzcoTeamContent(data: value)
                 }
             }
+            ForEach(data.defeatedCount) { value in
+                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
+                    ChartView(destination: {
+                        LineChartView(chartData: value.charts)
+                    }, content: {
+                        GrizzcoTeamContent(data: value)
+                    })
+                } else {
+                    GrizzcoTeamContent(data: value)
+                }
+            }
         })
     }
 }

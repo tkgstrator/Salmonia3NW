@@ -205,6 +205,7 @@ public enum Grizzco {
             @Published var ikuraNum: [ValueEntry] = []
             @Published var helpCount: [ValueEntry] = []
             @Published var deadCount: [ValueEntry] = []
+            @Published var defeatedCount: [ValueEntry] = []
 
             init() {}
 
@@ -237,6 +238,20 @@ public enum Grizzco {
                         icon: .Ikura,
                         values: results.map({ $0.ikuraNum }),
                         waves: results.map({ $0.ikuraNumPerWave }))
+                ]
+                self.defeatedCount = [
+                    ValueEntry(
+                        title: .CoopHistory_Enemy,
+                        id: .Solo,
+                        icon: .Salmon,
+                        values: players.map({ $0.bossKillCountsTotal }),
+                        waves: players.map({ $0.bossKillCountsTotalPerWave })),
+                    ValueEntry(
+                        title: .CoopHistory_Enemy,
+                        id: .Team,
+                        icon: .Salmon,
+                        values: results.map({ $0.bossKillCounts.sum() }),
+                        waves: results.map({ $0.bossKillCountsTotalPerWave }))
                 ]
                 self.helpCount = [
                     ValueEntry(
@@ -403,6 +418,13 @@ extension RealmCoopPlayer {
         }
         return Double(self.ikuraNum) * 3 / Double(self.specialCounts.count)
     }
+
+    var bossKillCountsTotalPerWave: Double? {
+        if self.specialCounts.count == .zero {
+            return nil
+        }
+        return Double(self.bossKillCountsTotal) * 3 / Double(self.specialCounts.count)
+    }
 }
 
 extension RealmCoopResult {
@@ -418,6 +440,13 @@ extension RealmCoopResult {
             return nil
         }
         return Double(self.ikuraNum) * 3 / Double(self.waves.count)
+    }
+
+    var bossKillCountsTotalPerWave: Double? {
+        if self.waves.count == .zero {
+            return nil
+        }
+        return Double(self.bossKillCounts.sum()) * 3 / Double(self.waves.count)
     }
 }
 
