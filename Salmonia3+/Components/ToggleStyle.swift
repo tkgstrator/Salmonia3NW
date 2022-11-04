@@ -28,11 +28,11 @@ struct SPToggleStyle: ToggleStyle {
                         .offset(x: configuration.isOn ? -55 : 55, y: 0)
                         .animation(.linear, value: configuration.isOn)
                     HStack(spacing: 0, content: {
-                        Text("OFF")
+                        Text(bundle: .L_BtnOption_02_T_BtnL_00)
                             .bold()
                             .frame(width: 110, height: 34, alignment: .center)
                             .foregroundColor(configuration.isOn ? .black : .white)
-                        Text("ON")
+                        Text(bundle: .L_BtnOption_02_T_BtnR_00)
                             .bold()
                             .frame(width: 110, height: 34, alignment: .center)
                             .foregroundColor(configuration.isOn ? .white : .black)
