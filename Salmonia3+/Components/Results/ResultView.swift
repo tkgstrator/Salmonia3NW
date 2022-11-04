@@ -17,6 +17,7 @@ struct ResultView: View {
 }
 
 private struct ResultSplatNet3: View {
+    @EnvironmentObject var appearances: Appearance
     let result: RealmCoopResult
 
     var body: some View {
@@ -84,7 +85,13 @@ private struct ResultSplatNet3: View {
         .padding(.leading)
         .padding(.trailing, 8)
         .padding(.vertical, 4)
-        .background(result.isClear ? SPColor.SplatNet3.SPSalmonOrange : SPColor.SplatNet3.SPSalmonOrangeDarker)
+        .background(
+            result.isClear
+            ? appearances.gamingScheme
+            ? AnyView(Rainbow())
+            : AnyView(SPColor.SplatNet3.SPSalmonOrange)
+            : AnyView(SPColor.SplatNet3.SPSalmonOrangeDarker)
+        )
         .padding(.bottom, 2)
     }
 }
