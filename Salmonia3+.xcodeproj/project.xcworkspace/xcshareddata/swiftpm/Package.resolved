@@ -172,6 +172,15 @@
       }
     },
     {
+      "identity" : "sdbridgeswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDBridge/SDBridgeSwift",
+      "state" : {
+        "revision" : "1413057dfb14162b7650b3c086042a67d53d784e",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",

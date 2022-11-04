@@ -13,6 +13,7 @@ import Alamofire
 #if !os(macOS)
 import UIKit
 import SplatNet3
+import SDBridgeSwift
 #endif
 
 struct SPWebView: UIViewControllerRepresentable {
@@ -38,23 +39,41 @@ struct SPWebView: UIViewControllerRepresentable {
     }
 }
 
+private enum NSScriptContent {
+    case closeWebView
+    case reloadExtension
+    case completeLoading
+    case invokeNativeShare(Share)
+    case invokeNativeShareUrl(ShareURL)
+    case copyToClipboard(String)
+    case downloadimages([String])
+
+    struct Share: Codable {
+        let text: String
+        let imageUrl: String
+        let hashtags: [String]
+    }
+    struct ShareURL: Codable {
+        let text: String
+        let url: String
+    }
+}
+
 /// イカリング3が送ってくるメッセージ
 private enum NSScriptMessage: String, CaseIterable {
     case closeWebView
     case reloadExtension
     case completeLoading
-
-    init?(message: WKScriptMessage) {
-        guard let rawValue: String = message.body as? String else {
-            return nil
-        }
-        self.init(rawValue: rawValue)
-    }
+    case invokeNativeShare
+    case invokeNativeShareUrl
+    case copyToClipboard
+    case downloadimages
 }
 
 final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
     @Environment(\.locale) var locale
     @StateObject var session: Session = Session()
+    let bridge: WebViewJavascriptBridge
 
     private let webView: WKWebView = {
         let webView: WKWebView = WKWebView()
@@ -71,39 +90,112 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
         return indicator
     }()
 
+    private func evaluateJavaScript(content: Any?) {
+        /// 変換不能だったとき
+        guard let content = content,
+              let stringValue = content as? String
+        else {
+            return
+        }
+
+        /// 単一メッセージ
+        if let message: NSScriptMessage = NSScriptMessage(rawValue: stringValue) {
+            switch message {
+                case .closeWebView:
+                    UIApplication.shared.rootViewController?.dismiss(animated: true)
+                default:
+                    break
+            }
+            return
+        }
+
+        /// メッセージデータを取得
+        guard let data: Data = stringValue.data(using: .utf8) else {
+            return
+        }
+
+        /// デコーダー
+        let decoder: JSONDecoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        /// 共有
+        if let object: NSScriptContent.Share = try? decoder.decode(NSScriptContent.Share.self, from: data) {
+            let session: Alamofire.Session = Alamofire.Session()
+            Task {
+                guard let data: Data = try? await session.download(URL(unsafeString: object.imageUrl)).serializingData().value,
+                      let image: UIImage = UIImage(data: data)
+                else {
+                    return
+                }
+                let ac: UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                self.present(ac, animated: true)
+            }
+            return
+        }
+
+        /// URL共有
+        if let object: NSScriptContent.ShareURL = try? decoder.decode(NSScriptContent.ShareURL.self, from: data) {
+            let items: [Any] = [
+                "\(object.text) #Salmonia3",
+                URL(unsafeString: object.url)
+            ]
+            let ac: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            self.present(ac, animated: true)
+            return
+        }
+
+        /// クリップボードにコピー
+        if let code: String = stringValue.capture(pattern: #"([A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4})"#, group: 1) {
+            UIPasteboard.general.string = code
+        }
+
+        if let imageURL: String = stringValue.capture(pattern: #"\[(https://.*)\]"#, group: 1) {
+            Task {
+                let session: Alamofire.Session = Alamofire.Session()
+                guard let data: Data = try? await session.download(URL(unsafeString: imageURL)).serializingData().value,
+                      let image: UIImage = UIImage(data: data)
+                else {
+                    return
+                }
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+        }
+    }
 
     init(coordinator: SPWebView.Coordinator) {
+        self.bridge = WebViewJavascriptBridge(webView: self.webView)
         super.init(nibName: nil, bundle: nil)
         self.webView.navigationDelegate = self
         self.webView.uiDelegate = self
         self.view = webView
 
-        /// トークンが設定されていなければ取得不可なのでリターンする
-        guard let gtoken = session.account?.credential.gameWebToken
-        else {
-            UIApplication.shared.rootViewController?.dismiss(animated: true)
-            return
+        bridge.consolePipeClosure = { content in
+            self.evaluateJavaScript(content: content)
         }
+
+        // This register for javascript call
+        bridge.register(handlerName: "DeviceLoadJavascriptSuccess") { (parameters, callback) in
+            let data = ["result":"iOS"]
+            callback?(data)
+        }
+
         self.loadRequest()
-        print("Initialize", self.view.frame)
     }
 
     required init?(coder: NSCoder) {
+        self.bridge = WebViewJavascriptBridge(webView: WKWebView())
         super.init(coder: coder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDidLoad", self.view.frame)
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        print("ViewDidAppear", self.view.frame)
         super.viewDidAppear(animated)
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("ViewWillAppear", self.view.frame)
         super.viewWillAppear(animated)
         indicator.center = self.view.center
         self.indicator.startAnimating()
@@ -112,23 +204,9 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
 
     /// This is where subclasses should create their custom view hierarchy if they aren't using a nib. Should never be called directly.
     override func loadView() {
-        print("WKWebViewLoad", self.view.frame)
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        print(message.name, message.body)
-        guard let message: NSScriptMessage = NSScriptMessage(message: message) else {
-            return
-        }
-
-        switch message {
-            case .closeWebView:
-                UIApplication.shared.rootViewController?.dismiss(animated: true)
-            case .reloadExtension:
-                break
-            case .completeLoading:
-                break
-        }
     }
 
     /// リクエスト前に呼ばれる
@@ -213,12 +291,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
         let request: URLRequest = URLRequest(url: baseURL)
         let config: WKWebViewConfiguration = WKWebViewConfiguration()
 
-        /// Console.Logをキャッチする
-        let source = "function captureLog(msg) { window.webkit.messageHandlers.logHandler.postMessage(msg); } window.console.log = captureLog;"
         DispatchQueue.main.async(execute: {
-            let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-            self.webView.configuration.userContentController.addUserScript(script)
-            self.webView.configuration.userContentController.add(self, name: "logHandler")
             /// Cookieの設定
             let cookie = HTTPCookie(properties: [
                 HTTPCookiePropertyKey.name: "_gtoken",
