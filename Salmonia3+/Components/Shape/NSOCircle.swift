@@ -2,7 +2,7 @@
 //  NSOCircle.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/09/18.
+//  Created by tkgstrator on 2022/09/18.
 //
 
 import SwiftUI

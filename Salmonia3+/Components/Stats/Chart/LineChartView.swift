@@ -2,7 +2,7 @@
 //  LineChartView.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/10/30.
+//  Created by tkgstrator on 2022/10/30.
 //
 
 import SwiftUI

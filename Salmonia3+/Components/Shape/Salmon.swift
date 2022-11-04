@@ -2,7 +2,7 @@
 //  Salmon.swift
 //  Salmonia3
 //
-//  Created by devonly on 2022/03/24.
+//  Created by tkgstrator on 2022/03/24.
 //  Copyright © 2022 Magi Corporation. All rights reserved.
 //
 

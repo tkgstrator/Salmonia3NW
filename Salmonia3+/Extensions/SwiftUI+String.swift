@@ -2,7 +2,7 @@
 //  SwiftUI+String.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/10/19.
+//  Created by tkgstrator on 2022/10/19.
 //
 
 import Foundation

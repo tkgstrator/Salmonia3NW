@@ -2,7 +2,7 @@
 //  NSTrackingView.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/09/25.
+//  Created by tkgstrator on 2022/09/25.
 //
 
 import SwiftUI

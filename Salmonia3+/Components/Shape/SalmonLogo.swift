@@ -2,7 +2,7 @@
 //  SalmonLogo.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/09/20.
+//  Created by tkgstrator on 2022/09/20.
 //
 
 import SwiftUI

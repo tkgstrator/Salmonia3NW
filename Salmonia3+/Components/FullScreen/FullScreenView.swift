@@ -2,7 +2,7 @@
 //  ModalView.swift
 //
 //  SwiftyUI
-//  Created by devonly on 2021/08/13.
+//  Created by tkgstrator on 2021/08/13.
 //
 //  Magi Corporation, All rights, reserved.
 

@@ -2,7 +2,7 @@
 //  SplitNavigationViewStyle.swift
 //
 //  SwiftyUI
-//  Created by devonly on 2021/08/27.
+//  Created by tkgstrator on 2021/08/27.
 //
 //  Magi Corporation, All rights, reserved.
 

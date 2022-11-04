@@ -2,24 +2,22 @@
 //  ThemeView.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/09/23.
+//  Created by tkgstrator on 2022/09/23.
 //
 
 import SwiftUI
 
 /// アプリの見た目などを変更します
 struct ThemeView: View {
+    @State private var isPresented: Bool = false
     var body: some View {
-        ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 360)), count: 1), content: {
-                NSOToggle.ColorScheme()
-                #if DEBUG
-                NSOToggle.BackgroundImage()
-                NSOToggle.RotaionEffect()
-                #endif
+        List(content: {
+            Toggle(isOn: $isPresented, label: {
+                Text(bundle: .Catalog_Point)
             })
-            .padding(.horizontal)
+            .toggleStyle(.splatoon)
         })
+        .listStyle(.plain)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(localizedText: "TITLE_APPEARANCE"))
     }

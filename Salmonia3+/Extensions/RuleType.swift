@@ -2,7 +2,7 @@
 //  ModeType.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/10/04.
+//  Created by tkgstrator on 2022/10/04.
 //
 
 import Foundation

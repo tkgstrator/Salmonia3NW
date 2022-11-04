@@ -2,7 +2,7 @@
 //  DebugIcon.swift
 //  Salmonia3+
 //
-//  Created by devonly on 2022/09/23.
+//  Created by tkgstrator on 2022/09/23.
 //
 
 import SwiftUI

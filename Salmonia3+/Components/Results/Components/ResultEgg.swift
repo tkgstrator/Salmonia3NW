@@ -2,7 +2,7 @@
 //  ResultEgg.swift
 //  Salmonia3
 //
-//  Created by devonly on 2021/12/30.
+//  Created by tkgstrator on 2021/12/30.
 //  Copyright © 2022 Magi Corporation. All rights reserved.
 //
 
