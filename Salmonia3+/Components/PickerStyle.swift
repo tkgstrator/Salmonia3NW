@@ -7,15 +7,18 @@
 //
 
 import SwiftUI
-
-struct PickerStyle: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+import SplatNet3
 
 struct PickerStyle_Previews: PreviewProvider {
+    @State private static var selection: Int? = 0
+
     static var previews: some View {
-        PickerStyle()
+        Picker(selection: $selection, content: {
+            Text("SplatNet1")
+            Text("SplatNet2")
+            Text("SplatNet3")
+        }, label: {
+            Text(bundle: .CoopHistory_Limited)
+        })
     }
 }

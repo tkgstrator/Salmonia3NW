@@ -26,6 +26,8 @@ internal struct UIGoogleMobileAdsView: UIViewControllerRepresentable {
         view.adUnitID = "ca-app-pub-7107468397673752/7949093151"
 #endif
         view.rootViewController = viewController
+        viewController.view.isOpaque = true
+        viewController.view.backgroundColor = .clear
         viewController.view.addSubview(view)
         viewController.view.frame = CGRect(origin: .zero, size: GADAdSizeBanner.size)
         view.load(GADRequest())

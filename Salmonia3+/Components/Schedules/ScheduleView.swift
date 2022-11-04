@@ -36,7 +36,6 @@ private struct ScheduleViewElement: View {
 
     var body: some View {
         ZStack(alignment: .center, content: {
-            Color.black
             VStack(alignment: .leading, spacing: 0, content: {
                 HStack(alignment: .center, spacing: 0, content: {
                     Text(schedule.stageId.localizedText)
@@ -65,7 +64,6 @@ private struct ScheduleViewElement: View {
             .padding(.bottom, 8)
             .padding(.top, 4)
         })
-        .foregroundColor(.white)
     }
 }
 

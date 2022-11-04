@@ -54,7 +54,6 @@ private struct ResultSplatNet3: View {
                             .lineLimit(1)
                             .foregroundColor(SPColor.SplatNet2.SPWhite)
                             .frame(minWidth: 40, alignment: .trailing)
-//                            .frame(maxWidth: .infinity, alignment: .trailing)
                     }, icon: {
                         Image(bundle: .GoldenIkura)
                             .resizable()
@@ -67,7 +66,6 @@ private struct ResultSplatNet3: View {
                             .lineLimit(1)
                             .foregroundColor(SPColor.SplatNet2.SPWhite)
                             .frame(minWidth: 40, alignment: .trailing)
-//                            .frame(maxWidth: .infinity, alignment: .trailing)
                     }, icon: {
                         Image(bundle: .Ikura)
                             .resizable()

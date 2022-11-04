@@ -13,15 +13,16 @@ import Firebase
 @main
 struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @AppStorage("CONFIG_COLOR_SCHEME") var preferredColorScheme: Bool = true
     /// Realmの設定
     private let configuration: Realm.Configuration = Realm.Configuration(schemaVersion: 5, deleteRealmIfMigrationNeeded: false)
+    @StateObject var appearances: Appearance = Appearance()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(preferredColorScheme ? .dark : .light)
+                .environment(\.colorScheme, appearances.colorScheme ? .dark : .light)
                 .environment(\.realmConfiguration, configuration)
+                .environmentObject(appearances)
         }
     }
 }

@@ -20,7 +20,7 @@ struct SPToggleStyle: ToggleStyle {
             ZStack(alignment: .center, content: {
                 RoundedRectangle(cornerRadius: 50)
                     .frame(width: 224, height: 38, alignment: .center)
-                    .foregroundColor(.black)
+                    .foregroundColor(SPColor.SplatNet3.SPBackground)
                 ZStack(alignment: .center, content: {
                     RoundedRectangle(cornerRadius: 50)
                         .frame(width: 110, height: 34, alignment: .center)
