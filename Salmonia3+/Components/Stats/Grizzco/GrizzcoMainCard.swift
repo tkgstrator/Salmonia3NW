@@ -12,15 +12,53 @@ struct GrizzcoWeaponView: View {
     @ObservedObject var data: Grizzco.Chart.Weapons
 
     var body: some View {
-        if #available(iOS 16.0, *), false {
-            ChartView(destination: {
-                EmptyView()
-            }, content: {
+        switch data.isRandom {
+            case true:
+                NavigationLink(destination: {
+                    RandomWeaponView(data: data.entries)
+                }, label: {
+                    GrizzcoRandomWeaponContent(data: data)
+                })
+            case false:
                 GrizzcoWeaponContent(data: data)
-            })
-        } else {
-            GrizzcoWeaponContent(data: data)
         }
+    }
+}
+
+private struct GrizzcoRandomWeaponContent: View {
+    @ObservedObject var data: Grizzco.Chart.Weapons
+    typealias Entry = Grizzco.Chart.Weapons.Entry
+
+    var body: some View {
+        ZStack(alignment: .center, content: {
+            Color.black.opacity(0.7)
+            VStack(alignment: .leading, spacing: 0, content: {
+                Text(bundle: .CoopHistory_SupplyWeapon)
+                    .font(systemName: .Splatfont, size: 12)
+                    .frame(maxWidth: .infinity, height: 12, alignment: .leading)
+                VStack(content: {
+                    if let suppliedWeaponCount = data.suppliedWeaponCount,
+                       let weaponCount = data.weaponCount
+                    {
+                        if suppliedWeaponCount == weaponCount {
+                            Text(bundle: .Catalog_Complete)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                        } else {
+                            Text(String(format: "%2d/%2d", suppliedWeaponCount, weaponCount))
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .font(systemName: .Splatfont2, size: 20)
+                        }
+                    }
+                })
+                .padding(.top, 8)
+                .padding(.bottom, 2)
+            })
+            .padding(.vertical, 6)
+            .padding(.horizontal, 10)
+        })
+        .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
+        .font(systemName: .Splatfont2, size: 12)
+        .cornerRadius(10, corners: .allCorners)
     }
 }
 

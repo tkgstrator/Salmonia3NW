@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SplatNet3
 
 enum BackgroundType: String, CaseIterable, Codable {
     case SPLATNET2  = "SplatNet2"
@@ -33,6 +34,23 @@ enum DeathType: String, CaseIterable, Codable {
 enum RescueType: String, CaseIterable, Codable {
     case Inkling
     case Octoling
+}
+
+enum StageThumbnailType: Int, CaseIterable, Codable {
+    case shakeup        = 1
+    case shakespiral    = 2
+    case shakedent      = 7
+
+    var localized: String {
+        switch self {
+            case .shakeup:
+                return StageType.Shakeup.localizedText
+            case .shakespiral:
+                return StageType.Shakespiral.localizedText
+            case .shakedent:
+                return StageType.Shakedent.localizedText
+        }
+    }
 }
 
 enum ButtonType: String, CaseIterable, Codable {
@@ -77,6 +95,10 @@ extension Image {
         case .None:
             self.init(bundle: ButtonType.Solo)
         }
+    }
+
+    init(bundle: StageThumbnailType) {
+        self.init("StageThumbnailType/\(bundle.rawValue)", bundle: .main)
     }
 
     init(chart bundle: ChartIconType) {

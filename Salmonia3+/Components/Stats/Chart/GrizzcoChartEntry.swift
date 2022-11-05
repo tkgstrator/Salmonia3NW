@@ -53,6 +53,85 @@ public enum Grizzco {
         }
     }
 
+    public enum Record {
+        class Total: ObservableObject {
+            @Published var bossCounts: [BossCount] = []
+            @Published var bossKillCounts: [BossCount] = []
+
+            init(results: RealmSwift.Results<RealmCoopResult>, players: RealmSwift.Results<RealmCoopPlayer>) {
+                let bossCounts: [Int] = sum(of: results.map({ Array($0.bossCounts) }))
+                let bossKillCounts: [Int] = sum(of: players.map({ Array($0.bossKillCounts) }))
+                let teamKillCounts: [Int] = sum(of: results.map({ Array($0.bossKillCounts) }))
+
+                SakelienType.allCases.enumerated().prefix(11).forEach({ index, sakelienId in
+                    self.bossCounts.append(BossCount(bossId: sakelienId, count: bossCounts[index]))
+                    self.bossKillCounts.append(BossCount(bossId: sakelienId, count: bossKillCounts[index]))
+                })
+            }
+
+            class BossCount: ObservableObject, Identifiable {
+                @Published var id: UUID = UUID()
+                @Published var bossId: SakelienType
+                @Published var count: Int = 0
+
+                init(bossId: SakelienType, count: Int) {
+                    self.bossId = bossId
+                    self.count = count
+                }
+            }
+        }
+
+        class Stage: ObservableObject, Identifiable {
+            internal init(
+                stageId: StageType = .Unknown,
+                maxGrade: GradeType? = nil,
+                maxGradePoint: Int? = nil,
+                minimumCount: Int? = nil,
+                goldenIkuraMax: Int? = nil,
+                ikuraMax: Int? = nil,
+                teamGoldenIkuraMax: Int? = nil,
+                teamIkuraMax: Int? = nil
+            ) {
+                self.id = id
+                self.stageId = stageId
+                self.maxGrade = maxGrade
+                self.maxGradePoint = maxGradePoint
+                self.minimumCount = minimumCount
+                self.goldenIkuraMax = goldenIkuraMax
+                self.ikuraMax = ikuraMax
+                self.teamGoldenIkuraMax = teamGoldenIkuraMax
+                self.teamIkuraMax = teamIkuraMax
+            }
+
+            @Published var id: UUID = UUID()
+            @Published var stageId: StageType = .Unknown
+            @Published var maxGrade: GradeType? = nil
+            @Published var maxGradePoint: Int? = nil
+            @Published var minimumCount: Int? = nil
+            @Published var goldenIkuraMax: Int? = nil
+            @Published var ikuraMax: Int? = nil
+            @Published var teamGoldenIkuraMax: Int? = nil
+            @Published var teamIkuraMax: Int? = nil
+
+            init(
+                stageId: StageType,
+                results: RealmSwift.Results<RealmCoopResult>,
+                players: RealmSwift.Results<RealmCoopPlayer>
+            ) {
+                guard let grade: GradeType = results.max(ofProperty: "grade") else {
+                    return
+                }
+                self.stageId = stageId
+                self.maxGrade = grade
+                self.maxGradePoint = results.filter("grade =%@", grade).max(ofProperty: "gradePoint")
+                self.goldenIkuraMax = players.max(ofProperty: "goldenIkuraNum")
+                self.teamGoldenIkuraMax = results.max(ofProperty: "goldenIkuraNum")
+                self.ikuraMax = players.max(ofProperty: "ikuraNum")
+                self.teamIkuraMax = results.max(ofProperty: "ikuraNum")
+            }
+        }
+    }
+
     public enum Chart {
         class Average: ObservableObject {
             @Published var weaponList: [WeaponType] = []
@@ -139,6 +218,8 @@ public enum Grizzco {
         class Weapons: ObservableObject {
             /// 支給されたブキの数
             @Published var suppliedWeaponCount: Int?
+            /// 支給される可能性のあるブキの数
+            @Published var weaponCount: Int?
             /// 推定コンプリート回数
             @Published var estimateCompleteCount: Int?
             /// データ
@@ -149,17 +230,35 @@ public enum Grizzco {
             init() {}
 
             init(schedule: RealmCoopSchedule, players: RealmSwift.Results<RealmCoopPlayer>) {
-                self.isRandom = schedule.weaponList.contains(.Random_Green)
-                self.suppliedWeaponCount = players.suppliedWeapons.count
-                self.entries = self.isRandom ? [] : players.suppliedWeaponEntry
+                let isRandom: Bool = schedule.weaponList.contains(.Random_Green)
+                self.isRandom = isRandom
+                self.suppliedWeaponCount = players.suppliedWeaponSet.count
+                self.weaponCount = WeaponType.randoms.count + 1
+                self.entries = {
+                    if isRandom {
+                        return players.suppliedWeaponEntry
+                    }
+                    let suppliedList: [WeaponType] = players.flatMap({ $0.weaponList })
+                    return Array(schedule.weaponList)
+                        .map({ weaponId in
+                            suppliedList.count(weaponId)
+                        })
+                        .map({ weaponId, count in
+                            Entry(
+                                id: weaponId,
+                                count: count,
+                                percent: suppliedList.count == .zero ? nil : Double(count) / Double(suppliedList.count) * 100)
+                        })
+                        .sorted(by: { $0.count < $1.count })
+                }()
             }
 
             struct Entry: Identifiable {
                 let id: WeaponType
-                let count: Int?
+                let count: Int
                 let percent: Double?
 
-                init(id: WeaponType, count: Int? = nil, percent: Double? = nil) {
+                init(id: WeaponType, count: Int, percent: Double?) {
                     self.id = id
                     self.count = count
                     self.percent = percent
@@ -325,10 +424,12 @@ public enum Grizzco {
                 let count: Int?
                 let goldenIkuraMax: Int?
                 let goldenIkuraAvg: Double?
-                let clearRation: Double?
+                let clearRatio: Double?
             }
 
-            init() {}
+            init(waves: RealmSwift.Results<RealmCoopWave>) {
+
+            }
         }
     }
 }
@@ -367,19 +468,26 @@ extension RealmSwift.Results where Element == RealmCoopPlayer {
     typealias WeaponEntry = Grizzco.Chart.Weapons.Entry
     typealias SpecialEntry = Grizzco.Chart.SpecialWeapons.Entry
 
-    fileprivate var suppliedWeapons: Set<WeaponType> {
+    /// 支給されたブキ
+    fileprivate var suppliedWeaponSet: Set<WeaponType> {
         Set(self.flatMap({ Array($0.weaponList) }))
     }
 
-    fileprivate var suppliedWeaponEntry: [WeaponEntry] {
-        let suppliedWeapons: [WeaponType] = self.flatMap({ Array($0.weaponList) })
-        let count: Int = suppliedWeapons.count
-        return suppliedWeapons.count().map({
-            WeaponEntry(
-                id: $0.element,
-                count: $0.count,
-                percent:  $0.count == .zero ? nil : Double($0.count) / Double(count) * 100)
-        })
+    /// ランダム編成で支給された回数
+    var suppliedWeaponEntry: [WeaponEntry] {
+        let suppliedList: [WeaponType] = self.flatMap({ $0.weaponList })
+        let randoms: Set<WeaponType> = Set(suppliedList).union(WeaponType.randoms)
+        return randoms
+            .map({ weaponId in
+                suppliedList.count(weaponId)
+            })
+            .map({ weaponId, count in
+                WeaponEntry(
+                    id: weaponId,
+                    count: count,
+                    percent: suppliedList.count == .zero ? nil : Double(count) / Double(suppliedList.count) * 100)
+            })
+            .sorted(by: { $0.count < $1.count })
     }
 
     fileprivate var suppliedSpecialEntry: [SpecialEntry] {
@@ -427,6 +535,14 @@ extension RealmCoopPlayer {
     }
 }
 
+extension RealmCoopSchedule {
+    typealias WeaponEntry = Grizzco.Chart.Weapons.Entry
+
+    var suppliedWeaponEntry: [WeaponEntry] {
+        self.weaponList.map({ WeaponEntry(id: $0, count: 0, percent: nil) })
+    }
+}
+
 extension RealmCoopResult {
     var goldenIkuraNumPerWave: Double? {
         if self.waves.count == .zero {
@@ -460,5 +576,26 @@ extension RealmCoopResult {
             return nil
         }
         return (self.dangerRate * 100 * 5 * 4 - Double(grade.rawValue * 100 + gradePoint)) / 3 - Double(grade.rawValue * 100)
+    }
+}
+
+extension Array where Element: Numeric  {
+    func add<T: Numeric>(_ input: Array<T>) -> Array<T> {
+        return zip(self as! [T], input).map({ $0.0 + $0.1 })
+    }
+}
+
+func sum<T: Numeric>(of arrays: Array<Array<T>>) -> Array<T> {
+    if let first = arrays.first {
+        var sum: [T] = Array(repeating: 0, count: first.count)
+        let _ = arrays.map({ sum = sum.add($0) })
+        return sum
+    }
+    return []
+}
+
+extension WeaponType {
+    static var randoms: Set<WeaponType> {
+        Set(WeaponType.allCases.filter({ $0.rawValue >= 0 && $0.rawValue <= 20000  }))
     }
 }
