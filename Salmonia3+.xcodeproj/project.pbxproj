@@ -66,6 +66,7 @@
 		10264AA4291618EC003EEA41 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10264AA3291618EC003EEA41 /* BarChartView.swift */; };
 		10264AA629163163003EEA41 /* GrizzcoRecordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10264AA529163163003EEA41 /* GrizzcoRecordCard.swift */; };
 		10264AA82916402D003EEA41 /* GrizzcoStageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10264AA72916402D003EEA41 /* GrizzcoStageCard.swift */; };
+		10264AAA29170283003EEA41 /* PlotChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10264AA929170283003EEA41 /* PlotChartView.swift */; };
 		102D15EF2902D99B0092E8E6 /* GrizzcoTeamCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */; };
 		102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */; };
 		102D15F3290385E40092E8E6 /* RandomWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102D15F2290385E40092E8E6 /* RandomWeaponView.swift */; };
@@ -74,14 +75,13 @@
 		10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F8E290D81BC004103CD /* PullToRefresh.swift */; };
 		10305F92290D87E1004103CD /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 10305F91290D87E1004103CD /* SwiftUIX */; };
 		10305F98290D9703004103CD /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F97290D9703004103CD /* LineChartView.swift */; };
-		10305F9A290DFFF9004103CD /* GradePointChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F99290DFFF9004103CD /* GradePointChart.swift */; };
 		10305F9F290E6995004103CD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305F9E290E6995004103CD /* ChartView.swift */; };
 		10305FA1290E71F5004103CD /* GrizzcoChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */; };
 		1031877C28FBC25D005AFBB9 /* RoundRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */; };
 		1031877E28FC0066005AFBB9 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031877D28FC0066005AFBB9 /* Line.swift */; };
 		1031878228FE43C8005AFBB9 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878128FE43C8005AFBB9 /* CustomBackButton.swift */; };
 		1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031878528FE9EAE005AFBB9 /* JSONCoopResult.swift */; };
-		1031F65E28FF8C8D00E15E8D /* GrizzcoHighCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */; };
+		1031F65E28FF8C8D00E15E8D /* GrizzcoMaximumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F65D28FF8C8D00E15E8D /* GrizzcoMaximumView.swift */; };
 		1031F66028FF8C9A00E15E8D /* GrizzcoScalesCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */; };
 		1031F66228FF8E6C00E15E8D /* GrizzcoAverageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */; };
 		1031F66428FF8F2B00E15E8D /* GrizzcoScheduleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */; };
@@ -89,7 +89,7 @@
 		1031F66B28FFF1F100E15E8D /* ResultRefreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F66A28FFF1F100E15E8D /* ResultRefreshable.swift */; };
 		1031F6A52901538300E15E8D /* SPWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A42901538300E15E8D /* SPWebView.swift */; };
 		1031F6A7290164B800E15E8D /* SPWebButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A6290164B800E15E8D /* SPWebButton.swift */; };
-		1031F6A9290291D600E15E8D /* GrizzcoMainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A8290291D600E15E8D /* GrizzcoMainCard.swift */; };
+		1031F6A9290291D600E15E8D /* GrizzcoWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */; };
 		1031F6AC2902AC1B00E15E8D /* SakelienChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6AB2902AC1B00E15E8D /* SakelienChart.swift */; };
 		1031F6AE2902BA8E00E15E8D /* WaveChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6AD2902BA8E00E15E8D /* WaveChart.swift */; };
 		10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10320C6028D40A3100666F09 /* SplatNet3 */; };
@@ -100,7 +100,7 @@
 		10320C6E28D4244200666F09 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6D28D4244200666F09 /* RealmService.swift */; };
 		105757B428DB22A200833B95 /* LoginProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105757B328DB22A200833B95 /* LoginProgress.swift */; };
 		1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1076273328DF7C520034F9A4 /* NSTrackingView.swift */; };
-		1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */; };
+		1098543E28F6F68E00E1E22F /* GrizzcoPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoPointView.swift */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
 		10A0ACB028DC9DFB008B332A /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */; };
@@ -218,6 +218,7 @@
 		10264AA3291618EC003EEA41 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		10264AA529163163003EEA41 /* GrizzcoRecordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoRecordCard.swift; sourceTree = "<group>"; };
 		10264AA72916402D003EEA41 /* GrizzcoStageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoStageCard.swift; sourceTree = "<group>"; };
+		10264AA929170283003EEA41 /* PlotChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlotChartView.swift; sourceTree = "<group>"; };
 		102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoTeamCard.swift; sourceTree = "<group>"; };
 		102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoWaveCard.swift; sourceTree = "<group>"; };
 		102D15F2290385E40092E8E6 /* RandomWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWeaponView.swift; sourceTree = "<group>"; };
@@ -225,14 +226,13 @@
 		10305F8B290D618E004103CD /* Rainbow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rainbow.swift; sourceTree = "<group>"; };
 		10305F8E290D81BC004103CD /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		10305F97290D9703004103CD /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
-		10305F99290DFFF9004103CD /* GradePointChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePointChart.swift; sourceTree = "<group>"; };
 		10305F9E290E6995004103CD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoChartEntry.swift; sourceTree = "<group>"; };
 		1031877B28FBC25D005AFBB9 /* RoundRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangle.swift; sourceTree = "<group>"; };
 		1031877D28FC0066005AFBB9 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1031878128FE43C8005AFBB9 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		1031878528FE9EAE005AFBB9 /* JSONCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoopResult.swift; sourceTree = "<group>"; };
-		1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoHighCard.swift; sourceTree = "<group>"; };
+		1031F65D28FF8C8D00E15E8D /* GrizzcoMaximumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoMaximumView.swift; sourceTree = "<group>"; };
 		1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoScalesCard.swift; sourceTree = "<group>"; };
 		1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoAverageCard.swift; sourceTree = "<group>"; };
 		1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoScheduleCard.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 		1031F66A28FFF1F100E15E8D /* ResultRefreshable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRefreshable.swift; sourceTree = "<group>"; };
 		1031F6A42901538300E15E8D /* SPWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPWebView.swift; sourceTree = "<group>"; };
 		1031F6A6290164B800E15E8D /* SPWebButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPWebButton.swift; sourceTree = "<group>"; };
-		1031F6A8290291D600E15E8D /* GrizzcoMainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoMainCard.swift; sourceTree = "<group>"; };
+		1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoWeaponView.swift; sourceTree = "<group>"; };
 		1031F6AB2902AC1B00E15E8D /* SakelienChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SakelienChart.swift; sourceTree = "<group>"; };
 		1031F6AD2902BA8E00E15E8D /* WaveChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveChart.swift; sourceTree = "<group>"; };
 		10320C6328D40D0A00666F09 /* RealmCoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 		104458E529115E4400DB4F4E /* SplatNet3 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet3; path = ../SplatNet3; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
-		1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointCard.swift; sourceTree = "<group>"; };
+		1098543D28F6F68E00E1E22F /* GrizzcoPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointView.swift; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
 		10A0ACAF28DC9DFB008B332A /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
@@ -506,9 +506,9 @@
 		10305F95290D96B4004103CD /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				10264AA929170283003EEA41 /* PlotChartView.swift */,
 				10305F97290D9703004103CD /* LineChartView.swift */,
 				10264AA3291618EC003EEA41 /* BarChartView.swift */,
-				10305F99290DFFF9004103CD /* GradePointChart.swift */,
 				10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */,
 			);
 			path = Chart;
@@ -548,11 +548,11 @@
 		1031F65A28FF8C4300E15E8D /* Grizzco */ = {
 			isa = PBXGroup;
 			children = (
-				1031F6A8290291D600E15E8D /* GrizzcoMainCard.swift */,
-				1098543D28F6F68E00E1E22F /* GrizzcoPointCard.swift */,
+				1031F65D28FF8C8D00E15E8D /* GrizzcoMaximumView.swift */,
+				1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */,
+				1098543D28F6F68E00E1E22F /* GrizzcoPointView.swift */,
 				1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */,
 				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
-				1031F65D28FF8C8D00E15E8D /* GrizzcoHighCard.swift */,
 				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
 				10E3191E28F2602A009C6BBC /* GrizzcoSpecialView.swift */,
 				102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */,
@@ -895,16 +895,15 @@
 				10A0ACBA28DD627F008B332A /* ThemeView.swift in Sources */,
 				100E876328D4E8EF007FCF3C /* ResultPlayer.swift in Sources */,
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
-				1098543E28F6F68E00E1E22F /* GrizzcoPointCard.swift in Sources */,
+				1098543E28F6F68E00E1E22F /* GrizzcoPointView.swift in Sources */,
 				1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */,
 				1031F66B28FFF1F100E15E8D /* ResultRefreshable.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
-				1031F6A9290291D600E15E8D /* GrizzcoMainCard.swift in Sources */,
-				1031F65E28FF8C8D00E15E8D /* GrizzcoHighCard.swift in Sources */,
+				1031F6A9290291D600E15E8D /* GrizzcoWeaponView.swift in Sources */,
+				1031F65E28FF8C8D00E15E8D /* GrizzcoMaximumView.swift in Sources */,
 				1076273428DF7C520034F9A4 /* NSTrackingView.swift in Sources */,
 				10264AA82916402D003EEA41 /* GrizzcoStageCard.swift in Sources */,
 				10305F8F290D81BC004103CD /* PullToRefresh.swift in Sources */,
-				10305F9A290DFFF9004103CD /* GradePointChart.swift in Sources */,
 				1017C1FA290E9C2A00C238F5 /* GrizzcoOverview.swift in Sources */,
 				1018B48D28D6CC4C002BD1F0 /* LoadingView.swift in Sources */,
 				100E877728D5B687007FCF3C /* ResultSpecial.swift in Sources */,
@@ -942,6 +941,7 @@
 				10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */,
 				1031F6A52901538300E15E8D /* SPWebView.swift in Sources */,
 				10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */,
+				10264AAA29170283003EEA41 /* PlotChartView.swift in Sources */,
 				10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */,
 				1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */,
 				1018B49C28D73352002BD1F0 /* SwiftUI+Text.swift in Sources */,
@@ -1174,7 +1174,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1210,7 +1210,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

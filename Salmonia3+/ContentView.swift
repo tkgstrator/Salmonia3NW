@@ -10,10 +10,10 @@ import SplatNet3
 import RealmSwift
 
 struct ContentView: View {
-    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
+    @StateObject var session: Session = Session()
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
-    let device: UIUserInterfaceIdiom = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         TabView(selection: $selection, content: {
@@ -75,7 +75,10 @@ struct ContentView: View {
             }
             .tag(3)
         })
-        .fullScreenCover(isPresented: $isFirstLaunch , content: {
+        .fullScreenCover(isPresented: Binding(get: {
+            session.accounts.isEmpty || isFirstLaunch
+        }, set: { _ in
+        }) , content: {
             TutorialView()
         })
         .accentColor(SPColor.SplatNet2.SPOrange)

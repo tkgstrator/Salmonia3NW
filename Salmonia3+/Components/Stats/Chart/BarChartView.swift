@@ -11,19 +11,6 @@ import Charts
 import SplatNet3
 
 @available(iOS 16.0, *)
-struct BarChartView: View {
-    typealias ChartEntry = Grizzco.ChartEntrySet
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-        Chart(content: {
-
-
-        })
-    }
-}
-
-@available(iOS 16.0, *)
 struct BossKillChartTab: View {
     @ObservedObject var data: Grizzco.Record.Total
 
@@ -32,7 +19,7 @@ struct BossKillChartTab: View {
             XBarChartView(title: .CoopHistory_Available ,chartData: data.bossCounts)
             XBarChartView(title: .CoopHistory_DefeatedEnemies ,chartData: data.bossKillCounts)
         })
-        .frame(height: 600)
+        .frame(height: 500)
         .tabViewStyle(.page(indexDisplayMode: .always))
     }
 }

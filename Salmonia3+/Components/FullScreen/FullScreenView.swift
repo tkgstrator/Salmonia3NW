@@ -144,10 +144,12 @@ struct FullScreen<Content: View>: UIViewControllerRepresentable {
             hosting.overrideUserInterfaceStyle = userInterfaceStyle
             hosting.presentationController?.delegate = coordinator as UIAdaptivePresentationControllerDelegate
 
-            // 個別の設定
-            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
-            gesture.delegate = self
-            hosting.view.addGestureRecognizer(gesture)
+            if !self.isModalInPresentation {
+                // 個別の設定
+                let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+                gesture.delegate = self
+                hosting.view.addGestureRecognizer(gesture)
+            }
 
             if let _ = presentedViewController?.isBeingPresented {} else {
                 present(hosting, animated: true, completion: nil)

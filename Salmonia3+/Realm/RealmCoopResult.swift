@@ -133,6 +133,4 @@ extension GradeType: RawRepresentable, PersistableEnum {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }

@@ -85,22 +85,16 @@ extension SpecialType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }
 
 extension WeaponType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }
 
 extension StageType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }

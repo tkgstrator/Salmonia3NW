@@ -39,6 +39,7 @@ struct GrizzcoStageCard: View {
                         Text("- -")
                     }
                     HStack(content: {
+                        Spacer()
                         Label(title: {
                             Text(String(format: "x%d", data.teamGoldenIkuraMax))
                                 .frame(width: 30, alignment: .trailing)
@@ -48,16 +49,16 @@ struct GrizzcoStageCard: View {
                                 .scaledToFit()
                                 .frame(width: 22, height: 18)
                         })
-                        Spacer()
-                        Label(title: {
-                            Text(String(format: "x%d", data.goldenIkuraMax))
-                                .frame(width: 30, alignment: .trailing)
-                        }, icon: {
-                            Image(bundle: .Golden)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 22, height: 18)
-                        })
+//                        Spacer()
+//                        Label(title: {
+//                            Text(String(format: "x%d", data.goldenIkuraMax))
+//                                .frame(width: 30, alignment: .trailing)
+//                        }, icon: {
+//                            Image(bundle: .Golden)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 22, height: 18)
+//                        })
                     })
                 })
                 .padding(.horizontal)
@@ -84,10 +85,13 @@ struct GrizzcoStageCard_Previews: PreviewProvider {
             teamIkuraMax: Int.random(in: 3000...6000))
     })
     static var previews: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5 * 2)), count: 1), content: {
-            ForEach(data, content: { entry in
-                GrizzcoStageCard(data: entry)
+        ScrollView(content: {
+            LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5 * 2)), count: 1), content: {
+                ForEach(data, content: { entry in
+                    GrizzcoStageCard(data: entry)
+                })
             })
         })
+        .padding(.horizontal)
     }
 }

@@ -232,8 +232,9 @@ enum IconList {
     }
 
     struct Accounts: View {
-        @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
+        @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
         @State private var isPresented: Bool = false
+        @StateObject var session: Session = Session()
 
         var body: some View {
             Image(bundle: .Review)
@@ -244,6 +245,7 @@ enum IconList {
                     isPresented.toggle()
                 })
                 .alert(isPresented: $isPresented, confirm: {
+                    try? session.removeAll()
                     isFirstLaunch.toggle()
                 })
         }

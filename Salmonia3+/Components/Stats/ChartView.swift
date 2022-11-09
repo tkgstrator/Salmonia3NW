@@ -28,7 +28,7 @@ struct ChartView<Content: View, Destination: View>: View {
         }, label: {
             content()
         })
-        .fullScreen(isPresented: $isPresented, transitionStyle: .crossDissolve, backgroundColor: .clear, content: {
+        .fullScreen(isPresented: $isPresented, transitionStyle: .crossDissolve, backgroundColor: .clear, isModalInPresentation: false, content: {
             destination()
         })
     }

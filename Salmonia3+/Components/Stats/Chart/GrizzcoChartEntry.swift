@@ -52,6 +52,13 @@ public enum Grizzco {
             self.value = Double(value)
         }
     }
+    
+    struct PointEntry: Identifiable {
+        let id: UUID = UUID()
+        let xValue: Double
+        let yValue: Double
+        let isClear: Bool
+    }
 
     public enum Record {
         class Total: ObservableObject {
@@ -59,6 +66,7 @@ public enum Grizzco {
             @Published var bossKillCounts: [BossCount] = []
 
             init(results: RealmSwift.Results<RealmCoopResult>, players: RealmSwift.Results<RealmCoopPlayer>) {
+                if results.isEmpty { return }
                 let bossCounts: [Int] = sum(of: results.map({ Array($0.bossCounts) }))
                 let bossKillCounts: [Int] = sum(of: players.map({ Array($0.bossKillCounts) }))
                 let teamKillCounts: [Int] = sum(of: results.map({ Array($0.bossKillCounts) }))
@@ -212,6 +220,25 @@ public enum Grizzco {
                 self.bronze = scales.removeFirst()
                 self.silver = scales.removeFirst()
                 self.gold = scales.removeFirst()
+            }
+        }
+
+        class Scatters: ObservableObject {
+            @Published var entries: [PointEntry] = []
+
+            init() {}
+
+            init(results: RealmSwift.List<RealmCoopResult>) {
+                self.entries = results.compactMap({ result in
+                    guard let player: RealmCoopPlayer = result.players.first else {
+                        return nil
+                    }
+                    return PointEntry(
+                        xValue: Double(player.goldenIkuraNum) / Double(result.goldenIkuraNum) * 100,
+                        yValue: Double(player.ikuraNum) / Double(result.ikuraNum) * 100,
+                        isClear: result.isClear
+                    )
+                })
             }
         }
 
@@ -413,12 +440,10 @@ public enum Grizzco {
         }
 
         class Wave: ObservableObject {
-            @Published var highTide: [WaveEntry] = []
-            @Published var normalTide: [WaveEntry] = []
-            @Published var lowTide: [WaveEntry] = []
+            @Published var entries: [WaveEntry] = []
 
             struct WaveEntry: Identifiable {
-                var id: Int { eventType.hashValue &+ waterLevel.hashValue }
+                var id: UUID = UUID()
                 let eventType: EventType = .Water_Levels
                 let waterLevel: WaterType = .Middle_Tide
                 let count: Int?
@@ -427,8 +452,20 @@ public enum Grizzco {
                 let clearRatio: Double?
             }
 
+            init() {}
+            
             init(waves: RealmSwift.Results<RealmCoopWave>) {
-
+                self.entries = EventType.allCases.flatMap({ eventType in
+                    WaterType.allCases.map({ waterLevel in
+                        let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("eventType=%@ AND waterLevel=%@", eventType, waterLevel)
+                        return WaveEntry(
+                            count: waves.count,
+                            goldenIkuraMax: waves.max(ofProperty: "goldenIkuraNum"),
+                            goldenIkuraAvg: waves.average(ofProperty: "goldenIkuraNum"),
+                            clearRatio: waves.count == .zero ? nil : Double(waves.filter({ $0.isClearWave }).count) / Double(waves.count) * 100
+                        )
+                    })
+                })
             }
         }
     }

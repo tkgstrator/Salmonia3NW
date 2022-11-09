@@ -26,6 +26,7 @@ struct ScheduleView: View {
 
 private struct ScheduleViewElement: View {
     let schedule: RealmCoopSchedule
+    let backgroundColor: Color
 
     let dateFormatter: DateFormatter = {
         let formatter: DateFormatter = DateFormatter()
@@ -34,36 +35,100 @@ private struct ScheduleViewElement: View {
         return formatter
     }()
 
-    var body: some View {
-        ZStack(alignment: .center, content: {
-            VStack(alignment: .leading, spacing: 0, content: {
-                HStack(alignment: .center, spacing: 0, content: {
-                    Text(schedule.stageId.localizedText)
-                    Spacer()
-                    if let startTime = schedule.startTime {
-                        Text(dateFormatter.string(from: startTime))
-                    }
-                })
-                .font(systemName: .Splatfont2, size: 14)
-                HStack(alignment: .center, spacing: 0, content: {
-                    if let gradeId = schedule.grade, let gradePoint = schedule.gradePoint {
-                        Text(String(format: "%@ %d", gradeId.localizedText, gradePoint))
-                    }
-                    Spacer()
-                    ForEach(schedule.weaponList.indices, id: \.self) { index in
-                        let weaponId: WeaponType = schedule.weaponList[index]
-                        Image(bundle: weaponId)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30, alignment: .center)
-                    }
-                })
-                .font(systemName: .Splatfont2, size: 14)
+    init(schedule: RealmCoopSchedule) {
+        self.schedule = schedule
+        self.backgroundColor = {
+            if let startTime = schedule.startTime, let endTime = schedule.endTime {
+                let currentTime: Date = Date()
+                /// 開催中
+                if currentTime >= startTime && currentTime <= endTime {
+                    return SPColor.SplatNet3.SPBlue.opacity(0.7)
+                }
+                /// 開催済み
+                if currentTime >= startTime {
+                    return SPColor.SplatNet3.SPBackground
+                }
+                /// 未開催
+                return SPColor.SplatNet3.SPYellow.opacity(0.7)
+            }
+            return SPColor.SplatNet3.SPBackground
+        }()
+    }
+
+    func StageName() -> some View {
+        Text(schedule.stageId.localizedText)
+            .font(systemName: .Splatfont2, size: 10)
+            .foregroundColor(.white)
+            .padding([.vertical], 2)
+            .padding(.horizontal, 4)
+            .background(Color.black)
+    }
+
+    func GradePoint() -> some View {
+        if let grade = schedule.grade, let gradePoint = schedule.gradePoint {
+            return Text(String(format: "%@ %d", grade.localizedText, gradePoint))
+                .font(systemName: .Splatfont2, size: 10)
+                .foregroundColor(.white)
+                .padding([.vertical], 2)
+                .padding(.horizontal, 4)
+                .background(Color.black)
+        }
+        return Text("- -")
+            .font(systemName: .Splatfont2, size: 10)
+            .foregroundColor(.white)
+            .padding([.vertical], 2)
+            .padding(.horizontal, 4)
+            .background(Color.black)
+    }
+
+    func StartTime() -> some View {
+        if let startTime = schedule.startTime {
+            return Text(dateFormatter.string(from: startTime))
+                .font(systemName: .Splatfont2, size: 10)
+                .foregroundColor(.white)
+                .padding([.vertical], 2)
+                .padding(.horizontal, 4)
+                .background(Color.black)
+        }
+        return Text("-")
+            .font(systemName: .Splatfont2, size: 10)
+            .foregroundColor(.white)
+            .padding([.vertical], 2)
+            .padding(.horizontal, 4)
+            .background(Color.black)
+    }
+
+    func WeaponList() -> some View {
+        LazyVGrid(columns: Array(repeating: .init(.fixed(28.17), spacing: 0), count: 4), content: {
+            ForEach(schedule.weaponList.indices, id: \.self, content: { index in
+                let weaponType: WeaponType = schedule.weaponList[index]
+                Image(bundle: weaponType)
+                    .resizable()
+                    .scaledToFit()
             })
-            .padding(.horizontal)
-            .padding(.bottom, 8)
-            .padding(.top, 4)
         })
+        .frame(width: 30 * 4)
+        .padding(4)
+        .background(RoundedRectangle(cornerRadius: 18).fill(Color.black))
+        .padding(4)
+    }
+
+    var body: some View {
+        HStack(spacing: 0, content: {
+            Image(bundle: schedule.stageId)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 136, height: 64)
+                .clipped()
+                .overlay(StageName(), alignment: .bottom)
+                .overlay(GradePoint(), alignment: .topLeading)
+            Rectangle()
+                .fill(backgroundColor)
+                .frame(maxWidth: .infinity, height: 64, alignment: .center)
+                .overlay(StartTime(), alignment: .topTrailing)
+                .overlay(WeaponList(), alignment: .bottomTrailing)
+        })
+        .padding(.bottom, 2)
     }
 }
 
@@ -95,12 +160,9 @@ fileprivate extension RealmCoopSchedule {
 
 struct ScheduleView_Previews: PreviewProvider {
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
+
     static var previews: some View {
-        ScheduleView(schedule: schedule)
+        ScheduleViewElement(schedule: schedule)
             .previewLayout(.fixed(width: 450, height: 60))
-        ScheduleView(schedule: schedule)
-            .previewLayout(.fixed(width: 400, height: 60))
-        ScheduleView(schedule: schedule)
-            .previewLayout(.fixed(width: 375, height: 60))
     }
 }

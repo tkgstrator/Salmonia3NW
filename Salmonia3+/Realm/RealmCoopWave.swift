@@ -82,15 +82,11 @@ extension WaterType: RawRepresentable, PersistableEnum {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }
 
 extension EventType: RawRepresentable, PersistableEnum {
     public init?(rawValue: Int) {
         self.init(id: rawValue)
     }
-
-    public var rawValue: Int { self.id! }
 }
 

@@ -43,6 +43,7 @@ private struct GrizzcoRandomWeaponContent: View {
                         if suppliedWeaponCount == weaponCount {
                             Text(bundle: .Catalog_Complete)
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .font(systemName: .Splatfont2, size: 20)
                         } else {
                             Text(String(format: "%2d/%2d", suppliedWeaponCount, weaponCount))
                                 .frame(maxWidth: .infinity, alignment: .trailing)

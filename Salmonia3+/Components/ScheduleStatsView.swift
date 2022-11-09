@@ -17,7 +17,7 @@ struct ScheduleStatsView: View {
     }
 
     var body: some View {
-        ScrollView(content: {
+        ScrollView(showsIndicators: false, content: {
             GrizzcoOverview(stats: stats)
             LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2)) {
                 LazyVGrid(columns: [.init(.flexible())], content: {
@@ -30,7 +30,6 @@ struct ScheduleStatsView: View {
             }
         })
         .padding(.horizontal)
-        .backgroundForResult()
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))

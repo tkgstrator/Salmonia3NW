@@ -40,7 +40,7 @@ struct TutorialView: View {
 
 
 private struct TutorialSignIn: View {
-    @AppStorage("CONFIG_IS_FIRST_LAUNCH_V2") var isFirstLaunch: Bool = true
+    @AppStorage("CONFIG_IS_FIRST_LAUNCH") var isFirstLaunch: Bool = true
     @StateObject var session: Session = Session()
     @State private var isModalPresented: Bool = false
     @State private var isPresented: Bool = false

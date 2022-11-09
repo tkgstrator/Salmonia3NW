@@ -37,6 +37,7 @@ struct RecordsView: View {
                 })
             })
         })
+        .padding(.horizontal)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .Record_Title))
     }
