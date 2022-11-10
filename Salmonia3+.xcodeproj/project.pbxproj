@@ -34,6 +34,7 @@
 		101726FB28F18DE60040F88B /* StatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101726FA28F18DE60040F88B /* StatsService.swift */; };
 		1017C1FA290E9C2A00C238F5 /* GrizzcoOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */; };
 		1017C1FC290EB75200C238F5 /* ChartIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1017C1FB290EB75200C238F5 /* ChartIconType.swift */; };
+		1017C1FF291CF37300C238F5 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 1017C1FE291CF37300C238F5 /* SplatNet3 */; };
 		1018B47728D603D8002BD1F0 /* ScheduleWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */; };
 		1018B47928D604C8002BD1F0 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1018B47828D604C8002BD1F0 /* ScheduleView.swift */; };
 		1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 1018B47B28D665BF002BD1F0 /* Introspect */; };
@@ -92,7 +93,6 @@
 		1031F6A9290291D600E15E8D /* GrizzcoWeaponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */; };
 		1031F6AC2902AC1B00E15E8D /* SakelienChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6AB2902AC1B00E15E8D /* SakelienChart.swift */; };
 		1031F6AE2902BA8E00E15E8D /* WaveChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1031F6AD2902BA8E00E15E8D /* WaveChart.swift */; };
-		10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10320C6028D40A3100666F09 /* SplatNet3 */; };
 		10320C6428D40D0A00666F09 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6328D40D0A00666F09 /* RealmCoopResult.swift */; };
 		10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6528D4131200666F09 /* RealmCoopWave.swift */; };
 		10320C6828D4147100666F09 /* RealmCoopPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10320C6728D4147100666F09 /* RealmCoopPlayer.swift */; };
@@ -183,6 +183,7 @@
 		101726FA28F18DE60040F88B /* StatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsService.swift; sourceTree = "<group>"; };
 		1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoOverview.swift; sourceTree = "<group>"; };
 		1017C1FB290EB75200C238F5 /* ChartIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartIconType.swift; sourceTree = "<group>"; };
+		1017C1FD291CE36E00C238F5 /* SplatNet */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet; path = ../SplatNet; sourceTree = "<group>"; };
 		1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeapon.swift; sourceTree = "<group>"; };
 		1018B47828D604C8002BD1F0 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		1018B48228D6B78A002BD1F0 /* Sesison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sesison.swift; sourceTree = "<group>"; };
@@ -248,7 +249,6 @@
 		10320C6728D4147100666F09 /* RealmCoopPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopPlayer.swift; sourceTree = "<group>"; };
 		10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		10320C6D28D4244200666F09 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
-		104458E529115E4400DB4F4E /* SplatNet3 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet3; path = ../SplatNet3; sourceTree = "<group>"; };
 		105757B328DB22A200833B95 /* LoginProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProgress.swift; sourceTree = "<group>"; };
 		1076273328DF7C520034F9A4 /* NSTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTrackingView.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoPointView.swift; sourceTree = "<group>"; };
@@ -283,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1009735428E4AC280032BB84 /* FirebaseAnalytics in Frameworks */,
+				1017C1FF291CF37300C238F5 /* SplatNet3 in Frameworks */,
 				1018B48628D6C83C002BD1F0 /* SDWebImageSwiftUI in Frameworks */,
 				10A6A19628B7A7200075563F /* RealmSwift in Frameworks */,
 				10305F92290D87E1004103CD /* SwiftUIX in Frameworks */,
@@ -290,7 +291,6 @@
 				10A6A19428B7A71E0075563F /* Realm in Frameworks */,
 				1018B47C28D665BF002BD1F0 /* Introspect in Frameworks */,
 				10A6A19228B7A7130075563F /* GoogleMobileAds in Frameworks */,
-				10320C6128D40A3100666F09 /* SplatNet3 in Frameworks */,
 				10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1009735628E4AC280032BB84 /* FirebaseAuth in Frameworks */,
 			);
@@ -632,7 +632,7 @@
 		10A6A18328B7A3D60075563F /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				104458E529115E4400DB4F4E /* SplatNet3 */,
+				1017C1FD291CE36E00C238F5 /* SplatNet */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -695,7 +695,6 @@
 				10A6A19128B7A7130075563F /* GoogleMobileAds */,
 				10A6A19328B7A71E0075563F /* Realm */,
 				10A6A19528B7A7200075563F /* RealmSwift */,
-				10320C6028D40A3100666F09 /* SplatNet3 */,
 				1018B47B28D665BF002BD1F0 /* Introspect */,
 				1018B48528D6C83C002BD1F0 /* SDWebImageSwiftUI */,
 				1009735328E4AC280032BB84 /* FirebaseAnalytics */,
@@ -703,6 +702,7 @@
 				10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */,
 				10305F91290D87E1004103CD /* SwiftUIX */,
 				10264A9D29154EC2003EEA41 /* SDBridgeSwift */,
+				1017C1FE291CF37300C238F5 /* SplatNet3 */,
 			);
 			productName = salmonia3nw;
 			productReference = 101AACB828B77C750030B56C /* Salmonia3.1.app */;
@@ -1426,6 +1426,10 @@
 			package = 1009735228E4AC280032BB84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
+		1017C1FE291CF37300C238F5 /* SplatNet3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SplatNet3;
+		};
 		1018B47B28D665BF002BD1F0 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1018B47A28D665BE002BD1F0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
@@ -1445,10 +1449,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10305F90290D87E1004103CD /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
-		};
-		10320C6028D40A3100666F09 /* SplatNet3 */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SplatNet3;
 		};
 		10A6A19128B7A7130075563F /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;
