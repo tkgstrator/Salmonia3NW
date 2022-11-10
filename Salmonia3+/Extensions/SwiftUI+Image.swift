@@ -55,6 +55,7 @@ enum StageThumbnailType: Int, CaseIterable, Codable {
 
 enum ButtonType: String, CaseIterable, Codable {
     case Arrows
+    case Swap
     case BackArrow
     case Chart
     case Circle

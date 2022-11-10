@@ -10,14 +10,40 @@ import SplatNet3
 
 struct WaveChartView: View {
     var body: some View {
-        List(content: {
-            ForEach(EventType.allCases, content: { eventType in
-                WaveChartContent(eventType: eventType)
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
+        ScrollView(content: {
+            LazyVStack(pinnedViews: .sectionHeaders, content: {
+                Section(content: {
+                    ForEach(EventType.allCases, content: { eventType in
+                        WaveChartContent(eventType: eventType)
+                            .listRowSeparator(.hidden)
+                            .listSectionSeparator(.hidden)
+                    })
+                }, header: {
+                    HStack(spacing: 0, content: {
+                        ForEach(WaterType.allCases, content: { waterLevel in
+                            WaveTideContent(waterLevel: waterLevel)
+                        })
+                    })
+                })
             })
         })
-        .listStyle(.plain)
+    }
+}
+
+struct WaveTideContent: View {
+    let waterLevel: WaterType
+
+    var body: some View {
+        ZStack(content: {
+            Rectangle()
+                .fill(SPColor.SplatNet3.SPBlue.opacity(0.7))
+            Rectangle()
+                .stroke(Color.black, lineWidth: 1)
+            Text(waterLevel.localizedText)
+                .font(systemName: .Splatfont2, size: 13)
+                .foregroundColor(.white)
+        })
+        .frame(width: 110, height: 20)
     }
 }
 
@@ -25,10 +51,14 @@ struct WaveChartContent: View {
     let eventType: EventType
 
     var body: some View {
-        HStack(spacing: 0, content: {
-            WaveContent()
-            WaveContent()
-            WaveContent()
+        VStack(alignment: .leading, spacing: 2, content: {
+            Text(eventType.localizedText)
+                .font(systemName: .Splatfont2, size: 13)
+            HStack(spacing: 0, content: {
+                WaveContent()
+                WaveContent()
+                WaveContent()
+            })
         })
     }
 }
@@ -67,8 +97,9 @@ struct WaveContent: View {
                     .fill(Color.gray)
                     .frame(width: geometry.width * (1 - percent))
             })
-            .overlay(Text(String(format: "%.1f%%", percent * 100)))
+            .overlay(Text(String(format: "%.1f%%", percent * 100)).shadow(color: .black, radius: 0, x: 1, y: 1))
             .font(systemName: .Splatfont2, size: 12)
+            .foregroundColor(.white)
         })
         .frame(height: 12)
         .padding(.horizontal, 4)
@@ -80,7 +111,7 @@ struct WaveContent: View {
             Rectangle()
                 .fill(Color(hex: "D9D9D9"))
             Rectangle()
-                .strokeBorder(.black, lineWidth: 1)
+                .stroke(Color.gray, lineWidth: 1)
         })
         .overlay(Count(clear: self.clear, appear: self.appear), alignment: .topTrailing)
         .overlay(Percent(clear: clear, appear: appear), alignment: .bottom)

@@ -45,20 +45,20 @@ struct ContentView: View {
                 })
             }
             .tag(1)
-            NavigationView(content: {
-                RecordsView()
-            })
-            .navigationViewStyle(.split)
-            .navigationBarBackButtonHidden()
-            .withGoogleMobileAds()
-            .tabItem {
-                Label(title: {
-                    Text(bundle: .Record_Title)
-                }, icon: {
-                    Image(systemName: "exclamationmark.circle")
-                })
-            }
-            .tag(2)
+//            NavigationView(content: {
+//                RecordsView()
+//            })
+//            .navigationViewStyle(.split)
+//            .navigationBarBackButtonHidden()
+//            .withGoogleMobileAds()
+//            .tabItem {
+//                Label(title: {
+//                    Text(bundle: .Record_Title)
+//                }, icon: {
+//                    Image(systemName: "exclamationmark.circle")
+//                })
+//            }
+//            .tag(2)
             NavigationView(content: {
                 UserView()
             })

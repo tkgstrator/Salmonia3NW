@@ -10,6 +10,7 @@ import SplatNet3
 import SwiftUIX
 
 struct ScheduleStatsView: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var stats: StatsService
 
     init(startTime: Date) {
@@ -30,6 +31,7 @@ struct ScheduleStatsView: View {
             }
         })
         .padding(.horizontal)
+        .background(colorScheme == .dark ? SPColor.SplatNet3.SPBackground : Color.white)
         .navigationBarBackButtonHidden()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))

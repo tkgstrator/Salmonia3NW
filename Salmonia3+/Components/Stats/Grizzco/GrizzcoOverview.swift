@@ -27,25 +27,20 @@ struct GrizzcoOverview: View {
             }
             GrizzcoSpecialView(data: stats.special)
                 .tag(1)
-            if #available(iOS 16.0, *) {
-                ChartView(destination: {
-                    EmptyView()
-                }, content: {
-                    GrizzcoWaveView(data: stats.waves)
-                })
-                .tag(0)
-            } else {
+            NavigationLink(destination: {
+                WaveChartView()
+            }, label: {
                 GrizzcoWaveView(data: stats.waves)
-                    .tag(2)
-            }
+            })
+            .tag(2)
+            NavigationLink(destination: {
+                WaveChartView()
+            }, label: {
+                GrizzcoWaveView(data: stats.waves)
+            })
+            .tag(3)
         })
         .frame(height: 160, alignment: .bottom)
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }
-
-//struct GrizzcoOverview_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GrizzcoOverview()
-//    }
-//}

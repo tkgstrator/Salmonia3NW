@@ -51,7 +51,7 @@ struct ResultsView: View {
                 Button(action: {
                     selection.next()
                 }, label: {
-                    Image(bundle: .Update)
+                    Image(bundle: .Swap)
                         .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
