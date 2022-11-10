@@ -26,7 +26,9 @@ struct LineChartView: View {
         self.chartData = chartData
         if let series = chartData.first {
             self.xAxis = stride(from: 0, through: Double(series.data.count), by: Double(series.data.count) / 5).map({ $0 })
-            self.yAxis = stride(from: chartData.minValue, through: chartData.maxValue, by: (chartData.maxValue - chartData.minValue) / 5).map({ $0 })
+            if chartData.maxValue != chartData.minValue {
+                self.yAxis = stride(from: chartData.minValue, through: chartData.maxValue, by: (chartData.maxValue - chartData.minValue) / 5).map({ $0 })
+            }
         }
     }
 
