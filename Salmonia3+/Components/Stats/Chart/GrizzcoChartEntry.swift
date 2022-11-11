@@ -10,33 +10,40 @@ import RealmSwift
 import SplatNet3
 
 public enum Grizzco {
+    /// チャートのエントリセット
     public class ChartEntrySet: ObservableObject, Identifiable {
         @Published var title: LocalizedType = .CoopHistory_Title
         @Published var data: [ChartEntry] = []
 
+        /// 平均値
         func average() -> Double {
             self.data.compactMap({ $0.value }).reduce(0, +) / Double(data.count)
         }
 
+        /// 最大値
         func max() -> Double {
             self.data.compactMap({ $0.value }).max(by: { $0 < $1 }) ?? .zero
         }
 
+        /// 最小値
         func min() -> Double {
             self.data.compactMap({ $0.value }).min(by: { $0 < $1 }) ?? .zero
         }
 
+        /// イニシャライザ
         init(title: LocalizedType) {
             self.title = title
             self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
         }
 
+        /// イニシャライザ
         init(title: LocalizedType, data: [ChartEntry]) {
             self.title = title
             self.data = data
         }
     }
 
+    /// チャートエントリ
     public struct ChartEntry: Identifiable {
         public let id: UUID = UUID()
         let count: Int
@@ -52,7 +59,8 @@ public enum Grizzco {
             self.value = Double(value)
         }
     }
-    
+
+    /// ポイントエントリ
     struct PointEntry: Identifiable {
         let id: UUID = UUID()
         let xValue: Double
@@ -61,9 +69,11 @@ public enum Grizzco {
     }
 
     public enum Record {
+        /// 総合記録
         class Total: ObservableObject {
             @Published var bossCounts: [BossCount] = []
             @Published var bossKillCounts: [BossCount] = []
+            @Published var teamKillCounts: [BossCount] = []
 
             init(results: RealmSwift.Results<RealmCoopResult>, players: RealmSwift.Results<RealmCoopPlayer>) {
                 if results.isEmpty { return }
@@ -74,6 +84,7 @@ public enum Grizzco {
                 SakelienType.allCases.enumerated().prefix(11).forEach({ index, sakelienId in
                     self.bossCounts.append(BossCount(bossId: sakelienId, count: bossCounts[index]))
                     self.bossKillCounts.append(BossCount(bossId: sakelienId, count: bossKillCounts[index]))
+                    self.teamKillCounts.append(BossCount(bossId: sakelienId, count: teamKillCounts[index]))
                 })
             }
 
@@ -89,7 +100,18 @@ public enum Grizzco {
             }
         }
 
+        /// ステージ記録
         class Stage: ObservableObject, Identifiable {
+            @Published var id: UUID = UUID()
+            @Published var stageId: StageType = .Unknown
+            @Published var maxGrade: GradeType? = nil
+            @Published var maxGradePoint: Int? = nil
+            @Published var minimumCount: Int? = nil
+            @Published var goldenIkuraMax: Int? = nil
+            @Published var ikuraMax: Int? = nil
+            @Published var teamGoldenIkuraMax: Int? = nil
+            @Published var teamIkuraMax: Int? = nil
+
             internal init(
                 stageId: StageType = .Unknown,
                 maxGrade: GradeType? = nil,
@@ -111,16 +133,6 @@ public enum Grizzco {
                 self.teamIkuraMax = teamIkuraMax
             }
 
-            @Published var id: UUID = UUID()
-            @Published var stageId: StageType = .Unknown
-            @Published var maxGrade: GradeType? = nil
-            @Published var maxGradePoint: Int? = nil
-            @Published var minimumCount: Int? = nil
-            @Published var goldenIkuraMax: Int? = nil
-            @Published var ikuraMax: Int? = nil
-            @Published var teamGoldenIkuraMax: Int? = nil
-            @Published var teamIkuraMax: Int? = nil
-
             init(
                 stageId: StageType,
                 results: RealmSwift.Results<RealmCoopResult>,
@@ -140,7 +152,9 @@ public enum Grizzco {
         }
     }
 
+    /// チャート
     public enum Chart {
+        /// 平均値
         class Average: ObservableObject {
             @Published var weaponList: [WeaponType] = []
             @Published var rareWeapon: WeaponType? = nil
@@ -161,7 +175,8 @@ public enum Grizzco {
             }
         }
 
-        class Point: ObservableObject {
+        ///
+        class Card: ObservableObject {
             @Published var playCount: Int? = nil
             @Published var goldenIkuraNum: Int? = nil
             @Published var ikuraNum: Int? = nil
@@ -441,15 +456,18 @@ public enum Grizzco {
 
         class Wave: ObservableObject {
             @Published var entries: [WaveEntry] = []
+            @Published var extra: [WaveEntry] = []
 
             struct WaveEntry: Identifiable {
                 var id: UUID = UUID()
-                let eventType: EventType = .Water_Levels
-                let waterLevel: WaterType = .Middle_Tide
-                let count: Int?
-                let goldenIkuraMax: Int?
-                let goldenIkuraAvg: Double?
+                let eventType: EventType?
+                let waterLevel: WaterType
+                let clear: Int
+                let count: Int
+                let goldenIkuraMax: Int
+                let goldenIkuraAvg: Double
                 let clearRatio: Double?
+                let isAvailable: Bool
             }
 
             init() {}
@@ -457,14 +475,43 @@ public enum Grizzco {
             init(waves: RealmSwift.Results<RealmCoopWave>) {
                 self.entries = EventType.allCases.flatMap({ eventType in
                     WaterType.allCases.map({ waterLevel in
-                        let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("eventType=%@ AND waterLevel=%@", eventType, waterLevel)
+                        let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("eventType=%@ AND waterLevel=%@ AND id!=4", eventType, waterLevel)
+                        let isAvailable: Bool = {
+                            /// 干潮が存在しない
+                            if (waterLevel == .Low_Tide && [EventType.Rush, EventType.Goldie_Seeking, EventType.Griller, EventType.Mudmouth].contains(eventType)) {
+                                return false
+                            }
+                            /// 干潮以外が存在しない
+                            if (waterLevel != .Low_Tide && [EventType.Giant, .Cohock_Charge].contains(eventType)) {
+                                return false
+                            }
+                            return true
+                        }()
                         return WaveEntry(
+                            eventType: eventType,
+                            waterLevel: waterLevel,
+                            clear: waves.filter({ $0.isClearWave }).count,
                             count: waves.count,
-                            goldenIkuraMax: waves.max(ofProperty: "goldenIkuraNum"),
-                            goldenIkuraAvg: waves.average(ofProperty: "goldenIkuraNum"),
-                            clearRatio: waves.count == .zero ? nil : Double(waves.filter({ $0.isClearWave }).count) / Double(waves.count) * 100
+                            goldenIkuraMax: waves.max(ofProperty: "goldenIkuraNum") ?? .zero,
+                            goldenIkuraAvg: waves.average(ofProperty: "goldenIkuraNum") ?? .zero,
+                            clearRatio: waves.count == .zero ? nil : Double(waves.filter({ $0.isClearWave }).count) / Double(waves.count) * 100,
+                            isAvailable: isAvailable
                         )
                     })
+                })
+                let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("id==4")
+                self.extra = WaterType.allCases.map({ waterLevel in
+                    let waves: RealmSwift.Results<RealmCoopWave> = waves.filter("waterLevel=%@", waterLevel)
+                    return WaveEntry(
+                        eventType: nil,
+                        waterLevel: waterLevel,
+                        clear: waves.filter({ $0.isClearWave }).count,
+                        count: waves.count,
+                        goldenIkuraMax: waves.max(ofProperty: "goldenIkuraNum") ?? .zero,
+                        goldenIkuraAvg: waves.average(ofProperty: "goldenIkuraNum") ?? .zero,
+                        clearRatio: waves.count == .zero ? nil : Double(waves.filter({ $0.isClearWave }).count) / Double(waves.count) * 100,
+                        isAvailable: true
+                    )
                 })
             }
         }

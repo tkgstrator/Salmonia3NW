@@ -9,15 +9,50 @@ import SwiftUI
 import SplatNet3
 
 struct WaveChartView: View {
+    let data: Grizzco.Chart.Wave
+
+    func NormalWave() -> some View {
+        ForEach(EventType.allCases, content: { eventType in
+            VStack(alignment: .leading, spacing: 2, content: {
+                Text(eventType.localizedText)
+                    .font(systemName: .Splatfont2, size: 13)
+                HStack(spacing: 0, content: {
+                    ForEach(WaterType.allCases, content: { waterLevel in
+                        if let entry: Grizzco.Chart.Wave.WaveEntry = data.entries.first(where: { $0.eventType == eventType && $0.waterLevel == waterLevel }) {
+                            WaveContent(entry: entry)
+                                .hidden(!entry.isAvailable)
+                        } else {
+                            EmptyView()
+                        }
+                    })
+                })
+            })
+        })
+    }
+
+    func ExtraWave() -> some View {
+        VStack(alignment: .leading, spacing: 2, content: {
+            Text(bundle: .CoopHistory_ExWave)
+                .font(systemName: .Splatfont2, size: 13)
+            HStack(spacing: 0, content: {
+                ForEach(WaterType.allCases, content: { waterLevel in
+                    if let entry: Grizzco.Chart.Wave.WaveEntry = data.extra.first(where: { $0.eventType == nil && $0.waterLevel == waterLevel }) {
+                        WaveContent(entry: entry)
+                            .hidden(!entry.isAvailable)
+                    } else {
+                        EmptyView()
+                    }
+                })
+            })
+        })
+    }
+
     var body: some View {
         ScrollView(content: {
             LazyVStack(pinnedViews: .sectionHeaders, content: {
                 Section(content: {
-                    ForEach(EventType.allCases, content: { eventType in
-                        WaveChartContent(eventType: eventType)
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.hidden)
-                    })
+                    NormalWave()
+                    ExtraWave()
                 }, header: {
                     HStack(spacing: 0, content: {
                         ForEach(WaterType.allCases, content: { waterLevel in
@@ -30,7 +65,7 @@ struct WaveChartView: View {
     }
 }
 
-struct WaveTideContent: View {
+private struct WaveTideContent: View {
     let waterLevel: WaterType
 
     var body: some View {
@@ -47,57 +82,33 @@ struct WaveTideContent: View {
     }
 }
 
-struct WaveChartContent: View {
-    let eventType: EventType
+private struct WaveContent: View {
+    let entry: Grizzco.Chart.Wave.WaveEntry
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 2, content: {
-            Text(eventType.localizedText)
-                .font(systemName: .Splatfont2, size: 13)
-            HStack(spacing: 0, content: {
-                WaveContent()
-                WaveContent()
-                WaveContent()
-            })
-        })
-    }
-}
-
-struct WaveContent: View {
-    let clear: Int
-    let appear: Int
-
-    init() {
-        let minValue: Int = Int.random(in: 0...50)
-        self.clear = minValue
-        self.appear = Int.random(in: minValue...50)
+    init(entry: Grizzco.Chart.Wave.WaveEntry) {
+        self.entry = entry
     }
 
-    func Count(clear: Int, appear: Int) -> some View {
-        Text(String(format: "%2d/%2d", clear, appear))
+    func Count() -> some View {
+        Text(String(format: "%2d/%2d", entry.clear, entry.count))
             .font(systemName: .Splatfont2, size: 12)
             .foregroundColor(.white)
             .padding(.horizontal, 4)
             .background(.black)
     }
 
-    func Percent(clear: Int, appear: Int) -> some View {
-        let percent: Double = {
-            if appear == .zero {
-                return .zero
-            }
-            return Double(clear) / Double(appear)
-        }()
-        return GeometryReader(content: { geometry in
+    func Percent() -> some View {
+        GeometryReader(content: { geometry in
             HStack(spacing: 0, content: {
+                let clearRatio: Double = entry.clearRatio ?? .zero
                 Rectangle()
                     .fill(SPColor.SplatNet3.SPOrange)
-                    .frame(width: geometry.width * percent)
+                    .frame(width: geometry.width * clearRatio / 100)
                 Rectangle()
                     .fill(Color.gray)
-                    .frame(width: geometry.width * (1 - percent))
+                    .frame(width: geometry.width * (1 - clearRatio / 100))
             })
-            .overlay(Text(String(format: "%.1f%%", percent * 100)).shadow(color: .black, radius: 0, x: 1, y: 1))
+            .overlay(Text(String(format: "%.1f%%", entry.clearRatio)).shadow(color: .black, radius: 0, x: 1, y: 1))
             .font(systemName: .Splatfont2, size: 12)
             .foregroundColor(.white)
         })
@@ -113,18 +124,18 @@ struct WaveContent: View {
             Rectangle()
                 .stroke(Color.gray, lineWidth: 1)
         })
-        .overlay(Count(clear: self.clear, appear: self.appear), alignment: .topTrailing)
-        .overlay(Percent(clear: clear, appear: appear), alignment: .bottom)
+        .overlay(Count(), alignment: .topTrailing)
+        .overlay(Percent(), alignment: .bottom)
         .frame(width: 110, height: 40)
     }
 }
 
-struct WaveChart_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView(content: {
-            WaveChartView()
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle(Text(bundle: .Blaster_LightLong_00))
-        })
-    }
-}
+//struct WaveChart_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView(content: {
+//            WaveChartView()
+//                .navigationBarTitleDisplayMode(.inline)
+//                .navigationTitle(Text(bundle: .Blaster_LightLong_00))
+//        })
+//    }
+//}

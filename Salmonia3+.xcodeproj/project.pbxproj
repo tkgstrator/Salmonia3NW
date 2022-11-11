@@ -113,7 +113,6 @@
 		10A6A19828B7AC1B0075563F /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A19728B7AC1B0075563F /* UserView.swift */; };
 		10A6A19A28B7AC240075563F /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A6A19928B7AC240075563F /* SchedulesView.swift */; };
 		10AF61A829145EA50043BA70 /* ToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF61A729145EA50043BA70 /* ToggleStyle.swift */; };
-		10AF61AA291477A20043BA70 /* PickerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF61A9291477A20043BA70 /* PickerStyle.swift */; };
 		10E3190F28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 10E3190E28F1E0E2009C6BBC /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		10E3191128F1E82E009C6BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */; };
 		10E3191328F1EC91009C6BBC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3191228F1EC91009C6BBC /* UIApplication.swift */; };
@@ -261,7 +260,6 @@
 		10A6A19728B7AC1B0075563F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		10A6A19928B7AC240075563F /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10AF61A729145EA50043BA70 /* ToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStyle.swift; sourceTree = "<group>"; };
-		10AF61A9291477A20043BA70 /* PickerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerStyle.swift; sourceTree = "<group>"; };
 		10E3191028F1E82E009C6BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		10E3191228F1EC91009C6BBC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStatsView.swift; sourceTree = "<group>"; };
@@ -326,10 +324,6 @@
 				1018B49228D6FB42002BD1F0 /* Icons */,
 				1018B47528D603CB002BD1F0 /* Schedules */,
 				100E873128D47DAB007FCF3C /* Results */,
-				10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */,
-				10305F8B290D618E004103CD /* Rainbow.swift */,
-				10AF61A9291477A20043BA70 /* PickerStyle.swift */,
-				10AF61A729145EA50043BA70 /* ToggleStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -391,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				1018B47828D604C8002BD1F0 /* ScheduleView.swift */,
+				10E3191A28F226D0009C6BBC /* ScheduleStatsView.swift */,
 				1018B47628D603D8002BD1F0 /* ScheduleWeapon.swift */,
 			);
 			path = Schedules;
@@ -517,6 +512,8 @@
 		10305F96290D96C1004103CD /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				10AF61A729145EA50043BA70 /* ToggleStyle.swift */,
+				10305F8B290D618E004103CD /* Rainbow.swift */,
 				1018B49728D708A3002BD1F0 /* GoogleMobileAds.swift */,
 				10305F8E290D81BC004103CD /* PullToRefresh.swift */,
 			);
@@ -928,7 +925,6 @@
 				10E3191F28F2602A009C6BBC /* GrizzcoSpecialView.swift in Sources */,
 				10320C6628D4131200666F09 /* RealmCoopWave.swift in Sources */,
 				100E873528D47DD1007FCF3C /* ResultView.swift in Sources */,
-				10AF61AA291477A20043BA70 /* PickerStyle.swift in Sources */,
 				100E876128D4E6F9007FCF3C /* WaterLevel.swift in Sources */,
 				1017C1FC290EB75200C238F5 /* ChartIconType.swift in Sources */,
 				102D15F12902EAA40092E8E6 /* GrizzcoWaveCard.swift in Sources */,
@@ -1174,7 +1170,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1210,7 +1206,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

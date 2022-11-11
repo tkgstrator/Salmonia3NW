@@ -101,10 +101,10 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
         /// 単一メッセージ
         if let message: NSScriptMessage = NSScriptMessage(rawValue: stringValue) {
             switch message {
-                case .closeWebView:
-                    UIApplication.shared.rootViewController?.dismiss(animated: true)
-                default:
-                    break
+            case .closeWebView:
+                UIApplication.shared.rootViewController?.dismiss(animated: true)
+            default:
+                break
             }
             return
         }
@@ -149,15 +149,25 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
             UIPasteboard.general.string = code
         }
 
-        if let imageURL: String = stringValue.capture(pattern: #"\[(https://.*)\]"#, group: 1) {
+        let imageURLs: [String] = stringValue.capture(pattern: #"(https://[^,^\]]*)"#)
+        if !imageURLs.isEmpty {
             Task {
-                let session: Alamofire.Session = Alamofire.Session()
-                guard let data: Data = try? await session.download(URL(unsafeString: imageURL)).serializingData().value,
-                      let image: UIImage = UIImage(data: data)
-                else {
-                    return
-                }
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                let _ = await imageURLs.asyncMap({ imageURL in
+                    let session: Alamofire.Session = Alamofire.Session()
+                    guard let data: Data = try? await session.download(URL(unsafeString: imageURL)).serializingData().value,
+                          let image: UIImage = UIImage(data: data)
+                    else {
+                        return
+                    }
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                })
+                let alert: UIAlertController = UIAlertController(
+                    title: LocalizedType.Common_Ikaring3.localized,
+                    message: LocalizedType.Common_Download.localized,
+                    preferredStyle: .alert)
+                let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
+                alert.addAction(action)
+                present(alert, animated: true)
             }
         }
     }

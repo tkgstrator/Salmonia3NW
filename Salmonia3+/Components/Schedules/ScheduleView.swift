@@ -38,6 +38,7 @@ private struct ScheduleViewElement: View {
     init(schedule: RealmCoopSchedule) {
         self.schedule = schedule
         self.backgroundColor = {
+            return [SPColor.SplatNet3.SPSalmonOrangeDarker, SPColor.SplatNet3.SPBackground].randomElement()!.opacity(0.7)
             if let startTime = schedule.startTime, let endTime = schedule.endTime {
                 let currentTime: Date = Date()
                 /// 開催中
@@ -121,7 +122,7 @@ private struct ScheduleViewElement: View {
                 .frame(width: 136, height: 64)
                 .clipped()
                 .overlay(StageName(), alignment: .bottom)
-                .overlay(GradePoint(), alignment: .topLeading)
+//                .overlay(GradePoint(), alignment: .topLeading)
             Rectangle()
                 .fill(backgroundColor)
                 .frame(maxWidth: .infinity, height: 64, alignment: .center)
@@ -162,7 +163,11 @@ struct ScheduleView_Previews: PreviewProvider {
     static let schedule: RealmCoopSchedule = RealmCoopSchedule(dummy: true)
 
     static var previews: some View {
-        ScheduleViewElement(schedule: schedule)
-            .previewLayout(.fixed(width: 450, height: 60))
+        ScrollView(content: {
+            ForEach(Range(0...10), id: \.self) { _ in
+                ScheduleViewElement(schedule: schedule)
+                    .previewLayout(.fixed(width: 450, height: 60))
+            }
+        })
     }
 }

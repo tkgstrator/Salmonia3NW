@@ -28,17 +28,11 @@ struct GrizzcoOverview: View {
             GrizzcoSpecialView(data: stats.special)
                 .tag(1)
             NavigationLink(destination: {
-                WaveChartView()
+                WaveChartView(data: stats.waves)
             }, label: {
                 GrizzcoWaveView(data: stats.waves)
             })
             .tag(2)
-            NavigationLink(destination: {
-                WaveChartView()
-            }, label: {
-                GrizzcoWaveView(data: stats.waves)
-            })
-            .tag(3)
         })
         .frame(height: 160, alignment: .bottom)
         .tabViewStyle(.page(indexDisplayMode: .never))

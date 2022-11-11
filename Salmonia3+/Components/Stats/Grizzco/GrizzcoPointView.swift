@@ -8,8 +8,8 @@
 import SwiftUI
 import SplatNet3
 
-struct GrizzcoPointView: View {
-    @ObservedObject var data: Grizzco.Chart.Point
+struct GrizzcoCardView: View {
+    @ObservedObject var data: Grizzco.Chart.Card
 
     var body: some View {
         if #available(iOS 16.0, *), !data.charts.isEmpty {
@@ -26,7 +26,7 @@ struct GrizzcoPointView: View {
 
 /// イカリング3形式の黄色いポイントカード
 private struct GrizzcoPointContent: View {
-    @ObservedObject var data: Grizzco.Chart.Point
+    @ObservedObject var data: Grizzco.Chart.Card
 
     var body: some View {
         VStack(alignment: .center, spacing: 0, content: {
