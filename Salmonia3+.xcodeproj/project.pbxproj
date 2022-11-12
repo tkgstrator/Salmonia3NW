@@ -494,6 +494,7 @@
 		10305F94290D96A4004103CD /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				10886B39291F869E005526A9 /* ChartEntry */,
 				10305F95290D96B4004103CD /* Chart */,
 				1031F6AA2902AC0200E15E8D /* Sakelien */,
 				1031F65A28FF8C4300E15E8D /* Grizzco */,
@@ -509,8 +510,6 @@
 				10305F97290D9703004103CD /* LineChartView.swift */,
 				10264AA3291618EC003EEA41 /* BarChartView.swift */,
 				10305FA0290E71F5004103CD /* GrizzcoChartEntry.swift */,
-				10886B35291F7956005526A9 /* ChartEntry.swift */,
-				10886B37291F795F005526A9 /* ChartEntrySet.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -630,6 +629,15 @@
 				10264AA12915ADD1003EEA41 /* RecordService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		10886B39291F869E005526A9 /* ChartEntry */ = {
+			isa = PBXGroup;
+			children = (
+				10886B35291F7956005526A9 /* ChartEntry.swift */,
+				10886B37291F795F005526A9 /* ChartEntrySet.swift */,
+			);
+			path = ChartEntry;
 			sourceTree = "<group>";
 		};
 		10A6A18328B7A3D60075563F /* Packages */ = {
