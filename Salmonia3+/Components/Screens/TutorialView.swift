@@ -18,14 +18,14 @@ struct TutorialView: View {
         TabView(selection: $selection, content: {
             Tutorial(
                 selection: $selection,
-                title: NSLocalizedString("TITLE_APPLICATION", comment: ""),
-                description: NSLocalizedString("DESC_APPLICATION", comment: "")
+                title: .Common_Welcome_App,
+                description: .Common_Welcome_App_Txt
             )
             .tag(0)
             Tutorial(
                 selection: $selection,
-                title: NSLocalizedString("TITLE_TRACKING", comment: ""),
-                description: NSLocalizedString("DESC_TRACKING_USAGE_DATA", comment: "")
+                title: .Common_Tracking_Data,
+                description: .Common_Tracking_Data_Txt
             )
             .trackingiOS()
             .transition(.fade)
@@ -49,13 +49,13 @@ private struct TutorialSignIn: View {
 
     var body: some View {
         GeometryReader(content: { geometry in
-            Text(localizedText: "TITLE_SIGN_IN")
+            Text(bundle: .Common_Sign_In_Title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .font(Font.system(size: 24))
                 .multilineTextAlignment(.center)
                 .position(x: geometry.center.x, y: 100)
-            Text(localizedText: "DESC_SIGN_IN")
+            Text(bundle: .Common_Sign_In_Txt)
                 .foregroundColor(.white)
                 .font(Font.system(size: 14))
                 .multilineTextAlignment(.center)
@@ -69,7 +69,7 @@ private struct TutorialSignIn: View {
             Button(action: {
                 isPresented.toggle()
             }, label: {
-                Text(localizedText: "BUTTON_SIGN_IN")
+                Text(bundle: .Common_Sign_In)
                     .fontWeight(.bold)
                     .frame(width: 300, height: 60, alignment: .center)
                     .foregroundColor(SPColor.Theme.SPOrange)
@@ -98,24 +98,24 @@ private struct TutorialSignIn: View {
 
 private struct Tutorial: View {
     @Binding var selection: Int
-    let title: String
-    let description: String
+    let title: LocalizedType
+    let description: LocalizedType
 
-    init(selection: Binding<Int>, title: String? = nil, description: String? = nil) {
+    init(selection: Binding<Int>, title: LocalizedType, description: LocalizedType) {
         self._selection = selection
-        self.title = title ?? ""
-        self.description = description ?? ""
+        self.title = title
+        self.description = description
     }
 
     var body: some View {
         GeometryReader(content: { geometry in
-            Text(localizedText: title)
+            Text(bundle: title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .font(Font.system(size: 26))
                 .multilineTextAlignment(.center)
                 .position(x: geometry.center.x, y: 100)
-            Text(localizedText: description)
+            Text(bundle: description)
                 .foregroundColor(.white)
                 .font(Font.system(size: 14))
                 .position(x: geometry.center.x, y: 160)
@@ -131,7 +131,7 @@ private struct Tutorial: View {
                     selection += 1
                 }
             }, label: {
-                Text(localizedText: "BUTTON_NEXT")
+                Text(bundle: .Common_Next)
                     .fontWeight(.bold)
                     .frame(width: 300, height: 60, alignment: .center)
                     .foregroundColor(SPColor.Theme.SPOrange)

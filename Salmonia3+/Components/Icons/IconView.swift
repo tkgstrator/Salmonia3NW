@@ -33,17 +33,17 @@ extension ButtonStyle where Self == NSOLikeButtonStyle {
 
 struct NSOCircleActionModifier: ViewModifier {
     let action: () -> Void
-    let localizedText: Text
+    let title: Text
     let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
-    init(localizedText: String, action: @escaping () -> Void) {
+    init(bundle: LocalizedType, action: @escaping () -> Void) {
         self.action = action
-        self.localizedText = Text(localizedText.sha256Hash)
+        self.title = Text(bundle: bundle)
     }
 
-    init(localizedText: Text, action: @escaping () -> Void) {
+    init(title: String, action: @escaping () -> Void) {
         self.action = action
-        self.localizedText = localizedText
+        self.title = Text(title)
     }
 
     func body(content: Content) -> some View {
@@ -56,7 +56,7 @@ struct NSOCircleActionModifier: ViewModifier {
                     .scaledToFit()
                     .foregroundColor(SPColor.Theme.SPOrange)
                     .overlay(content.padding(4))
-                localizedText
+                title
                     .font(systemName: .Splatfont2, size: 14)
                     .frame(height: 16)
                     .foregroundColor(.primary)
@@ -70,17 +70,17 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
     @State private var isPresented: Bool = false
 
     let destination: () -> T
-    let localizedText: Text
+    let title: Text
     let generator: UINotificationFeedbackGenerator = UINotificationFeedbackGenerator()
 
-    init(localizedText: String, destination: @escaping () -> T) {
+    init(bundle: LocalizedType, destination: @escaping () -> T) {
         self.destination = destination
-        self.localizedText = Text(localizedText.sha256Hash)
+        self.title = Text(bundle: bundle)
     }
 
-    init(localizedText: Text, destination: @escaping () -> T) {
+    init(title: String, destination: @escaping () -> T) {
         self.destination = destination
-        self.localizedText = localizedText
+        self.title = Text(title)
     }
 
     func body(content: Content) -> some View {
@@ -96,7 +96,7 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
                         .scaledToFit()
                         .foregroundColor(SPColor.Theme.SPOrange)
                         .overlay(content.padding(4))
-                    localizedText
+                    title
                         .font(systemName: .Splatfont2, size: 14)
                         .frame(height: 16)
                         .foregroundColor(.primary)
@@ -108,16 +108,20 @@ struct NSOCircleNavigationLinkModifier<T: View>: ViewModifier {
 }
 
 extension View {
-    func navigationCircleButton<T: View>(localizedText: String, destination: @escaping () -> T) -> some View {
-        self.modifier(NSOCircleNavigationLinkModifier(localizedText: localizedText, destination: destination))
+    func navigationCircleButton<T: View>(bundle: LocalizedType, destination: @escaping () -> T) -> some View {
+        self.modifier(NSOCircleNavigationLinkModifier(bundle: bundle, destination: destination))
     }
 
-    func actionCircleButton(localizedText: String, action: @escaping () -> Void) -> some View {
-        self.modifier(NSOCircleActionModifier(localizedText: localizedText, action: action))
+    func navigationCircleButton<T: View>(title: String, destination: @escaping () -> T) -> some View {
+        self.modifier(NSOCircleNavigationLinkModifier(title: title, destination: destination))
     }
 
-    func actionCircleButton(localizedText: Text, action: @escaping () -> Void) -> some View {
-        self.modifier(NSOCircleActionModifier(localizedText: localizedText, action: action))
+    func actionCircleButton(bundle: LocalizedType, action: @escaping () -> Void) -> some View {
+        self.modifier(NSOCircleActionModifier(bundle: bundle, action: action))
+    }
+
+    func actionCircleButton(title: String, action: @escaping () -> Void) -> some View {
+        self.modifier(NSOCircleActionModifier(title: title, action: action))
     }
 }
 

@@ -16,7 +16,7 @@ struct GrizzcoTeamView: View {
             ForEach(data.ikuraNum) { value in
                 if #available(iOS 16.0, *), !value.charts.data.isEmpty {
                     ChartView(destination: {
-                        LineChartView(chartData: value.charts)
+                        LineChartView(legend: value.charts.legend, chartData: value.charts)
                     }, content: {
                         GrizzcoTeamContent(data: value)
                     })
@@ -24,28 +24,28 @@ struct GrizzcoTeamView: View {
                     GrizzcoTeamContent(data: value)
                 }
             }
-            ForEach(data.goldenIkuraNum) { value in
-                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
-                    ChartView(destination: {
-                        LineChartView(chartData: value.charts)
-                    }, content: {
-                        GrizzcoTeamContent(data: value)
-                    })
-                } else {
-                    GrizzcoTeamContent(data: value)
-                }
-            }
-            ForEach(data.defeatedCount) { value in
-                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
-                    ChartView(destination: {
-                        LineChartView(chartData: value.charts)
-                    }, content: {
-                        GrizzcoTeamContent(data: value)
-                    })
-                } else {
-                    GrizzcoTeamContent(data: value)
-                }
-            }
+//            ForEach(data.goldenIkuraNum) { value in
+//                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
+//                    ChartView(destination: {
+//                        LineChartView(chartData: value.charts)
+//                    }, content: {
+//                        GrizzcoTeamContent(data: value)
+//                    })
+//                } else {
+//                    GrizzcoTeamContent(data: value)
+//                }
+//            }
+//            ForEach(data.defeatedCount) { value in
+//                if #available(iOS 16.0, *), !value.charts.data.isEmpty {
+//                    ChartView(destination: {
+//                        LineChartView(chartData: value.charts)
+//                    }, content: {
+//                        GrizzcoTeamContent(data: value)
+//                    })
+//                } else {
+//                    GrizzcoTeamContent(data: value)
+//                }
+//            }
         })
     }
 }

@@ -26,8 +26,6 @@ struct UserView: View {
                 }
 #if DEBUG
                 IconList.Chart()
-                IconList.Status()
-                IconList.Friends()
 #endif
             })
         })

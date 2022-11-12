@@ -24,7 +24,7 @@ enum IconList {
                     .resizable()
                     .scaledToFit()
                     .padding()
-                    .actionCircleButton(localizedText: Text(account.nickname), action: {
+                    .actionCircleButton(bundle: .Carousel_CoopHistory, action: {
                         isAppDeveloperMode.toggle()
                     })
             } else {
@@ -39,7 +39,7 @@ enum IconList {
                 .resizable()
                 .scaledToFit()
                 .navigationCircleButton(
-                    localizedText: "TITLE_DEBUG",
+                    title: "TITLE_DEBUG",
                     destination: {
                         DebugView()
                     })
@@ -55,7 +55,7 @@ enum IconList {
                 .scaledToFit()
                 .padding()
                 .actionCircleButton(
-                    localizedText: "TITLE_PRIVACY",
+                    bundle: .Common_Privacy_Policy,
                     action: {
                         isPresented.toggle()
                     })
@@ -74,7 +74,7 @@ enum IconList {
                 .scaledToFit()
                 .padding()
                 .actionCircleButton(
-                    localizedText: "TITLE_REVIEW",
+                    bundle: .Common_Write_Review,
                     action: {
                         if let scene = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first(where: { $0.activationState == .foregroundActive }) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
@@ -92,7 +92,7 @@ enum IconList {
                 .scaledToFit()
                 .padding()
                 .navigationCircleButton(
-                    localizedText: "TITLE_ERASE",
+                    bundle: .Common_Data_Managements,
                     destination: {
                         DeleteConfirmView()
                     })
@@ -106,35 +106,9 @@ enum IconList {
                 .scaledToFit()
                 .padding()
                 .navigationCircleButton(
-                    localizedText: "TITLE_APPEARANCE",
+                    bundle: .Common_Customize,
                     destination: {
                         ThemeView()
-                    })
-        }
-    }
-
-    struct Friends: View {
-        var body: some View {
-            Image(bundle: .Mission_Lv03)
-                .resizable()
-                .scaledToFit()
-                .navigationCircleButton(
-                    localizedText: "TITLE_FRIENDS",
-                    destination: {
-                        EmptyView()
-                    })
-        }
-    }
-
-    struct Status: View {
-        var body: some View {
-            Image(bundle: .CoopBossKillNum_SakelienGiant_Lv00)
-                .resizable()
-                .scaledToFit()
-                .navigationCircleButton(
-                    localizedText: "TITLE_STATUS",
-                    destination: {
-                        SPWebView()
                     })
         }
     }
@@ -145,7 +119,9 @@ enum IconList {
                 .resizable()
                 .scaledToFit()
                 .padding()
-                .actionCircleButton(localizedText: "TITLE_CHART", action: {
+                .actionCircleButton(
+                    bundle: .Common_Charts,
+                    action: {
                     let encoder: JSONEncoder = {
                         let encoder: JSONEncoder = JSONEncoder()
                         encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -187,29 +163,19 @@ enum IconList {
                 .scaledToFit()
                 .padding()
                 .actionCircleButton(
-                    localizedText: Text(bundle: .StageSchedule_Title),
+                    bundle: .Common_Get_Schedules,
                     action: {
                         isPresented.toggle()
                     })
-                .alert(isPresented: $isPresented, title: Text(bundle: .StageSchedule_Title), message: Text(bundle: .Widgets_Loading), confirm: {
-                    Task {
-                        let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
-                        RealmService.shared.save(schedules)
-                    }
-                })
-        }
-    }
-
-    struct Erase: View {
-        var body: some View {
-            Image(bundle: .Defeated)
-                .resizable()
-                .scaledToFit()
-                .padding()
-                .navigationCircleButton(
-                    localizedText: "TITLE_ERASE",
-                    destination: {
-                        EmptyView()
+                .alert(
+                    isPresented: $isPresented,
+                    title: Text(bundle: .Common_Get_Schedules),
+                    message: Text(bundle: .Common_Get_Schedules_Txt),
+                    confirm: {
+                        Task {
+                            let schedules: [CoopSchedule.Response] = try await session.getAllCoopSchedule()
+                            RealmService.shared.save(schedules)
+                        }
                     })
         }
     }
@@ -222,12 +188,18 @@ enum IconList {
                 .resizable()
                 .scaledToFit()
                 .padding()
-                .actionCircleButton(localizedText: "TITLE_ERASE_RESULTS", action: {
+                .actionCircleButton(
+                    bundle: .Common_Wipe_Results,
+                    action: {
                     isPresented.toggle()
                 })
-                .alert(isPresented: $isPresented, confirm: {
-                    RealmService.shared.deleteAll()
-                })
+                .alert(
+                    isPresented: $isPresented,
+                    title: Text(bundle: .Common_Wipe_Results),
+                    message: Text(bundle: .Common_Wipe_Results_Txt),
+                    confirm: {
+                        RealmService.shared.deleteAll()
+                    })
         }
     }
 
@@ -241,13 +213,19 @@ enum IconList {
                 .resizable()
                 .scaledToFit()
                 .padding()
-                .actionCircleButton(localizedText: "TITLE_ERASE_ACCOUNTS", action: {
+                .actionCircleButton(
+                    bundle: .Common_Unlink_Accounts,
+                    action: {
                     isPresented.toggle()
                 })
-                .alert(isPresented: $isPresented, confirm: {
-                    try? session.removeAll()
-                    isFirstLaunch.toggle()
-                })
+                .alert(
+                    isPresented: $isPresented,
+                    title: Text(bundle: .Common_Unlink_Accounts),
+                    message: Text(bundle: .Common_Unlink_Accounts_Txt),
+                    confirm: {
+                        try? session.removeAll()
+                        isFirstLaunch.toggle()
+                    })
         }
     }
 }

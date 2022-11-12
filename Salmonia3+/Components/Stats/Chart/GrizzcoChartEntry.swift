@@ -12,33 +12,50 @@ import SplatNet3
 public enum Grizzco {
     /// チャートのエントリセット
     public class ChartEntrySet: ObservableObject, Identifiable {
-        @Published var title: LocalizedType = .CoopHistory_Title
+        /// ラベル
+        @Published var legend: LocalizedType = .CoopHistory_Title
+        /// データセット
         @Published var data: [ChartEntry] = []
 
-        /// 平均値
-        func average() -> Double {
-            self.data.compactMap({ $0.value }).reduce(0, +) / Double(data.count)
+        /// xの平均値
+        func xAvg() -> Double {
+            self.data.compactMap({ $0.x }).reduce(0, +) / Double(data.count)
         }
 
-        /// 最大値
-        func max() -> Double {
-            self.data.compactMap({ $0.value }).max(by: { $0 < $1 }) ?? .zero
+        /// xの最大値
+        func xMax() -> Double {
+            self.data.compactMap({ $0.x }).max(by: { $0 < $1 }) ?? .zero
         }
 
-        /// 最小値
-        func min() -> Double {
-            self.data.compactMap({ $0.value }).min(by: { $0 < $1 }) ?? .zero
+        /// xの最小値
+        func xMin() -> Double {
+            self.data.compactMap({ $0.x }).min(by: { $0 < $1 }) ?? .zero
+        }
+
+        /// yの平均値
+        func yAvg() -> Double {
+            self.data.compactMap({ $0.y }).reduce(0, +) / Double(data.count)
+        }
+
+        /// yの最大値
+        func yMax() -> Double {
+            self.data.compactMap({ $0.y }).max(by: { $0 < $1 }) ?? .zero
+        }
+
+        /// yの最小値
+        func yMin() -> Double {
+            self.data.compactMap({ $0.y }).min(by: { $0 < $1 }) ?? .zero
         }
 
         /// イニシャライザ
-        init(title: LocalizedType) {
-            self.title = title
-            self.data = (0...20).map({ ChartEntry(count: $0, value: Double.random(in: 0...15))})
+        init(legend: LocalizedType) {
+            self.legend = legend
+            self.data = (0...20).map({ ChartEntry(x: $0, y: Int.random(in: 0...15))})
         }
 
         /// イニシャライザ
-        init(title: LocalizedType, data: [ChartEntry]) {
-            self.title = title
+        init(legend: LocalizedType, data: [ChartEntry]) {
+            self.legend = legend
             self.data = data
         }
     }
@@ -46,17 +63,27 @@ public enum Grizzco {
     /// チャートエントリ
     public struct ChartEntry: Identifiable {
         public let id: UUID = UUID()
-        let count: Int
-        let value: Double
+        let x: Double
+        let y: Double
 
-        init<T: BinaryInteger>(count: Int, value: T) {
-            self.count = count
-            self.value = Double(value)
+        init<T: BinaryInteger>(x: T, y: T) {
+            self.x = Double(x)
+            self.y = Double(y)
         }
 
-        init<T: BinaryFloatingPoint>(count: Int, value: T) {
-            self.count = count
-            self.value = Double(value)
+        init<T: BinaryFloatingPoint>(x: T, y: T) {
+            self.x = Double(x)
+            self.y = Double(y)
+        }
+
+        init<T: BinaryInteger, S: BinaryFloatingPoint>(x: T, y: S) {
+            self.x = Double(x)
+            self.y = Double(y)
+        }
+
+        init<T: BinaryInteger, S: BinaryFloatingPoint>(x: S, y: T) {
+            self.x = Double(x)
+            self.y = Double(y)
         }
     }
 
@@ -216,8 +243,8 @@ public enum Grizzco {
                 self.maxGradePoint = results.filter("grade=%@", maxGrade).max(ofProperty: "gradePoint")
                 self.averageWaveCleared = results.averageWaveCleared
                 self.charts = [
-                    results.compactMap({ $0.dangerRate == .zero ? nil : $0.gradePoint }).asLineChartEntry(id: .CoopHistory_JobRatio),
-                    results.compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .CoopHistory_Score)
+                    results.compactMap({ $0.dangerRate == .zero ? nil : $0.gradePoint }).asLineChartEntry(id: .Common_Player_You),
+                    results.compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .Common_Player_Crew)
                 ]
             }
         }
@@ -581,18 +608,6 @@ extension RealmSwift.Results where Element == RealmCoopPlayer {
             return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: nil, percent: nil) })
         }
         return specialList.map({ suppliedSpecials.count($0) }).map({ SpecialEntry(id: $0.element, count: $0.count, percent: Double($0.count) / Double(suppliedSpecials.count) * 100) })
-    }
-}
-
-extension Array where Element: BinaryFloatingPoint {
-    func asLineChartEntry(id: LocalizedType) -> Grizzco.ChartEntrySet {
-        Grizzco.ChartEntrySet(title: id, data: self.enumerated().map({ Grizzco.ChartEntry(count: $0.offset, value: $0.element) }))
-    }
-}
-
-extension Array where Element: BinaryInteger {
-    func asLineChartEntry(id: LocalizedType) -> Grizzco.ChartEntrySet {
-        Grizzco.ChartEntrySet(title: id, data: self.enumerated().map({ Grizzco.ChartEntry(count: $0.offset, value: $0.element) }))
     }
 }
 
