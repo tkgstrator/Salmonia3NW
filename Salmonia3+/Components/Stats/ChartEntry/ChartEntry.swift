@@ -15,26 +15,8 @@ public protocol ChartEntry: Identifiable {
     var x: Double { get }
     /// yの値
     var y: Double { get }
-
-    init<T: BinaryInteger>(x: T, y: T)
-    init<T: BinaryFloatingPoint>(x: T, y: T)
 }
 
 extension ChartEntry {
-    var id: UUID { UUID() }
-}
-
-struct LineChartEntry: ChartEntry {
-    let x: Double
-    let y: Double
-
-    init<T: BinaryInteger>(x: T, y: T) {
-        self.x = Double(x)
-        self.y = Double(y)
-    }
-
-    init<T: BinaryFloatingPoint>(x: T, y: T) {
-        self.x = Double(x)
-        self.y = Double(y)
-    }
+    public var id: UUID { UUID() }
 }

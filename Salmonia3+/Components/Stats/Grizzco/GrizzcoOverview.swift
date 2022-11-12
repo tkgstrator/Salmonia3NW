@@ -14,25 +14,25 @@ struct GrizzcoOverview: View {
 
     var body: some View {
         TabView(selection: $selection, content: {
-//            if #available(iOS 16.0, *) {
-//                ChartView(destination: {
-//                    PlotChartView(chartData: stats.scatters.entries)
-//                }, content: {
-//                    GrizzcoAverageView(data: stats.average)
-//                })
-//                .tag(0)
-//            } else {
-//                GrizzcoAverageView(data: stats.average)
-//                    .tag(0)
-//            }
-//            GrizzcoSpecialView(data: stats.special)
-//                .tag(1)
-//            NavigationLink(destination: {
-//                WaveChartView(data: stats.waves)
-//            }, label: {
-//                GrizzcoWaveView(data: stats.waves)
-//            })
-//            .tag(2)
+            if #available(iOS 16.0, *), !stats.averageData.chart.entries.isEmpty {
+                ChartView(destination: {
+                    PlotChartView(chart: stats.averageData.chart)
+                }, content: {
+                    GrizzcoAverageView(data: stats.averageData)
+                })
+                .tag(0)
+            } else {
+                GrizzcoAverageView(data: stats.averageData)
+                    .tag(0)
+            }
+            GrizzcoSpecialView(chart: stats.specialData)
+                .tag(1)
+            NavigationLink(destination: {
+                WaveChartView(data: stats.waveData)
+            }, label: {
+                GrizzcoWaveView()
+            })
+            .tag(2)
         })
         .frame(height: 160, alignment: .bottom)
         .tabViewStyle(.page(indexDisplayMode: .never))

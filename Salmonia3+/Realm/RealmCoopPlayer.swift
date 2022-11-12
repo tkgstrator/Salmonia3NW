@@ -81,6 +81,12 @@ extension NamePlateType: PersistableEnum {}
 
 extension SpeciesType: PersistableEnum {}
 
+extension RealmCoopPlayer {
+    var result: RealmCoopResult? {
+        self.link.first
+    }
+}
+
 extension SpecialType: PersistableEnum, RawRepresentable {
     public init?(rawValue: Int) {
         self.init(id: rawValue)

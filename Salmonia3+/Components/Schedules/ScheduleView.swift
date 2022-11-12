@@ -38,7 +38,6 @@ private struct ScheduleViewElement: View {
     init(schedule: RealmCoopSchedule) {
         self.schedule = schedule
         self.backgroundColor = {
-            return [SPColor.SplatNet3.SPSalmonOrangeDarker, SPColor.SplatNet3.SPBackground].randomElement()!.opacity(0.7)
             if let startTime = schedule.startTime, let endTime = schedule.endTime {
                 let currentTime: Date = Date()
                 /// 開催中
@@ -47,7 +46,11 @@ private struct ScheduleViewElement: View {
                 }
                 /// 開催済み
                 if currentTime >= startTime {
-                    return SPColor.SplatNet3.SPBackground
+                    if schedule.results.isEmpty {
+                        return SPColor.SplatNet3.SPBackground
+                    } else {
+                        return SPColor.SplatNet3.SPSalmonOrangeDarker
+                    }
                 }
                 /// 未開催
                 return SPColor.SplatNet3.SPYellow.opacity(0.7)
@@ -122,7 +125,7 @@ private struct ScheduleViewElement: View {
                 .frame(width: 136, height: 64)
                 .clipped()
                 .overlay(StageName(), alignment: .bottom)
-//                .overlay(GradePoint(), alignment: .topLeading)
+                .overlay(GradePoint(), alignment: .topLeading)
             Rectangle()
                 .fill(backgroundColor)
                 .frame(maxWidth: .infinity, height: 64, alignment: .center)

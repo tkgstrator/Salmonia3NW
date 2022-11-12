@@ -19,18 +19,18 @@ struct ScheduleStatsView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false, content: {
-//            LazyVStack(content: {
-//                GrizzcoOverview(stats: stats)
-//                LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2)) {
-//                    LazyVGrid(columns: [.init(.flexible())], content: {
-//                        GrizzcoMaximumView(data: stats.maximum)
-//                        GrizzcoScaleView(data: stats.scales)
-//                        GrizzcoWeaponView(data: stats.weapons)
-//                    })
-//                    GrizzcoCardView(data: stats.points)
+            LazyVStack(content: {
+                GrizzcoOverview(stats: stats)
+                LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 197.5), alignment: .top), count: 2)) {
+                    LazyVGrid(columns: [.init(.flexible())], content: {
+                        GrizzcoHighScoreView(data: stats.highScore)
+                        GrizzcoScaleView(data: stats.scaleCount)
+                        GrizzcoWeaponView(data: stats.weaponData)
+                    })
+                GrizzcoCardView(data: stats.pointCard)
 //                    GrizzcoTeamView(data: stats.values)
-//                }
-//            })
+                }
+            })
         })
         .padding(.horizontal)
         .background(colorScheme == .dark ? SPColor.SplatNet3.SPBackground : Color.white)
