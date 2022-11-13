@@ -27,6 +27,17 @@ struct GrizzcoOverview: View {
             }
             GrizzcoSpecialView(chart: stats.specialData)
                 .tag(1)
+            if #available(iOS 16.0, *), !stats.averageData.chart.entries.isEmpty {
+                ChartView(destination: {
+                    BarChartView(chart: stats.bossData.chart)
+                }, content: {
+                    GrizzcoDefeatedView()
+                })
+                .tag(3)
+            } else {
+                GrizzcoDefeatedView()
+                    .tag(3)
+            }
             NavigationLink(destination: {
                 WaveChartView(data: stats.waveData)
             }, label: {

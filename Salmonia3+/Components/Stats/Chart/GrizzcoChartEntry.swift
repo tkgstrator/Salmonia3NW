@@ -10,6 +10,7 @@ import RealmSwift
 import SplatNet3
 
 enum Grizzco {
+    /// エントリ
     struct Entry<T: RawRepresentable>: Identifiable {
         let id: UUID = UUID()
         let key: T
@@ -23,6 +24,7 @@ enum Grizzco {
         }
     }
 
+    /// 平均データ
     class AverageData: ObservableObject {
         @Published var goldenIkuraNum: Double? = nil
         @Published var ikuraNum: Double? = nil
@@ -51,6 +53,7 @@ enum Grizzco {
         }
     }
 
+    /// スペシャル支給率
     class SpecialData: ObservableObject {
         @Published var entries: [Entry<SpecialType>] = []
 
@@ -61,6 +64,7 @@ enum Grizzco {
         }
     }
 
+    /// 各WAVE
     class WaveEvent: ObservableObject {
         @Published var waves: [Entry] = []
         @Published var extra: [Entry] = []
@@ -210,6 +214,22 @@ enum Grizzco {
                         )
                     })
             }()
+        }
+    }
+
+    /// オオモノシャケ
+    class BossData: ObservableObject {
+        @Published var chart: BarChartEntryData = BarChartEntryData()
+
+        init() {}
+
+        init(results: RealmSwift.List<RealmCoopResult>) {
+            self.chart = BarChartEntryData(
+                legend: .CoopHistory_Enemy,
+                entries: [
+                    results.asBossDefeatedEntries(isMyself: true),
+                    results.asBossDefeatedEntries(isMyself: false),
+                ].flatMap({ $0 }))
         }
     }
 

@@ -13,7 +13,7 @@ public protocol ChartEntrySet: Identifiable {
     associatedtype ChartEntryType = ChartEntry
     var id: UUID { get }
     /// ラベル
-    var label: LocalizedType { get }
+//    var label: LocalizedType { get }
     /// データセット
     var data: [ChartEntryType] { get }
     
