@@ -14,7 +14,7 @@ struct GrizzcoOverview: View {
 
     var body: some View {
         TabView(selection: $selection, content: {
-            if #available(iOS 16.0, *), !stats.averageData.chart.entries.isEmpty {
+            if #available(iOS 16.0, *), !stats.averageData.isEmpty {
                 ChartView(destination: {
                     PlotChartView(chart: stats.averageData.chart)
                 }, content: {
@@ -27,7 +27,7 @@ struct GrizzcoOverview: View {
             }
             GrizzcoSpecialView(chart: stats.specialData)
                 .tag(1)
-            if #available(iOS 16.0, *), !stats.averageData.chart.entries.isEmpty {
+            if #available(iOS 16.0, *), !stats.bossData.isEmpty {
                 ChartView(destination: {
                     BarChartView(chart: stats.bossData.chart)
                 }, content: {

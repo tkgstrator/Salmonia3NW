@@ -19,11 +19,6 @@ public struct SplitNavigationViewStyle: NavigationViewStyle {
         struct ControllerView: UIViewControllerRepresentable {
             class ViewController: UIViewController {
                 override func viewDidLoad() {
-//                    svc.preferredPrimaryColumnWidth = 375
-//                    print(svc.primaryColumnWidth)
-//                    print(svc.primaryColumnWidth)
-//                    svc.presentsWithGesture = false
-//                    svc.showsSecondaryOnlyButton = false
                 }
 
                 override func viewWillAppear(_ animated: Bool) {

@@ -14,66 +14,65 @@ struct ContentView: View {
     @StateObject var session: Session = Session()
     /// 現在の表示中タブ取得
     @State private var selection: Int = 0
+    @State private var isLaunchAsAppStore: Bool = VersionUpdater.launchAsTestFlight() == .AppStore
+
+    private func Results() -> some View {
+        NavigationView(content: {
+            ResultsView()
+        })
+        .navigationViewStyle(.split)
+        .navigationBarBackButtonHidden()
+        .withGoogleMobileAds(enabled: isLaunchAsAppStore)
+        .tabItem {
+            Label(title: {
+                Text(bundle: .CoopHistory_History)
+            }, icon: {
+                Image(systemName: "sparkles")
+            })
+        }
+        .tag(0)
+    }
+
+    private func Schedules() -> some View {
+        NavigationView(content: {
+            SchedulesView()
+        })
+        .navigationViewStyle(.split)
+        .navigationBarBackButtonHidden()
+        .withGoogleMobileAds(enabled: isLaunchAsAppStore)
+        .tabItem {
+            Label(title: {
+                Text(bundle: .StageSchedule_Title)
+            }, icon: {
+                Image(systemName: "calendar")
+            })
+        }
+        .tag(1)
+    }
+
+    private func Home() -> some View {
+        NavigationView(content: {
+            UserView()
+        })
+        .navigationViewStyle(.split)
+        .navigationBarBackButtonHidden()
+        .withGoogleMobileAds(enabled: isLaunchAsAppStore)
+        .tabItem {
+            Label(title: {
+                Text(bundle: .Common_MyPage)
+            }, icon: {
+                Image(bundle: .Home)
+                    .renderingMode(.template)
+            })
+        }
+        .tag(3)
+    }
 
     var body: some View {
         TabView(selection: $selection, content: {
-            NavigationView(content: {
-                ResultsView()
-            })
-            .navigationViewStyle(.split)
-            .navigationBarBackButtonHidden()
-            .withGoogleMobileAds()
-            .tabItem {
-                Label(title: {
-                    Text(bundle: .CoopHistory_History)
-                }, icon: {
-                    Image(systemName: "sparkles")
-                })
-            }
-            .tag(0)
-            NavigationView(content: {
-                SchedulesView()
-            })
-            .navigationViewStyle(.split)
-            .navigationBarBackButtonHidden()
-            .withGoogleMobileAds()
-            .tabItem {
-                Label(title: {
-                    Text(bundle: .StageSchedule_Title)
-                }, icon: {
-                    Image(systemName: "calendar")
-                })
-            }
-            .tag(1)
-//            NavigationView(content: {
-//                RecordsView()
-//            })
-//            .navigationViewStyle(.split)
-//            .navigationBarBackButtonHidden()
-//            .withGoogleMobileAds()
-//            .tabItem {
-//                Label(title: {
-//                    Text(bundle: .Record_Title)
-//                }, icon: {
-//                    Image(systemName: "exclamationmark.circle")
-//                })
-//            }
-//            .tag(2)
-            NavigationView(content: {
-                UserView()
-            })
-            .navigationViewStyle(.split)
-            .navigationBarBackButtonHidden()
-            .withGoogleMobileAds()
-            .tabItem {
-                Label(title: {
-                    Text(bundle: .Common_Home)
-                }, icon: {
-                    Image(bundle: .Home)
-                        .renderingMode(.template)
-                })
-            }
-            .tag(3)
+            Results()
+            Schedules()
+            Home()
         })
         .fullScreenCover(isPresented: Binding(get: {
             session.accounts.isEmpty || isFirstLaunch
@@ -88,16 +87,15 @@ struct ContentView: View {
 
 struct GoogleMobileAds: ViewModifier {
     func body(content: Content) -> some View {
-        VStack(alignment: .center, spacing: 0, content: {
-            content
-            GoogleMobileAdsView()
-        })
+        content
+            .padding(.bottom, 50)
+            .overlay(GoogleMobileAdsView(), alignment: .bottom)
     }
 }
 
 extension View {
-    func withGoogleMobileAds() -> some View {
-        self.modifier(GoogleMobileAds())
+    func withGoogleMobileAds(enabled: Bool) -> some View {
+        enabled ? AnyView(self.modifier(GoogleMobileAds())) : AnyView(self)
     }
 }
 

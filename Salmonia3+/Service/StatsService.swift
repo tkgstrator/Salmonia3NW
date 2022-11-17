@@ -11,6 +11,7 @@ import SplatNet3
 import SwiftUI
 
 final class StatsService: ObservableObject {
+    @Published var startTime: Date? = nil
     @Published var pointCard: Grizzco.PointCard = Grizzco.PointCard()
     @Published var highScore: Grizzco.HighScore = Grizzco.HighScore()
     @Published var scaleCount: Grizzco.ScaleCount = Grizzco.ScaleCount()
@@ -19,6 +20,8 @@ final class StatsService: ObservableObject {
     @Published var specialData: Grizzco.SpecialData = Grizzco.SpecialData()
     @Published var waveData: Grizzco.WaveEvent = Grizzco.WaveEvent()
     @Published var bossData: Grizzco.BossData = Grizzco.BossData()
+    @Published var valueData: Grizzco.ValueData = Grizzco.ValueData()
+    @Published var rateData: Grizzco.RateData = Grizzco.RateData()
     //    @Published var average: Grizzco.Chart.Average = Grizzco.Chart.Average()
 //    @Published var maximum: Grizzco.Chart.Maximum = Grizzco.Chart.Maximum()
 //    @Published var weapons: Grizzco.Chart.Weapons = Grizzco.Chart.Weapons()
@@ -29,7 +32,7 @@ final class StatsService: ObservableObject {
 //    @Published var scatters: Grizzco.Chart.Scatters = Grizzco.Chart.Scatters()
 //    @Published var waves: Grizzco.Chart.Wave = Grizzco.Chart.Wave()
 
-    init(startTime: Date?) {
+    func calculate() {
         guard let startTime = startTime,
               let schedule: RealmCoopSchedule = RealmService.shared.objects(ofType: RealmCoopSchedule.self).first(where: { $0.startTime == startTime })
         else {
@@ -48,6 +51,12 @@ final class StatsService: ObservableObject {
         self.specialData = Grizzco.SpecialData(players: players)
         self.waveData = Grizzco.WaveEvent(waves: waves)
         self.bossData = Grizzco.BossData(results: schedule.results)
+        self.valueData = Grizzco.ValueData(results: schedule.results)
+        self.rateData = Grizzco.RateData(results: schedule.results)
+    }
+
+    init(startTime: Date?) {
+        self.startTime = startTime
         //        self.average = Grizzco.Chart.Average(schedule: schedule, players: players)
 //        self.maximum = Grizzco.Chart.Maximum(results: schedule.results)
 //        self.weapons = Grizzco.Chart.Weapons(schedule: schedule, players: players)

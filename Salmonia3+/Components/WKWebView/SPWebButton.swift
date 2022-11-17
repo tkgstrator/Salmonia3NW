@@ -23,7 +23,6 @@ struct SPWebButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30, alignment: .center)
-//                    .foregroundColor(.primary)
             })
         })
         .buttonStyle(.plain)

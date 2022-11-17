@@ -15,12 +15,12 @@ struct ThemeView: View {
 
     var body: some View {
         List(content: {
-            SPToggle(isPresented: appearances.$colorScheme, bundle: .L_BtnOption_07_T_Header_00)
-            SPToggle(isPresented: appearances.$gamingScheme, bundle: .CoopHistory_Limited)
+            SPToggle(isPresented: appearances.$colorScheme, bundle: .Common_DarkMode)
+            SPToggle(isPresented: appearances.$gamingScheme, bundle: .Common_GamingMode)
         })
         .listStyle(.plain)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(Text(bundle: .L_Bottom_05_T_Info_00))
+        .navigationTitle(Text(bundle: .Common_Customize))
     }
 }
 

@@ -63,7 +63,7 @@ struct WaveChartView: View {
                 })
             })
         })
-        .navigationTitle(Text(bundle: .Common_Clear_Ratio))
+        .navigationTitle(Text(bundle: .Common_Event_Clear_Ratio))
     }
 }
 

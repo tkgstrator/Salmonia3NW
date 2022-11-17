@@ -113,6 +113,10 @@
 		10886B4D29210ECF005526A9 /* BarChartEntrySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B4C29210ECF005526A9 /* BarChartEntrySet.swift */; };
 		10886B4F29210F0C005526A9 /* BarChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B4E29210F0C005526A9 /* BarChartEntry.swift */; };
 		10886B5229214C8A005526A9 /* GrizzcoDefeatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5129214C8A005526A9 /* GrizzcoDefeatedView.swift */; };
+		10886B55292394FD005526A9 /* GrizzcoRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B54292394FD005526A9 /* GrizzcoRateView.swift */; };
+		10886B572923AB0E005526A9 /* RateChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B562923AB0E005526A9 /* RateChartView.swift */; };
+		10886B5929262CD3005526A9 /* NSScriptContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5829262CD3005526A9 /* NSScriptContent.swift */; };
+		10886B5B29262CE8005526A9 /* NSScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5A29262CE8005526A9 /* NSScriptMessage.swift */; };
 		1098543E28F6F68E00E1E22F /* GrizzcoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
@@ -276,6 +280,10 @@
 		10886B4C29210ECF005526A9 /* BarChartEntrySet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartEntrySet.swift; sourceTree = "<group>"; };
 		10886B4E29210F0C005526A9 /* BarChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartEntry.swift; sourceTree = "<group>"; };
 		10886B5129214C8A005526A9 /* GrizzcoDefeatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoDefeatedView.swift; sourceTree = "<group>"; };
+		10886B54292394FD005526A9 /* GrizzcoRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoRateView.swift; sourceTree = "<group>"; };
+		10886B562923AB0E005526A9 /* RateChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateChartView.swift; sourceTree = "<group>"; };
+		10886B5829262CD3005526A9 /* NSScriptContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScriptContent.swift; sourceTree = "<group>"; };
+		10886B5A29262CE8005526A9 /* NSScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScriptMessage.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoCardView.swift; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
@@ -509,6 +517,8 @@
 			children = (
 				1031F6A42901538300E15E8D /* SPWebView.swift */,
 				1031F6A6290164B800E15E8D /* SPWebButton.swift */,
+				10886B5829262CD3005526A9 /* NSScriptContent.swift */,
+				10886B5A29262CE8005526A9 /* NSScriptMessage.swift */,
 			);
 			path = WKWebView;
 			sourceTree = "<group>";
@@ -529,6 +539,7 @@
 		10305F95290D96B4004103CD /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				10886B562923AB0E005526A9 /* RateChartView.swift */,
 				10264AA929170283003EEA41 /* PlotChartView.swift */,
 				10305F97290D9703004103CD /* LineChartView.swift */,
 				10264AA3291618EC003EEA41 /* BarChartView.swift */,
@@ -573,15 +584,10 @@
 		1031F65A28FF8C4300E15E8D /* Grizzco */ = {
 			isa = PBXGroup;
 			children = (
+				10886B53292307C0005526A9 /* Card */,
 				10886B5029214C6D005526A9 /* Overview */,
-				1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */,
-				1031F65D28FF8C8D00E15E8D /* GrizzccoHighScoreView.swift */,
-				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
-				1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */,
-				1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */,
-				1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */,
-				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
 				102D15EE2902D99B0092E8E6 /* GrizzcoTeamCard.swift */,
+				1031F66328FF8F2B00E15E8D /* GrizzcoScheduleCard.swift */,
 				10264AA529163163003EEA41 /* GrizzcoRecordCard.swift */,
 				10264AA72916402D003EEA41 /* GrizzcoStageCard.swift */,
 			);
@@ -690,11 +696,25 @@
 		10886B5029214C6D005526A9 /* Overview */ = {
 			isa = PBXGroup;
 			children = (
+				1017C1F9290E9C2A00C238F5 /* GrizzcoOverview.swift */,
+				1031F66128FF8E6C00E15E8D /* GrizzcoAverageCard.swift */,
 				102D15F02902EAA40092E8E6 /* GrizzcoWaveCard.swift */,
 				10886B5129214C8A005526A9 /* GrizzcoDefeatedView.swift */,
 				10E3191E28F2602A009C6BBC /* GrizzcoSpecialView.swift */,
 			);
 			path = Overview;
+			sourceTree = "<group>";
+		};
+		10886B53292307C0005526A9 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */,
+				1031F65F28FF8C9A00E15E8D /* GrizzcoScalesCard.swift */,
+				1031F65D28FF8C8D00E15E8D /* GrizzccoHighScoreView.swift */,
+				1031F6A8290291D600E15E8D /* GrizzcoWeaponView.swift */,
+				10886B54292394FD005526A9 /* GrizzcoRateView.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		10A6A18328B7A3D60075563F /* Packages */ = {
@@ -966,7 +986,9 @@
 				100E875A28D4D4DB007FCF3C /* ResultWave.swift in Sources */,
 				10886B4B291FD9AF005526A9 /* PlotChartEntry.swift in Sources */,
 				1098543E28F6F68E00E1E22F /* GrizzcoCardView.swift in Sources */,
+				10886B55292394FD005526A9 /* GrizzcoRateView.swift in Sources */,
 				1031878628FE9EAE005AFBB9 /* JSONCoopResult.swift in Sources */,
+				10886B5B29262CE8005526A9 /* NSScriptMessage.swift in Sources */,
 				1031F66B28FFF1F100E15E8D /* ResultRefreshable.swift in Sources */,
 				100E876528D4E92D007FCF3C /* Salmon.swift in Sources */,
 				10886B45291FBC70005526A9 /* RealmSwift+Results.swift in Sources */,
@@ -1019,6 +1041,8 @@
 				10264AAA29170283003EEA41 /* PlotChartView.swift in Sources */,
 				10886B43291FBC31005526A9 /* RealmSwift+List.swift in Sources */,
 				10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */,
+				10886B572923AB0E005526A9 /* RateChartView.swift in Sources */,
+				10886B5929262CD3005526A9 /* NSScriptContent.swift in Sources */,
 				1018B49628D6FD2B002BD1F0 /* TutorialView.swift in Sources */,
 				1018B49C28D73352002BD1F0 /* SwiftUI+Text.swift in Sources */,
 				100E875328D4B91A007FCF3C /* ResultHeader.swift in Sources */,
@@ -1254,7 +1278,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1274,7 +1298,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1290,7 +1314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia3+/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1310,7 +1334,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
 				PRODUCT_NAME = Salmonia3.1;
 				SWIFT_EMIT_LOC_STRINGS = YES;

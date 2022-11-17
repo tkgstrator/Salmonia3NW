@@ -30,7 +30,7 @@ struct UserView: View {
             })
         })
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(Text(bundle: .Common_Home))
+        .navigationTitle(Text(bundle: .Common_MyPage))
     }
 }
 

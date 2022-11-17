@@ -24,6 +24,41 @@ enum Grizzco {
         }
     }
 
+    struct RateEntry: Identifiable {
+        let id: UUID = UUID()
+        let gradePoint: Int
+        let percent: Double
+        let isMyself: Bool
+
+        init(gradePoint: Int, percent: Double, isMyself: Bool) {
+            self.gradePoint = gradePoint
+            self.percent = percent
+            self.isMyself = isMyself
+        }
+    }
+
+    struct RateEntrySet: Identifiable {
+        let id: UUID = UUID()
+        let legend: LocalizedType
+        let entries: [PlotChartEntry]
+    }
+
+    class RateData: ObservableObject {
+        @Published var ikuraNum: PlotChartEntryData = PlotChartEntryData()
+
+        init() {}
+        
+        init(results: RealmSwift.List<RealmCoopResult>) {
+            self.ikuraNum = PlotChartEntryData(
+                legend: .CoopHistory_DeliverCount,
+                entries: [
+                    PlotChartEntrySet(label: .Common_Player_You, data: results.ikuraNumRate(isMyself: true)),
+                    PlotChartEntrySet(label: .Common_Player_Crew, data: results.ikuraNumRate(isMyself: false))
+                ]
+            )
+        }
+    }
+
     /// 平均データ
     class AverageData: ObservableObject {
         @Published var goldenIkuraNum: Double? = nil
@@ -33,6 +68,9 @@ enum Grizzco {
         @Published var rareWeapon: WeaponType? = nil
         @Published var weaponList: [WeaponType] = []
         @Published var chart: PlotChartEntryData = PlotChartEntryData()
+        var isEmpty: Bool {
+            chart.entries.first?.data.isEmpty ?? true
+        }
 
         init() {}
 
@@ -136,8 +174,12 @@ enum Grizzco {
         @Published var bossKillCounts: Int? = nil
         @Published var helpCount: Int? = nil
         @Published var deathCount: Int? = nil
+        @Published var defeatedCounts: Int? = nil
         /// キケン度のチャート
         @Published var chart: LineChartEntryData = LineChartEntryData()
+        var isEmpty: Bool {
+            chart.entries.first?.data.isEmpty ?? true
+        }
 
         init() {}
         
@@ -152,6 +194,7 @@ enum Grizzco {
             self.bossKillCounts = results.filter("isBossDefeated=true").count
             self.helpCount = players.sum(ofProperty: "helpCount")
             self.deathCount = players.sum(ofProperty: "deadCount")
+            self.defeatedCounts = players.sum(ofProperty: "bossKillCountsTotal")
             self.chart = LineChartEntryData(
                 legend: .CoopHistory_DangerRatio,
                 entries: [
@@ -179,6 +222,104 @@ enum Grizzco {
             self.bronze = scales[0]
             self.silver = scales[1]
             self.gold = scales[2]
+        }
+    }
+
+    class ValueEntry: ObservableObject {
+        @Published var legend: LocalizedType = .CoopHistory_Title
+        @Published var avg: Double? = nil
+        @Published var max: Int? = nil
+        @Published var chart: LineChartEntryData = LineChartEntryData()
+        var isEmpty: Bool {
+            chart.entries.first?.data.isEmpty ?? true
+        }
+
+        init() {}
+
+        init(legend: LocalizedType, avg: Double?, max: Int?, chart: LineChartEntryData) {
+            self.legend = legend
+            self.avg = avg
+            self.max = max
+            self.chart = chart
+        }
+    }
+
+    ///
+    class ValueData: ObservableObject {
+        @Published var ikuraNum: ValueEntry = ValueEntry()
+        @Published var teamIkuraNum: ValueEntry = ValueEntry()
+        @Published var goldenIkuraNum: ValueEntry = ValueEntry()
+        @Published var teamGoldenIkuraNum: ValueEntry = ValueEntry()
+        @Published var bossDefeatedNum: ValueEntry = ValueEntry()
+        @Published var teamBossDefeatedNum: ValueEntry = ValueEntry()
+
+        init() {}
+
+        init(results: RealmSwift.List<RealmCoopResult>) {
+            let players: [RealmCoopPlayer] = results.compactMap({ $0.players.first(where: { $0.isMyself}) })
+            self.ikuraNum = ValueEntry(
+                legend: .CoopHistory_DeliverCount,
+                avg: players.map({ $0.ikuraNum }).avg(),
+                max: players.map({ $0.ikuraNum }).max(),
+                chart: LineChartEntryData(
+                    legend: .CoopHistory_DeliverCount,
+                    entries: [
+                        results.ikuraNum(isMyself: true).asLineChartEntry(id: .Common_Player_You),
+                        results.ikuraNum(isMyself: false).asLineChartEntry(id: .Common_Player_Crew),
+                    ])
+            )
+            self.teamIkuraNum = ValueEntry(
+                legend: .CoopHistory_DeliverCount,
+                avg: results.map({ $0.ikuraNum }).avg(),
+                max: results.map({ $0.ikuraNum }).max(),
+                chart: LineChartEntryData(
+                    legend: .CoopHistory_DeliverCount,
+                    entries: [
+                        results.teamIkuraNum().asLineChartEntry(id: .Common_Player_You),
+                    ])
+            )
+            self.goldenIkuraNum = ValueEntry(
+                legend: .CoopHistory_GoldenDeliverCount,
+                avg: players.map({ $0.goldenIkuraNum }).avg(),
+                max: players.map({ $0.goldenIkuraNum }).max(),
+                chart: LineChartEntryData(
+                    legend: .CoopHistory_GoldenDeliverCount,
+                    entries: [
+                        results.goldenIkuraNum(isMyself: true).asLineChartEntry(id: .Common_Player_You),
+                        results.goldenIkuraNum(isMyself: false).asLineChartEntry(id: .Common_Player_Crew),
+                    ])
+            )
+            self.teamGoldenIkuraNum = ValueEntry(
+                legend: .CoopHistory_DeliverCount,
+                avg: results.map({ $0.goldenIkuraNum }).avg(),
+                max: results.map({ $0.goldenIkuraNum }).max(),
+                chart: LineChartEntryData(
+                    legend: .CoopHistory_GoldenDeliverCount,
+                    entries: [
+                        results.teamGoldenIkuraNum().asLineChartEntry(id: .Common_Player_You),
+                    ])
+            )
+            self.bossDefeatedNum = ValueEntry(
+                legend: .CoopHistory_Enemy,
+                avg: players.map({ $0.bossKillCountsTotal }).avg(),
+                max: players.map({ $0.bossKillCountsTotal }).max(),
+                chart: LineChartEntryData(
+                    legend: .Common_Defeated_Sakelien_Count,
+                    entries: [
+                        results.defeatedNum(isMyself: true).asLineChartEntry(id: .Common_Player_You),
+                        results.defeatedNum(isMyself: false).asLineChartEntry(id: .Common_Player_Crew),
+                    ])
+            )
+            self.teamBossDefeatedNum = ValueEntry(
+                legend: .CoopHistory_Enemy,
+                avg: results.map({ $0.bossKillCounts.sum() }).avg(),
+                max: results.map({ $0.bossKillCounts.sum() }).max(),
+                chart: LineChartEntryData(
+                    legend: .Common_Defeated_Sakelien_Count,
+                    entries: [
+                        results.teamDefeatedNum().asLineChartEntry(id: .Common_Player_You),
+                    ])
+            )
         }
     }
 
@@ -220,12 +361,15 @@ enum Grizzco {
     /// オオモノシャケ
     class BossData: ObservableObject {
         @Published var chart: BarChartEntryData = BarChartEntryData()
+        var isEmpty: Bool {
+            chart.entries.isEmpty
+        }
 
         init() {}
 
         init(results: RealmSwift.List<RealmCoopResult>) {
             self.chart = BarChartEntryData(
-                legend: .CoopHistory_Enemy,
+                legend: .Common_Defeated_Ratio,
                 entries: [
                     results.asBossDefeatedEntries(isMyself: true),
                     results.asBossDefeatedEntries(isMyself: false),
@@ -240,6 +384,9 @@ enum Grizzco {
         @Published var maxGradePoint: Int? = nil
         /// 評価レートのチャート
         @Published var chart: LineChartEntryData = LineChartEntryData()
+        var isEmpty: Bool {
+            chart.entries.first?.data.isEmpty ?? false
+        }
 
         init() {}
         
@@ -260,6 +407,15 @@ enum Grizzco {
                     results.filter({ $0.dangerRate != .zero }).compactMap({ $0.gradePointCrew }).asLineChartEntry(id: .Common_Player_Crew),
                 ])
         }
+    }
+}
+
+extension Array where Element: BinaryInteger {
+    func avg() -> Double? {
+        if self.isEmpty {
+            return nil
+        }
+        return Double(self.reduce(0, +)) / Double(self.count)
     }
 }
 

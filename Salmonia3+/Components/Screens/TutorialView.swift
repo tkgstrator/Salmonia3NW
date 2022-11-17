@@ -89,7 +89,9 @@ private struct TutorialSignIn: View {
             })
             .fullScreen(isPresented: $isModalPresented, content: {
                 LoadingView(code: $code, verifier: $verifier, onSuccess: {
-                    isFirstLaunch.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        isFirstLaunch.toggle()
+                    })
                 })
             })
         })

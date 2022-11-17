@@ -15,7 +15,7 @@ struct GrizzcoDefeatedView: View {
         ZStack(alignment: .center, content: {
             SPColor.SplatNet2.SPRed
             VStack(alignment: .center, spacing: 0, content: {
-                Text(bundle: .CoopHistory_Enemy)
+                Text(bundle: .Common_Defeated_Ratio)
                     .font(systemName: .Splatfont2, size: 13)
                     .foregroundColor(.white)
                     .shadow(color: Color.black, radius: 0, x: 1, y: 1)

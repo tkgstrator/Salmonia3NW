@@ -16,8 +16,7 @@ struct GrizzcoWaveView: View {
             SPColor.SplatNet2.SPRed
             VStack(alignment: .center, spacing: 0, content: {
                 HStack(alignment: .center, spacing: nil, content: {
-                    Text(bundle: .CoopHistory_HighestScore)
-                    Text(bundle: .History_Summary)
+                    Text(bundle: .Common_Event_Clear_Ratio)
                 })
                 .font(systemName: .Splatfont2, size: 13)
                 .foregroundColor(.white)

@@ -22,6 +22,7 @@ struct ChartView<Content: View, Destination: View>: View {
         self.destination = destination
     }
 
+
     var body: some View {
         Button(action: {
             isPresented.toggle()

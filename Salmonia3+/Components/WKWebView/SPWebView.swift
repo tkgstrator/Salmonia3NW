@@ -16,6 +16,7 @@ import SplatNet3
 import SDBridgeSwift
 #endif
 
+/// イカリング3ビューワ
 struct SPWebView: UIViewControllerRepresentable {
     class Coordinator: NSObject {
         var parent: SPWebView
@@ -39,37 +40,6 @@ struct SPWebView: UIViewControllerRepresentable {
     }
 }
 
-private enum NSScriptContent {
-    case closeWebView
-    case reloadExtension
-    case completeLoading
-    case invokeNativeShare(Share)
-    case invokeNativeShareUrl(ShareURL)
-    case copyToClipboard(String)
-    case downloadimages([String])
-
-    struct Share: Codable {
-        let text: String
-        let imageUrl: String
-        let hashtags: [String]
-    }
-    struct ShareURL: Codable {
-        let text: String
-        let url: String
-    }
-}
-
-/// イカリング3が送ってくるメッセージ
-private enum NSScriptMessage: String, CaseIterable {
-    case closeWebView
-    case reloadExtension
-    case completeLoading
-    case invokeNativeShare
-    case invokeNativeShareUrl
-    case copyToClipboard
-    case downloadimages
-}
-
 final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
     @Environment(\.locale) var locale
     @StateObject var session: Session = Session()
@@ -82,14 +52,15 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
         return webView
     }()
 
+    /// ロードのIndicator
     private let indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-//        indicator.style = .large
         indicator.color = .white
         return indicator
     }()
 
+    /// JavaScriptを実行
     private func evaluateJavaScript(content: Any?) {
         /// 変換不能だったとき
         guard let content = content,
@@ -98,7 +69,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
             return
         }
 
-        /// 単一メッセージ
+        /// 送られてきたメッセージを変換
         if let message: NSScriptMessage = NSScriptMessage(rawValue: stringValue) {
             switch message {
             case .closeWebView:
@@ -127,8 +98,15 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
                 else {
                     return
                 }
-                let ac: UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                self.present(ac, animated: true)
+                let controller: UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    if let popover = controller.popoverPresentationController {
+                        popover.sourceView = controller.view
+                        popover.barButtonItem = .none
+                        popover.sourceRect = controller.accessibilityFrame
+                    }
+                }
+                self.present(controller, animated: true)
             }
             return
         }
@@ -139,8 +117,15 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
                 "\(object.text) #Salmonia3",
                 URL(unsafeString: object.url)
             ]
-            let ac: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            self.present(ac, animated: true)
+            let controller: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                if let popover = controller.popoverPresentationController {
+                    popover.sourceView = controller.view
+                    popover.barButtonItem = .none
+                    popover.sourceRect = controller.accessibilityFrame
+                }
+            }
+            self.present(controller, animated: true)
             return
         }
 
@@ -162,8 +147,8 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 })
                 let alert: UIAlertController = UIAlertController(
-                    title: LocalizedType.Common_Ikaring3.localized,
-                    message: LocalizedType.Common_Download.localized,
+                    title: LocalizedType.Common_App_Salmonia.localized,
+                    message: LocalizedType.Common_Save_To_PhotoLibrary.localized,
                     preferredStyle: .alert)
                 let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
                 alert.addAction(action)
@@ -274,18 +259,18 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
         let gtoken: String = account.credential.gameWebToken
 
         switch gameWebToken.status {
-            case .Valid:
-                self.loadWithGToken(gtoken: gtoken)
-            case .Expired:
-                session.refresh(account.credential, for: Alamofire.Session(), completion: { value in
-                    switch value {
-                        case .success(let credential):
-                            let gtoken: String = credential.gameWebToken
-                            self.loadWithGToken(gtoken: gtoken)
-                        case .failure(_):
-                            break
-                    }
-                })
+        case .Valid:
+            self.loadWithGToken(gtoken: gtoken)
+        case .Expired:
+            session.refresh(account.credential, for: Alamofire.Session(), completion: { value in
+                switch value {
+                case .success(let credential):
+                    let gtoken: String = credential.gameWebToken
+                    self.loadWithGToken(gtoken: gtoken)
+                case .failure(_):
+                    break
+                }
+            })
         }
     }
 

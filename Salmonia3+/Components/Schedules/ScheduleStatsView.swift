@@ -26,11 +26,15 @@ struct ScheduleStatsView: View {
                         GrizzcoHighScoreView(data: stats.highScore)
                         GrizzcoScaleView(data: stats.scaleCount)
                         GrizzcoWeaponView(data: stats.weaponData)
+//                        GrizzcoRateView(data: stats.rateData)
                     })
-                GrizzcoCardView(data: stats.pointCard)
-//                    GrizzcoTeamView(data: stats.values)
+                    GrizzcoCardView(data: stats.pointCard)
+                    GrizzcoTeamView(data: stats.valueData)
                 }
             })
+        })
+        .onAppear(perform: {
+            stats.calculate()
         })
         .padding(.horizontal)
         .background(colorScheme == .dark ? SPColor.SplatNet3.SPBackground : Color.white)

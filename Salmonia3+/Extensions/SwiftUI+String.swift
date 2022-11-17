@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 
 extension String {
+    init<T: Numeric>(format: String, _ value: T?) {
+        if let value = value, let value: CVarArg = value as? CVarArg {
+            self.init(format: format, value)
+        } else {
+            self.init("-")
+        }
+    }
+
     init(format: String, _ value: Double?) {
         if let value = value {
             self.init(format: format, value)
