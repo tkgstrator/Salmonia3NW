@@ -117,6 +117,7 @@
 		10886B572923AB0E005526A9 /* RateChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B562923AB0E005526A9 /* RateChartView.swift */; };
 		10886B5929262CD3005526A9 /* NSScriptContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5829262CD3005526A9 /* NSScriptContent.swift */; };
 		10886B5B29262CE8005526A9 /* NSScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5A29262CE8005526A9 /* NSScriptMessage.swift */; };
+		10886B5D2926433F005526A9 /* UIActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10886B5C2926433F005526A9 /* UIActivityViewController.swift */; };
 		1098543E28F6F68E00E1E22F /* GrizzcoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */; };
 		10A0ACAA28DC730F008B332A /* SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0ACA928DC730F008B332A /* SDWebImage.swift */; };
 		10A0ACAE28DC7717008B332A /* SPLATNET1.png in Resources */ = {isa = PBXBuildFile; fileRef = 10A0ACAD28DC7717008B332A /* SPLATNET1.png */; };
@@ -284,6 +285,7 @@
 		10886B562923AB0E005526A9 /* RateChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateChartView.swift; sourceTree = "<group>"; };
 		10886B5829262CD3005526A9 /* NSScriptContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScriptContent.swift; sourceTree = "<group>"; };
 		10886B5A29262CE8005526A9 /* NSScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSScriptMessage.swift; sourceTree = "<group>"; };
+		10886B5C2926433F005526A9 /* UIActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityViewController.swift; sourceTree = "<group>"; };
 		1098543D28F6F68E00E1E22F /* GrizzcoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrizzcoCardView.swift; sourceTree = "<group>"; };
 		10A0ACA928DC730F008B332A /* SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDWebImage.swift; sourceTree = "<group>"; };
 		10A0ACAD28DC7717008B332A /* SPLATNET1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SPLATNET1.png; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 			children = (
 				1031878128FE43C8005AFBB9 /* CustomBackButton.swift */,
 				10320C6A28D41B8700666F09 /* SplitNavigationViewStyle.swift */,
+				10886B5C2926433F005526A9 /* UIActivityViewController.swift */,
 			);
 			path = UINavigationController;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				100E875828D4BFBB007FCF3C /* SwiftUI+View.swift in Sources */,
 				1031F66428FF8F2B00E15E8D /* GrizzcoScheduleCard.swift in Sources */,
 				101AACBC28B77C750030B56C /* mainApp.swift in Sources */,
+				10886B5D2926433F005526A9 /* UIActivityViewController.swift in Sources */,
 				1018B49428D6FB82002BD1F0 /* IconView.swift in Sources */,
 				100E877528D59261007FCF3C /* ResultScore.swift in Sources */,
 				10886B40291FBC02005526A9 /* WeaponType.swift in Sources */,

@@ -99,14 +99,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
                     return
                 }
                 let controller: UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                if UIDevice.current.userInterfaceIdiom == .pad {
-                    if let popover = controller.popoverPresentationController {
-                        popover.sourceView = controller.view
-                        popover.barButtonItem = .none
-                        popover.sourceRect = controller.accessibilityFrame
-                    }
-                }
-                self.present(controller, animated: true)
+                self.popover(controller, animated: true)
             }
             return
         }
@@ -118,14 +111,7 @@ final class WebViewController: UIViewController, WKScriptMessageHandler, WKNavig
                 URL(unsafeString: object.url)
             ]
             let controller: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                if let popover = controller.popoverPresentationController {
-                    popover.sourceView = controller.view
-                    popover.barButtonItem = .none
-                    popover.sourceRect = controller.accessibilityFrame
-                }
-            }
-            self.present(controller, animated: true)
+            self.popover(controller, animated: true)
             return
         }
 
