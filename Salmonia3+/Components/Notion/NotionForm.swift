@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct NotionForm: View {
     @Environment(\.dismiss) var dismiss
@@ -21,16 +22,20 @@ struct NotionForm: View {
 
     var body: some View {
         Form(content: {
-            Section(header: Text("種類"), content: {
-                Picker("種類", selection: $selection, content: {
+            Section(header: Text(bundle: .Common_Form_Type), content: {
+                Picker(LocalizedType.Common_Form_Type.localized,
+                       selection: $selection,
+                       content: {
                     ForEach(TagType.allCases, content: { formType in
-                        Text(formType.rawValue)
+                        Text(bundle: formType.localized)
                             .tag(formType)
                     })
                 })
             })
-            Section(header: Text("内容"), content: {
-                TextField("タイトル", text: $title, isEditing: $isEditing)
+            Section(header: Text(bundle: .Common_Form_Title), content: {
+                TextField("", text: $title, isEditing: $isEditing)
+            })
+            Section(header: Text(bundle: .Common_Form_Content), content: {
                 TextEditor(text: $content)
             })
             Button(action: {

@@ -14,20 +14,24 @@ struct UserView: View {
 
     var body: some View {
         ScrollView(content: {
-            LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
-                IconList.NSO()
-                IconList.Review()
-                IconList.Appearance()
-                IconList.Setting()
-                IconList.Privacy()
-                IconList.Schedule()
-                IconList.Form()
-                if isAppDeveloperMode {
-                    IconList.Debug()
-                }
+            LazyVStack(content: {
+                LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 3), spacing: 16, content: {
+                    IconList.NSO()
+                    IconList.Review()
+                    IconList.Appearance()
+                })
+                LazyVGrid(columns: Array(repeating: .init(.flexible(minimum: 40)), count: 4), spacing: 16, content: {
+                    IconList.Setting()
+                    IconList.Privacy()
+                    IconList.Schedule()
+                    IconList.Form()
+                    if isAppDeveloperMode {
+                        IconList.Debug()
+                    }
 #if DEBUG
-                IconList.Chart()
+                    IconList.Chart()
 #endif
+                })
             })
         })
         .navigationBarTitleDisplayMode(.inline)

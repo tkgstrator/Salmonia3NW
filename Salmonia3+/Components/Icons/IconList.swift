@@ -48,9 +48,10 @@ enum IconList {
 
     struct Form: View {
         var body: some View {
-            Image(bundle: .Mission_Lv00)
+            Image(bundle: .Squid)
                 .resizable()
                 .scaledToFit()
+                .padding()
                 .navigationCircleButton(
                     bundle: .Common_Share,
                     destination: {
