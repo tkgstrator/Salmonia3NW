@@ -6,7 +6,7 @@
   
 */
 
-CFBundleDisplayName = "Salmonia3+";
-NSUserTrackingUsageDescription = "最適な広告を表示するためにトラッキングすることを許可します";
-NSPhotoLibraryAdditionasUsageDescription = "フォトライブラリに画像を保存することを許可します";
-NSPhotoLibraryUsageDescription = "フォトライブラリに画像を保存することを許可します";
+"CFBundleDisplayName" = "Salmonia3+";
+"NSUserTrackingUsageDescription" = "最適な広告を表示するためにトラッキングすることを許可します";
+"NSPhotoLibraryAdditionasUsageDescription" = "フォトライブラリに画像を保存することを許可します";
+"NSPhotoLibraryUsageDescription" = "フォトライブラリに画像を保存することを許可します";

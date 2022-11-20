@@ -74,10 +74,7 @@ struct ContentView: View {
             Schedules()
             Home()
         })
-        .fullScreenCover(isPresented: Binding(get: {
-            session.accounts.isEmpty || isFirstLaunch
-        }, set: { _ in
-        }) , content: {
+        .fullScreenCover(isPresented: $isFirstLaunch, content: {
             TutorialView()
         })
         .accentColor(SPColor.SplatNet2.SPOrange)

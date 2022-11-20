@@ -10,7 +10,30 @@ import SwiftUIX
 
 struct GrizzcoOverview: View {
     @ObservedObject var stats: StatsService
+    @State private var tabCounts: Int = 4
     @State private var selection: Int = 0
+
+    func SlideArrow(selection: Binding<Int>) -> some View {
+        HStack(content: {
+            Button(action: {
+                withAnimation(.default) {
+                    selection.wrappedValue = selection.wrappedValue  == .zero ? tabCounts - 1 : (selection.wrappedValue - 1)
+                }
+            }, label: {
+                Text("←")
+            })
+            Spacer()
+            Button(action: {
+                withAnimation(.default) {
+                    selection.wrappedValue = (selection.wrappedValue + 1) % tabCounts
+                }
+            }, label: {
+                Text("→")
+            })
+        })
+        .font(systemName: .Splatfont, size: 24)
+        .frame(width: 340, height: nil)
+    }
 
     var body: some View {
         TabView(selection: $selection, content: {
@@ -33,19 +56,20 @@ struct GrizzcoOverview: View {
                 }, content: {
                     GrizzcoDefeatedView()
                 })
-                .tag(3)
+                .tag(2)
             } else {
                 GrizzcoDefeatedView()
-                    .tag(3)
+                    .tag(2)
             }
             NavigationLink(destination: {
                 WaveChartView(data: stats.waveData)
             }, label: {
                 GrizzcoWaveView()
             })
-            .tag(2)
+            .tag(3)
         })
         .frame(height: 160, alignment: .bottom)
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .overlay(SlideArrow(selection: $selection))
     }
 }

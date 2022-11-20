@@ -6,7 +6,7 @@
   
 */
 
-CFBundleDisplayName = "Salmonia3+";
-NSUserTrackingUsageDescription = "Your data will be used to deliver personalized ads to you";
-NSPhotoLibraryAdditionasUsageDescription = "Required to read and save images";
-NSPhotoLibraryUsageDescription = "Required to read and save images";
+"CFBundleDisplayName" = "Salmonia3+";
+"NSUserTrackingUsageDescription" = "Your data will be used to deliver personalized ads to you";
+"NSPhotoLibraryAdditionasUsageDescription" = "Required to read and save images";
+"NSPhotoLibraryUsageDescription" = "Required to read and save images";

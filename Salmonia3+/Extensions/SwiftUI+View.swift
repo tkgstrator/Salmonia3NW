@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SplatNet3
 
 enum FontLocaleType: Int, CaseIterable {
     case JP = 0
@@ -34,7 +35,7 @@ extension View {
     }
     
     func font(systemName: FontStyle, size: CGFloat) -> some View {
-        let intValue: Int = Int(NSLocalizedString("a829c84bcf08125189e6742d4f7631f523f4417f0acc8ecfb01903902ef4a46d", bundle: .main, comment: "Localized")) ?? 0
+        let intValue: Int = Int(Locale.languageSP3Locale) ?? 0
         let locale: FontLocaleType = FontLocaleType(rawValue: intValue) ?? .JP
 
         let fontName: FontType = {

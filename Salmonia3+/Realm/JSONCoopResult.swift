@@ -12,7 +12,7 @@ import CryptoKit
 struct JSONCoopResult: Codable, Hashable {
     /// データの正当性を担保するためのハッシュ
     var hash: String?
-    /// Salmon StatsID
+    /// Salmon Stats ID
     let salmonId: Int?
     /// ID
     let id: String

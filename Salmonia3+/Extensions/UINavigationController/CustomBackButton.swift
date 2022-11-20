@@ -16,7 +16,7 @@ private struct CustomBackButton: ViewModifier {
     func body(content: Content) -> some View {
         content
             .introspectNavigationController(customize: { nvc in
-                let intValue: Int = Int(NSLocalizedString("a829c84bcf08125189e6742d4f7631f523f4417f0acc8ecfb01903902ef4a46d", bundle: .main, comment: "Localized")) ?? 0
+                let intValue: Int = Int(Locale.languageSP3Locale) ?? 0
                 let locale: FontLocaleType = FontLocaleType(rawValue: intValue) ?? .JP
                 let fontName: FontType = {
                     switch (locale) {
@@ -28,8 +28,6 @@ private struct CustomBackButton: ViewModifier {
                         return .Splatfont1TW
                     }
                 }()
-//                nvc.navigationController?.hidesBarsOnTap = true
-//                nvc.navigationController?.hidesBarsOnSwipe = true
                 /// フォントの切り替え
                 nvc.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: fontName.rawValue, size: 16)!]
                 /// 戻るボタンの切り替え

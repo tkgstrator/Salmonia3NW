@@ -24,7 +24,7 @@ enum IconList {
                     .resizable()
                     .scaledToFit()
                     .padding()
-                    .actionCircleButton(bundle: .Carousel_CoopHistory, action: {
+                    .actionCircleButton(title: account.nickname, action: {
                         isAppDeveloperMode.toggle()
                     })
             } else {
@@ -42,6 +42,19 @@ enum IconList {
                     title: "TITLE_DEBUG",
                     destination: {
                         DebugView()
+                    })
+        }
+    }
+
+    struct Form: View {
+        var body: some View {
+            Image(bundle: .Mission_Lv00)
+                .resizable()
+                .scaledToFit()
+                .navigationCircleButton(
+                    bundle: .Common_Share,
+                    destination: {
+                        NotionForm()
                     })
         }
     }
@@ -125,7 +138,7 @@ enum IconList {
                     let encoder: JSONEncoder = {
                         let encoder: JSONEncoder = JSONEncoder()
                         encoder.keyEncodingStrategy = .convertToSnakeCase
-//                        encoder.outputFormatting = .prettyPrinted
+                        encoder.outputFormatting = .prettyPrinted
                         return encoder
                     }()
                     let results: [JSONCoopResult] = RealmService.shared.exportToJSON()
@@ -144,8 +157,7 @@ enum IconList {
                         try data.write(to: filePath, options: .atomic)
                         let items = [filePath]
                         let activity: UIActivityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-                        let vc: UIViewController? = UIApplication.shared.rootViewController
-                        vc?.present(activity, animated: true)
+                        UIApplication.shared.rootViewController?.popover(activity, animated: true)
                     } catch {
 
                     }
@@ -261,9 +273,10 @@ extension View {
     /// アラートで許可を押した場合に指定した処理を実行
     func alert(
         isPresented: Binding<Bool>,
-        title: Text = Text(localizedText: "TITLE_CONFIRM_DANGER"),
-        message: Text = Text(localizedText: "DESC_DANGER_ERASE"),
-        confirm: @escaping () -> Void) -> some View {
+        title: Text,
+        message: Text,
+        confirm: @escaping () -> Void
+    ) -> some View {
         self.modifier(AlertModifier(isPresented: isPresented, title: title, message: message, confirm: confirm))
     }
 }

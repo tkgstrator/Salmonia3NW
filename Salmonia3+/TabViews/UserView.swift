@@ -21,6 +21,7 @@ struct UserView: View {
                 IconList.Setting()
                 IconList.Privacy()
                 IconList.Schedule()
+                IconList.Form()
                 if isAppDeveloperMode {
                     IconList.Debug()
                 }
