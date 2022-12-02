@@ -1,0 +1,892 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */; };
+		102F38B8293351B5001E1FD5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 102F38BA293351B5001E1FD5 /* Localizable.strings */; };
+		102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38BC2933570F001E1FD5 /* SFSymbols.swift */; };
+		102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38BF293357D4001E1FD5 /* SPButtonStyle.swift */; };
+		102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38C129336A80001E1FD5 /* MyPageView.swift */; };
+		102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CB29336BF5001E1FD5 /* RealmCoopWave.swift */; };
+		102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CC29336BF5001E1FD5 /* RealmCoopPlayer.swift */; };
+		102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */; };
+		102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */; };
+		102F38D429337692001E1FD5 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D329337692001E1FD5 /* ResultsView.swift */; };
+		102F38D62933778D001E1FD5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D52933778D001E1FD5 /* Session.swift */; };
+		102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D9293378E2001E1FD5 /* SignInButton.swift */; };
+		102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38DC29337A7C001E1FD5 /* ResultElement.swift */; };
+		102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */; };
+		102F38E229337B36001E1FD5 /* FontType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38E129337B36001E1FD5 /* FontType.swift */; };
+		102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38E329337CC1001E1FD5 /* RealmService.swift */; };
+		102F38E629338E1E001E1FD5 /* IconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38E529338E1E001E1FD5 /* IconType.swift */; };
+		102F38EE293391AE001E1FD5 /* splatoon1twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38E8293391AE001E1FD5 /* splatoon1twzh.ttf */; };
+		102F38EF293391AE001E1FD5 /* splatoon2chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38E9293391AE001E1FD5 /* splatoon2chzh.ttf */; };
+		102F38F0293391AE001E1FD5 /* splatoon1jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38EA293391AE001E1FD5 /* splatoon1jpja.ttf */; };
+		102F38F1293391AE001E1FD5 /* splatoon1chzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38EB293391AE001E1FD5 /* splatoon1chzh.ttf */; };
+		102F38F2293391AE001E1FD5 /* splatoon2jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38EC293391AE001E1FD5 /* splatoon2jpja.ttf */; };
+		102F38F3293391AE001E1FD5 /* splatoon2twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38ED293391AE001E1FD5 /* splatoon2twzh.ttf */; };
+		102F38F529339468001E1FD5 /* LogoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38F429339468001E1FD5 /* LogoType.swift */; };
+		102F38F729339A1F001E1FD5 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38F629339A1F001E1FD5 /* DeleteButton.swift */; };
+		10403BF32938F46A003D10BA /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10403BF22938F46A003D10BA /* SplatNet3 */; };
+		104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAAF2292CBAFF00739B2C /* mainApp.swift */; };
+		104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAAF4292CBAFF00739B2C /* ContentView.swift */; };
+		104BAAF7292CBB0000739B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 104BAAF6292CBB0000739B2C /* Assets.xcassets */; };
+		104BAAFA292CBB0000739B2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 104BAAF9292CBB0000739B2C /* Preview Assets.xcassets */; };
+		104BAB04292CBB0000739B2C /* Salmonia3+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB03292CBB0000739B2C /* Salmonia3+Tests.swift */; };
+		104BAB0E292CBB0000739B2C /* Salmonia3+UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB0D292CBB0000739B2C /* Salmonia3+UITests.swift */; };
+		104BAB10292CBB0000739B2C /* Salmonia3+UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB0F292CBB0000739B2C /* Salmonia3+UITestsLaunchTests.swift */; };
+		104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB24292CCE3100739B2C /* FilePickerButton.swift */; };
+		104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB27292CD7DF00739B2C /* FileBackupButton.swift */; };
+		104BAB2B292CDD1700739B2C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 104BAB2A292CDD1700739B2C /* RealmSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		104BAB00292CBB0000739B2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 104BAAE7292CBAFF00739B2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 104BAAEE292CBAFF00739B2C;
+			remoteInfo = salmonia3plus;
+		};
+		104BAB0A292CBB0000739B2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 104BAAE7292CBAFF00739B2C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 104BAAEE292CBAFF00739B2C;
+			remoteInfo = salmonia3plus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
+		102F38B9293351B5001E1FD5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102F38BB293351B8001E1FD5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102F38BC2933570F001E1FD5 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
+		102F38BF293357D4001E1FD5 /* SPButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPButtonStyle.swift; sourceTree = "<group>"; };
+		102F38C129336A80001E1FD5 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		102F38CB29336BF5001E1FD5 /* RealmCoopWave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopWave.swift; sourceTree = "<group>"; };
+		102F38CC29336BF5001E1FD5 /* RealmCoopPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopPlayer.swift; sourceTree = "<group>"; };
+		102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopSchedule.swift; sourceTree = "<group>"; };
+		102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
+		102F38D329337692001E1FD5 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		102F38D52933778D001E1FD5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		102F38D9293378E2001E1FD5 /* SignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInButton.swift; sourceTree = "<group>"; };
+		102F38DC29337A7C001E1FD5 /* ResultElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultElement.swift; sourceTree = "<group>"; };
+		102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View.swift"; sourceTree = "<group>"; };
+		102F38E129337B36001E1FD5 /* FontType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontType.swift; sourceTree = "<group>"; };
+		102F38E329337CC1001E1FD5 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		102F38E529338E1E001E1FD5 /* IconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconType.swift; sourceTree = "<group>"; };
+		102F38E8293391AE001E1FD5 /* splatoon1twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1twzh.ttf; sourceTree = "<group>"; };
+		102F38E9293391AE001E1FD5 /* splatoon2chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2chzh.ttf; sourceTree = "<group>"; };
+		102F38EA293391AE001E1FD5 /* splatoon1jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1jpja.ttf; sourceTree = "<group>"; };
+		102F38EB293391AE001E1FD5 /* splatoon1chzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon1chzh.ttf; sourceTree = "<group>"; };
+		102F38EC293391AE001E1FD5 /* splatoon2jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2jpja.ttf; sourceTree = "<group>"; };
+		102F38ED293391AE001E1FD5 /* splatoon2twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2twzh.ttf; sourceTree = "<group>"; };
+		102F38F429339468001E1FD5 /* LogoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoType.swift; sourceTree = "<group>"; };
+		102F38F629339A1F001E1FD5 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		10403BF12938F346003D10BA /* SplatNet3 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet3; path = ../SplatNet3; sourceTree = "<group>"; };
+		104BAAEF292CBAFF00739B2C /* salmonia3plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = salmonia3plus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		104BAAF2292CBAFF00739B2C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
+		104BAAF4292CBAFF00739B2C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		104BAAF6292CBB0000739B2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		104BAAF9292CBB0000739B2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		104BAAFF292CBB0000739B2C /* salmonia3plusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = salmonia3plusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		104BAB03292CBB0000739B2C /* Salmonia3+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salmonia3+Tests.swift"; sourceTree = "<group>"; };
+		104BAB09292CBB0000739B2C /* salmonia3plusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = salmonia3plusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		104BAB0D292CBB0000739B2C /* Salmonia3+UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salmonia3+UITests.swift"; sourceTree = "<group>"; };
+		104BAB0F292CBB0000739B2C /* Salmonia3+UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Salmonia3+UITestsLaunchTests.swift"; sourceTree = "<group>"; };
+		104BAB1C292CBC9B00739B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		104BAB24292CCE3100739B2C /* FilePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerButton.swift; sourceTree = "<group>"; };
+		104BAB27292CD7DF00739B2C /* FileBackupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBackupButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		104BAAEC292CBAFF00739B2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				104BAB2B292CDD1700739B2C /* RealmSwift in Frameworks */,
+				10403BF32938F46A003D10BA /* SplatNet3 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAAFC292CBB0000739B2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAB06292CBB0000739B2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		102F38AE293349A7001E1FD5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				10403BF12938F346003D10BA /* SplatNet3 */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		102F38B029334A6E001E1FD5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		102F38B329334BBD001E1FD5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
+				102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */,
+				102F38BC2933570F001E1FD5 /* SFSymbols.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		102F38BE293357C9001E1FD5 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				102F38BF293357D4001E1FD5 /* SPButtonStyle.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		102F38D7293378C0001E1FD5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				102F38DB29337A58001E1FD5 /* List */,
+				102F38D8293378D7001E1FD5 /* Button */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		102F38D8293378D7001E1FD5 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				104BAB24292CCE3100739B2C /* FilePickerButton.swift */,
+				104BAB27292CD7DF00739B2C /* FileBackupButton.swift */,
+				102F38D9293378E2001E1FD5 /* SignInButton.swift */,
+				102F38F629339A1F001E1FD5 /* DeleteButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		102F38DB29337A58001E1FD5 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				102F38DC29337A7C001E1FD5 /* ResultElement.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		102F38E029337B2A001E1FD5 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				102F38E129337B36001E1FD5 /* FontType.swift */,
+				102F38E529338E1E001E1FD5 /* IconType.swift */,
+				102F38F429339468001E1FD5 /* LogoType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		102F38E7293391A1001E1FD5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				102F38EB293391AE001E1FD5 /* splatoon1chzh.ttf */,
+				102F38EA293391AE001E1FD5 /* splatoon1jpja.ttf */,
+				102F38E8293391AE001E1FD5 /* splatoon1twzh.ttf */,
+				102F38E9293391AE001E1FD5 /* splatoon2chzh.ttf */,
+				102F38EC293391AE001E1FD5 /* splatoon2jpja.ttf */,
+				102F38ED293391AE001E1FD5 /* splatoon2twzh.ttf */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		104BAAE6292CBAFF00739B2C = {
+			isa = PBXGroup;
+			children = (
+				102F38BA293351B5001E1FD5 /* Localizable.strings */,
+				102F38AE293349A7001E1FD5 /* Packages */,
+				104BAAF1292CBAFF00739B2C /* salmonia3plus */,
+				104BAB02292CBB0000739B2C /* Salmonia3+Tests */,
+				104BAB0C292CBB0000739B2C /* Salmonia3+UITests */,
+				104BAAF0292CBAFF00739B2C /* Products */,
+				102F38B029334A6E001E1FD5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		104BAAF0292CBAFF00739B2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				104BAAEF292CBAFF00739B2C /* salmonia3plus.app */,
+				104BAAFF292CBB0000739B2C /* salmonia3plusTests.xctest */,
+				104BAB09292CBB0000739B2C /* salmonia3plusUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		104BAAF1292CBAFF00739B2C /* salmonia3plus */ = {
+			isa = PBXGroup;
+			children = (
+				104BAB1C292CBC9B00739B2C /* Info.plist */,
+				102F38E7293391A1001E1FD5 /* Assets */,
+				102F38E029337B2A001E1FD5 /* Enum */,
+				102F38B329334BBD001E1FD5 /* Extensions */,
+				104BAB26292CCE8700739B2C /* Realm */,
+				104BAB1D292CC92600739B2C /* Views */,
+				102F38BE293357C9001E1FD5 /* ViewModifiers */,
+				102F38D7293378C0001E1FD5 /* Components */,
+				104BAAF2292CBAFF00739B2C /* mainApp.swift */,
+				104BAAF4292CBAFF00739B2C /* ContentView.swift */,
+				102F38D52933778D001E1FD5 /* Session.swift */,
+				102F38E329337CC1001E1FD5 /* RealmService.swift */,
+				104BAAF6292CBB0000739B2C /* Assets.xcassets */,
+				104BAAF8292CBB0000739B2C /* Preview Content */,
+			);
+			path = salmonia3plus;
+			sourceTree = "<group>";
+		};
+		104BAAF8292CBB0000739B2C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				104BAAF9292CBB0000739B2C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		104BAB02292CBB0000739B2C /* Salmonia3+Tests */ = {
+			isa = PBXGroup;
+			children = (
+				104BAB03292CBB0000739B2C /* Salmonia3+Tests.swift */,
+			);
+			path = "Salmonia3+Tests";
+			sourceTree = "<group>";
+		};
+		104BAB0C292CBB0000739B2C /* Salmonia3+UITests */ = {
+			isa = PBXGroup;
+			children = (
+				104BAB0D292CBB0000739B2C /* Salmonia3+UITests.swift */,
+				104BAB0F292CBB0000739B2C /* Salmonia3+UITestsLaunchTests.swift */,
+			);
+			path = "Salmonia3+UITests";
+			sourceTree = "<group>";
+		};
+		104BAB1D292CC92600739B2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				104BAB23292CCE1300739B2C /* Common */,
+				10FC2465292CDFE3000E5FC3 /* Tab */,
+				10FC2466292CDFF9000E5FC3 /* Form */,
+				104BAB1E292CC93000739B2C /* Data */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		104BAB1E292CC93000739B2C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		104BAB23292CCE1300739B2C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		104BAB26292CCE8700739B2C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				102F38CC29336BF5001E1FD5 /* RealmCoopPlayer.swift */,
+				102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */,
+				102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */,
+				102F38CB29336BF5001E1FD5 /* RealmCoopWave.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		10FC2465292CDFE3000E5FC3 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				102F38C129336A80001E1FD5 /* MyPageView.swift */,
+				102F38D329337692001E1FD5 /* ResultsView.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		10FC2466292CDFF9000E5FC3 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		104BAAEE292CBAFF00739B2C /* salmonia3plus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 104BAB13292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plus" */;
+			buildPhases = (
+				104BAAEB292CBAFF00739B2C /* Sources */,
+				104BAAEC292CBAFF00739B2C /* Frameworks */,
+				104BAAED292CBAFF00739B2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = salmonia3plus;
+			packageProductDependencies = (
+				104BAB2A292CDD1700739B2C /* RealmSwift */,
+				10403BF22938F46A003D10BA /* SplatNet3 */,
+			);
+			productName = salmonia3plus;
+			productReference = 104BAAEF292CBAFF00739B2C /* salmonia3plus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		104BAAFE292CBB0000739B2C /* salmonia3plusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 104BAB16292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plusTests" */;
+			buildPhases = (
+				104BAAFB292CBB0000739B2C /* Sources */,
+				104BAAFC292CBB0000739B2C /* Frameworks */,
+				104BAAFD292CBB0000739B2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				104BAB01292CBB0000739B2C /* PBXTargetDependency */,
+			);
+			name = salmonia3plusTests;
+			productName = salmonia3plusTests;
+			productReference = 104BAAFF292CBB0000739B2C /* salmonia3plusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		104BAB08292CBB0000739B2C /* salmonia3plusUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 104BAB19292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plusUITests" */;
+			buildPhases = (
+				104BAB05292CBB0000739B2C /* Sources */,
+				104BAB06292CBB0000739B2C /* Frameworks */,
+				104BAB07292CBB0000739B2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				104BAB0B292CBB0000739B2C /* PBXTargetDependency */,
+			);
+			name = salmonia3plusUITests;
+			productName = salmonia3plusUITests;
+			productReference = 104BAB09292CBB0000739B2C /* salmonia3plusUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		104BAAE7292CBAFF00739B2C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				ORGANIZATIONNAME = "Magi Corporation";
+				TargetAttributes = {
+					104BAAEE292CBAFF00739B2C = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					104BAAFE292CBB0000739B2C = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 104BAAEE292CBAFF00739B2C;
+					};
+					104BAB08292CBB0000739B2C = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 104BAAEE292CBAFF00739B2C;
+					};
+				};
+			};
+			buildConfigurationList = 104BAAEA292CBAFF00739B2C /* Build configuration list for PBXProject "salmonia3plus" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ja,
+			);
+			mainGroup = 104BAAE6292CBAFF00739B2C;
+			packageReferences = (
+				104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
+			productRefGroup = 104BAAF0292CBAFF00739B2C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				104BAAEE292CBAFF00739B2C /* salmonia3plus */,
+				104BAAFE292CBB0000739B2C /* salmonia3plusTests */,
+				104BAB08292CBB0000739B2C /* salmonia3plusUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		104BAAED292CBAFF00739B2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				104BAAFA292CBB0000739B2C /* Preview Assets.xcassets in Resources */,
+				102F38EF293391AE001E1FD5 /* splatoon2chzh.ttf in Resources */,
+				102F38B8293351B5001E1FD5 /* Localizable.strings in Resources */,
+				102F38F1293391AE001E1FD5 /* splatoon1chzh.ttf in Resources */,
+				102F38F2293391AE001E1FD5 /* splatoon2jpja.ttf in Resources */,
+				102F38F3293391AE001E1FD5 /* splatoon2twzh.ttf in Resources */,
+				104BAAF7292CBB0000739B2C /* Assets.xcassets in Resources */,
+				102F38EE293391AE001E1FD5 /* splatoon1twzh.ttf in Resources */,
+				102F38F0293391AE001E1FD5 /* splatoon1jpja.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAAFD292CBB0000739B2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAB07292CBB0000739B2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		104BAAEB292CBAFF00739B2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				102F38D62933778D001E1FD5 /* Session.swift in Sources */,
+				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
+				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
+				102F38D429337692001E1FD5 /* ResultsView.swift in Sources */,
+				102F38E629338E1E001E1FD5 /* IconType.swift in Sources */,
+				104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */,
+				102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */,
+				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
+				102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */,
+				102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */,
+				102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */,
+				102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */,
+				102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */,
+				102F38E229337B36001E1FD5 /* FontType.swift in Sources */,
+				102F38F729339A1F001E1FD5 /* DeleteButton.swift in Sources */,
+				102F38F529339468001E1FD5 /* LogoType.swift in Sources */,
+				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
+				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
+				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
+				102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */,
+				104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */,
+				102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAAFB292CBB0000739B2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				104BAB04292CBB0000739B2C /* Salmonia3+Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		104BAB05292CBB0000739B2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				104BAB10292CBB0000739B2C /* Salmonia3+UITestsLaunchTests.swift in Sources */,
+				104BAB0E292CBB0000739B2C /* Salmonia3+UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		104BAB01292CBB0000739B2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 104BAAEE292CBAFF00739B2C /* salmonia3plus */;
+			targetProxy = 104BAB00292CBB0000739B2C /* PBXContainerItemProxy */;
+		};
+		104BAB0B292CBB0000739B2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 104BAAEE292CBAFF00739B2C /* salmonia3plus */;
+			targetProxy = 104BAB0A292CBB0000739B2C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		102F38BA293351B5001E1FD5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				102F38B9293351B5001E1FD5 /* en */,
+				102F38BB293351B8001E1FD5 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		104BAB11292CBB0000739B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		104BAB12292CBB0000739B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		104BAB14292CBB0000739B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = salmonia3plus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Salmonia3+";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = NSPhotoLibraryAdditionsUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSTrackingUsageDescription;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		104BAB15292CBB0000739B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = salmonia3plus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Salmonia3+";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = NSPhotoLibraryAdditionsUsageDescription;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = NSPhotoLibraryUsageDescription;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = NSTrackingUsageDescription;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		104BAB17292CBB0000739B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "salmonia3plusTests-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/salmonia3plus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/salmonia3plus";
+			};
+			name = Debug;
+		};
+		104BAB18292CBB0000739B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "salmonia3plusTests-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/salmonia3plus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/salmonia3plus";
+			};
+			name = Release;
+		};
+		104BAB1A292CBB0000739B2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = salmonia3plus;
+			};
+			name = Debug;
+		};
+		104BAB1B292CBB0000739B2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.salmonia3plusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = salmonia3plus;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		104BAAEA292CBAFF00739B2C /* Build configuration list for PBXProject "salmonia3plus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				104BAB11292CBB0000739B2C /* Debug */,
+				104BAB12292CBB0000739B2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		104BAB13292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				104BAB14292CBB0000739B2C /* Debug */,
+				104BAB15292CBB0000739B2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		104BAB16292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				104BAB17292CBB0000739B2C /* Debug */,
+				104BAB18292CBB0000739B2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		104BAB19292CBB0000739B2C /* Build configuration list for PBXNativeTarget "salmonia3plusUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				104BAB1A292CBB0000739B2C /* Debug */,
+				104BAB1B292CBB0000739B2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10403BF22938F46A003D10BA /* SplatNet3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SplatNet3;
+		};
+		104BAB2A292CDD1700739B2C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 104BAAE7292CBAFF00739B2C /* Project object */;
+}

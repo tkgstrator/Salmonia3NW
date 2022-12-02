@@ -1,13 +1,13 @@
 //
-//  salmonia3nwUITests.swift
-//  salmonia3nwUITests
+//  Salmonia3+UITests.swift
+//  Salmonia3+UITests
 //
-//  Created by tkgstrator on 2022/08/25.
+//  Created by devonly on 2022/11/22.
 //
 
 import XCTest
 
-class salmonia3nwUITests: XCTestCase {
+final class mainUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,13 +1,13 @@
 //
-//  salmonia3nwUITestsLaunchTests.swift
-//  salmonia3nwUITests
+//  Salmonia3+UITestsLaunchTests.swift
+//  Salmonia3+UITests
 //
-//  Created by tkgstrator on 2022/08/25.
+//  Created by devonly on 2022/11/22.
 //
 
 import XCTest
 
-class salmonia3nwUITestsLaunchTests: XCTestCase {
+final class salmonia3plusUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

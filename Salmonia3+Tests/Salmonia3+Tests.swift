@@ -1,14 +1,14 @@
 //
-//  salmonia3nwTests.swift
-//  salmonia3nwTests
+//  Salmonia3+Tests.swift
+//  Salmonia3+Tests
 //
-//  Created by tkgstrator on 2022/08/25.
+//  Created by devonly on 2022/11/22.
 //
 
 import XCTest
-@testable import salmonia3nw
+@testable import salmonia3plus
 
-class salmonia3nwTests: XCTestCase {
+final class mainTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
