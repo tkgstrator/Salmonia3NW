@@ -17,7 +17,6 @@
 		102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */; };
 		102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */; };
 		102F38D429337692001E1FD5 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D329337692001E1FD5 /* ResultsView.swift */; };
-		102F38D62933778D001E1FD5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D52933778D001E1FD5 /* Session.swift */; };
 		102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38D9293378E2001E1FD5 /* SignInButton.swift */; };
 		102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38DC29337A7C001E1FD5 /* ResultElement.swift */; };
 		102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */; };
@@ -43,6 +42,13 @@
 		104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB24292CCE3100739B2C /* FilePickerButton.swift */; };
 		104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAB27292CD7DF00739B2C /* FileBackupButton.swift */; };
 		104BAB2B292CDD1700739B2C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 104BAB2A292CDD1700739B2C /* RealmSwift */; };
+		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
+		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
+		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
+		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
+		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
+		10F039AA293B9A2F00BAD41C /* Version6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A9293B9A2F00BAD41C /* Version6.swift */; };
+		10F039AC293B9A4E00BAD41C /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039AB293B9A4E00BAD41C /* RealmMigration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +80,6 @@
 		102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopSchedule.swift; sourceTree = "<group>"; };
 		102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmCoopResult.swift; sourceTree = "<group>"; };
 		102F38D329337692001E1FD5 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
-		102F38D52933778D001E1FD5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		102F38D9293378E2001E1FD5 /* SignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInButton.swift; sourceTree = "<group>"; };
 		102F38DC29337A7C001E1FD5 /* ResultElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultElement.swift; sourceTree = "<group>"; };
 		102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+View.swift"; sourceTree = "<group>"; };
@@ -103,6 +108,13 @@
 		104BAB1C292CBC9B00739B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		104BAB24292CCE3100739B2C /* FilePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerButton.swift; sourceTree = "<group>"; };
 		104BAB27292CD7DF00739B2C /* FileBackupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBackupButton.swift; sourceTree = "<group>"; };
+		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
+		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
+		10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SP3Session+Request.swift"; sourceTree = "<group>"; };
+		10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
+		10F039A6293B6F7300BAD41C /* SHA256Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256Hash.swift; sourceTree = "<group>"; };
+		10F039A9293B9A2F00BAD41C /* Version6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version6.swift; sourceTree = "<group>"; };
+		10F039AB293B9A4E00BAD41C /* RealmMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +162,12 @@
 		102F38B329334BBD001E1FD5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */,
 				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
 				102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */,
 				102F38BC2933570F001E1FD5 /* SFSymbols.swift */,
+				10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */,
+				10F039A6293B6F7300BAD41C /* SHA256Hash.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -189,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				102F38DC29337A7C001E1FD5 /* ResultElement.swift */,
+				10BCCFD6293A955200093BC5 /* ScheduleElement.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -252,8 +268,6 @@
 				102F38D7293378C0001E1FD5 /* Components */,
 				104BAAF2292CBAFF00739B2C /* mainApp.swift */,
 				104BAAF4292CBAFF00739B2C /* ContentView.swift */,
-				102F38D52933778D001E1FD5 /* Session.swift */,
-				102F38E329337CC1001E1FD5 /* RealmService.swift */,
 				104BAAF6292CBB0000739B2C /* Assets.xcassets */,
 				104BAAF8292CBB0000739B2C /* Preview Content */,
 			);
@@ -313,12 +327,31 @@
 		104BAB26292CCE8700739B2C /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				10F039A8293B9A1D00BAD41C /* Migration */,
+				10F039AD293BA09B00BAD41C /* Database */,
+				102F38E329337CC1001E1FD5 /* RealmService.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		10F039A8293B9A1D00BAD41C /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				10F039AB293B9A4E00BAD41C /* RealmMigration.swift */,
+				10F039A9293B9A2F00BAD41C /* Version6.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
+		10F039AD293BA09B00BAD41C /* Database */ = {
+			isa = PBXGroup;
+			children = (
 				102F38CC29336BF5001E1FD5 /* RealmCoopPlayer.swift */,
 				102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */,
 				102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */,
 				102F38CB29336BF5001E1FD5 /* RealmCoopWave.swift */,
 			);
-			path = Realm;
+			path = Database;
 			sourceTree = "<group>";
 		};
 		10FC2465292CDFE3000E5FC3 /* Tab */ = {
@@ -326,6 +359,7 @@
 			children = (
 				102F38C129336A80001E1FD5 /* MyPageView.swift */,
 				102F38D329337692001E1FD5 /* ResultsView.swift */,
+				10BCCFD8293B255400093BC5 /* SchedulesView.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -483,22 +517,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				102F38D62933778D001E1FD5 /* Session.swift in Sources */,
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
 				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
+				10F039AC293B9A4E00BAD41C /* RealmMigration.swift in Sources */,
 				102F38D429337692001E1FD5 /* ResultsView.swift in Sources */,
 				102F38E629338E1E001E1FD5 /* IconType.swift in Sources */,
 				104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */,
 				102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */,
+				10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */,
 				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
 				102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */,
 				102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */,
+				10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */,
+				10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */,
+				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
+				10F039AA293B9A2F00BAD41C /* Version6.swift in Sources */,
 				102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */,
 				102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */,
 				102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */,
 				102F38E229337B36001E1FD5 /* FontType.swift in Sources */,
 				102F38F729339A1F001E1FD5 /* DeleteButton.swift in Sources */,
 				102F38F529339468001E1FD5 /* LogoType.swift in Sources */,
+				10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */,
 				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
@@ -674,7 +714,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -712,7 +752,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

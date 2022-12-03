@@ -7,17 +7,25 @@
 
 import SwiftUI
 import RealmSwift
+import CryptoKit
+import Realm
 
 @main
 struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    private let configuration: Realm.Configuration = Realm.Configuration(schemaVersion: 1, deleteRealmIfMigrationNeeded: false)
+    @StateObject var session: Session = Session()
+    private let configuration: Realm.Configuration = Realm.Configuration(
+        schemaVersion: 7,
+        migrationBlock: RealmMigration.migrationBlock(),
+        deleteRealmIfMigrationNeeded: false
+    )
 
     var body: some Scene {
         WindowGroup {
             NavigationView(content: {
                 ContentView()
                     .environment(\.realmConfiguration, configuration)
+                    .environmentObject(session)
             })
         }
     }

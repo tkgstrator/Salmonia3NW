@@ -23,6 +23,19 @@ public actor RealmService: ObservableObject {
         try? realm.commitWrite()
     }
 
+    public func lastPlayedTime() -> Date? {
+        return realm.objects(RealmCoopResult.self).max(ofProperty: "playTime")
+    }
+
+    public func save(_ schedules: [CoopSchedule]) {
+        realm.beginWrite()
+        let schedules: [RealmCoopSchedule] = schedules.map({ RealmCoopSchedule(content: $0) })
+        for schedule in schedules {
+            realm.add(schedule, update: .all)
+        }
+        try? realm.commitWrite()
+    }
+
     public func save(_ results: [CoopResult]) {
         let schedules: Set<CoopResult.Schedule> = Set(results.map({ $0.schedule }))
 

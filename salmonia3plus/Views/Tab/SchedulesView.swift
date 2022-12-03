@@ -1,7 +1,7 @@
 //
 //  ResultsView.swift
 //  Salmonia3+
-//  
+//
 //  Created by devonly on 2022/11/27
 //  Copyright © 2022 Magi Corporation. All rights reserved.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 import RealmSwift
 import SplatNet3
 
-struct ResultsView: View {
+struct SchedulesView: View {
     @ObservedResults(
         RealmCoopSchedule.self,
         filter: NSPredicate(format: "mode = %@", ModeType.REGULAR.rawValue),
@@ -22,9 +22,8 @@ struct ResultsView: View {
         List(content: {
             ForEach(schedules, id: \.self, content: { schedule in
                 ScheduleElement(schedule: schedule)
-                ForEach(schedule.results.sorted(by: { $0.playTime > $1.playTime }), content: { result in
-                    ResultElement(result: result)
-                })
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
             })
         })
         .listStyle(.plain)
@@ -43,8 +42,8 @@ struct ResultsView: View {
     }
 }
 
-struct ResultsView_Previews: PreviewProvider {
+struct SchedulesView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultsView()
+        SchedulesView()
     }
 }

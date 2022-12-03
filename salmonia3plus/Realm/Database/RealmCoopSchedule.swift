@@ -8,8 +8,10 @@
 import Foundation
 import RealmSwift
 import SplatNet3
+import CryptoKit
 
-class RealmCoopSchedule: Object, Codable {
+class RealmCoopSchedule: Object, Codable, Identifiable {
+    @Persisted(primaryKey: true) var id: String
     @Persisted(indexed: true) var startTime: Date?
     @Persisted(indexed: true) var endTime: Date?
     @Persisted var stageId: CoopStageId
@@ -23,8 +25,26 @@ class RealmCoopSchedule: Object, Codable {
         super.init()
     }
 
+    convenience init(content: CoopSchedule) {
+        self.init()
+        self.id = content.startTime.hash
+        self.startTime = content.startTime
+        self.endTime = content.endTime
+        self.stageId = content.stageId
+        self.weaponList.append(objectsIn: content.weaponList)
+        self.rareWeapon = nil
+        self.rule = content.rule
+        self.mode = content.mode
+    }
+
     convenience init(content: CoopResult.Schedule) {
         self.init()
+        self.id = {
+            if let startTime = content.startTime {
+                return startTime.hash
+            }
+            return content.hash
+        }()
         self.startTime = content.startTime
         self.endTime = content.endTime
         self.stageId = content.stage
@@ -35,6 +55,7 @@ class RealmCoopSchedule: Object, Codable {
     }
 
     enum CodingKeys: String, CodingKey {
+        case id
         case startTime
         case endTime
         case stageId
@@ -49,6 +70,7 @@ class RealmCoopSchedule: Object, Codable {
         super.init()
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
         self.startTime = try container.decodeIfPresent(Date.self, forKey: .startTime)
         self.endTime = try container.decodeIfPresent(Date.self, forKey: .endTime)
         self.stageId = try container.decode(CoopStageId.self, forKey: .stageId)
@@ -62,6 +84,7 @@ class RealmCoopSchedule: Object, Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
+        try container.encode(id, forKey: .id)
         try container.encode(startTime, forKey: .startTime)
         try container.encode(endTime, forKey: .endTime)
         try container.encode(stageId, forKey: .stageId)
@@ -73,9 +96,18 @@ class RealmCoopSchedule: Object, Codable {
     }
 }
 
-extension RealmCoopSchedule: Identifiable {
-    public var id: Int {
-        return self.hashValue
+extension Date {
+    var hash: String {
+        return SHA256
+            .hash(data: self.description.data(using: .utf8)!)
+            .compactMap({ String(format: "%02x", $0) })
+            .joined()
+    }
+}
+
+fileprivate extension CoopResult.Schedule {
+    var hash: String {
+        SHA256.resultHash(stageId: self.stage, rule: self.rule, mode: self.mode, weaponList: self.weaponList)
     }
 }
 

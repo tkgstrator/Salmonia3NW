@@ -9,7 +9,9 @@ import SwiftUI
 import SplatNet3
 
 struct ContentView: View {
+    @StateObject private var session: Session = Session()
     @State private var selection: Int = 0
+    @State private var isPresented: Bool = false
 
     public func TabContent<Content: View>(
         bundle: LocalizedType,
@@ -40,6 +42,7 @@ struct ContentView: View {
                 },
                 content: {
                     ResultsView()
+                        .environment(\.isModalPresented, $isPresented)
                 }
             )
             .tag(0)
@@ -49,7 +52,8 @@ struct ContentView: View {
                     Image(icon: .Home)
                 },
                 content: {
-                    EmptyView()
+                    SchedulesView()
+                        .environment(\.isModalPresented, $isPresented)
                 }
             )
             .tag(1)
@@ -64,6 +68,7 @@ struct ContentView: View {
             )
             .tag(2)
         })
+        .fullScreen(isPresented: $isPresented, session: session)
     }
 }
 

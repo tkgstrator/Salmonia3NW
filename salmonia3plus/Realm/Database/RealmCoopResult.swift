@@ -16,6 +16,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
     @Persisted var grade: GradeId?
     @Persisted var isClear: Bool
     @Persisted var failureWave: Int?
+    @Persisted var bossId: EnemyId?
     @Persisted var isBossDefeated: Bool?
     @Persisted var ikuraNum: Int
     @Persisted var goldenIkuraNum: Int
@@ -46,6 +47,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.gradePoint = content.gradePoint
         self.isClear = content.jobResult.isClear
         self.failureWave = content.jobResult.failureWave
+        self.bossId = content.jobResult.bossId
         self.isBossDefeated = content.jobResult.isBossDefeated
         self.ikuraNum = content.ikuraNum
         self.goldenIkuraNum = content.goldenIkuraNum
@@ -152,3 +154,5 @@ final class RealmCoopResult: Object, Identifiable, Codable {
 }
 
 extension GradeId: PersistableEnum {}
+
+extension EnemyId: PersistableEnum {}
