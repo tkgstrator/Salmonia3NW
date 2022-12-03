@@ -41,9 +41,8 @@
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
 		10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C7C293BAC120098CC64 /* ScheduleButton.swift */; };
-		10D69C7F293BBE860098CC64 /* Version7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C7E293BBE860098CC64 /* Version7.swift */; };
-		10D69C81293BD57D0098CC64 /* Version8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C80293BD57D0098CC64 /* Version8.swift */; };
 		10D69C84293BDD770098CC64 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10D69C83293BDD770098CC64 /* ZIPFoundation */; };
+		10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C85293BE12E0098CC64 /* ResultsButton.swift */; };
 		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
 		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
 		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
@@ -87,8 +86,7 @@
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10D69C7C293BAC120098CC64 /* ScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleButton.swift; sourceTree = "<group>"; };
-		10D69C7E293BBE860098CC64 /* Version7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version7.swift; sourceTree = "<group>"; };
-		10D69C80293BD57D0098CC64 /* Version8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version8.swift; sourceTree = "<group>"; };
+		10D69C85293BE12E0098CC64 /* ResultsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsButton.swift; sourceTree = "<group>"; };
 		10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SP3Session+Request.swift"; sourceTree = "<group>"; };
 		10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		10F039A6293B6F7300BAD41C /* SHA256Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256Hash.swift; sourceTree = "<group>"; };
@@ -163,6 +161,7 @@
 				102F38D9293378E2001E1FD5 /* SignInButton.swift */,
 				102F38F629339A1F001E1FD5 /* DeleteButton.swift */,
 				10D69C7C293BAC120098CC64 /* ScheduleButton.swift */,
+				10D69C85293BE12E0098CC64 /* ResultsButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -284,8 +283,6 @@
 			children = (
 				10F039AB293B9A4E00BAD41C /* RealmMigration.swift */,
 				10F039A9293B9A2F00BAD41C /* Version6.swift */,
-				10D69C7E293BBE860098CC64 /* Version7.swift */,
-				10D69C80293BD57D0098CC64 /* Version8.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -407,7 +404,6 @@
 			files = (
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
 				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
-				10D69C81293BD57D0098CC64 /* Version8.swift in Sources */,
 				10F039AC293B9A4E00BAD41C /* RealmMigration.swift in Sources */,
 				102F38D429337692001E1FD5 /* ResultsView.swift in Sources */,
 				102F38E629338E1E001E1FD5 /* IconType.swift in Sources */,
@@ -433,8 +429,8 @@
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
 				102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */,
+				10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */,
 				104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */,
-				10D69C7F293BBE860098CC64 /* Version7.swift in Sources */,
 				102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

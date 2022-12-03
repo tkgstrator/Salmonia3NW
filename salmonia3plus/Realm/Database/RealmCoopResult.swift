@@ -56,7 +56,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.bossKillCounts.append(objectsIn: content.bossKillCounts)
         self.dangerRate = content.dangerRate
         self.jobRate = {
-            if let jobRate = jobRate {
+            if let jobRate = content.jobRate {
                 return jobRate
             }
             return nil

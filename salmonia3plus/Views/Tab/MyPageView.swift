@@ -49,6 +49,8 @@ struct MyPageView: View {
                         .frame(width: width * scale)
                     FileBackupButton()
                         .frame(width: width * scale)
+                    ResultsButton()
+                        .frame(width: width * scale)
                 })
                 .padding(.horizontal)
             })

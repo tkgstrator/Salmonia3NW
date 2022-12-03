@@ -83,12 +83,6 @@ extension RealmMigration {
             if let newValue: DynamicObject = newValue,
                let oldValue: DynamicObject = oldValue
             {
-                if let dangerRate: Double = oldValue["dangerRate"] as? Double {
-                    newValue["dangerRate"] = dangerRate
-                }
-                if let jobRate: Double = oldValue["jobRate"] as? Double {
-                    newValue["jobRate"] = jobRate
-                }
                 if let _ = oldValue["isBossDefeated"] as? Bool {
                     /// 現在オカシラシャケはヨコヅナしかいないので決め打ち
                     newValue["bossId"] = 23

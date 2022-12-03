@@ -11,20 +11,18 @@ import RealmSwift
 
 enum RealmMigration {
     static let configuration: Realm.Configuration = Realm.Configuration(
-        schemaVersion: 9,
+        schemaVersion: 11,
         migrationBlock: RealmMigration.migrationBlock(),
         deleteRealmIfMigrationNeeded: false
     )
 
     static func migrationBlock() -> MigrationBlock? {
         return { migration, schemaVersion in
+            print(schemaVersion)
             switch schemaVersion {
             case 6:
+                /// 1.2.1からのアップデート
                 version6(migration)
-            case 7:
-                version7(migration)
-            case 8:
-                version8(migration)
             default:
                 break
             }

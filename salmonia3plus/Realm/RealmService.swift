@@ -34,10 +34,10 @@ public actor RealmService: ObservableObject {
             /// 必要かどうかはわからない
             schedule.results.removeAll()
             if let startTime: Date = schedule.startTime, let endTime: Date = schedule.endTime {
-                let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("jobRate!=nil AND playTime<=%@ AND playTime<=%@", startTime, endTime)
+                let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("ANY link.mode=%@ AND playTime>=%@ AND playTime<=%@", ModeType.REGULAR.rawValue, startTime, endTime)
                 schedule.results.append(objectsIn: results)
             }
-            realm.add(schedules, update: .all)
+            realm.add(schedule, update: .all)
         }
         try? realm.commitWrite()
     }
@@ -77,8 +77,12 @@ public actor RealmService: ObservableObject {
         let source: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("json")
         try data.write(to: source, options: .atomic)
         let destination: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("zip")
-        try fileManager.zipItem(at: source, to: destination)
+        try fileManager.zipItem(at: source, to: destination, compressionMethod: .deflate)
         return destination
+    }
+
+    public func resultsCount() -> Int {
+        return realm.objects(RealmCoopResult.self).count
     }
 
     public func lastPlayedTime() -> Date? {
@@ -102,18 +106,28 @@ public actor RealmService: ObservableObject {
     }
 
     public func save(_ results: [CoopResult]) {
-        let schedules: Set<CoopResult.Schedule> = Set(results.map({ $0.schedule }))
+        /// スケジュール書き込み
+        let schedules: [RealmCoopSchedule] = Set(results.map({ $0.schedule })).map({ RealmCoopSchedule(content: $0) })
+        realm.beginWrite()
+        realm.add(schedules, update: .modified)
+        try? realm.commitWrite()
 
-        schedules.forEach({ schedule in
-            let results: [RealmCoopResult] = results.filter({ $0.schedule == schedule }).map({ RealmCoopResult(content: $0) })
-            let schedule: RealmCoopSchedule = RealmCoopSchedule(content: schedule)
-            realm.beginWrite()
-            // 存在しなかったら書き込む
-            if !realm.objects(RealmCoopSchedule.self).contains(schedule) {
-                realm.add(schedule)
+        /// 書き込むべきリザルト
+        let results: [RealmCoopResult] = results.map({ RealmCoopResult(content: $0) })
+        print(schedules.count, results.count)
+        realm.beginWrite()
+        /// リザルト全件書き込み
+        realm.add(results, update: .all)
+        /// スケジュールに割り当てる
+        for schedule in schedules {
+            if let schedule = realm.objects(RealmCoopSchedule.self).first(where: { $0 == schedule }),
+               let startTime = schedule.startTime,
+               let endTime = schedule.endTime
+            {
+                let results = results.filter({ $0.playTime >= startTime && $0.playTime <= endTime })
                 schedule.results.append(objectsIn: results)
             }
-            try? realm.commitWrite()
-        })
+        }
+        try? realm.commitWrite()
     }
 }

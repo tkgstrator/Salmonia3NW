@@ -20,7 +20,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
     @Persisted var goldenIkuraNum: Int
     @Persisted var ikuraNum: Int
     @Persisted var goldenIkuraAssistNum: Int
-    @Persisted var specialId: SpecialId
+    @Persisted var specialId: SpecialId?
     @Persisted var species: SpeciesType
     @Persisted var bossKillCountsTotal: Int
     @Persisted var bossKillCounts: List<Int>
