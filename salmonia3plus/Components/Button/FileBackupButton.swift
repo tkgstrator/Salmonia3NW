@@ -7,16 +7,27 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct FileBackupButton: View {
     @State private var isPresented: Bool = false
 
     var body: some View {
         Button(action: {
-            isPresented.toggle()
+            Task {
+                do {
+                    let filePath: URL = try await RealmService.shared.exportJSON()
+                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
+                    UIApplication.shared.rootViewController?.popover(activity, animated: true)
+                } catch(let error) {
+                    print(error)
+                }
+            }
         }, label: {
-            Text("Backup")
+            Image(icon: .Swap)
+                .resizable()
         })
+        .buttonStyle(SPButtonStyle(title: .Common_Share, color: SPColor.SplatNet3.SPLeague))
     }
 }
 

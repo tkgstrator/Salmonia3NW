@@ -21,10 +21,12 @@ struct ResultsView: View {
     var body: some View {
         List(content: {
             ForEach(schedules, id: \.self, content: { schedule in
-                ScheduleElement(schedule: schedule)
-                ForEach(schedule.results.sorted(by: { $0.playTime > $1.playTime }), content: { result in
-                    ResultElement(result: result)
-                })
+                if !schedule.results.isEmpty {
+                    ScheduleElement(schedule: schedule)
+                    ForEach(schedule.results.sorted(by: { $0.playTime > $1.playTime }), content: { result in
+                        ResultElement(result: result)
+                    })
+                }
             })
         })
         .listStyle(.plain)

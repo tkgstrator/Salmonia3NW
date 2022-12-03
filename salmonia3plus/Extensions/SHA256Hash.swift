@@ -18,6 +18,17 @@ extension SHA256 {
             .joined()
     }
 
+    static func resultHash(startTime: Date, endTime: Date, stageId: Int, rule: String, mode: String, weaponList: [Int]) -> String {
+        let hashes: [String] = [
+            SHA256.hash(startTime.description),
+            SHA256.hash(endTime.description),
+            SHA256.hash(stageId),
+            SHA256.hash(rule),
+            SHA256.hash(mode)
+        ] + weaponList.map({ SHA256.hash($0) })
+        return SHA256.hash(hashes.joined())
+    }
+
     static func resultHash(stageId: Int, rule: String, mode: String, weaponList: [Int]) -> String {
         let hashes: [String] = [
             SHA256.hash(stageId),

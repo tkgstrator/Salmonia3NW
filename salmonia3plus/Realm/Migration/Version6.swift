@@ -18,10 +18,19 @@ extension RealmMigration {
             if let newValue: DynamicObject = newValue,
                let oldValue: DynamicObject = oldValue
             {
-                if let startTime: Date = oldValue["startTime"] as? Date {
-                    newValue["id"] = startTime.hash
+                /// 通常のシフトの仮ハッシュ計算
+                if let startTime: Date = oldValue["startTime"] as? Date,
+                   let endTime: Date = oldValue["endTime"] as? Date,
+                   let stageId: Int = oldValue["stageId"] as? Int,
+                   let rule: String = oldValue["rule"] as? String,
+                   let mode: String = oldValue["mode"] as? String,
+                   let weaponList: RealmSwift.List<Int> = oldValue["weaponList"] as? RealmSwift.List<Int>
+                {
+                    newValue["id"] = SHA256.resultHash(startTime: startTime, endTime: endTime, stageId: stageId, rule: rule, mode: mode, weaponList: Array(weaponList))
                     return
                 }
+
+                /// プライベートシフトの仮ハッシュ計算
                 if let stageId: Int = oldValue["stageId"] as? Int,
                    let rule: String = oldValue["rule"] as? String,
                    let mode: String = oldValue["mode"] as? String,
@@ -40,6 +49,7 @@ extension RealmMigration {
                 if let specialId: Int = oldValue["specialId"] as? Int {
                     newValue["specialId"] = specialId
                 }
+                newValue["uniform"] = 1
             }
         })
 
@@ -73,13 +83,11 @@ extension RealmMigration {
             if let newValue: DynamicObject = newValue,
                let oldValue: DynamicObject = oldValue
             {
-                if let dangerRate: Double = oldValue["dangerRate"] as? Double,
-                   let value: Decimal128 = try? Decimal128(string: String(format: "%.3f", dangerRate)) {
-                    newValue["dangerRate"] = value
+                if let dangerRate: Double = oldValue["dangerRate"] as? Double {
+                    newValue["dangerRate"] = dangerRate
                 }
-                if let jobRate: Double = oldValue["jobRate"] as? Double,
-                   let value: Decimal128 = try? Decimal128(string: String(format: "%.1f", jobRate)) {
-                    newValue["jobRate"] = value
+                if let jobRate: Double = oldValue["jobRate"] as? Double {
+                    newValue["jobRate"] = jobRate
                 }
                 if let _ = oldValue["isBossDefeated"] as? Bool {
                     /// 現在オカシラシャケはヨコヅナしかいないので決め打ち

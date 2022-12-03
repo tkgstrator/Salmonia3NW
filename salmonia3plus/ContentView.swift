@@ -10,7 +10,7 @@ import SplatNet3
 
 struct ContentView: View {
     @StateObject private var session: Session = Session()
-    @State private var selection: Int = 0
+    @State private var selection: Int = 2
     @State private var isPresented: Bool = false
 
     public func TabContent<Content: View>(

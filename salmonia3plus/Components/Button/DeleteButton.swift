@@ -27,10 +27,24 @@ struct DeleteButton: View {
             actions: {
             Button(action: {
                 Task {
+                    await RealmService.shared.deleteAll(options: [.SCHEDULE])
+                }
+            }, label: {
+                Text(bundle: .StageSchedule_Title)
+            })
+            Button(action: {
+                Task {
+                    await RealmService.shared.deleteAll(options: [.RESULT])
+                }
+            }, label: {
+                Text(bundle: .CoopHistory_History)
+            })
+            Button(action: {
+                Task {
                     await RealmService.shared.deleteAll()
                 }
             }, label: {
-                Text("OK")
+                Text(bundle: .Common_Decide)
             })
         }, message: {
             Text(bundle: .Common_Wipe_Results_Txt)

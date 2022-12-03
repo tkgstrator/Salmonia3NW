@@ -23,8 +23,8 @@ final class RealmCoopResult: Object, Identifiable, Codable {
     @Persisted var goldenIkuraAssistNum: Int
     @Persisted var bossCounts: List<Int>
     @Persisted var bossKillCounts: List<Int>
-    @Persisted var dangerRate: Decimal128
-    @Persisted var jobRate: Decimal128?
+    @Persisted var dangerRate: Double
+    @Persisted var jobRate: Double?
     @Persisted var jobScore: Int?
     @Persisted var kumaPoint: Int?
     @Persisted var jobBonus: Int?
@@ -54,10 +54,10 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.goldenIkuraAssistNum = content.goldenIkuraAssistNum
         self.bossCounts.append(objectsIn: content.bossCounts)
         self.bossKillCounts.append(objectsIn: content.bossKillCounts)
-        self.dangerRate = Decimal128(floatLiteral: content.dangerRate)
+        self.dangerRate = content.dangerRate
         self.jobRate = {
             if let jobRate = jobRate {
-                return Decimal128(value: jobRate)
+                return jobRate
             }
             return nil
         }()
@@ -113,8 +113,8 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.goldenIkuraAssistNum = try container.decode(Int.self, forKey: .goldenIkuraAssitNum)
         self.bossCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossCounts))
         self.bossKillCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossKillCounts))
-        self.dangerRate = try container.decode(Decimal128.self, forKey: .dangerRate)
-        self.jobRate = try container.decodeIfPresent(Decimal128.self, forKey: .jobRate)
+        self.dangerRate = try container.decode(Double.self, forKey: .dangerRate)
+        self.jobRate = try container.decodeIfPresent(Double.self, forKey: .jobRate)
         self.jobScore = try container.decodeIfPresent(Int.self, forKey: .jobScore)
         self.kumaPoint = try container.decodeIfPresent(Int.self, forKey: .kumaPoint)
         self.jobBonus = try container.decodeIfPresent(Int.self, forKey: .jobBonus)
