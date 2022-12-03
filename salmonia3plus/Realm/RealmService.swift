@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftUI
 import SplatNet3
+import ZIPFoundation
 
 public actor RealmService: ObservableObject {
     public static let shared: RealmService = RealmService()
@@ -57,6 +58,7 @@ public actor RealmService: ObservableObject {
     }
 
     public func exportJSON() throws -> URL {
+        let fileManager: FileManager = FileManager.default
         let encoder: JSONEncoder = {
             let encoder: JSONEncoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -69,12 +71,14 @@ public actor RealmService: ObservableObject {
             formatter.dateFormat = "yyyymmddHHMMss"
             return formatter.string(from: Date())
         }()
-        guard let dir: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let baseURL: URL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Invalid URL"))
         }
-        let filePath: URL = dir.appendingPathComponent(fileName).appendingPathExtension("json")
-        try data.write(to: filePath, options: .atomic)
-        return filePath
+        let source: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("json")
+        try data.write(to: source, options: .atomic)
+        let destination: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("zip")
+        try fileManager.zipItem(at: source, to: destination)
+        return destination
     }
 
     public func lastPlayedTime() -> Date? {

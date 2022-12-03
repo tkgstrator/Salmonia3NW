@@ -16,8 +16,8 @@ struct FileBackupButton: View {
         Button(action: {
             Task {
                 do {
-                    let filePath: URL = try await RealmService.shared.exportJSON()
-                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [filePath], applicationActivities: nil)
+                    let destination: URL = try await RealmService.shared.exportJSON()
+                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [destination], applicationActivities: nil)
                     UIApplication.shared.rootViewController?.popover(activity, animated: true)
                 } catch(let error) {
                     print(error)
