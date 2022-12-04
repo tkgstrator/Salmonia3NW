@@ -11,6 +11,7 @@ import SplatNet3
 
 struct SignInButton: View {
     @State private var isPresented: Bool = false
+    let contentId: ContentId
 
     var body: some View {
         Button(action: {
@@ -19,13 +20,13 @@ struct SignInButton: View {
             Image(icon: .Switch)
                 .resizable()
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Sign_In, color: SPColor.SplatNet3.SPRed))
-        .authorize(isPresented: $isPresented, contentId: .SP3)
+        .buttonStyle(SPButtonStyle(title: .Common_Sign_In, color: contentId == .SP3 ? SPColor.SplatNet3.SPBlue : SPColor.SplatNet2.SPRed))
+        .authorize(isPresented: $isPresented, contentId: contentId)
     }
 }
 
 struct SignInButton_Previews: PreviewProvider {
     static var previews: some View {
-        SignInButton()
+        SignInButton(contentId: .SP3)
     }
 }

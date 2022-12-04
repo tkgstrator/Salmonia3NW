@@ -29,12 +29,12 @@ public actor RealmService: ObservableObject {
         /// スケジュール書き込み
         realm.beginWrite()
         /// 必要かどうかはわからない
-        realm.delete(realm.objects(RealmCoopSchedule.self).filter("startTime!=nil"))
+        realm.delete(realm.objects(RealmCoopSchedule.self).filter("mode=%@", ModeType.REGULAR.rawValue))
         for schedule in schedules {
             /// 必要かどうかはわからない
             schedule.results.removeAll()
             if let startTime: Date = schedule.startTime, let endTime: Date = schedule.endTime {
-                let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("ANY link.mode=%@ AND playTime>=%@ AND playTime<=%@", ModeType.REGULAR.rawValue, startTime, endTime)
+                let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("gradePoint!=nil AND playTime>=%@ AND playTime<=%@", startTime, endTime)
                 schedule.results.append(objectsIn: results)
             }
             realm.add(schedule, update: .all)
@@ -57,7 +57,7 @@ public actor RealmService: ObservableObject {
         try? realm.commitWrite()
     }
 
-    public func exportJSON() throws -> URL {
+    public func exportJSON(compress: Bool = true) throws -> URL {
         let fileManager: FileManager = FileManager.default
         let encoder: JSONEncoder = {
             let encoder: JSONEncoder = JSONEncoder()
@@ -76,9 +76,17 @@ public actor RealmService: ObservableObject {
         }
         let source: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("json")
         try data.write(to: source, options: .atomic)
-        let destination: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("zip")
-        try fileManager.zipItem(at: source, to: destination, compressionMethod: .deflate)
-        return destination
+
+        switch compress {
+        case true:
+            /// 圧縮設定のときはZIPを返す
+            let destination: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("zip")
+            try fileManager.zipItem(at: source, to: destination, compressionMethod: .deflate)
+            return destination
+        case false:
+            /// 非圧縮のときはJSONを返す
+            return source
+        }
     }
 
     public func resultsCount() -> Int {
@@ -124,7 +132,7 @@ public actor RealmService: ObservableObject {
                let startTime = schedule.startTime,
                let endTime = schedule.endTime
             {
-                let results = results.filter({ $0.playTime >= startTime && $0.playTime <= endTime })
+                let results = results.filter({ $0.playTime >= startTime && $0.playTime <= endTime && $0.grade != nil })
                 schedule.results.append(objectsIn: results)
             }
         }

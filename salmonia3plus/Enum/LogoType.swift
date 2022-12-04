@@ -10,7 +10,9 @@ import Foundation
 import SwiftUI
 
 enum LogoType: String, CaseIterable {
-    case Icon
+    case Logo2
+    case Logo3
+    case Logo3_Pre
     case Switch
 }
 

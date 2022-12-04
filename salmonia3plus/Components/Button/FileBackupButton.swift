@@ -14,20 +14,38 @@ struct FileBackupButton: View {
 
     var body: some View {
         Button(action: {
-            Task {
-                do {
-                    let destination: URL = try await RealmService.shared.exportJSON()
-                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [destination], applicationActivities: nil)
-                    UIApplication.shared.rootViewController?.popover(activity, animated: true)
-                } catch(let error) {
-                    print(error)
-                }
-            }
+            isPresented.toggle()
         }, label: {
             Image(icon: .Swap)
                 .resizable()
         })
         .buttonStyle(SPButtonStyle(title: .Common_Share, color: SPColor.SplatNet3.SPLeague))
+        .confirmationDialog(
+            Text("バックアップ"),
+            isPresented: $isPresented,
+            titleVisibility: .visible,
+            actions: {
+            Button(action: {
+                Task {
+                    let destination: URL = try await RealmService.shared.exportJSON(compress: true)
+                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [destination], applicationActivities: nil)
+                    UIApplication.shared.rootViewController?.popover(activity, animated: true)
+                }
+            }, label: {
+                Text("圧縮(ZIP)")
+            })
+            Button(action: {
+                Task {
+                    let destination: URL = try await RealmService.shared.exportJSON(compress: false)
+                    let activity: UIActivityViewController = UIActivityViewController(activityItems: [destination], applicationActivities: nil)
+                    UIApplication.shared.rootViewController?.popover(activity, animated: true)
+                }
+            }, label: {
+                Text("非圧縮(JSON)")
+            })
+        }, message: {
+            Text("リザルトのバックアップを行います")
+        })
     }
 }
 

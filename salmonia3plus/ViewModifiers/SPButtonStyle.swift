@@ -37,6 +37,30 @@ struct SPButtonStyle: ButtonStyle {
     }
 }
 
+struct SPWebButtonStyle: ButtonStyle {
+    let title: LocalizedType
+    let color: Color
+
+    init(title: LocalizedType = .Common_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
+        self.title = title
+        self.color = color
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(content: {
+            configuration
+                .label
+                .mask(alignment: .center, {
+                    Image(icon: .Circle)
+                        .resizable()
+                        .scaledToFit()
+                })
+            Text(bundle: title)
+                .font(systemName: .Splatfont2, size: 11)
+        })
+    }
+}
+
 struct SPButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader(content: { geometry in
