@@ -25,4 +25,13 @@ class Session: SP3Session {
         await RealmService.shared.save(schedules)
         return schedules
     }
+
+    @discardableResult
+    func upload(data: Data) async throws -> Discord.Attachments.Response {
+        try await session.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(data, withName: "SwiftyBeaver.json", fileName: "SwiftyBeaver.json", mimeType: "application/json")
+        }, with: Discord.Attachments())
+        .serializingDecodable(Discord.Attachments.Response.self)
+        .value
+    }
 }

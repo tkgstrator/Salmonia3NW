@@ -19,9 +19,9 @@ struct FileBackupButton: View {
             Image(icon: .Swap)
                 .resizable()
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Share, color: SPColor.SplatNet3.SPLeague))
+        .buttonStyle(SPButtonStyle(title: .Common_Backup, color: SPColor.SplatNet3.SPLeague))
         .confirmationDialog(
-            Text("バックアップ"),
+            Text(bundle: .Common_Backup),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
@@ -32,7 +32,7 @@ struct FileBackupButton: View {
                     UIApplication.shared.rootViewController?.popover(activity, animated: true)
                 }
             }, label: {
-                Text("圧縮(ZIP)")
+                Text(bundle: .Common_Backup_Compress)
             })
             Button(action: {
                 Task {
@@ -41,10 +41,10 @@ struct FileBackupButton: View {
                     UIApplication.shared.rootViewController?.popover(activity, animated: true)
                 }
             }, label: {
-                Text("非圧縮(JSON)")
+                Text(bundle: .Common_Backup_No_Compress)
             })
         }, message: {
-            Text("リザルトのバックアップを行います")
+            Text(bundle: .Common_Backup_Txt)
         })
     }
 }

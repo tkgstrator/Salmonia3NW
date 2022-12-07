@@ -19,9 +19,9 @@ struct DeleteButton: View {
             Image(icon: .Defeated)
                 .resizable()
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Wipe_Results, color: SPColor.SplatNet3.SPPink))
+        .buttonStyle(SPButtonStyle(title: .Common_Wipe_Data, color: SPColor.SplatNet3.SPPink))
         .confirmationDialog(
-            Text(bundle: .Common_Wipe_Results),
+            Text(bundle: .Common_Wipe_Data),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
@@ -47,7 +47,7 @@ struct DeleteButton: View {
                 Text(bundle: .Common_Decide)
             })
         }, message: {
-            Text(bundle: .Common_Wipe_Results_Txt)
+            Text(bundle: .Common_Wipe_Data_Txt)
         })
     }
 }

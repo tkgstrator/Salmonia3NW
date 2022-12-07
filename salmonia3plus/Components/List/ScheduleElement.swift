@@ -108,6 +108,28 @@ private struct _ScheduleElement: View {
         .background(Color.black)
     }
 
+    func GradeBadge() -> some View {
+        guard let maxGradePoint = schedule.maxGradePoint else {
+            return EmptyView()
+                .asAnyView()
+        }
+        if maxGradePoint < 200 {
+            return EmptyView()
+                .asAnyView()
+        }
+        let offset: Int = maxGradePoint == 999 ? 3 : (maxGradePoint - 200) / 200
+        print(offset, maxGradePoint)
+        guard let badgeId: BadgeId = BadgeId(rawValue: 5000000 + schedule.stageId.rawValue * 10 + offset) else {
+            return EmptyView()
+                .asAnyView()
+        }
+        return Image(bundle: badgeId)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 40, height: 40, alignment: .center)
+            .asAnyView()
+    }
+
     var body: some View {
         HStack(spacing: 0, content: {
             Image(schedule.stageId)
@@ -123,9 +145,15 @@ private struct _ScheduleElement: View {
                 })
             Rectangle()
                 .fill(backgroundColor)
-//                .frame(maxWidth: .infinity, height: 64, alignment: .center)
-                .overlay(StartTime(), alignment: .topTrailing)
-                .overlay(WeaponList(), alignment: .bottomTrailing)
+                .overlay(alignment: .bottomLeading, content: {
+                    GradeBadge()
+                })
+                .overlay(alignment: .topLeading, content: {
+                    StartTime()
+                })
+                .overlay(alignment: .bottomTrailing, content: {
+                    WeaponList()
+                })
         })
         .padding(.bottom, 2)
     }
@@ -176,8 +204,14 @@ extension RealmCoopSchedule {
     }
 }
 
-//struct ScheduleElement_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScheduleElement()
-//    }
-//}
+struct ScheduleElement_Previews: PreviewProvider {
+    @Environment(\.isPreview) var isPreview
+    static let schedule: RealmCoopSchedule = RealmCoopSchedule.preview
+
+    static var previews: some View {
+        List(content: {
+            ScheduleElement(schedule: schedule)
+        })
+        .listStyle(.plain)
+    }
+}

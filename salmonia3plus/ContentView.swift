@@ -9,7 +9,7 @@ import SwiftUI
 import SplatNet3
 
 struct ContentView: View {
-    @StateObject private var session: Session = Session()
+    @EnvironmentObject var session: Session
     @State private var selection: Int = 2
     @State private var isPresented: Bool = false
 
@@ -47,7 +47,7 @@ struct ContentView: View {
             )
             .tag(0)
             TabContent(
-                bundle: .CoopHistory_History,
+                bundle: .StageSchedule_Title,
                 icon: {
                     Image(icon: .Home)
                 },
@@ -60,7 +60,7 @@ struct ContentView: View {
             TabContent(
                 bundle: .Common_MyPage,
                 icon: {
-                    Image(icon: .Home)
+                    Image(icon: .Me)
                 },
                 content: {
                     MyPageView()

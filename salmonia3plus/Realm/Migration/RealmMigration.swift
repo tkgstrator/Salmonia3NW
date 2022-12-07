@@ -18,13 +18,18 @@ enum RealmMigration {
 
     static func migrationBlock() -> MigrationBlock? {
         return { migration, schemaVersion in
-            print(schemaVersion)
-            switch schemaVersion {
-            case 6:
-                /// 1.2.1からのアップデート
+            print("SchemaVersion", schemaVersion)
+            if schemaVersion <= 6 {
                 version6(migration)
-            default:
-                break
+            }
+            if schemaVersion <= 7 {
+                version7(migration)
+            }
+            if schemaVersion <= 8 {
+                version8(migration)
+            }
+            if schemaVersion <= 11 {
+                version11(migration)
             }
         }
     }

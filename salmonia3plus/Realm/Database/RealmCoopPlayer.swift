@@ -93,7 +93,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
         self.goldenIkuraNum = try container.decode(Int.self, forKey: .goldenIkuraNum)
         self.goldenIkuraAssistNum = try container.decode(Int.self, forKey: .goldenIkuraAssistNum)
         self.ikuraNum = try container.decode(Int.self, forKey: .ikuraNum)
-        self.specialId = try container.decode(SpecialId.self, forKey: .specialId)
+        self.specialId = try container.decodeIfPresent(SpecialId.self, forKey: .specialId)
         self.species = try container.decode(SpeciesType.self, forKey: .species)
         self.specialCounts.append(objectsIn: try container.decode([Int].self, forKey: .specialCounts))
         self.bossKillCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossKillCounts))

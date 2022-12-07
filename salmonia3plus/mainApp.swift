@@ -9,6 +9,7 @@ import SwiftUI
 import RealmSwift
 import CryptoKit
 import Realm
+import SplatNet3
 
 @main
 struct mainApp: SwiftUI.App {
@@ -28,6 +29,7 @@ struct mainApp: SwiftUI.App {
     class AppDelegate: NSObject, UIApplicationDelegate {
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
             print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+            SwiftyLogger.addDestination(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
             return true
         }
     }
