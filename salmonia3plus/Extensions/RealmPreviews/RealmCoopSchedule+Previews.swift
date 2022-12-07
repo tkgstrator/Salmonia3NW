@@ -29,7 +29,7 @@ extension RealmCoopSchedule {
 extension RealmCoopResult {
     static let preview: RealmCoopResult = {
         let result = RealmCoopResult()
-        result.id = UUID().uuidString
+        result.id = ""
         result.gradePoint = 999
         result.grade = .Eggsecutive_VP
         result.isClear = true
@@ -46,8 +46,8 @@ extension RealmCoopResult {
         result.kumaPoint = 999
         result.jobBonus = 999
         result.smellMeter = 5
-        result.waves.append(RealmCoopWave.preview)
-        result.players.append(RealmCoopPlayer.preview)
+//        result.waves.append(RealmCoopWave.preview)
+//        result.players.append(RealmCoopPlayer.preview)
         result.scale.append(objectsIn: Array(repeating: 99, count: 3))
         result.playTime = Date(timeIntervalSince1970: 1667228400)
         result.scenarioCode = nil

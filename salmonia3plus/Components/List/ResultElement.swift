@@ -13,9 +13,13 @@ struct ResultElement: View {
     let result: RealmCoopResult
 
     var body: some View {
-        _ResultElement(result: result)
-            .listRowInsets(EdgeInsets())
-            .listRowSeparator(.hidden)
+        NavigationLinker(destination: {
+            ResultView(result: result)
+        }, label: {
+            _ResultElement(result: result)
+        })
+        .listRowInsets(EdgeInsets())
+        .listRowSeparator(.hidden)
     }
 }
 

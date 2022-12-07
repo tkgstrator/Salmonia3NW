@@ -12,9 +12,16 @@ import SplatNet3
 class Session: SP3Session {
     override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
         let playTime: Date? = await RealmService.shared.lastPlayedTime()
+        if let playTime = playTime {
+            SwiftyLogger.info("ResultId: \(playTime)")
+        } else {
+            SwiftyLogger.info("ResultId: Not set")
+        }
+
         let results: [CoopResult] = try await super.getAllCoopHistoryDetailQuery(playTime: playTime, completion: { value, total in
             completion(value, total)
         })
+        SwiftyLogger.info("Get results: \(results.count)")
 
         await RealmService.shared.save(results)
         return results
@@ -22,6 +29,8 @@ class Session: SP3Session {
 
     override func getCoopStageScheduleQuery() async throws -> [CoopSchedule] {
         let schedules: [CoopSchedule] = try await super.getCoopStageScheduleQuery()
+        SwiftyLogger.info("Get schedules: \(schedules.count)")
+
         await RealmService.shared.save(schedules)
         return schedules
     }

@@ -153,6 +153,12 @@ final class RealmCoopResult: Object, Identifiable, Codable {
     }
 }
 
+extension RealmCoopResult {
+    var schedule: RealmCoopSchedule {
+        self.link.first ?? RealmCoopSchedule.preview
+    }
+}
+
 extension GradeId: PersistableEnum {}
 
 extension EnemyId: PersistableEnum {}

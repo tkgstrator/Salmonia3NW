@@ -148,7 +148,7 @@ private struct _ScheduleElement: View {
                 .overlay(alignment: .bottomLeading, content: {
                     GradeBadge()
                 })
-                .overlay(alignment: .topLeading, content: {
+                .overlay(alignment: .topTrailing, content: {
                     StartTime()
                 })
                 .overlay(alignment: .bottomTrailing, content: {
