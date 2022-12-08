@@ -61,6 +61,7 @@ struct MyPageView: View {
                 .padding(.horizontal)
             })
         })
+        .navigationTitle(Text(bundle: .Common_MyPage))
     }
 }
 

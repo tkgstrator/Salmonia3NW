@@ -118,7 +118,6 @@ private struct _ScheduleElement: View {
                 .asAnyView()
         }
         let offset: Int = maxGradePoint == 999 ? 3 : (maxGradePoint - 200) / 200
-        print(offset, maxGradePoint)
         guard let badgeId: BadgeId = BadgeId(rawValue: 5000000 + schedule.stageId.rawValue * 10 + offset) else {
             return EmptyView()
                 .asAnyView()

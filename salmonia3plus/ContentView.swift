@@ -10,85 +10,64 @@ import SplatNet3
 import Introspect
 
 struct ContentView: View {
-    @EnvironmentObject var session: Session
-    @State private var selection: Int = 2
+    @StateObject private var session: SP3Session = SP3Session()
     @State private var isPresented: Bool = false
 
-    public func TabContent<Content: View>(
-        bundle: LocalizedType,
-        icon: @escaping () -> Image,
-        content: @escaping () -> Content
-    ) -> some View {
-        NavigationView(content: {
-            content()
-                .navigationTitle(Text(bundle: bundle))
-                .navigationBarTitleDisplayMode(.inline)
-        })
-        .navigationViewStyle(.split)
-        .tabItem({
-            Label(title: {
-                Text(bundle: bundle)
-            }, icon: {
-                icon()
-            })
-        })
-    }
-
     var body: some View {
-        TabView(selection: $selection, content: {
-            TabContent(
-                bundle: .CoopHistory_History,
-                icon: {
-                    Image(icon: .Home)
-                },
-                content: {
-                    ResultsView()
-                        .environment(\.isModalPresented, $isPresented)
-                }
-            )
-            .tag(0)
-            TabContent(
-                bundle: .StageSchedule_Title,
-                icon: {
-                    Image(icon: .Home)
-                },
-                content: {
-                    SchedulesView()
-                        .environment(\.isModalPresented, $isPresented)
-                }
-            )
-            .tag(1)
-            TabContent(
-                bundle: .Common_MyPage,
-                icon: {
-                    Image(icon: .Me)
-                },
-                content: {
-                    MyPageView()
-                }
-            )
-            .tag(2)
-        })
-        .introspectTabBarController(customize: { tabBarController in
-            print(tabBarController)
-            print(tabBarController as? CustomTabBarController)
-        })
-        .fullScreen(isPresented: $isPresented, session: session)
+        _ContentView()
+            .environment(\.isModalPresented, $isPresented)
+            .edgesIgnoringSafeArea(.all)
+            .fullScreen(isPresented: $isPresented, session: session)
     }
 }
 
-class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.delegate = self
-    }
-
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        navigationController?.popToRootViewController(animated: true)
+extension UIImage {
+    convenience init?(icon: IconType) {
+        self.init(named: "Icon/\(icon.rawValue)", in: .main, with: nil)
     }
 }
 
-class TabViewController: UIViewController, UITabBarDelegate {
+private struct _ContentView: UIViewControllerRepresentable {
+    func makeCoordinator() -> Coordinator {
+    }
+
+    func makeUIViewController(context: Context) -> UITabBarController {
+        let controller = UITabBarController()
+        let mypage = UINavigationController(rootViewController: UIHostingController(rootView: MyPageView()))
+        let result = UINavigationController(rootViewController: UIHostingController(rootView: ResultsView()))
+        let schedule = UINavigationController(rootViewController: UIHostingController(rootView: SchedulesView()))
+
+        mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
+        result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
+        schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
+        controller.setViewControllers([mypage, result, schedule], animated: true)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UITabBarController, context: Context) {
+    }
+
+    class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
+        required init?(coder: NSCoder) {
+            fatalError()
+        }
+
+        init() {
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+        }
+
+        override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+        }
+
+        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+            super.init(nibName: nil, bundle: nil)
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

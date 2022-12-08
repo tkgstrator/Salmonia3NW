@@ -33,6 +33,7 @@ struct SchedulesView: View {
             })
         })
         .showsScrollIndicators()
+        .navigationTitle(Text(bundle: .StageSchedule_Title))
     }
 
     private func send(action: @escaping () -> Void) async {

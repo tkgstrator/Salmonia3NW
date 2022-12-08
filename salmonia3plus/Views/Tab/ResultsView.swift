@@ -36,6 +36,7 @@ struct ResultsView: View {
             })
         })
         .showsScrollIndicators()
+        .navigationTitle(Text(bundle: .CoopHistory_History))
     }
 
     private func send(action: @escaping () -> Void) async {
