@@ -21,7 +21,28 @@ private struct CoopResult: EnvironmentKey {
     static var defaultValue: RealmCoopResult = RealmCoopResult.preview
 }
 
+private struct RootPresentationModeKey: EnvironmentKey {
+    static let defaultValue: Binding<RootPresentationMode> = .constant(RootPresentationMode())
+}
+
+typealias RootPresentationMode = Bool
+
+extension RootPresentationMode {
+    public mutating func dismiss() {
+        self.toggle()
+    }
+}
+
 extension EnvironmentValues {
+    var rootPresentationMode: Binding<RootPresentationMode> {
+        get {
+            self[RootPresentationModeKey.self]
+        }
+        set {
+            self[RootPresentationModeKey.self] = newValue
+        }
+    }
+
     var coopResult: RealmCoopResult {
         get {
             return self[CoopResult.self]

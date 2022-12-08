@@ -18,11 +18,9 @@ struct mainApp: SwiftUI.App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView(content: {
-                ContentView()
-                    .environment(\.realmConfiguration, RealmMigration.configuration)
-                    .environmentObject(session)
-            })
+            ContentView()
+                .environment(\.realmConfiguration, RealmMigration.configuration)
+                .environmentObject(session)
         }
     }
 

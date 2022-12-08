@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SplatNet3
+import Introspect
 
 struct ContentView: View {
     @EnvironmentObject var session: Session
@@ -68,8 +69,26 @@ struct ContentView: View {
             )
             .tag(2)
         })
+        .introspectTabBarController(customize: { tabBarController in
+            print(tabBarController)
+            print(tabBarController as? CustomTabBarController)
+        })
         .fullScreen(isPresented: $isPresented, session: session)
     }
+}
+
+class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
+    }
+
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+class TabViewController: UIViewController, UITabBarDelegate {
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -53,6 +53,7 @@
 		10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C7C293BAC120098CC64 /* ScheduleButton.swift */; };
 		10D69C84293BDD770098CC64 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10D69C83293BDD770098CC64 /* ZIPFoundation */; };
 		10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C85293BE12E0098CC64 /* ResultsButton.swift */; };
+		10DC185A29422361009EB01C /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 10DC185929422361009EB01C /* Introspect */; };
 		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
 		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
 		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
@@ -132,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				104BAB2B292CDD1700739B2C /* RealmSwift in Frameworks */,
+				10DC185A29422361009EB01C /* Introspect in Frameworks */,
 				10403BF32938F46A003D10BA /* SplatNet3 in Frameworks */,
 				10D69C84293BDD770098CC64 /* ZIPFoundation in Frameworks */,
 			);
@@ -393,6 +395,7 @@
 				104BAB2A292CDD1700739B2C /* RealmSwift */,
 				10403BF22938F46A003D10BA /* SplatNet3 */,
 				10D69C83293BDD770098CC64 /* ZIPFoundation */,
+				10DC185929422361009EB01C /* Introspect */,
 			);
 			productName = salmonia3plus;
 			productReference = 104BAAEF292CBAFF00739B2C /* salmonia3plus.app */;
@@ -438,6 +441,7 @@
 			packageReferences = (
 				104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				10D69C82293BDD770098CC64 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				10DC185829422361009EB01C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 104BAAF0292CBAFF00739B2C /* Products */;
 			projectDirPath = "";
@@ -661,7 +665,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -700,7 +704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 31;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -773,6 +777,14 @@
 				minimumVersion = 0.9.9;
 			};
 		};
+		10DC185829422361009EB01C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -789,6 +801,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10D69C82293BDD770098CC64 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		10DC185929422361009EB01C /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10DC185829422361009EB01C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
