@@ -9,13 +9,28 @@
 import Foundation
 import SwiftUI
 
-struct IsModalPresented: EnvironmentKey {
+private struct IsModalPresented: EnvironmentKey {
     typealias Value = Binding<Bool>
 
     static var defaultValue: Binding<Bool> = .constant(false)
 }
 
+private struct CoopResult: EnvironmentKey {
+    typealias Value = RealmCoopResult
+
+    static var defaultValue: RealmCoopResult = RealmCoopResult.preview
+}
+
 extension EnvironmentValues {
+    var coopResult: RealmCoopResult {
+        get {
+            return self[CoopResult.self]
+        }
+        set {
+            self[CoopResult.self] = newValue
+        }
+    }
+
     var isModalPresented: Binding<Bool> {
         get {
             return self[IsModalPresented.self]

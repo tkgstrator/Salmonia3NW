@@ -46,7 +46,7 @@ extension RealmCoopResult {
         result.kumaPoint = 999
         result.jobBonus = 999
         result.smellMeter = 5
-//        result.waves.append(RealmCoopWave.preview)
+        result.waves.append(objectsIn: RealmCoopWave.previews)
 //        result.players.append(RealmCoopPlayer.preview)
         result.scale.append(objectsIn: Array(repeating: 99, count: 3))
         result.playTime = Date(timeIntervalSince1970: 1667228400)
@@ -66,6 +66,20 @@ extension RealmCoopWave {
         wave.goldenIkuraPopNum = 99
         wave.quotaNum = 35
         return wave
+    }()
+
+    static let previews: [RealmCoopWave] = {
+        [1, 2, 3].map({ id in
+            let wave = RealmCoopWave()
+            wave.id = id
+            wave.waterLevel = .NORMAL_TIDE
+            wave.eventType = .Water_Levels
+            wave.isClear = true
+            wave.goldenIkuraNum = 99
+            wave.goldenIkuraPopNum = 99
+            wave.quotaNum = 35
+            return wave
+        })
     }()
 }
 
