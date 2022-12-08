@@ -32,15 +32,29 @@ private struct _ContentView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: Context) -> UITabBarController {
+        let views: [UIViewController] = {
+            switch UIDevice.current.userInterfaceIdiom {
+            case .phone:
+                let mypage = UINavigationController(rootViewController: UIHostingController(rootView: MyPageView()))
+                let result = UINavigationController(rootViewController: UIHostingController(rootView: ResultsView()))
+                let schedule = UINavigationController(rootViewController: UIHostingController(rootView: SchedulesView()))
+                mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
+                result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
+                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
+                return [mypage, result, schedule]
+            default:
+                let mypage = UIHostingController(rootView: NavigationView(content: { MyPageView() }).navigationViewStyle(.split))
+                let result = UIHostingController(rootView: NavigationView(content: { ResultsView() }).navigationViewStyle(.split))
+                let schedule = UIHostingController(rootView: NavigationView(content: { SchedulesView() }).navigationViewStyle(.split))
+                mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
+                result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
+                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
+                return [mypage, result, schedule]
+            }
+        }()
         let controller = UITabBarController()
-        let mypage = UIHostingController(rootView: NavigationView(content: { MyPageView() }).navigationViewStyle(.split))
-        let result = UIHostingController(rootView: NavigationView(content: { ResultsView() }).navigationViewStyle(.split))
-        let schedule = UIHostingController(rootView: NavigationView(content: { SchedulesView() }).navigationViewStyle(.split))
 
-        mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
-        result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
-        schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
-        controller.setViewControllers([mypage, result, schedule], animated: true)
+        controller.setViewControllers(views, animated: false)
         return controller
     }
 
