@@ -61,6 +61,7 @@ struct MyPageView: View {
                 .padding(.horizontal)
             })
         })
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .Common_MyPage))
     }
 }

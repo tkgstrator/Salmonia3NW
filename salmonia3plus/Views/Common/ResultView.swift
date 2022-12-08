@@ -20,6 +20,7 @@ struct ResultView: View {
             _ResultStaus()
             _ResultWave()
         })
+        .navigationBarTitleDisplayMode(.inline)
         .environment(\.coopResult, result)
     }
 }

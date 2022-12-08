@@ -10,7 +10,7 @@ import SplatNet3
 import Introspect
 
 struct ContentView: View {
-    @StateObject private var session: SP3Session = SP3Session()
+    @StateObject private var session: Session = Session()
     @State private var isPresented: Bool = false
 
     var body: some View {
@@ -33,9 +33,9 @@ private struct _ContentView: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UITabBarController {
         let controller = UITabBarController()
-        let mypage = UINavigationController(rootViewController: UIHostingController(rootView: MyPageView()))
-        let result = UINavigationController(rootViewController: UIHostingController(rootView: ResultsView()))
-        let schedule = UINavigationController(rootViewController: UIHostingController(rootView: SchedulesView()))
+        let mypage = UIHostingController(rootView: NavigationView(content: { MyPageView() }).navigationViewStyle(.split))
+        let result = UIHostingController(rootView: NavigationView(content: { ResultsView() }).navigationViewStyle(.split))
+        let schedule = UIHostingController(rootView: NavigationView(content: { SchedulesView() }).navigationViewStyle(.split))
 
         mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
         result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)

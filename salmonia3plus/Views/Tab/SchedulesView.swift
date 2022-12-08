@@ -33,6 +33,7 @@ struct SchedulesView: View {
             })
         })
         .showsScrollIndicators()
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .StageSchedule_Title))
     }
 

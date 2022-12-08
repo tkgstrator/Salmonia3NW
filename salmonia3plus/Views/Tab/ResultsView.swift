@@ -36,6 +36,7 @@ struct ResultsView: View {
             })
         })
         .showsScrollIndicators()
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .CoopHistory_History))
     }
 
