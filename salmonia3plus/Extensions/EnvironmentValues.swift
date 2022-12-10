@@ -15,31 +15,25 @@ private struct IsModalPresented: EnvironmentKey {
     static var defaultValue: Binding<Bool> = .constant(false)
 }
 
+private struct PreferredColorScheme: EnvironmentKey {
+    typealias Value = Binding<ColorScheme>
+
+    static var defaultValue: Binding<ColorScheme> = .constant(.dark)
+}
+
 private struct CoopResult: EnvironmentKey {
     typealias Value = RealmCoopResult
 
     static var defaultValue: RealmCoopResult = RealmCoopResult.preview
 }
 
-private struct RootPresentationModeKey: EnvironmentKey {
-    static let defaultValue: Binding<RootPresentationMode> = .constant(RootPresentationMode())
-}
-
-typealias RootPresentationMode = Bool
-
-extension RootPresentationMode {
-    public mutating func dismiss() {
-        self.toggle()
-    }
-}
-
 extension EnvironmentValues {
-    var rootPresentationMode: Binding<RootPresentationMode> {
+    var preferredColorScheme: Binding<ColorScheme> {
         get {
-            self[RootPresentationModeKey.self]
+            return self[PreferredColorScheme.self]
         }
         set {
-            self[RootPresentationModeKey.self] = newValue
+            self[PreferredColorScheme.self] = newValue
         }
     }
 

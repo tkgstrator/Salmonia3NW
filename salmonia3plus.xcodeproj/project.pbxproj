@@ -29,7 +29,7 @@
 		102F38F2293391AE001E1FD5 /* splatoon2jpja.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38EC293391AE001E1FD5 /* splatoon2jpja.ttf */; };
 		102F38F3293391AE001E1FD5 /* splatoon2twzh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 102F38ED293391AE001E1FD5 /* splatoon2twzh.ttf */; };
 		102F38F529339468001E1FD5 /* LogoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38F429339468001E1FD5 /* LogoType.swift */; };
-		102F38F729339A1F001E1FD5 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38F629339A1F001E1FD5 /* DeleteButton.swift */; };
+		102F38F729339A1F001E1FD5 /* ManagementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38F629339A1F001E1FD5 /* ManagementButton.swift */; };
 		10403BF32938F46A003D10BA /* SplatNet3 in Frameworks */ = {isa = PBXBuildFile; productRef = 10403BF22938F46A003D10BA /* SplatNet3 */; };
 		104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAAF2292CBAFF00739B2C /* mainApp.swift */; };
 		104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104BAAF4292CBAFF00739B2C /* ContentView.swift */; };
@@ -54,6 +54,25 @@
 		10D69C84293BDD770098CC64 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10D69C83293BDD770098CC64 /* ZIPFoundation */; };
 		10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C85293BE12E0098CC64 /* ResultsButton.swift */; };
 		10DC185A29422361009EB01C /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 10DC185929422361009EB01C /* Introspect */; };
+		10DC189A294366AE009EB01C /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC1899294366AE009EB01C /* MenuButton.swift */; };
+		10DC189C29436954009EB01C /* UnlinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC189B29436954009EB01C /* UnlinkButton.swift */; };
+		10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC189F29436E8A009EB01C /* SourceLink.swift */; };
+		10DC18A229436EAB009EB01C /* FAQLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18A129436EAB009EB01C /* FAQLink.swift */; };
+		10DC18A429437033009EB01C /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18A329437033009EB01C /* ListRow.swift */; };
+		10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18A52943711C009EB01C /* VersionLabel.swift */; };
+		10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18A8294371F9009EB01C /* ResultLabel.swift */; };
+		10DC18AB294372AA009EB01C /* LanguageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18AA294372AA009EB01C /* LanguageButton.swift */; };
+		10DC18AE29437330009EB01C /* ThemeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18AD29437330009EB01C /* ThemeToggle.swift */; };
+		10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18AF294373A3009EB01C /* GamingToggle.swift */; };
+		10DC18B229437755009EB01C /* PrivacyLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18B129437755009EB01C /* PrivacyLink.swift */; };
+		10DC18B429438220009EB01C /* FormatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18B329438220009EB01C /* FormatType.swift */; };
+		10DC18B629439185009EB01C /* SettingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18B529439185009EB01C /* SettingButton.swift */; };
+		10DC18B82943B471009EB01C /* CreditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18B72943B471009EB01C /* CreditView.swift */; };
+		10DC18BA2943C4A3009EB01C /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18B92943C4A3009EB01C /* UserType.swift */; };
+		10DC18BC2943C590009EB01C /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BB2943C590009EB01C /* RoleType.swift */; };
+		10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BD2943DABE009EB01C /* Decimal128.swift */; };
+		10DC18C02943DAEF009EB01C /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BF2943DAEF009EB01C /* CornerRadius.swift */; };
+		10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C12944A6CB009EB01C /* CreditLink.swift */; };
 		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
 		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
 		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
@@ -84,7 +103,7 @@
 		102F38EC293391AE001E1FD5 /* splatoon2jpja.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2jpja.ttf; sourceTree = "<group>"; };
 		102F38ED293391AE001E1FD5 /* splatoon2twzh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = splatoon2twzh.ttf; sourceTree = "<group>"; };
 		102F38F429339468001E1FD5 /* LogoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoType.swift; sourceTree = "<group>"; };
-		102F38F629339A1F001E1FD5 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		102F38F629339A1F001E1FD5 /* ManagementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementButton.swift; sourceTree = "<group>"; };
 		10403BF12938F346003D10BA /* SplatNet3 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SplatNet3; path = ../SplatNet3; sourceTree = "<group>"; };
 		104BAAEF292CBAFF00739B2C /* salmonia3plus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = salmonia3plus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		104BAAF2292CBAFF00739B2C /* mainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainApp.swift; sourceTree = "<group>"; };
@@ -120,6 +139,25 @@
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10D69C7C293BAC120098CC64 /* ScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleButton.swift; sourceTree = "<group>"; };
 		10D69C85293BE12E0098CC64 /* ResultsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsButton.swift; sourceTree = "<group>"; };
+		10DC1899294366AE009EB01C /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		10DC189B29436954009EB01C /* UnlinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkButton.swift; sourceTree = "<group>"; };
+		10DC189F29436E8A009EB01C /* SourceLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceLink.swift; sourceTree = "<group>"; };
+		10DC18A129436EAB009EB01C /* FAQLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQLink.swift; sourceTree = "<group>"; };
+		10DC18A329437033009EB01C /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
+		10DC18A52943711C009EB01C /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
+		10DC18A8294371F9009EB01C /* ResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultLabel.swift; sourceTree = "<group>"; };
+		10DC18AA294372AA009EB01C /* LanguageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageButton.swift; sourceTree = "<group>"; };
+		10DC18AD29437330009EB01C /* ThemeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeToggle.swift; sourceTree = "<group>"; };
+		10DC18AF294373A3009EB01C /* GamingToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingToggle.swift; sourceTree = "<group>"; };
+		10DC18B129437755009EB01C /* PrivacyLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyLink.swift; sourceTree = "<group>"; };
+		10DC18B329438220009EB01C /* FormatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatType.swift; sourceTree = "<group>"; };
+		10DC18B529439185009EB01C /* SettingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingButton.swift; sourceTree = "<group>"; };
+		10DC18B72943B471009EB01C /* CreditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditView.swift; sourceTree = "<group>"; };
+		10DC18B92943C4A3009EB01C /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		10DC18BB2943C590009EB01C /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
+		10DC18BD2943DABE009EB01C /* Decimal128.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal128.swift; sourceTree = "<group>"; };
+		10DC18BF2943DAEF009EB01C /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
+		10DC18C12944A6CB009EB01C /* CreditLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditLink.swift; sourceTree = "<group>"; };
 		10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SP3Session+Request.swift"; sourceTree = "<group>"; };
 		10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		10F039A6293B6F7300BAD41C /* SHA256Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256Hash.swift; sourceTree = "<group>"; };
@@ -167,6 +205,8 @@
 				102F38BC2933570F001E1FD5 /* SFSymbols.swift */,
 				10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */,
 				10F039A6293B6F7300BAD41C /* SHA256Hash.swift */,
+				10DC18BD2943DABE009EB01C /* Decimal128.swift */,
+				10DC18BF2943DAEF009EB01C /* CornerRadius.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -182,9 +222,13 @@
 		102F38D7293378C0001E1FD5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10DC18982943669B009EB01C /* Link */,
+				10DC18AC29437326009EB01C /* Toggle */,
+				10DC18A7294371E3009EB01C /* Label */,
 				1077DD8B293CB93300786CD0 /* Shape */,
 				102F38DB29337A58001E1FD5 /* List */,
 				102F38D8293378D7001E1FD5 /* Button */,
+				10DC18A329437033009EB01C /* ListRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -194,12 +238,16 @@
 			children = (
 				104BAB24292CCE3100739B2C /* FilePickerButton.swift */,
 				104BAB27292CD7DF00739B2C /* FileBackupButton.swift */,
+				10DC1899294366AE009EB01C /* MenuButton.swift */,
+				10DC189B29436954009EB01C /* UnlinkButton.swift */,
 				102F38D9293378E2001E1FD5 /* SignInButton.swift */,
-				102F38F629339A1F001E1FD5 /* DeleteButton.swift */,
+				102F38F629339A1F001E1FD5 /* ManagementButton.swift */,
 				10D69C7C293BAC120098CC64 /* ScheduleButton.swift */,
 				10D69C85293BE12E0098CC64 /* ResultsButton.swift */,
 				1077DD89293CB6F200786CD0 /* InAppButton.swift */,
 				105B54B92940D08700597A2D /* LogButton.swift */,
+				10DC18AA294372AA009EB01C /* LanguageButton.swift */,
+				10DC18B529439185009EB01C /* SettingButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -219,6 +267,9 @@
 				102F38E129337B36001E1FD5 /* FontType.swift */,
 				102F38E529338E1E001E1FD5 /* IconType.swift */,
 				102F38F429339468001E1FD5 /* LogoType.swift */,
+				10DC18B329438220009EB01C /* FormatType.swift */,
+				10DC18B92943C4A3009EB01C /* UserType.swift */,
+				10DC18BB2943C590009EB01C /* RoleType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -305,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				105B54BE2940FBC200597A2D /* ResultView.swift */,
+				10DC18B72943B471009EB01C /* CreditView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -333,6 +385,35 @@
 				1077DD8C293CB93A00786CD0 /* SPCircle.swift */,
 			);
 			path = Shape;
+			sourceTree = "<group>";
+		};
+		10DC18982943669B009EB01C /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				10DC18B129437755009EB01C /* PrivacyLink.swift */,
+				10DC189F29436E8A009EB01C /* SourceLink.swift */,
+				10DC18A129436EAB009EB01C /* FAQLink.swift */,
+				10DC18C12944A6CB009EB01C /* CreditLink.swift */,
+			);
+			path = Link;
+			sourceTree = "<group>";
+		};
+		10DC18A7294371E3009EB01C /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				10DC18A52943711C009EB01C /* VersionLabel.swift */,
+				10DC18A8294371F9009EB01C /* ResultLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		10DC18AC29437326009EB01C /* Toggle */ = {
+			isa = PBXGroup;
+			children = (
+				10DC18AD29437330009EB01C /* ThemeToggle.swift */,
+				10DC18AF294373A3009EB01C /* GamingToggle.swift */,
+			);
+			path = Toggle;
 			sourceTree = "<group>";
 		};
 		10F039A8293B9A1D00BAD41C /* Migration */ = {
@@ -477,19 +558,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
+				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
+				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
 				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
+				10DC18B629439185009EB01C /* SettingButton.swift in Sources */,
 				10F039AC293B9A4E00BAD41C /* RealmMigration.swift in Sources */,
 				1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */,
+				10DC18B229437755009EB01C /* PrivacyLink.swift in Sources */,
 				102F38D429337692001E1FD5 /* ResultsView.swift in Sources */,
 				102F38E629338E1E001E1FD5 /* IconType.swift in Sources */,
 				104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */,
 				102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */,
+				10DC18A429437033009EB01C /* ListRow.swift in Sources */,
 				105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */,
+				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
 				105B54B42940C8D000597A2D /* Version6.swift in Sources */,
 				10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */,
+				10DC189A294366AE009EB01C /* MenuButton.swift in Sources */,
 				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
 				1077DDA0293E606400786CD0 /* Secrets.swift in Sources */,
+				10DC18AE29437330009EB01C /* ThemeToggle.swift in Sources */,
+				10DC18A229436EAB009EB01C /* FAQLink.swift in Sources */,
+				10DC18B429438220009EB01C /* FormatType.swift in Sources */,
+				10DC18AB294372AA009EB01C /* LanguageButton.swift in Sources */,
 				102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */,
 				102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */,
 				1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */,
@@ -497,24 +589,32 @@
 				105B54BA2940D08700597A2D /* LogButton.swift in Sources */,
 				10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */,
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
+				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
+				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
+				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
 				10F039AA293B9A2F00BAD41C /* Version8.swift in Sources */,
 				102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */,
 				102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */,
 				102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */,
 				102F38E229337B36001E1FD5 /* FontType.swift in Sources */,
-				102F38F729339A1F001E1FD5 /* DeleteButton.swift in Sources */,
+				102F38F729339A1F001E1FD5 /* ManagementButton.swift in Sources */,
 				102F38F529339468001E1FD5 /* LogoType.swift in Sources */,
 				10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */,
 				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
+				10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */,
+				10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
 				102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */,
+				10DC189C29436954009EB01C /* UnlinkButton.swift in Sources */,
+				10DC18BA2943C4A3009EB01C /* UserType.swift in Sources */,
 				10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */,
 				104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */,
 				102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */,
+				10DC18C02943DAEF009EB01C /* CornerRadius.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,7 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -704,7 +804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

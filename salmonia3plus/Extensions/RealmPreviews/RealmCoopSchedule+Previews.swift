@@ -47,7 +47,7 @@ extension RealmCoopResult {
         result.jobBonus = 999
         result.smellMeter = 5
         result.waves.append(objectsIn: RealmCoopWave.previews)
-//        result.players.append(RealmCoopPlayer.preview)
+        result.players.append(RealmCoopPlayer.preview)
         result.scale.append(objectsIn: Array(repeating: 99, count: 3))
         result.playTime = Date(timeIntervalSince1970: 1667228400)
         result.scenarioCode = nil
@@ -86,13 +86,29 @@ extension RealmCoopWave {
 extension RealmCoopPlayer {
     static let preview: RealmCoopPlayer = {
         let player = RealmCoopPlayer()
+        player.name = "とてもなまえがながい"
         player.goldenIkuraNum = 99
         player.ikuraNum = 9999
         player.goldenIkuraAssistNum = 999
+        player.bossKillCountsTotal = 99
         player.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
         player.isMyself = true
         player.specialId = .SpJetpack
         player.id = UUID().uuidString
         return player
     }()
+}
+
+extension RealmCoopResult {
+    var specialUsage: [[SpecialId]] {
+        let usages: [(SpecialId, [Int])] = Array(zip(players.compactMap({ $0.specialId }), players.map({ Array($0.specialCounts) })))
+        var specialUsage: [[SpecialId]] = Array(repeating: [], count: waves.count)
+
+        for usage in usages {
+            for (index, count) in usage.1.enumerated() {
+                specialUsage[index].append(contentsOf: Array(repeating: usage.0, count: count))
+            }
+        }
+        return specialUsage.map({ $0.sorted(by: { $0.rawValue < $1.rawValue })})
+    }
 }

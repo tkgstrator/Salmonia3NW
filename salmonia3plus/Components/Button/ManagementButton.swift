@@ -9,17 +9,15 @@
 import SwiftUI
 import SplatNet3
 
-struct DeleteButton: View {
+struct ManagementButton: View {
     @State private var isPresented: Bool = false
 
     var body: some View {
-        Button(action: {
+        Button(role: .destructive, action: {
             isPresented.toggle()
         }, label: {
-            Image(icon: .Defeated)
-                .resizable()
+            Text(bundle: .Common_Wipe_Data)
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Wipe_Data, color: SPColor.SplatNet3.SPPink))
         .confirmationDialog(
             Text(bundle: .Common_Wipe_Data),
             isPresented: $isPresented,
@@ -54,6 +52,6 @@ struct DeleteButton: View {
 
 struct DeleteButton_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteButton()
+        ManagementButton()
     }
 }

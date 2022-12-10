@@ -16,9 +16,16 @@ struct ResultView: View {
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
-            _ResultHeader()
-            _ResultStaus()
-            _ResultWave()
+            VStack(spacing: 0, content: {
+                _ResultHeader()
+                _ResultStatus()
+                _ResultWave()
+                _ResultPlayer()
+                _ResultEnemy()
+            })
+        })
+        .background(content: {
+            SPColor.SplatNet3.SPBackground.ignoresSafeArea()
         })
         .navigationBarTitleDisplayMode(.inline)
         .environment(\.coopResult, result)
@@ -103,10 +110,11 @@ private struct _ResultHeader: View {
             .overlay(alignment: .bottom, content: {
                 WeaponView()
             })
+            .padding(.bottom, 15)
     }
 }
 
-private struct _ResultStaus: View {
+private struct _ResultStatus: View {
     @Environment(\.coopResult) var result
 
     func ResultStatus() -> some View {
@@ -118,14 +126,17 @@ private struct _ResultStaus: View {
             .font(systemName: .Splatfont2, size: 12)
             .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
             .padding(.bottom, 5)
-            ZStack(alignment: .leading, content: {
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 153, height: 10)
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(width: 153 * 0.5, height: 10)
-                    .foregroundColor(SPColor.SplatNet3.SPSalmonOrange)
+            GeometryReader(content: { geometry in
+                ZStack(alignment: .leading, content: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(SPColor.SplatNet3.SPBackground)
+                        .frame(width: geometry.frame(in: .local).width, height: 10)
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: geometry.frame(in: .local).width * 0.35, height: 10)
+                        .foregroundColor(SPColor.SplatNet3.SPSalmonOrange)
+                })
+                .padding(.bottom, 10)
             })
-            .padding(.bottom, 10)
             HStack(alignment: .bottom, spacing: nil, content: {
                 HStack(spacing: 4, content: {
                     Image(icon: .GoldenIkura)
@@ -162,10 +173,10 @@ private struct _ResultStaus: View {
             })
         })
         .padding(10)
+        .frame(maxWidth: 205.5)
         .background(content: {
             Color.black.opacity(0.7)
         })
-        .frame(width: 173, height: 96.5)
         .cornerRadius(10, corners: .allCorners)
     }
 
@@ -195,16 +206,20 @@ private struct _ResultStaus: View {
             Text("+")
                 .font(systemName: .Splatfont2, size: 15)
                 .foregroundColor(SPColor.SplatNet2.SPWhite)
+                .lineLimit(1)
             VStack(content: {
                 Text(String(format: "%d", result.jobBonus))
                     .font(systemName: .Splatfont2, size: 15)
                     .foregroundColor(Color.white)
+                    .lineLimit(1)
                 Text(bundle: .CoopHistory_Bonus)
                     .font(systemName: .Splatfont2, size: 10)
                     .foregroundColor(SPColor.SplatNet2.SPWhite)
+                    .lineLimit(1)
             })
             .frame(maxWidth: .infinity)
         })
+        .frame(maxWidth: 205.5)
     }
 
     func PointStatus() -> some View {
@@ -228,19 +243,44 @@ private struct _ResultStaus: View {
                 GridStatus()
             })
             .padding(10)
-            .frame(width: 173, height: 48)
+            .frame(height: 48.0)
             .background(content: {
                 Color.black.opacity(0.7)
             })
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
         })
-        .frame(width: 173)
+        .frame(maxWidth: 205.5)
     }
 
     var body: some View {
         HStack(content: {
             ResultStatus()
+                .frame(height: 96.5)
             PointStatus()
+                .frame(height: 96.5)
+        })
+        .padding(.horizontal, 10)
+        .padding(.bottom, 15)
+    }
+}
+
+private struct _ResultEnemy: View {
+    var body: some View {
+        VStack(spacing: 0, content: {
+            ForEach(EnemyId.allCases.dropLast(1), content: { enemyId in
+                HStack(content: {
+                    Image(enemyId)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 45, height: 45)
+                        .padding(.trailing, 5)
+                    Text(enemyId)
+                        .font(systemName: .Splatfont2, size: 15)
+                        .foregroundColor(Color.white)
+                    Spacer()
+                })
+                .frame(width: 340)
+            })
         })
     }
 }
@@ -249,47 +289,151 @@ private struct _ResultWave: View {
 //    @Environment(\.coopResult) var result: RealmCoopResult
     let waves: [RealmCoopWave] = RealmCoopWave.previews
 
+    func ResultSpecial(specialUsage: [SpecialId]) -> some View {
+        HStack(spacing: 0, content: {
+            ForEach(specialUsage.indices, id: \.self, content: { index in
+                let specialId: SpecialId = specialUsage[index]
+                Image(specialId)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 14.4, height: 14.4, alignment: .center)
+                    .padding(1.8)
+                    .background(content: {
+                        Color.black
+                    })
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .padding([.bottom, .trailing], 3)
+            })
+        })
+    }
+
+    func ResultWave(wave: RealmCoopWave) -> some View {
+        VStack(spacing: 0, content: {
+            Text(String(format: "WAVE %d", wave.id))
+                .font(systemName: .Splatfont2, size: 13)
+                .foregroundColor(Color.black)
+                .padding(.top, 7)
+                .padding(.bottom, 4)
+                .frame(height: 24)
+            if let goldenIkuraNum = wave.goldenIkuraNum, let quotaNum = wave.quotaNum {
+                Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
+                    .font(systemName: .Splatfont2, size: 17)
+                    .foregroundColor(Color.white)
+                    .frame(height: 25)
+                    .frame(maxWidth: .infinity)
+                    .background(content: {
+                        Color.black.opacity(0.8)
+                    })
+            }
+            Spacer()
+            HStack(spacing: 4, content: {
+                Image(icon: .GoldenIkura)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 16, height: 16, alignment: .center)
+                Text(String(format: "x%d", wave.goldenIkuraPopNum))
+                    .font(systemName: .Splatfont2, size: 11)
+                    .foregroundColor(Color.black.opacity(0.6))
+            })
+            Text(bundle: .CoopHistory_Available)
+                .font(systemName: .Splatfont2, size: 9)
+                .foregroundColor(Color.black.opacity(0.6))
+                .padding(.bottom, 5)
+        })
+        .frame(height: 135)
+        .background(content: {
+            SPColor.SplatNet3.SPYellow
+        })
+    }
+
     var body: some View {
-        HStack(spacing: 1, content: {
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1, alignment: .top), count: waves.count),
+                  alignment: .center,
+                  content: {
             ForEach(waves, content: { wave in
                 VStack(spacing: 0, content: {
-                    Text(String(format: "WAVE %d", wave.id))
-                        .font(systemName: .Splatfont2, size: 13)
-                        .foregroundColor(Color.black)
-                        .padding(.top, 7)
-                        .padding(.bottom, 4)
-                        .frame(height: 24)
-                    if let goldenIkuraNum = wave.goldenIkuraNum, let quotaNum = wave.quotaNum {
-                        Text(String(format: "%d/%d", goldenIkuraNum, quotaNum))
-                            .font(systemName: .Splatfont2, size: 17)
-                            .foregroundColor(Color.white)
-                            .frame(height: 25)
-                            .frame(maxWidth: .infinity)
-                            .background(content: {
-                                Color.black.opacity(0.8)
-                            })
-                    }
-                    Spacer()
-                    HStack(spacing: 4, content: {
-                        Image(icon: .GoldenIkura)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 16, height: 16, alignment: .center)
-                        Text(String(format: "x%d", wave.goldenIkuraPopNum))
-                            .font(systemName: .Splatfont2, size: 11)
-                            .foregroundColor(Color.black.opacity(0.6))
-                    })
-                    Text(bundle: .CoopHistory_Available)
-                        .font(systemName: .Splatfont2, size: 9)
-                        .foregroundColor(Color.black.opacity(0.6))
-                        .padding(.bottom, 5)
-                })
-                .frame(width: 100, height: 135)
-                .background(content: {
-                    SPColor.SplatNet3.SPYellow
+                    ResultWave(wave: wave)
+                    ResultSpecial(specialUsage: [.SpChariot, .SpJetpack, .SpMicroLaser])
+                        .padding(.top, 5)
                 })
             })
         })
+        .padding(.bottom, 15)
+    }
+}
+
+private struct _ResultPlayer: View {
+    @Environment(\.coopResult) var result: RealmCoopResult
+
+    func ResultStatus(player: RealmCoopPlayer) -> some View {
+        HStack(spacing: 5, content: {
+            VStack(alignment: .leading, spacing: 5, content: {
+                HStack(spacing: 0, content: {
+                    Image(icon: .GoldenIkura)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22, height: 16)
+                    Text(String(format: "x%d", player.goldenIkuraNum))
+                        .font(systemName: .Splatfont2, size: 12)
+                        .foregroundColor(Color.white)
+                })
+                HStack(spacing: 0, content: {
+                    Image(icon: .Ikura)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 22, height: 16)
+                    Text(String(format: "x%d", player.ikuraNum))
+                        .font(systemName: .Splatfont2, size: 12)
+                        .foregroundColor(Color.white)
+                })
+            })
+            VStack(alignment: .leading, spacing: 5, content: {
+                HStack(spacing: 0, content: {
+                    Image(icon: .GoldenIkura)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 16)
+                    Text(String(format: "x%d", player.helpCount))
+                        .font(systemName: .Splatfont2, size: 12)
+                        .foregroundColor(Color.white)
+                })
+                HStack(spacing: 0, content: {
+                    Image(icon: .Ikura)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 16)
+                    Text(String(format: "x%d", player.deadCount))
+                        .font(systemName: .Splatfont2, size: 12)
+                        .foregroundColor(Color.white)
+                })
+            })
+        })
+    }
+
+    var body: some View {
+        VStack(spacing: 1, content: {
+            ForEach(result.players, content: { player in
+                HStack(content: {
+                    VStack(alignment: .leading, spacing: 0, content: {
+                        Text(player.name)
+                            .font(systemName: .Splatfont2, size: 15)
+                            .foregroundColor(Color.white)
+                        Text(String(format: "%@ x%d", LocalizedType.CoopHistory_Enemy.localized, player.bossKillCountsTotal))
+                            .font(systemName: .Splatfont2, size: 11)
+                            .foregroundColor(Color.white.opacity(0.7))
+                    })
+                    Spacer()
+                    ResultStatus(player: player)
+                })
+                .padding(10)
+                .frame(maxWidth: 420)
+                .background(content: {
+                    SPColor.SplatNet3.SPSalmonOrange
+                })
+            })
+        })
+        .padding(.horizontal, 10)
+        .padding(.bottom, 15)
     }
 }
 
@@ -308,50 +452,4 @@ struct ScheduleView_Previews: PreviewProvider {
         _ResultHeader()
             .environment(\.coopResult, result)
     }
-}
-
-extension Decimal128 {
-    var intValue: Int {
-        Int(truncating: NSDecimalNumber(decimal: self.decimalValue))
-    }
-
-    var dobleValue: Double {
-        Double(truncating: NSDecimalNumber(decimal: self.decimalValue))
-    }
-}
-
-extension String {
-    init(format: String, _ arguments: CVarArg?) {
-        if let arguments = arguments {
-            self.init(format: format, arguments)
-        } else {
-            self.init("-")
-        }
-    }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
-
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
-extension Text {
-//    init<T: BinaryInteger>(_ value: T?) {
-//        if let value = value {
-//            self.init(verbatim: "\(value)")
-//        } else {
-//            self.init("-")
-//        }
-//    }
 }

@@ -33,6 +33,7 @@ struct SPButtonStyle: ButtonStyle {
                 })
             Text(bundle: title)
                 .font(systemName: .Splatfont2, size: 11)
+                .lineLimit(1)
                 .multilineTextAlignment(.center)
         })
     }

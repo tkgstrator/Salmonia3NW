@@ -15,12 +15,15 @@ import SplatNet3
 struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var session: Session = Session()
+    @State var colorScheme: ColorScheme = .dark
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.realmConfiguration, RealmMigration.configuration)
                 .environmentObject(session)
+//                .environment(\.preferredColorScheme, $colorScheme)
+                .environment(\.colorScheme, colorScheme)
         }
     }
 

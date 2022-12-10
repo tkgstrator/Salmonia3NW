@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "tondemo71zasso.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "automatic"
+  }
+}

@@ -51,10 +51,10 @@ public actor RealmService: ObservableObject {
         let data: Data = try encoder.encode(schedules)
         let fileName: String = {
             let formatter: DateFormatter = DateFormatter()
-            formatter.dateFormat = "yyyymmddHHMMss"
+            formatter.dateFormat = "yyyyMMddHHmmss"
             return formatter.string(from: Date())
         }()
-        guard let baseURL: URL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let baseURL: URL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Invalid URL"))
         }
         let source: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("json")
@@ -80,15 +80,26 @@ public actor RealmService: ObservableObject {
         return realm.objects(RealmCoopResult.self).max(ofProperty: "playTime")
     }
 
-    public func openURL(url: URL, decoding: JSONDecoder.DateDecodingStrategy = .deferredToDate) async throws {
+    public func openURL(url: URL, format: FormatType) async throws {
         let decoder: JSONDecoder = {
             let decoder: JSONDecoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.dateDecodingStrategy = decoding
+            decoder.dateDecodingStrategy = .iso8601
             return decoder
         }()
         let data: Data = try Data(contentsOf: url)
-        let schedules: [RealmCoopSchedule] = try decoder.decode([RealmCoopSchedule].self, from: data)
+
+        /// データの変換
+        let schedules: [RealmCoopSchedule] = try {
+            switch format {
+            case .SPLATNET3:
+                let results: [CoopHistoryDetailQuery.Response] = (try decoder.decode([CoopHistoryDetailQuery.Response].self, from: data)).filter({ $0.data.coopHistoryDetail.afterGrade != nil })
+                print(results.count)
+                return []
+            case .SALMONIA3:
+                return try decoder.decode([RealmCoopSchedule].self, from: data)
+            }
+        }()
         try inWriteTransaction(transaction: {
 //            realm.deleteAll()
             realm.add(schedules, update: .all)

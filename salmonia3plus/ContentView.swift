@@ -40,7 +40,7 @@ private struct _ContentView: UIViewControllerRepresentable {
                 let schedule = UINavigationController(rootViewController: UIHostingController(rootView: SchedulesView()))
                 mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
                 result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
-                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
+                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 2)
                 return [mypage, result, schedule]
             default:
                 let mypage = UIHostingController(rootView: NavigationView(content: { MyPageView() }).navigationViewStyle(.split))
@@ -48,7 +48,7 @@ private struct _ContentView: UIViewControllerRepresentable {
                 let schedule = UIHostingController(rootView: NavigationView(content: { SchedulesView() }).navigationViewStyle(.split))
                 mypage.tabBarItem = UITabBarItem(title: LocalizedType.Common_MyPage.localized, image: UIImage(icon: .Me), tag: 0)
                 result.tabBarItem = UITabBarItem(title: LocalizedType.CoopHistory_History.localized, image: UIImage(icon: .Home), tag: 1)
-                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 1)
+                schedule.tabBarItem = UITabBarItem(title: LocalizedType.StageSchedule_Title.localized, image: UIImage(icon: .Home), tag: 2)
                 return [mypage, result, schedule]
             }
         }()

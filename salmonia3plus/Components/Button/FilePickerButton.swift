@@ -11,35 +11,27 @@ import SplatNet3
 struct FilePickerButton: View {
     @State private var isPresented: Bool = false
     @State private var isSelected: Bool = false
-    @State private var dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
+    @State private var dataFormatType: FormatType = .SALMONIA3
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         Button(action: {
             isPresented.toggle()
         }, label: {
-            Image(icon: .Refresh)
-                .resizable()
+            Text(bundle: .Common_Restore)
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Restore, color: SPColor.SplatNet3.SPBlue))
         .confirmationDialog(Text(bundle: .Common_Restore), isPresented: $isPresented, titleVisibility: .visible, actions: {
             Button(action: {
-                dateDecodingStrategy = .iso8601
+                dataFormatType = .SALMONIA3
                 isSelected.toggle()
             }, label: {
-                Text("ISO8601")
+                Text("Salmonia3+")
             })
             Button(action: {
-                dateDecodingStrategy = .secondsSince1970
+                dataFormatType = .SPLATNET3
                 isSelected.toggle()
             }, label: {
-                Text("SecondsSince1970")
-            })
-            Button(action: {
-                dateDecodingStrategy = .deferredToDate
-                isSelected.toggle()
-            }, label: {
-                Text("DeferredToDate")
+                Text("SplatNet3")
             })
         }, message: {
             Text(bundle: .Common_Restore_Txt)
@@ -48,14 +40,14 @@ struct FilePickerButton: View {
             FilePickerView(fileType: .json, onSelected: { url in
                 Task {
                     do {
-                        try await RealmService.shared.openURL(url: url, decoding: dateDecodingStrategy)
+                        try await RealmService.shared.openURL(url: url, format: dataFormatType)
                         dismiss()
                     } catch(let error) {
                         SwiftyLogger.error(error.localizedDescription)
-                        let alert: UIAlertController = UIAlertController(title: "読み込み失敗しました", message: error.localizedDescription, preferredStyle: .alert)
-                        let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Close.localized, style: .default)
+                        let alert: UIAlertController = UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
+                        let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
                         alert.addAction(action)
-                        UIApplication.shared.rootViewController?.present(alert, animated: true)
+                        UIApplication.shared.presentedViewController?.present(alert, animated: true)
                     }
                 }
             })

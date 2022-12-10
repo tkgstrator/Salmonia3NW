@@ -27,6 +27,8 @@ enum IconType: String, CaseIterable {
     case Swap
     case Switch
     case Update
+    case Gear
+    case Player
 }
 
 extension Image {

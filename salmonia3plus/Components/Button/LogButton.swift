@@ -18,10 +18,8 @@ struct LogButton: View {
         Button(action: {
             isPresented.toggle()
         }, label: {
-            Image(icon: .Refresh)
-                .resizable()
+            Text(bundle: .Common_Log)
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Log, color: SPColor.SplatNet3.SPBlue))
         .confirmationDialog(
             Text(bundle: .Common_Log),
             isPresented: $isPresented,
