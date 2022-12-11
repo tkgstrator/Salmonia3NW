@@ -69,7 +69,7 @@ extension RealmCoopWave {
     }()
 
     static let previews: [RealmCoopWave] = {
-        [1, 2, 3].map({ id in
+        [1, 2, 3, 4].map({ id in
             let wave = RealmCoopWave()
             wave.id = id
             wave.waterLevel = .NORMAL_TIDE
@@ -88,8 +88,10 @@ extension RealmCoopPlayer {
         let player = RealmCoopPlayer()
         player.name = "とてもなまえがながい"
         player.goldenIkuraNum = 99
-        player.ikuraNum = 9999
+        player.ikuraNum = 999
         player.goldenIkuraAssistNum = 999
+        player.deadCount = 99
+        player.helpCount = 99
         player.bossKillCountsTotal = 99
         player.bossKillCounts.append(objectsIn: Array(repeating: 99, count: 15))
         player.isMyself = true

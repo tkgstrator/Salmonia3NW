@@ -265,29 +265,50 @@ private struct _ResultStatus: View {
 }
 
 private struct _ResultEnemy: View {
+    @Environment(\.coopResult) var result
+
     var body: some View {
         VStack(spacing: 0, content: {
             ForEach(EnemyId.allCases.dropLast(1), content: { enemyId in
-                HStack(content: {
-                    Image(enemyId)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 45, height: 45)
-                        .padding(.trailing, 5)
-                    Text(enemyId)
-                        .font(systemName: .Splatfont2, size: 15)
-                        .foregroundColor(Color.white)
-                    Spacer()
-                })
-                .frame(width: 340)
+                let index: Int = EnemyId.allCases.firstIndex(of: enemyId) ?? 0
+                let bossCount: Int = result.bossCounts[index]
+                let bossKillCount: Int = result.bossKillCounts[index]
+                let playerBossKillCount: Int = result.players.first?.bossKillCounts[index] ?? 0
+                if bossCount != .zero {
+                    HStack(content: {
+                        Image(enemyId)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 45, height: 45)
+                            .padding(.trailing, 5)
+                        Text(enemyId)
+                            .font(systemName: .Splatfont2, size: 15)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                        HStack(alignment: .bottom, spacing: 0, content: {
+                            Text(String(format: "%d", bossKillCount))
+                                .font(systemName: .Splatfont2, size: 15)
+                                .padding(.trailing, 2)
+                            Text(String(format: "(%d)", playerBossKillCount))
+                                .font(systemName: .Splatfont2, size: 11)
+                            Spacer()
+                            Text("/")
+                            Spacer()
+                            Text(String(format: "x%d", bossCount))
+                                .font(systemName: .Splatfont2, size: 15)
+                        })
+                        .frame(width: 80)
+                        .foregroundColor(bossCount == bossKillCount ? Color.yellow : Color.white)
+                    })
+                }
             })
         })
+        .frame(maxWidth: 340)
     }
 }
 
 private struct _ResultWave: View {
-//    @Environment(\.coopResult) var result: RealmCoopResult
-    let waves: [RealmCoopWave] = RealmCoopWave.previews
+    @Environment(\.coopResult) var result: RealmCoopResult
 
     func ResultSpecial(specialUsage: [SpecialId]) -> some View {
         HStack(spacing: 0, content: {
@@ -324,7 +345,23 @@ private struct _ResultWave: View {
                     .background(content: {
                         Color.black.opacity(0.8)
                     })
+            } else {
+                Text(result.bossId ?? .SakelienGiant)
+                    .font(systemName: .Splatfont2, size: 17)
+                    .foregroundColor(SPColor.SplatNet3.SPSalmonGreen)
+                    .frame(height: 25)
+                    .frame(maxWidth: .infinity)
+                    .background(content: {
+                        Color.black.opacity(0.8)
+                    })
             }
+            Text(wave.waterLevel)
+                .font(systemName: .Splatfont2, size: 12)
+                .foregroundColor(Color.black)
+                .padding(.vertical, 6)
+            Text(wave.eventType)
+                .font(systemName: .Splatfont2, size: 12)
+                .foregroundColor(Color.black)
             Spacer()
             HStack(spacing: 4, content: {
                 Image(icon: .GoldenIkura)
@@ -347,18 +384,22 @@ private struct _ResultWave: View {
     }
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1, alignment: .top), count: waves.count),
+        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1, alignment: .top), count: result.waves.count),
                   alignment: .center,
                   content: {
-            ForEach(waves, content: { wave in
+            ForEach(result.waves, content: { wave in
+                let isFirst: Bool = result.waves.first == wave
+                let isLast: Bool = result.waves.last == wave
                 VStack(spacing: 0, content: {
                     ResultWave(wave: wave)
+                        .cornerWaveRadius(10, isFirst: isFirst, isLast: isLast)
                     ResultSpecial(specialUsage: [.SpChariot, .SpJetpack, .SpMicroLaser])
                         .padding(.top, 5)
                 })
             })
         })
         .padding(.bottom, 15)
+        .padding(.horizontal, 10)
     }
 }
 
@@ -387,6 +428,7 @@ private struct _ResultPlayer: View {
                         .foregroundColor(Color.white)
                 })
             })
+            .frame(minWidth: 50)
             VStack(alignment: .leading, spacing: 5, content: {
                 HStack(spacing: 0, content: {
                     Image(icon: .GoldenIkura)
@@ -407,12 +449,20 @@ private struct _ResultPlayer: View {
                         .foregroundColor(Color.white)
                 })
             })
+            .frame(minWidth: 53)
         })
+        .padding(4)
+        .background(content: {
+            Color.black.opacity(0.7)
+        })
+        .cornerRadius(10, corners: .allCorners)
     }
 
     var body: some View {
         VStack(spacing: 1, content: {
             ForEach(result.players, content: { player in
+                let isFirst: Bool = result.players.first == player
+                let isLast: Bool = result.players.last == player
                 HStack(content: {
                     VStack(alignment: .leading, spacing: 0, content: {
                         Text(player.name)
@@ -425,15 +475,43 @@ private struct _ResultPlayer: View {
                     Spacer()
                     ResultStatus(player: player)
                 })
-                .padding(10)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
                 .frame(maxWidth: 420)
                 .background(content: {
                     SPColor.SplatNet3.SPSalmonOrange
+                        .cornerPlayerRadius(10, isFirst: isFirst, isLast: isLast)
                 })
             })
         })
         .padding(.horizontal, 10)
         .padding(.bottom, 15)
+    }
+}
+
+fileprivate extension View {
+    func cornerPlayerRadius(_ radius: CGFloat, isFirst: Bool, isLast: Bool) -> some View {
+        switch (isFirst, isLast) {
+        case (true, false):
+            return self.cornerRadius(10, corners: [.topLeft, .topRight])
+        case (false, true):
+            return self.cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+        default:
+            return self.cornerRadius(10, corners: [])
+        }
+    }
+
+    func cornerWaveRadius(_ radius: CGFloat, isFirst: Bool, isLast: Bool) -> some View {
+        switch (isFirst, isLast) {
+        case (true, false):
+            return self.cornerRadius(10, corners: [.topLeft, .bottomLeft])
+        case (false, true):
+            return self.cornerRadius(10, corners: [.topRight, .bottomRight])
+        case (true, true):
+            return self.cornerRadius(10, corners: .allCorners)
+        default:
+            return self.cornerRadius(10, corners: [])
+        }
     }
 }
 
