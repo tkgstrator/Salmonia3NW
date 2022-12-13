@@ -11,6 +11,7 @@ import SplatNet3
 
 final class RealmCoopPlayer: Object, Identifiable, Codable {
     @Persisted(primaryKey: true) var id: String
+    @Persisted var uid: String
     @Persisted var name: String
     @Persisted var byname: String
     @Persisted var nameId: String
@@ -37,7 +38,8 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
 
     convenience init(content: CoopResult.PlayerResult) {
         self.init()
-        self.id = content.id
+        self.id = content.id.description
+        self.uid = content.id.uid
         self.name = content.name
         self.byname = content.byname
         self.nameId = content.nameId
@@ -60,6 +62,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case uid
         case name
         case byname
         case nameId
@@ -83,7 +86,9 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
     public required init(from decoder: Decoder) throws {
         super.init()
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
+        let id = try container.decode(Common.PlayerId.self, forKey: .id)
+        self.id = id.description
+        self.uid = id.uid
         self.name = try container.decode(String.self, forKey: .name)
         self.byname = try container.decode(String.self, forKey: .byname)
         self.nameId = try container.decode(String.self, forKey: .nameId)
@@ -107,6 +112,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
+        try container.encode(uid, forKey: .uid)
         try container.encode(name, forKey: .name)
         try container.encode(byname, forKey: .byname)
         try container.encode(nameId, forKey: .nameId)

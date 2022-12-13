@@ -11,7 +11,7 @@ import RealmSwift
 
 enum RealmMigration {
     static let configuration: Realm.Configuration = Realm.Configuration(
-        schemaVersion: 12,
+        schemaVersion: 13,
         migrationBlock: RealmMigration.migrationBlock(),
         deleteRealmIfMigrationNeeded: false
     )

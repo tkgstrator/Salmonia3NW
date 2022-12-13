@@ -30,8 +30,8 @@
             filePath = "salmonia3plus/Realm/RealmService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "openURL(url:format:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -162,6 +162,70 @@
             endingLineNumber = "40"
             landmarkName = "version11(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B45101FA-14F7-4283-A2A1-8E6A83DF617C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "salmonia3plus/Views/Tab/ResultsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ABF82E4F-C02F-475B-8DD5-2757597DDB6C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "salmonia3plus/Views/Tab/ResultsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "ABF82E4F-C02F-475B-8DD5-2757597DDB6C - 7d727a9e1a507f08"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in salmonia3plus.ResultsView.body.getter : some"
+                  moduleName = "salmonia3plus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/salmonia3plus/salmonia3plus/Views/Tab/ResultsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "ABF82E4F-C02F-475B-8DD5-2757597DDB6C - 7d727a9e1a507f08"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in salmonia3plus.ResultsView.body.getter : some"
+                  moduleName = "salmonia3plus"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Developer/salmonia3plus/salmonia3plus/Views/Tab/ResultsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "224">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

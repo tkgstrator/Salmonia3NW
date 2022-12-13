@@ -24,6 +24,10 @@ public actor RealmService: ObservableObject {
         case RESULT
     }
 
+    func results(player: RealmCoopPlayer) -> RealmSwift.Results<RealmCoopSchedule> {
+        realm.objects(RealmCoopSchedule.self).filter("ANY players = %@", player)
+    }
+
     public func deleteAll(options: [RealmDeleteType] = [.ALL]) {
         realm.beginWrite()
         for option in options {

@@ -458,29 +458,39 @@ private struct _ResultPlayer: View {
         .cornerRadius(10, corners: .allCorners)
     }
 
+    func MakeBody(player: RealmCoopPlayer, isFirst: Bool, isLast: Bool) -> some View {
+        HStack(content: {
+            VStack(alignment: .leading, spacing: 0, content: {
+                Text(player.name)
+                    .font(systemName: .Splatfont2, size: 15)
+                    .foregroundColor(Color.white)
+                Text(String(format: "%@ x%d", LocalizedType.CoopHistory_Enemy.localized, player.bossKillCountsTotal))
+                    .font(systemName: .Splatfont2, size: 11)
+                    .foregroundColor(Color.white.opacity(0.7))
+            })
+            Spacer()
+            ResultStatus(player: player)
+        })
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .frame(maxWidth: 420)
+        .background(content: {
+            SPColor.SplatNet3.SPSalmonOrange
+                .cornerPlayerRadius(10, isFirst: isFirst, isLast: isLast)
+        })
+    }
+
     var body: some View {
         VStack(spacing: 1, content: {
             ForEach(result.players, content: { player in
                 let isFirst: Bool = result.players.first == player
                 let isLast: Bool = result.players.last == player
-                HStack(content: {
-                    VStack(alignment: .leading, spacing: 0, content: {
-                        Text(player.name)
-                            .font(systemName: .Splatfont2, size: 15)
-                            .foregroundColor(Color.white)
-                        Text(String(format: "%@ x%d", LocalizedType.CoopHistory_Enemy.localized, player.bossKillCountsTotal))
-                            .font(systemName: .Splatfont2, size: 11)
-                            .foregroundColor(Color.white.opacity(0.7))
-                    })
-                    Spacer()
-                    ResultStatus(player: player)
-                })
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .frame(maxWidth: 420)
-                .background(content: {
-                    SPColor.SplatNet3.SPSalmonOrange
-                        .cornerPlayerRadius(10, isFirst: isFirst, isLast: isLast)
+                NavigationLink(destination: {
+                    ResultsView()
+//                        .environment(\.coopPlayerId, player.nsaid)
+//                        .environment(\.schedules, RealmService.shared.results(player: player))
+                }, label: {
+                    MakeBody(player: player, isFirst: isFirst, isLast: isLast)
                 })
             })
         })

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RealmSwift
+import SplatNet3
 import SwiftUI
 
 private struct IsModalPresented: EnvironmentKey {
@@ -33,6 +35,12 @@ private struct CoopSchedule: EnvironmentKey {
     static var defaultValue: RealmCoopSchedule = RealmCoopSchedule.preview
 }
 
+private struct CoopPlayer: EnvironmentKey {
+    typealias Value = String?
+
+    static var defaultValue: String? = nil
+}
+
 extension EnvironmentValues {
     var preferredColorScheme: Binding<ColorScheme> {
         get {
@@ -52,6 +60,15 @@ extension EnvironmentValues {
         }
     }
 
+    var coopPlayerId: String? {
+        get {
+            return self[CoopPlayer.self]
+        }
+        set {
+            self[CoopPlayer.self] = newValue
+        }
+    }
+
     var coopSchedule: RealmCoopSchedule {
         get {
             return self[CoopSchedule.self]
@@ -60,7 +77,7 @@ extension EnvironmentValues {
             self[CoopSchedule.self] = newValue
         }
     }
-    
+
     var isModalPresented: Binding<Bool> {
         get {
             return self[IsModalPresented.self]

@@ -16,6 +16,7 @@ struct ResultsView: View {
         filter: NSPredicate(format: "mode = %@", ModeType.REGULAR.rawValue),
         sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
     ) var schedules
+    @Environment(\.coopPlayerId) var playerId
     @Environment(\.isModalPresented) var isPresented
 
     var body: some View {
@@ -35,6 +36,10 @@ struct ResultsView: View {
                 isPresented.wrappedValue.toggle()
             })
         })
+        .onAppear(perform: {
+            if let playerId = playerId {
+            }
+        })
         .showsScrollIndicators()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .CoopHistory_History))
@@ -44,6 +49,12 @@ struct ResultsView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             action()
         })
+    }
+}
+
+extension NSPredicate {
+    public convenience init(_ property: String, valuesIn values: [AnyObject]) {
+        self.init(format: "\(property) IN %@", argumentArray: [values])
     }
 }
 
