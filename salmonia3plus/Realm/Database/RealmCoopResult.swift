@@ -80,6 +80,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         case isClear
         case failureWave
         case isBossDefeated
+        case bossId
         case ikuraNum
         case goldenIkuraNum
         case goldenIkuraAssitNum
@@ -108,6 +109,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.isClear = try container.decode(Bool.self, forKey: .isClear)
         self.failureWave = try container.decodeIfPresent(Int.self, forKey: .failureWave)
         self.isBossDefeated = try container.decodeIfPresent(Bool.self, forKey: .isBossDefeated)
+        self.bossId = try container.decodeIfPresent(EnemyId.self, forKey: .bossId)
         self.ikuraNum = try container.decode(Int.self, forKey: .ikuraNum)
         self.goldenIkuraNum = try container.decode(Int.self, forKey: .goldenIkuraNum)
         self.goldenIkuraAssistNum = try container.decode(Int.self, forKey: .goldenIkuraAssitNum)
@@ -135,6 +137,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         try container.encode(isClear, forKey: .isClear)
         try container.encode(failureWave, forKey: .failureWave)
         try container.encode(isBossDefeated, forKey: .isBossDefeated)
+        try container.encode(bossId, forKey: .bossId)
         try container.encode(ikuraNum, forKey: .ikuraNum)
         try container.encode(goldenIkuraNum, forKey: .goldenIkuraNum)
         try container.encode(goldenIkuraAssistNum, forKey: .goldenIkuraAssitNum)
