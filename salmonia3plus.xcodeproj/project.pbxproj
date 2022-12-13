@@ -73,6 +73,7 @@
 		10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BD2943DABE009EB01C /* Decimal128.swift */; };
 		10DC18C02943DAEF009EB01C /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BF2943DAEF009EB01C /* CornerRadius.swift */; };
 		10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C12944A6CB009EB01C /* CreditLink.swift */; };
+		10DC18C42945B19C009EB01C /* ResultTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C32945B19C009EB01C /* ResultTabView.swift */; };
 		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
 		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
 		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
@@ -158,6 +159,7 @@
 		10DC18BD2943DABE009EB01C /* Decimal128.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decimal128.swift; sourceTree = "<group>"; };
 		10DC18BF2943DAEF009EB01C /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		10DC18C12944A6CB009EB01C /* CreditLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditLink.swift; sourceTree = "<group>"; };
+		10DC18C32945B19C009EB01C /* ResultTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTabView.swift; sourceTree = "<group>"; };
 		10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SP3Session+Request.swift"; sourceTree = "<group>"; };
 		10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		10F039A6293B6F7300BAD41C /* SHA256Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256Hash.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			children = (
 				105B54BE2940FBC200597A2D /* ResultView.swift */,
 				10DC18B72943B471009EB01C /* CreditView.swift */,
+				10DC18C32945B19C009EB01C /* ResultTabView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */,
 				102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */,
 				10DC18A429437033009EB01C /* ListRow.swift in Sources */,
+				10DC18C42945B19C009EB01C /* ResultTabView.swift in Sources */,
 				105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */,
 				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
@@ -765,7 +769,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -804,7 +808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

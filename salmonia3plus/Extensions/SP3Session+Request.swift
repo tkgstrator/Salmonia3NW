@@ -38,7 +38,7 @@ class Session: SP3Session {
     @discardableResult
     func upload(data: Data) async throws -> Discord.Attachments.Response {
         try await session.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(data, withName: "SwiftyBeaver.json", fileName: "SwiftyBeaver.json", mimeType: "application/json")
+            multipartFormData.append(data, withName: "SwiftyBeaver.log", fileName: "SwiftyBeaver.log", mimeType: "application/json")
         }, with: Discord.Attachments())
         .serializingDecodable(Discord.Attachments.Response.self)
         .value

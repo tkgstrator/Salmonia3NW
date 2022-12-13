@@ -27,6 +27,12 @@ private struct CoopResult: EnvironmentKey {
     static var defaultValue: RealmCoopResult = RealmCoopResult.preview
 }
 
+private struct CoopSchedule: EnvironmentKey {
+    typealias Value = RealmCoopSchedule
+
+    static var defaultValue: RealmCoopSchedule = RealmCoopSchedule.preview
+}
+
 extension EnvironmentValues {
     var preferredColorScheme: Binding<ColorScheme> {
         get {
@@ -46,6 +52,15 @@ extension EnvironmentValues {
         }
     }
 
+    var coopSchedule: RealmCoopSchedule {
+        get {
+            return self[CoopSchedule.self]
+        }
+        set {
+            self[CoopSchedule.self] = newValue
+        }
+    }
+    
     var isModalPresented: Binding<Bool> {
         get {
             return self[IsModalPresented.self]
