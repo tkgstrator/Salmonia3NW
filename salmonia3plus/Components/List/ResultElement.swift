@@ -14,8 +14,8 @@ struct ResultElement: View {
 
     var body: some View {
         NavigationLinker(destination: {
-            ResultTabView()
-                .environment(\.coopSchedule, result.schedule)
+            ResultView(result: result)
+//                .environment(\.coopSchedule, result.schedule)
         }, label: {
             _ResultElement(result: result)
         })

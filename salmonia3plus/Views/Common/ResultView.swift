@@ -487,7 +487,7 @@ private struct _ResultPlayer: View {
                 let isLast: Bool = result.players.last == player
                 NavigationLink(destination: {
                     ResultsView()
-//                        .environment(\.coopPlayerId, player.nsaid)
+                        .environment(\.coopPlayerId, player.uid)
 //                        .environment(\.schedules, RealmService.shared.results(player: player))
                 }, label: {
                     MakeBody(player: player, isFirst: isFirst, isLast: isLast)
