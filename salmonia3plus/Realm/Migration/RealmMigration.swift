@@ -31,6 +31,9 @@ enum RealmMigration {
             if schemaVersion <= 11 {
                 version11(migration)
             }
+            if schemaVersion <= 12 {
+                version11(migration)
+            }
         }
     }
 }

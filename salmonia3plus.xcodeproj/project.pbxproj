@@ -74,6 +74,7 @@
 		10DC18C02943DAEF009EB01C /* CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18BF2943DAEF009EB01C /* CornerRadius.swift */; };
 		10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C12944A6CB009EB01C /* CreditLink.swift */; };
 		10DC18C42945B19C009EB01C /* ResultTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C32945B19C009EB01C /* ResultTabView.swift */; };
+		10DC18C629495BDC009EB01C /* Version12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC18C529495BDC009EB01C /* Version12.swift */; };
 		10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */; };
 		10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */; };
 		10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F039A6293B6F7300BAD41C /* SHA256Hash.swift */; };
@@ -160,6 +161,7 @@
 		10DC18BF2943DAEF009EB01C /* CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadius.swift; sourceTree = "<group>"; };
 		10DC18C12944A6CB009EB01C /* CreditLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditLink.swift; sourceTree = "<group>"; };
 		10DC18C32945B19C009EB01C /* ResultTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTabView.swift; sourceTree = "<group>"; };
+		10DC18C529495BDC009EB01C /* Version12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version12.swift; sourceTree = "<group>"; };
 		10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SP3Session+Request.swift"; sourceTree = "<group>"; };
 		10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		10F039A6293B6F7300BAD41C /* SHA256Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHA256Hash.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				105B54B52940C91A00597A2D /* Version7.swift */,
 				10F039A9293B9A2F00BAD41C /* Version8.swift */,
 				105B54B72940C9CC00597A2D /* Version11.swift */,
+				10DC18C529495BDC009EB01C /* Version12.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				10DC18A429437033009EB01C /* ListRow.swift in Sources */,
 				10DC18C42945B19C009EB01C /* ResultTabView.swift in Sources */,
 				105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */,
+				10DC18C629495BDC009EB01C /* Version12.swift in Sources */,
 				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
 				105B54B42940C8D000597A2D /* Version6.swift in Sources */,
