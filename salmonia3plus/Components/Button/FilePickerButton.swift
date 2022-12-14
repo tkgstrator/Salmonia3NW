@@ -18,9 +18,9 @@ struct FilePickerButton: View {
         Button(action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Common_Restore)
+            Text(bundle: .Custom_Restore)
         })
-        .confirmationDialog(Text(bundle: .Common_Restore), isPresented: $isPresented, titleVisibility: .visible, actions: {
+        .confirmationDialog(Text(bundle: .Custom_Restore), isPresented: $isPresented, titleVisibility: .visible, actions: {
             Button(action: {
                 dataFormatType = .SALMONIA3
                 isSelected.toggle()
@@ -34,7 +34,7 @@ struct FilePickerButton: View {
                 Text("SplatNet3")
             })
         }, message: {
-            Text(bundle: .Common_Restore_Txt)
+            Text(bundle: .Custom_Restore_Txt)
         })
         .sheet(isPresented: $isSelected, content: {
             FilePickerView(fileType: .json, onSelected: { url in

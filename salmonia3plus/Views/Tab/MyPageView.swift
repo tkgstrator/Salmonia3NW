@@ -54,7 +54,7 @@ struct MyPageView: View {
             })
         })
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(Text(bundle: .Common_MyPage))
+        .navigationTitle(Text(bundle: .Custom_MyPage))
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 struct PrivacyLink: View {
     var body: some View {
         Link(destination: URL(unsafeString: "https://salmonia3.netlify.app"), label: {
-            ListRow(title: .Common_Privacy_Policy)
+            ListRow(title: .Custom_Privacy_Policy)
         })
     }
 }

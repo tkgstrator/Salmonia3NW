@@ -17,7 +17,7 @@ struct ThemeToggle: View {
             get: { colorScheme.wrappedValue == .dark },
             set: { colorScheme.wrappedValue = $0 ? .dark : .light }
         ), label: {
-            Text(bundle: .Common_DarkMode)
+            Text(bundle: .Custom_Dark_Mode)
         })
     }
 }

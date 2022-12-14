@@ -14,7 +14,7 @@ struct LanguageButton: View {
         Button(action: {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }, label: {
-            ListRow(title: .MyOutfits_Reverse)
+            ListRow(title: .Custom_Languages)
         })
     }
 }

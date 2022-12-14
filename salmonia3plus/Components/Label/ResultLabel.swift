@@ -14,7 +14,7 @@ struct ResultLabel: View {
 
     var body: some View {
         HStack(content: {
-            Text(bundle: .MyOutfits_Reverse)
+            Text(bundle: .Custom_Results_Count)
             Spacer()
             Text(String(format: "%d", results.count))
                 .foregroundColor(.secondary)

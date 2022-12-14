@@ -26,6 +26,6 @@ struct ListRow: View {
 
 struct ListRow_Previews: PreviewProvider {
     static var previews: some View {
-        ListRow(title: .Common_Wipe_Data)
+        ListRow(title: .Custom_Wipe_Results)
     }
 }

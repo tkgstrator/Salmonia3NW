@@ -14,7 +14,7 @@ struct SPButtonStyle: ButtonStyle {
     let title: LocalizedType
     let color: Color
 
-    init(title: LocalizedType = .Common_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
+    init(title: LocalizedType = .Custom_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
         self.title = title
         self.color = color
     }
@@ -43,7 +43,7 @@ struct SPWebButtonStyle: ButtonStyle {
     let title: LocalizedType
     let color: Color
 
-    init(title: LocalizedType = .Common_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
+    init(title: LocalizedType = .Custom_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
         self.title = title
         self.color = color
     }

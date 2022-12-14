@@ -12,7 +12,7 @@ import SplatNet3
 struct SourceLink: View {
     var body: some View {
         Link(destination: URL(unsafeString: "https://github.com/tkgstrator/Salmonia3NW"), label: {
-            ListRow(title: .Settings_Title)
+            ListRow(title: .Custom_Source_Code)
         })
     }
 }

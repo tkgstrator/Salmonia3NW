@@ -16,10 +16,10 @@ struct ManagementButton: View {
         Button(role: .destructive, action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Common_Wipe_Data)
+            Text(bundle: .Custom_Wipe_Results)
         })
         .confirmationDialog(
-            Text(bundle: .Common_Wipe_Data),
+            Text(bundle: .Custom_Wipe_Results),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
@@ -45,7 +45,7 @@ struct ManagementButton: View {
                 Text(bundle: .Common_Decide)
             })
         }, message: {
-            Text(bundle: .Common_Wipe_Data_Txt)
+            Text(bundle: .Custom_Wipe_Results_Txt)
         })
     }
 }

@@ -36,26 +36,20 @@ struct _MenuView: View {
                 Section(content: {
                     ResultLabel()
                 }, header: {
-                    Text(bundle: .Common_Data_Managements)
+                    Text(bundle: .Custom_User_Data)
                 })
                 Section(content: {
                     ThemeToggle()
                     GamingToggle()
                     LanguageButton()
                 }, header: {
-                    Text(bundle: .Common_Data_Managements)
+                    Text(bundle: .Custom_Appearances)
                 })
                 Section(content: {
                     FileBackupButton()
                     FilePickerButton()
                 }, header: {
-                    Text(bundle: .Common_Data_Managements)
-                })
-                Section(content: {
-                    ManagementButton()
-                    UnlinkButton()
-                }, header: {
-                    Text(bundle: .Common_Data_Managements)
+                    Text(bundle: .Custom_Data_Management)
                 })
                 Section(content: {
                     PrivacyLink()
@@ -65,7 +59,11 @@ struct _MenuView: View {
                     LogButton()
                     VersionLabel()
                 }, header: {
-                    Text(bundle: .Common_Data_Managements)
+                    Text(bundle: .Custom_Application)
+                })
+                Section(content: {
+                    ManagementButton()
+                    UnlinkButton()
                 })
             })
             .listStyle(.insetGrouped)

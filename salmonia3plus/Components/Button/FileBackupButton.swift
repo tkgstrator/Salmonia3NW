@@ -50,25 +50,25 @@ struct FileBackupButton: View {
         Button(action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Common_Backup)
+            Text(bundle: .Custom_Backup)
         })
         .confirmationDialog(
-            Text(bundle: .Common_Backup),
+            Text(bundle: .Custom_Backup),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
             Button(action: {
                 exportJSON(compress: true)
             }, label: {
-                Text(bundle: .Common_Backup_Compress)
+                Text(bundle: .Custom_Backup_Compress)
             })
             Button(action: {
                 exportJSON(compress: false)
             }, label: {
-                Text(bundle: .Common_Backup_No_Compress)
+                Text(bundle: .Custom_Backup_No_Compress)
             })
         }, message: {
-            Text(bundle: .Common_Backup_Txt)
+            Text(bundle: .Custom_Backup_Txt)
         })
     }
 }

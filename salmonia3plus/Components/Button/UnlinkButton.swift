@@ -17,16 +17,16 @@ struct UnlinkButton: View {
         Button(role: .destructive, action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Common_Unlink_Accounts)
+            Text(bundle: .Custom_Sign_Out)
         })
-        .confirmationDialog(Text(bundle: .Common_Unlink_Accounts), isPresented: $isPresented, titleVisibility: .visible, actions: {
+        .confirmationDialog(Text(bundle: .Custom_Sign_Out), isPresented: $isPresented, titleVisibility: .visible, actions: {
             Button(role: .destructive, action: {
                 session.removeAll()
             }, label: {
-                Text(bundle: .Common_Unlink_Accounts)
+                Text(bundle: .Custom_Sign_Out)
             })
         }, message: {
-            Text(bundle: .Common_Unlink_Accounts_Txt)
+            Text(bundle: .Custom_Sign_Out_Txt)
         })
     }
 }

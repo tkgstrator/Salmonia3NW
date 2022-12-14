@@ -27,14 +27,12 @@ extension RealmMigration {
                    let decimalValue: Decimal = Decimal(string: String(format: "%.3f", doubleValue))
                 {
                     newValue["dangerRate"] = decimalValue
-                    print("DangerRate", decimalValue, doubleValue)
                 }
 
                 if let doubleValue: Double = oldValue["jobRate"] as? Double,
                    let decimalValue: Decimal = Decimal(string: String(format: "%.2f", doubleValue))
                 {
                     newValue["jobRate"] = decimalValue
-                    print("JobRate", decimalValue, doubleValue)
                 }
             }
         })

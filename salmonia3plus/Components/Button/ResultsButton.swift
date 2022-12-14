@@ -21,7 +21,7 @@ struct ResultsButton: View {
             Image(icon: .Squid)
                 .resizable()
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Job_Works, color: SPColor.SplatNet3.SPXMatch))
+        .buttonStyle(SPButtonStyle(title: .Custom_Results_Count, color: SPColor.SplatNet3.SPXMatch))
         .confirmationDialog(
             Text("保存されているリザルト件数"),
             isPresented: $isPresented,
@@ -32,7 +32,7 @@ struct ResultsButton: View {
                 Text("\(results.count)件")
             })
         }, message: {
-            Text(bundle: .Common_Get_Schedules_Txt)
+            Text(bundle: .Custom_Results_Count)
         })
     }
 }

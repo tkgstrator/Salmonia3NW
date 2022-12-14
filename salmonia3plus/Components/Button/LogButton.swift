@@ -18,10 +18,10 @@ struct LogButton: View {
         Button(action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Common_Log)
+            Text(bundle: .Custom_Log)
         })
         .confirmationDialog(
-            Text(bundle: .Common_Log),
+            Text(bundle: .Custom_Log_Txt),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
@@ -42,7 +42,7 @@ struct LogButton: View {
                     Text(bundle: .Common_Decide)
                 })
             }, message: {
-                Text(bundle: .Common_Log_Txt)
+                Text(bundle: .Custom_Log_Txt)
             })
 
     }

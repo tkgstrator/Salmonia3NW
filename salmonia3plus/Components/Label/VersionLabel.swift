@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SplatNet3
 
 struct VersionLabel: View {
     let version: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "1.0.0"
@@ -14,7 +15,7 @@ struct VersionLabel: View {
 
     var body: some View {
         HStack(content: {
-            Text(bundle: .MyOutfits_Reverse)
+            Text(bundle: .Custom_Version)
             Spacer()
             Text(String(format: "%@(%@)", version, build))
                 .foregroundColor(.secondary)

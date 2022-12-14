@@ -11,8 +11,8 @@ import SplatNet3
 
 struct FAQLink: View {
     var body: some View {
-        Link(destination: URL(unsafeString: "https://github.com/tkgstrator/Salmonia3NW/wiki/FAQ"), label: {
-            ListRow(title: .Settings_Title)
+        Link(destination: URL(unsafeString: "https://salmonia3.netlify.app/faq"), label: {
+            ListRow(title: .Custom_FAQ)
         })
     }
 }

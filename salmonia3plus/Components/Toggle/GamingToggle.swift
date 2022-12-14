@@ -14,7 +14,7 @@ struct GamingToggle: View {
 
     var body: some View {
         Toggle(isOn: $isPresented, label: {
-            Text(bundle: .Common_GamingMode)
+            Text(bundle: .Custom_Gaming_Mode)
         })
     }
 }

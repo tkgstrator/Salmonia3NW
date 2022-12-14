@@ -20,9 +20,9 @@ struct ScheduleButton: View {
             Image(icon: .Refresh)
                 .resizable()
         })
-        .buttonStyle(SPButtonStyle(title: .Common_Get_Schedules, color: SPColor.SplatNet3.SPBankara))
+        .buttonStyle(SPButtonStyle(title: .Custom_Schedule_Sync, color: SPColor.SplatNet3.SPBankara))
         .confirmationDialog(
-            Text(bundle: .Common_Get_Schedules),
+            Text(bundle: .Custom_Schedule_Sync),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
@@ -39,7 +39,7 @@ struct ScheduleButton: View {
                 Text(bundle: .Common_Decide)
             })
         }, message: {
-            Text(bundle: .Common_Get_Schedules_Txt)
+            Text(bundle: .Custom_Schedule_Sync_Txt)
         })
     }
 }

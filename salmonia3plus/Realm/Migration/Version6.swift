@@ -23,7 +23,6 @@ extension RealmMigration {
                    let startTime: Date = oldValue["startTime"] as? Date
                 {
                     if startTime >= limitTime {
-                        print("Deleted", startTime)
                         migration.delete(newValue)
                     }
                 }
