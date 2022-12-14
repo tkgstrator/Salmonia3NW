@@ -15,19 +15,8 @@ struct MyPageView: View {
             let width: CGFloat = (geometry.frame(in: .local).width - 32.0)
             ScrollView(content: {
                 LazyVStack(content: {
-                    TabView(content: {
-                        Color.pink
-                            .tag(0)
-                        Color.blue
-                            .tag(1)
-                        Color.yellow
-                            .tag(2)
-                        Color.red
-                            .tag(3)
-                    })
-                    .tabViewStyle(.page)
-                    .aspectRatio(390/195, contentMode: .fit)
-                    .padding(.bottom, 35)
+                    StageView()
+                        .padding(.bottom, 35)
                     LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
                         let scale: CGFloat = (1.0 - (3 - 1) * 0.07) / 3.0
                         SignInButton(contentId: .SP3)

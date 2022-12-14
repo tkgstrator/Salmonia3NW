@@ -22,7 +22,7 @@ struct mainApp: SwiftUI.App {
             ContentView()
                 .environment(\.realmConfiguration, RealmMigration.configuration)
                 .environmentObject(session)
-//                .environment(\.preferredColorScheme, $colorScheme)
+                .environment(\.preferredColorScheme, $colorScheme)
                 .environment(\.colorScheme, colorScheme)
         }
     }

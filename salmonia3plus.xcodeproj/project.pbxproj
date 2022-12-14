@@ -44,6 +44,8 @@
 		105B54BA2940D08700597A2D /* LogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B54B92940D08700597A2D /* LogButton.swift */; };
 		105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B54BC2940EFE500597A2D /* RealmCoopSchedule+Previews.swift */; };
 		105B54BF2940FBC200597A2D /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B54BE2940FBC200597A2D /* ResultView.swift */; };
+		10765BB9294A0D48008FC754 /* StageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BB8294A0D48008FC754 /* StageHeader.swift */; };
+		10765BBB294A0F3E008FC754 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBA294A0F3E008FC754 /* StageView.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -121,6 +123,8 @@
 		105B54B92940D08700597A2D /* LogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogButton.swift; sourceTree = "<group>"; };
 		105B54BC2940EFE500597A2D /* RealmCoopSchedule+Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmCoopSchedule+Previews.swift"; sourceTree = "<group>"; };
 		105B54BE2940FBC200597A2D /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		10765BB8294A0D48008FC754 /* StageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageHeader.swift; sourceTree = "<group>"; };
+		10765BBA294A0F3E008FC754 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 		102F38D7293378C0001E1FD5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10765BB7294A0D3B008FC754 /* Header */,
 				10DC18982943669B009EB01C /* Link */,
 				10DC18AC29437326009EB01C /* Toggle */,
 				10DC18A7294371E3009EB01C /* Label */,
@@ -362,6 +367,7 @@
 				105B54BE2940FBC200597A2D /* ResultView.swift */,
 				10DC18B72943B471009EB01C /* CreditView.swift */,
 				10DC18C32945B19C009EB01C /* ResultTabView.swift */,
+				10765BBA294A0F3E008FC754 /* StageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -382,6 +388,14 @@
 				105B54BC2940EFE500597A2D /* RealmCoopSchedule+Previews.swift */,
 			);
 			path = RealmPreviews;
+			sourceTree = "<group>";
+		};
+		10765BB7294A0D3B008FC754 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				10765BB8294A0D48008FC754 /* StageHeader.swift */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		1077DD8B293CB93300786CD0 /* Shape */ = {
@@ -580,6 +594,7 @@
 				105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */,
 				10DC18C629495BDC009EB01C /* Version12.swift in Sources */,
 				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
+				10765BB9294A0D48008FC754 /* StageHeader.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
 				105B54B42940C8D000597A2D /* Version6.swift in Sources */,
 				10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */,
@@ -599,6 +614,7 @@
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
 				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
+				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
@@ -773,7 +789,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -812,7 +828,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 43;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
