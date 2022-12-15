@@ -27,7 +27,7 @@ struct UserButton: View {
             }
         })
         .disabled(true)
-        .buttonStyle(SPWebButtonStyle(title: session.account?.nickname, color: SPColor.SplatNet3.SPCoop))
+        .buttonStyle(SPWebButtonStyle(title: session.account?.nickname, color: Color.clear))
     }
 }
 

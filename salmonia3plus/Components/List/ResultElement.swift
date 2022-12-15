@@ -77,14 +77,16 @@ private struct _ResultElement: View {
     private func Result() -> some View {
         VStack(alignment: .center, spacing: 0, content: {
             HStack(content: {
-                GoldenIkura(frame: CGSize(width: 20.5, height: 18))
+                Image(icon: .GoldenIkura)
+                    .scaledToFit(frame: CGSize(width: 20.5, height: 18))
                 Text(String(format: "x%d", result.goldenIkuraNum))
                     .lineLimit(1)
                     .foregroundColor(SPColor.SplatNet2.SPWhite)
                     .frame(width: 36, alignment: .trailing)
             })
             HStack(content: {
-                Ikura(frame: CGSize(width: 20.5, height: 15))
+                Image(icon: .Ikura)
+                    .scaledToFit(frame: CGSize(width: 20.5, height: 15))
                 Text(String(format: "x%d", result.ikuraNum))
                     .lineLimit(1)
                     .foregroundColor(SPColor.SplatNet2.SPWhite)

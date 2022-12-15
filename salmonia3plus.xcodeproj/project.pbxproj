@@ -49,10 +49,12 @@
 		10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBC294AA7AA008FC754 /* LogLabel.swift */; };
 		10765BBF294AA9B6008FC754 /* LogDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */; };
 		10765BC1294B1912008FC754 /* LayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC0294B1912008FC754 /* LayoutType.swift */; };
-		10765BC4294B45A9008FC754 /* StageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC3294B45A9008FC754 /* StageService.swift */; };
+		10765BC4294B45A9008FC754 /* StageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC3294B45A9008FC754 /* StageStats.swift */; };
 		10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC5294B4DE3008FC754 /* UserButton.swift */; };
 		10765BC9294B4EB6008FC754 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 10765BC8294B4EB6008FC754 /* SDWebImageSwiftUI */; };
 		10765BCB294B6B0C008FC754 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCA294B6B0C008FC754 /* URLScheme.swift */; };
+		10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */; };
+		10765BCF294BE3E5008FC754 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCE294BE3E5008FC754 /* OffsetKey.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -135,9 +137,11 @@
 		10765BBC294AA7AA008FC754 /* LogLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLabel.swift; sourceTree = "<group>"; };
 		10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDeleteButton.swift; sourceTree = "<group>"; };
 		10765BC0294B1912008FC754 /* LayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutType.swift; sourceTree = "<group>"; };
-		10765BC3294B45A9008FC754 /* StageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageService.swift; sourceTree = "<group>"; };
+		10765BC3294B45A9008FC754 /* StageStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageStats.swift; sourceTree = "<group>"; };
 		10765BC5294B4DE3008FC754 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		10765BCA294B6B0C008FC754 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
+		10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Image.swift"; sourceTree = "<group>"; };
+		10765BCE294BE3E5008FC754 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -220,15 +224,16 @@
 		102F38B329334BBD001E1FD5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				10765BD0294BE40B008FC754 /* SwiftUI */,
 				105B54BB2940EFD000597A2D /* RealmPreviews */,
 				10E9B3FF293A5B0400779CB6 /* SP3Session+Request.swift */,
-				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
 				102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */,
 				102F38BC2933570F001E1FD5 /* SFSymbols.swift */,
 				10F039A4293B4A9B00BAD41C /* EnvironmentValues.swift */,
 				10F039A6293B6F7300BAD41C /* SHA256Hash.swift */,
 				10DC18BD2943DABE009EB01C /* Decimal128.swift */,
-				10DC18BF2943DAEF009EB01C /* CornerRadius.swift */,
+				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
+				10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -420,9 +425,18 @@
 		10765BC2294B4593008FC754 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				10765BC3294B45A9008FC754 /* StageService.swift */,
+				10765BC3294B45A9008FC754 /* StageStats.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		10765BD0294BE40B008FC754 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				10DC18BF2943DAEF009EB01C /* CornerRadius.swift */,
+				10765BCE294BE3E5008FC754 /* OffsetKey.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		1077DD8B293CB93300786CD0 /* Shape */ = {
@@ -649,7 +663,7 @@
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
 				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
 				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
-				10765BC4294B45A9008FC754 /* StageService.swift in Sources */,
+				10765BC4294B45A9008FC754 /* StageStats.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
@@ -671,7 +685,9 @@
 				102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */,
 				10DC189C29436954009EB01C /* UnlinkButton.swift in Sources */,
 				10DC18BA2943C4A3009EB01C /* UserType.swift in Sources */,
+				10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */,
 				10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */,
+				10765BCF294BE3E5008FC754 /* OffsetKey.swift in Sources */,
 				104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */,
 				102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */,
 				10DC18C02943DAEF009EB01C /* CornerRadius.swift in Sources */,
