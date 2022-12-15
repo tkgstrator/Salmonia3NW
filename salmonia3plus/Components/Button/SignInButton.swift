@@ -10,6 +10,7 @@ import SwiftUI
 import SplatNet3
 
 struct SignInButton: View {
+    @EnvironmentObject var session: Session
     @State private var isPresented: Bool = false
     let contentId: ContentId
 
@@ -21,7 +22,7 @@ struct SignInButton: View {
                 .resizable()
         })
         .buttonStyle(SPButtonStyle(title: .Custom_Sign_In, color: contentId == .SP3 ? SPColor.SplatNet3.SPBlue : SPColor.SplatNet2.SPRed))
-        .authorize(isPresented: $isPresented, contentId: contentId)
+        .authorize(isPresented: $isPresented, contentId: contentId, session: session)
     }
 }
 

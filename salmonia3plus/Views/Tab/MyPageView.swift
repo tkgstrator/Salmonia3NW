@@ -21,9 +21,9 @@ struct MyPageView: View {
                         let scale: CGFloat = (1.0 - (3 - 1) * 0.07) / 3.0
                         SignInButton(contentId: .SP3)
                             .frame(width: width * scale)
-                        SignInButton(contentId: .SP2)
+                        UserButton()
                             .frame(width: width * scale)
-                        SignInButton(contentId: .SP3)
+                        SignInButton(contentId: .SP2)
                             .frame(width: width * scale)
                     })
                     .padding(.horizontal)

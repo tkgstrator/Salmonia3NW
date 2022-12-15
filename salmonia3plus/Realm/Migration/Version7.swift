@@ -14,11 +14,20 @@ import CryptoKit
 extension RealmMigration {
     /// プライマリーキーを設定する
     static func version7(_ migration: Migration) {
+        var hashes: [String] = []
         migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
             if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
                 if let startTime: Date = oldValue["startTime"] as? Date {
-                    newValue["id"] = startTime.hash
-                    return
+                    let hash: String = startTime.hash
+                    /// ハッシュが衝突する可能性があるのでここで除去する
+                    if hashes.contains(hash) {
+                        migration.delete(newValue)
+                        return
+                    } else {
+                        hashes.append(hash)
+                        newValue["id"] = hash
+                        return
+                    }
                 }
                 if let stageId: Int = oldValue["stageId"] as? Int,
                    let rule: String = oldValue["rule"] as? String,

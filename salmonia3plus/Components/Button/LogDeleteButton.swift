@@ -16,20 +16,20 @@ struct LogDeleteButton: View {
         Button(role: .destructive, action: {
             isPresented.toggle()
         }, label: {
-            Text(bundle: .Custom_Log)
+            Text(bundle: .Custom_Wipe_Log)
         })
         .confirmationDialog(
-            Text(bundle: .Custom_Log),
+            Text(bundle: .Custom_Wipe_Log),
             isPresented: $isPresented,
             titleVisibility: .visible,
             actions: {
                 Button(action: {
                     SwiftyLogger.deleteAll()
                 }, label: {
-                Text(bundle: .Custom_Log_Txt)
+                Text(bundle: .Common_Decide)
             })
         }, message: {
-            Text(bundle: .Custom_Log_Txt)
+            Text(bundle: .Custom_Wipe_Log_Txt)
         })
     }
 }

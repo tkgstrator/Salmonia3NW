@@ -8,12 +8,22 @@
 
 import Foundation
 import RealmSwift
+import SplatNet3
 
 enum RealmMigration {
     static let configuration: Realm.Configuration = Realm.Configuration(
         schemaVersion: 13,
         migrationBlock: RealmMigration.migrationBlock(),
-        deleteRealmIfMigrationNeeded: false
+        deleteRealmIfMigrationNeeded: false,
+        shouldCompactOnLaunch: { totalBytes, usedBytes in
+            let used: Double = Double(usedBytes) / Double(totalBytes)
+            SwiftyLogger.verbose("Size:\(totalBytes) Used:\(usedBytes) Percentage:\(used)")
+            /// DBサイズが10MB以上で使用率が50%を切っていたら圧縮する
+            if totalBytes >= 10 * 1024 * 1024 && used <= 0.5 {
+                return true
+            }
+            return false
+        }
     )
 
     static func migrationBlock() -> MigrationBlock? {

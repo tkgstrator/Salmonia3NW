@@ -127,7 +127,6 @@ public actor RealmService: ObservableObject {
             }
         }()
 
-
         /// 追記する
         try inWriteTransaction(transaction: {
             realm.add(schedules, update: .all)

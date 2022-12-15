@@ -22,7 +22,10 @@ public enum InAppBrowser {
                     .resizable()
                     .scaledToFit()
             })
-            .buttonStyle(SPWebButtonStyle(title: .Common_Ikaring3, color: SPColor.SplatNet3.SPBlue))
+            .buttonStyle(SPWebButtonStyle(
+                title: contentId == .SP3 ? .Common_Ikaring3 : .Custom_Ikaring2,
+                color: SPColor.SplatNet3.SPBlue
+            ))
             .openInAppBrowser(isPresented: $isPresented, contentId: contentId)
         }
     }

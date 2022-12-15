@@ -48,6 +48,10 @@
 		10765BBB294A0F3E008FC754 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBA294A0F3E008FC754 /* StageView.swift */; };
 		10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBC294AA7AA008FC754 /* LogLabel.swift */; };
 		10765BBF294AA9B6008FC754 /* LogDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */; };
+		10765BC1294B1912008FC754 /* LayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC0294B1912008FC754 /* LayoutType.swift */; };
+		10765BC4294B45A9008FC754 /* StageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC3294B45A9008FC754 /* StageService.swift */; };
+		10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC5294B4DE3008FC754 /* UserButton.swift */; };
+		10765BC9294B4EB6008FC754 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 10765BC8294B4EB6008FC754 /* SDWebImageSwiftUI */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -129,6 +133,9 @@
 		10765BBA294A0F3E008FC754 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		10765BBC294AA7AA008FC754 /* LogLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLabel.swift; sourceTree = "<group>"; };
 		10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDeleteButton.swift; sourceTree = "<group>"; };
+		10765BC0294B1912008FC754 /* LayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutType.swift; sourceTree = "<group>"; };
+		10765BC3294B45A9008FC754 /* StageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageService.swift; sourceTree = "<group>"; };
+		10765BC5294B4DE3008FC754 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -182,6 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10765BC9294B4EB6008FC754 /* SDWebImageSwiftUI in Frameworks */,
 				104BAB2B292CDD1700739B2C /* RealmSwift in Frameworks */,
 				10DC185A29422361009EB01C /* Introspect in Frameworks */,
 				10403BF32938F46A003D10BA /* SplatNet3 in Frameworks */,
@@ -254,6 +262,7 @@
 				10DC1899294366AE009EB01C /* MenuButton.swift */,
 				10DC189B29436954009EB01C /* UnlinkButton.swift */,
 				102F38D9293378E2001E1FD5 /* SignInButton.swift */,
+				10765BC5294B4DE3008FC754 /* UserButton.swift */,
 				102F38F629339A1F001E1FD5 /* ManagementButton.swift */,
 				10D69C7C293BAC120098CC64 /* ScheduleButton.swift */,
 				10D69C85293BE12E0098CC64 /* ResultsButton.swift */,
@@ -284,6 +293,7 @@
 				10DC18B329438220009EB01C /* FormatType.swift */,
 				10DC18B92943C4A3009EB01C /* UserType.swift */,
 				10DC18BB2943C590009EB01C /* RoleType.swift */,
+				10765BC0294B1912008FC754 /* LayoutType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -324,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				104BAB1C292CBC9B00739B2C /* Info.plist */,
+				10765BC2294B4593008FC754 /* Service */,
 				102F38E7293391A1001E1FD5 /* Assets */,
 				102F38E029337B2A001E1FD5 /* Enum */,
 				102F38B329334BBD001E1FD5 /* Extensions */,
@@ -401,6 +412,14 @@
 				10765BB8294A0D48008FC754 /* StageHeader.swift */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		10765BC2294B4593008FC754 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				10765BC3294B45A9008FC754 /* StageService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		1077DD8B293CB93300786CD0 /* Shape */ = {
@@ -503,6 +522,7 @@
 				10403BF22938F46A003D10BA /* SplatNet3 */,
 				10D69C83293BDD770098CC64 /* ZIPFoundation */,
 				10DC185929422361009EB01C /* Introspect */,
+				10765BC8294B4EB6008FC754 /* SDWebImageSwiftUI */,
 			);
 			productName = salmonia3plus;
 			productReference = 104BAAEF292CBAFF00739B2C /* salmonia3plus.app */;
@@ -549,6 +569,7 @@
 				104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				10D69C82293BDD770098CC64 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				10DC185829422361009EB01C /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				10765BC7294B4EB6008FC754 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 104BAAF0292CBAFF00739B2C /* Products */;
 			projectDirPath = "";
@@ -583,6 +604,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */,
+				10765BC1294B1912008FC754 /* LayoutType.swift in Sources */,
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
 				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
 				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
@@ -622,6 +645,7 @@
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
 				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
 				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
+				10765BC4294B45A9008FC754 /* StageService.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
@@ -799,7 +823,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -838,7 +862,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 49;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -903,6 +927,14 @@
 				kind = branch;
 			};
 		};
+		10765BC7294B4EB6008FC754 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		10D69C82293BDD770098CC64 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
@@ -930,6 +962,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 104BAB29292CDD1700739B2C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		10765BC8294B4EB6008FC754 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10765BC7294B4EB6008FC754 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		10D69C83293BDD770098CC64 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

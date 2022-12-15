@@ -11,11 +11,16 @@ import SwiftUI
 import SplatNet3
 
 struct SPButtonStyle: ButtonStyle {
-    let title: LocalizedType
+    let title: Text
     let color: Color
 
+    init(title: String?, color: Color = SPColor.SplatNet3.SPRed) {
+        self.title = Text(String(format: "%@", title))
+        self.color = color
+    }
+
     init(title: LocalizedType = .Custom_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
-        self.title = title
+        self.title = Text(bundle: title)
         self.color = color
     }
 
@@ -31,7 +36,7 @@ struct SPButtonStyle: ButtonStyle {
                         .label
                         .padding()
                 })
-            Text(bundle: title)
+            title
                 .font(systemName: .Splatfont2, size: 11)
                 .lineLimit(1)
                 .multilineTextAlignment(.center)
@@ -40,11 +45,16 @@ struct SPButtonStyle: ButtonStyle {
 }
 
 struct SPWebButtonStyle: ButtonStyle {
-    let title: LocalizedType
+    let title: Text
     let color: Color
 
+    init(title: String? = nil, color: Color = SPColor.SplatNet3.SPRed) {
+        self.title = Text(String(format: "%@", title))
+        self.color = color
+    }
+
     init(title: LocalizedType = .Custom_MyPage, color: Color = SPColor.SplatNet3.SPRed) {
-        self.title = title
+        self.title = Text(bundle: title)
         self.color = color
     }
 
@@ -57,7 +67,7 @@ struct SPWebButtonStyle: ButtonStyle {
                         .resizable()
                         .scaledToFit()
                 })
-            Text(bundle: title)
+            title
                 .font(systemName: .Splatfont2, size: 11)
         })
     }

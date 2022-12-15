@@ -42,7 +42,7 @@ struct ManagementButton: View {
                     await RealmService.shared.deleteAll()
                 }
             }, label: {
-                Text(bundle: .Common_Decide)
+                Text(bundle: .Custom_Wipe_All)
             })
         }, message: {
             Text(bundle: .Custom_Wipe_Results_Txt)
