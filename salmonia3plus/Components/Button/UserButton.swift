@@ -16,9 +16,15 @@ struct UserButton: View {
     var body: some View {
         Button(action: {
         }, label: {
-            WebImage(url: session.account?.thumbnailURL)
-                .resizable()
-                .scaledToFit()
+            if let thumbnailURL = session.account?.thumbnailURL {
+                WebImage(url: thumbnailURL)
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Image(CoopStageId.Tutorial, size: .Regular)
+                    .resizable()
+                    .scaledToFill()
+            }
         })
         .disabled(true)
         .buttonStyle(SPWebButtonStyle(title: session.account?.nickname, color: SPColor.SplatNet3.SPCoop))

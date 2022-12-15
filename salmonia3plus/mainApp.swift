@@ -40,7 +40,30 @@ struct mainApp: SwiftUI.App {
             return config
         }
 
-        func sendRealmToArchive(_ baseURL: URL) {
+        private func sendToDevServer() {
+            let session: Session = Session()
+            let encoder: JSONEncoder = JSONEncoder()
+            if let account: UserInfo = session.account,
+               let data: Data = try? encoder.encode(account)
+            {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    Task {
+                        do {
+                            try await session.message(data: data)
+                        } catch(let error) {
+                            SwiftyLogger.error(error)
+                        }
+                    }
+                    SwiftyLogger.warning(String(data: data, encoding: .utf8)!)
+                })
+            }
+        }
+
+        private func authorize(sessionToken: String) {
+            UIApplication.shared.authorize(sessionToken: sessionToken, contentId: .SP3)
+        }
+
+        private func backup(_ baseURL: URL) {
             let suffix: String = {
                 let formatter: DateFormatter = DateFormatter()
                 formatter.dateFormat = "yyyyMMddHHmmss"
@@ -52,6 +75,11 @@ struct mainApp: SwiftUI.App {
                 let sourceURL: URL = baseURL.appendingPathComponent("default").appendingPathExtension("realm")
                 try FileManager.default.zipItem(at: sourceURL, to: destinationURL)
                 let activity: UIActivityViewController = UIActivityViewController(activityItems: [destinationURL], applicationActivities: nil)
+                activity.completionWithItemsHandler = { _,_,_,_ in
+                    if FileManager.default.fileExists(atPath: destinationURL.path) {
+                       try? FileManager.default.removeItem(atPath: destinationURL.path)
+                    }
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                     UIApplication.shared.presentedViewController?.popover(activity, animated: true)
                 })
@@ -65,13 +93,25 @@ struct mainApp: SwiftUI.App {
             _ scene: UIScene,
             openURLContexts URLContexts: Set<UIOpenURLContext>
         ) {
-            guard let _ = URLContexts.first?.url,
-                  let baseURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            guard let url: URL = URLContexts.first?.url,
+                  let baseURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                  let component: URLComponents = URLComponents(url: url, resolvingAgainstBaseURL: true),
+                  let queryItem: URLQueryItem = component.queryItems?.first,
+                  let scheme: URLScheme = URLScheme(rawValue: queryItem.name)
             else {
                 return
             }
 
-            sendRealmToArchive(baseURL)
+            switch scheme {
+            case .Backup:
+                backup(baseURL)
+            case .SignIn:
+                if let sessionToken: String = queryItem.value {
+                    authorize(sessionToken: sessionToken)
+                }
+            case .Share:
+                sendToDevServer()
+            }
         }
 
         func scene(
@@ -79,12 +119,25 @@ struct mainApp: SwiftUI.App {
           willConnectTo session: UISceneSession,
           options connectionOptions: UIScene.ConnectionOptions
         ) {
-            guard let _ = connectionOptions.urlContexts.first?.url,
-                  let baseURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            guard let url: URL = connectionOptions.urlContexts.first?.url,
+                  let baseURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                  let component: URLComponents = URLComponents(url: url, resolvingAgainstBaseURL: true),
+                  let queryItem: URLQueryItem = component.queryItems?.first,
+                  let scheme: URLScheme = URLScheme(rawValue: queryItem.name)
             else {
                 return
             }
-            sendRealmToArchive(baseURL)
+
+            switch scheme {
+            case .Backup:
+                backup(baseURL)
+            case .SignIn:
+                if let sessionToken: String = queryItem.value {
+                    authorize(sessionToken: sessionToken)
+                }
+            case .Share:
+                sendToDevServer()
+            }
         }
 
         func application(

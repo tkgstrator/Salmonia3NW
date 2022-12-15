@@ -52,6 +52,7 @@
 		10765BC4294B45A9008FC754 /* StageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC3294B45A9008FC754 /* StageService.swift */; };
 		10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BC5294B4DE3008FC754 /* UserButton.swift */; };
 		10765BC9294B4EB6008FC754 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 10765BC8294B4EB6008FC754 /* SDWebImageSwiftUI */; };
+		10765BCB294B6B0C008FC754 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCA294B6B0C008FC754 /* URLScheme.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -136,6 +137,7 @@
 		10765BC0294B1912008FC754 /* LayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutType.swift; sourceTree = "<group>"; };
 		10765BC3294B45A9008FC754 /* StageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageService.swift; sourceTree = "<group>"; };
 		10765BC5294B4DE3008FC754 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
+		10765BCA294B6B0C008FC754 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				10DC18B92943C4A3009EB01C /* UserType.swift */,
 				10DC18BB2943C590009EB01C /* RoleType.swift */,
 				10765BC0294B1912008FC754 /* LayoutType.swift */,
+				10765BCA294B6B0C008FC754 /* URLScheme.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
 				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
 				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
+				10765BCB294B6B0C008FC754 /* URLScheme.swift in Sources */,
 				10DC18B629439185009EB01C /* SettingButton.swift in Sources */,
 				10F039AC293B9A4E00BAD41C /* RealmMigration.swift in Sources */,
 				1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */,
@@ -823,7 +827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -862,7 +866,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 51;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

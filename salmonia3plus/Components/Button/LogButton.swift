@@ -53,14 +53,9 @@ enum Discord {
         var headers: [String: String]?
         var baseURL: URL = URL(unsafeString: discordWebhookURL)
 
-        init(id: String) {
-            let version: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "1.0.0"
-            let build: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String) ?? "0"
-
+        init(context: String) {
             self.parameters = [
-                "id": id,
-                "version": version,
-                "build": build,
+                "content": context
             ]
         }
 
