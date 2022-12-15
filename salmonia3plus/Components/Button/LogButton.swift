@@ -28,11 +28,7 @@ struct LogButton: View {
                 Button(action: {
                     Task {
                         do {
-                            guard let baseURL: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
-                                return
-                            }
-                            let logURL: URL = baseURL.appendingPathComponent("swiftybeaver").appendingPathExtension("log")
-                            let data: Data = try Data(contentsOf: logURL.absoluteURL, options: .uncached)
+                            let data: Data = try Data(contentsOf: SwiftyLogger.baseURL.absoluteURL, options: .uncached)
                             try await session.upload(data: data)
                         } catch(let error) {
                             SwiftyLogger.error(error.localizedDescription)

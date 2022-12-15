@@ -35,6 +35,7 @@ struct _MenuView: View {
             List(content: {
                 Section(content: {
                     ResultLabel()
+                    LogLabel()
                 }, header: {
                     Text(bundle: .Custom_User_Data)
                 })
@@ -62,6 +63,7 @@ struct _MenuView: View {
                     Text(bundle: .Custom_Application)
                 })
                 Section(content: {
+                    LogDeleteButton()
                     ManagementButton()
                     UnlinkButton()
                 })

@@ -46,6 +46,8 @@
 		105B54BF2940FBC200597A2D /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105B54BE2940FBC200597A2D /* ResultView.swift */; };
 		10765BB9294A0D48008FC754 /* StageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BB8294A0D48008FC754 /* StageHeader.swift */; };
 		10765BBB294A0F3E008FC754 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBA294A0F3E008FC754 /* StageView.swift */; };
+		10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBC294AA7AA008FC754 /* LogLabel.swift */; };
+		10765BBF294AA9B6008FC754 /* LogDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -125,6 +127,8 @@
 		105B54BE2940FBC200597A2D /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		10765BB8294A0D48008FC754 /* StageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageHeader.swift; sourceTree = "<group>"; };
 		10765BBA294A0F3E008FC754 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
+		10765BBC294AA7AA008FC754 /* LogLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogLabel.swift; sourceTree = "<group>"; };
+		10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDeleteButton.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 				105B54B92940D08700597A2D /* LogButton.swift */,
 				10DC18AA294372AA009EB01C /* LanguageButton.swift */,
 				10DC18B529439185009EB01C /* SettingButton.swift */,
+				10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 			children = (
 				10DC18A52943711C009EB01C /* VersionLabel.swift */,
 				10DC18A8294371F9009EB01C /* ResultLabel.swift */,
+				10765BBC294AA7AA008FC754 /* LogLabel.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */,
 				10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */,
 				105B54BA2940D08700597A2D /* LogButton.swift in Sources */,
+				10765BBF294AA9B6008FC754 /* LogDeleteButton.swift in Sources */,
 				10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */,
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
@@ -629,6 +636,7 @@
 				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
 				10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */,
 				10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */,
+				10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
@@ -791,7 +799,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -830,7 +838,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

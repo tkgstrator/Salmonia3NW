@@ -84,7 +84,7 @@ public actor RealmService: ObservableObject {
         return realm.objects(RealmCoopResult.self).max(ofProperty: "playTime")
     }
 
-    public func openURL(url: URL, format: FormatType) async throws {
+    public func openURL(url: URL, format: FormatType) async throws -> Int {
         let decoder: JSONDecoder = {
             let decoder: JSONDecoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -109,6 +109,8 @@ public actor RealmService: ObservableObject {
         try inWriteTransaction(transaction: {
             realm.add(schedules, update: .all)
         })
+
+        return schedules.flatMap({ $0.results }).count
     }
 
     /// リザルト取得APIで取得したスケジュール書き込み

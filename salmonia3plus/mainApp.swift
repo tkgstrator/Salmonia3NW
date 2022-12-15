@@ -45,6 +45,7 @@ struct mainApp: SwiftUI.App {
 
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
             print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+            SwiftyLogger.configure()
             SwiftyLogger.addDestination(appId: appId, appSecret: appSecret, encryptionKey: encryptionKey)
             return true
         }
