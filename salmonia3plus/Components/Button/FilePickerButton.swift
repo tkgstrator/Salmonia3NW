@@ -36,7 +36,7 @@ struct FilePickerButton: View {
             Text(bundle: .Custom_Restore_Txt)
         })
         .sheet(isPresented: $isSelected, content: {
-            FilePickerView(fileType: .json, onSelected: { url in
+            FilePickerView(fileType: [.json, .zip], onSelected: { url in
                 Task {
                     do {
                         let resultCounts: Int = try await RealmService.shared.openURL(url: url, format: dataFormatType)

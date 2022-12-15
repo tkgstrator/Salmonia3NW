@@ -11,6 +11,7 @@ import RealmSwift
 import SwiftUI
 import SplatNet3
 import ZIPFoundation
+import UniformTypeIdentifiers
 
 public actor RealmService: ObservableObject {
     public static let shared: RealmService = RealmService()
@@ -84,15 +85,37 @@ public actor RealmService: ObservableObject {
         return realm.objects(RealmCoopResult.self).max(ofProperty: "playTime")
     }
 
-    public func openURL(url: URL, format: FormatType) async throws -> Int {
+    public func openURL(url sourceURL: URL, format: FormatType) async throws -> Int {
         let decoder: JSONDecoder = {
             let decoder: JSONDecoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             decoder.dateDecodingStrategy = .iso8601
             return decoder
         }()
-        let data: Data = try Data(contentsOf: url)
+        let data: Data = try {
+            switch UTType(filenameExtension: sourceURL.pathExtension) {
+            case .some(let ext):
+                switch ext {
+                case .json:
+                    return try Data(contentsOf: sourceURL)
+                case .zip:
+                    let fileName: String = sourceURL.deletingPathExtension().lastPathComponent
+                    let destinationURL: URL = FileManager.default.temporaryDirectory
+                    try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
 
+                    do {
+                        try FileManager.default.unzipItem(at: sourceURL, to: destinationURL)
+                        return try Data(contentsOf: destinationURL.appendingPathComponent(fileName, conformingTo: .json))
+                    } catch {
+                        return try Data(contentsOf: destinationURL.appendingPathComponent(fileName, conformingTo: .json))
+                    }
+                default:
+                    throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Given data "))
+                }
+            case .none:
+                throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Given data "))
+            }
+        }()
         /// データの変換
         let schedules: [RealmCoopSchedule] = try {
             switch format {
