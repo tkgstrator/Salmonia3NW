@@ -98,14 +98,15 @@ public actor RealmService: ObservableObject {
             switch format {
             case .SPLATNET3:
                 let results: [CoopHistoryDetailQuery.Response] = (try decoder.decode([CoopHistoryDetailQuery.Response].self, from: data)).filter({ $0.data.coopHistoryDetail.afterGrade != nil })
-                print(results.count)
                 return []
             case .SALMONIA3:
                 return try decoder.decode([RealmCoopSchedule].self, from: data)
             }
         }()
+
+
+        /// 追記する
         try inWriteTransaction(transaction: {
-//            realm.deleteAll()
             realm.add(schedules, update: .all)
         })
     }

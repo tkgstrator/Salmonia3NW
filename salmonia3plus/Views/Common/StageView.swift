@@ -38,27 +38,30 @@ struct StageView: View {
             })
         })
         .onChange(of: offset, perform: { value in
-            if selection == 0 && abs(offset) <= 50 {
+            if selection == 0 && offset == 0 {
                 selection = headers.count - 2
             }
-            if selection == headers.count - 1 && abs(offset) <= 50 {
+            if selection == headers.count - 1 && offset == 0 {
                 selection = 1
             }
         })
         .onAppear(perform: {
-            guard var first = headers.first,
-                  var last = headers.last
-            else {
-                return
-            }
-            first.id = UUID()
-            last.id = UUID()
-            headers.append(first)
-            headers.insert(last, at: 0)
+            if headers.count == 4 {
+                guard var first = headers.first,
+                      var last = headers.last
+                else {
+                    return
+                }
+                first.id = UUID()
+                last.id = UUID()
+                headers.append(first)
+                headers.insert(last, at: 0)
 
-            selection = 1
+                selection = 1
+            }
         })
-        .tabViewStyle(.page(indexDisplayMode: .never))
+        .tabViewStyle(.page)
+//        .tabViewStyle(.page(indexDisplayMode: .never))
         .aspectRatio(390/195, contentMode: .fit)
     }
 
@@ -83,16 +86,26 @@ private struct _StageHeaderTab: Identifiable, Hashable {
 private struct _StageHeader: View {
     let header: _StageHeaderTab
 
+    func MakeBody() -> some View {
+        Color.blue.opacity(0.4)
+    }
+
     var body: some View {
         Image(header.stageId, size: .Regular)
             .resizable()
             .scaledToFill()
             .frame(width: 390, height: 195)
+            .overlay(content: {
+                MakeBody()
+                    .padding(.all)
+            })
     }
 }
 
 struct StageView_Previews: PreviewProvider {
     static var previews: some View {
-        StageView()
+        ScrollView(content: {
+            StageView()
+        })
     }
 }

@@ -43,7 +43,7 @@ struct FilePickerButton: View {
                         try await RealmService.shared.openURL(url: url, format: dataFormatType)
                         dismiss()
                     } catch(let error) {
-                        SwiftyLogger.error(error.localizedDescription)
+                        SwiftyLogger.error(error)
                         let alert: UIAlertController = UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
                         let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
                         alert.addAction(action)
