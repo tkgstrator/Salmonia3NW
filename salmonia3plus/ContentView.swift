@@ -11,7 +11,7 @@ import RealmSwift
 import Introspect
 
 struct ContentView: View {
-    @StateObject private var session: Session = Session()
+    @EnvironmentObject var session: Session
     @State private var isPresented: Bool = false
 
     var body: some View {

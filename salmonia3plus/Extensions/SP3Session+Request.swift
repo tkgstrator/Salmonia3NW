@@ -10,6 +10,10 @@ import Foundation
 import SplatNet3
 
 class Session: SP3Session {
+    override init() {
+        super.init()
+    }
+    
     override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
         let playTime: Date? = await RealmService.shared.lastPlayedTime()
         if let playTime = playTime {

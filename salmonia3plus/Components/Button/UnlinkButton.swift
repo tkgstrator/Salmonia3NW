@@ -10,7 +10,7 @@ import SwiftUI
 import SplatNet3
 
 struct UnlinkButton: View {
-    @StateObject var session: Session = Session()
+    @EnvironmentObject var session: Session
     @State private var isPresented: Bool = false
 
     var body: some View {

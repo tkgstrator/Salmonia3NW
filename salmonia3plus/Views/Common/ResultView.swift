@@ -264,68 +264,52 @@ private struct _ResultStatus: View {
     }
 }
 
-private struct _ResultEnemy: View {
-    @Environment(\.coopResult) var result
-
-    var body: some View {
-        VStack(spacing: 0, content: {
-            ForEach(EnemyId.allCases.dropLast(1), content: { enemyId in
-                let index: Int = EnemyId.allCases.firstIndex(of: enemyId) ?? 0
-                let bossCount: Int = result.bossCounts[index]
-                let bossKillCount: Int = result.bossKillCounts[index]
-                let playerBossKillCount: Int = result.players.first?.bossKillCounts[index] ?? 0
-                if bossCount != .zero {
-                    HStack(content: {
-                        Image(enemyId)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 45, height: 45)
-                            .padding(.trailing, 5)
-                        Text(enemyId)
-                            .font(systemName: .Splatfont2, size: 15)
-                            .foregroundColor(Color.white)
-                        Spacer()
-                        HStack(alignment: .bottom, spacing: 0, content: {
-                            Text(String(format: "%d", bossKillCount))
-                                .font(systemName: .Splatfont2, size: 15)
-                                .padding(.trailing, 2)
-                            Text(String(format: "(%d)", playerBossKillCount))
-                                .font(systemName: .Splatfont2, size: 11)
-                            Spacer()
-                            Text("/")
-                            Spacer()
-                            Text(String(format: "x%d", bossCount))
-                                .font(systemName: .Splatfont2, size: 15)
-                        })
-                        .frame(width: 80)
-                        .foregroundColor(bossCount == bossKillCount ? Color.yellow : Color.white)
-                    })
-                }
-            })
-        })
-        .frame(maxWidth: 340)
-    }
-}
-
 private struct _ResultWave: View {
     @Environment(\.coopResult) var result: RealmCoopResult
 
     func ResultSpecial(specialUsage: [SpecialId]) -> some View {
-        HStack(spacing: 0, content: {
-            ForEach(specialUsage.indices, id: \.self, content: { index in
-                let specialId: SpecialId = specialUsage[index]
-                Image(specialId)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 14.4, height: 14.4, alignment: .center)
-                    .padding(1.8)
-                    .background(content: {
-                        Color.black
+        VStack(alignment: .center, spacing: 0, content: {
+            let items: [[SpecialId]] = specialUsage.chunked(by: 4)
+            ForEach(items, id: \.self, content: { item in
+                HStack(spacing: 0, content: {
+                    ForEach(item.indices, id: \.self, content: { index in
+                        let specialId: SpecialId = item[index]
+                        Image(specialId)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 14.4, height: 14.4, alignment: .center)
+                            .padding(1.8)
+                            .background(content: {
+                                Color.black
+                            })
+                            .clipShape(RoundedRectangle(cornerRadius: 4.7988))
+                            .padding([.bottom, .trailing], 3)
                     })
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .padding([.bottom, .trailing], 3)
+                })
             })
         })
+    }
+
+    func ResultSpecials(specialUsage: [SpecialId]) -> some View {
+        LazyVGrid(
+            columns: Array(repeating: .init(.fixed(18), spacing: 3), count: 4),
+            alignment: .center,
+            spacing: 3,
+            content: {
+                ForEach(specialUsage.indices, id: \.self, content: { index in
+                    let specialId: SpecialId = specialUsage[index]
+                    Image(specialId)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 14.4, height: 14.4, alignment: .center)
+                        .padding(1.8)
+                        .background(content: {
+                            Color.black
+                        })
+                        .clipShape(RoundedRectangle(cornerRadius: 4.7988))
+                        .padding([.bottom, .trailing], 3)
+                })
+            })
     }
 
     func ResultWave(wave: RealmCoopWave) -> some View {
@@ -384,27 +368,63 @@ private struct _ResultWave: View {
     }
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1, alignment: .top), count: result.waves.count),
-                  alignment: .center,
-                  content: {
-            ForEach(result.waves, content: { wave in
-                let isFirst: Bool = result.waves.first == wave
-                let isLast: Bool = result.waves.last == wave
-                VStack(spacing: 0, content: {
-                    ResultWave(wave: wave)
-                        .cornerWaveRadius(10, isFirst: isFirst, isLast: isLast)
-                    ResultSpecial(specialUsage: [.SpChariot, .SpJetpack, .SpMicroLaser])
-                        .padding(.top, 5)
+        LazyVGrid(
+            columns: Array(repeating: .init(.flexible(maximum: 105), spacing: 1, alignment: .top), count: result.waves.count),
+            alignment: .center,
+            content: {
+                ForEach(result.waves, content: { wave in
+                    let isFirst: Bool = result.waves.first == wave
+                    let isLast: Bool = result.waves.last == wave
+                    let specialUsage: [SpecialId] = wave.specialUsage
+                    VStack(spacing: 0, content: {
+                        ResultWave(wave: wave)
+                            .cornerWaveRadius(10, isFirst: isFirst, isLast: isLast)
+                        ResultSpecial(specialUsage: specialUsage)
+                            .padding(.top, 5)
+                    })
                 })
             })
-        })
-        .padding(.bottom, 15)
+        .padding(.bottom, 10)
         .padding(.horizontal, 10)
     }
 }
 
 private struct _ResultPlayer: View {
     @Environment(\.coopResult) var result: RealmCoopResult
+
+    func ResultWeapon(player: RealmCoopPlayer) -> some View {
+        HStack(spacing: 2, content: {
+            ForEach(player.weaponList.indices, id: \.self, content: { index in
+                let weaponId: WeaponId = player.weaponList[index]
+                Image(weaponId)
+                    .scaledToFit(frame: CGSize(width: 18, height: 18))
+                    .background(content: {
+                        Circle().fill(Color.black)
+                    })
+            })
+        })
+    }
+
+    func ResultWeapons(player: RealmCoopPlayer) -> some View {
+        LazyVGrid(columns: Array(repeating: .init(.fixed(18), spacing: 2), count: 3), spacing: 2, content: {
+            ForEach(player.weaponList.indices, id: \.self, content: { index in
+                let weaponId: WeaponId = player.weaponList[index]
+                Image(weaponId)
+                    .scaledToFit(frame: CGSize(width: 18, height: 18), padding: 2)
+                    .background(content: {
+                        Circle().fill(Color.black)
+                    })
+            })
+            if let specialId: SpecialId = player.specialId {
+                Image(specialId)
+                    .scaledToFit(frame: CGSize(width: 18, height: 18), padding: 2)
+                    .background(content: {
+                        Circle().fill(Color.black)
+                    })
+            }
+        })
+        .frame(width: 58, height: 38, alignment: .center)
+    }
 
     func ResultStatus(player: RealmCoopPlayer) -> some View {
         HStack(spacing: 5, content: {
@@ -469,6 +489,7 @@ private struct _ResultPlayer: View {
                     .foregroundColor(Color.white.opacity(0.7))
             })
             Spacer()
+            ResultWeapons(player: player)
             ResultStatus(player: player)
         })
         .padding(.horizontal, 10)
@@ -496,6 +517,49 @@ private struct _ResultPlayer: View {
         })
         .padding(.horizontal, 10)
         .padding(.bottom, 15)
+    }
+}
+
+private struct _ResultEnemy: View {
+    @Environment(\.coopResult) var result
+
+    var body: some View {
+        VStack(spacing: 0, content: {
+            ForEach(EnemyId.allCases.dropLast(1), content: { enemyId in
+                let index: Int = EnemyId.allCases.firstIndex(of: enemyId) ?? 0
+                let bossCount: Int = result.bossCounts[index]
+                let bossKillCount: Int = result.bossKillCounts[index]
+                let playerBossKillCount: Int = result.players.first?.bossKillCounts[index] ?? 0
+                if bossCount != .zero {
+                    HStack(content: {
+                        Image(enemyId)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 45, height: 45)
+                            .padding(.trailing, 5)
+                        Text(enemyId)
+                            .font(systemName: .Splatfont2, size: 15)
+                            .foregroundColor(Color.white)
+                        Spacer()
+                        HStack(alignment: .bottom, spacing: 0, content: {
+                            Text(String(format: "%d", bossKillCount))
+                                .font(systemName: .Splatfont2, size: 15)
+                                .padding(.trailing, 2)
+                            Text(String(format: "(%d)", playerBossKillCount))
+                                .font(systemName: .Splatfont2, size: 11)
+                            Spacer()
+                            Text("/")
+                            Spacer()
+                            Text(String(format: "x%d", bossCount))
+                                .font(systemName: .Splatfont2, size: 15)
+                        })
+                        .frame(width: 90)
+                        .foregroundColor(bossCount == bossKillCount ? Color.yellow : Color.white)
+                    })
+                }
+            })
+        })
+        .frame(maxWidth: 340)
     }
 }
 

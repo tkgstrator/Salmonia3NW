@@ -69,6 +69,16 @@ final class RealmCoopWave: Object, Identifiable, Codable {
     }
 }
 
+extension RealmCoopWave {
+    private var result: RealmCoopResult {
+        self.link.first ?? RealmCoopResult.preview
+    }
+
+    var specialUsage: [SpecialId] {
+        return result.specialUsage[self.id - 1]
+    }
+}
+
 /// RealmSwift.List
 extension RealmSwift.List where Element: Encodable {
     public func encode(to encoder: Encoder) throws {

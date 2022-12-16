@@ -55,6 +55,7 @@
 		10765BCB294B6B0C008FC754 /* URLScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCA294B6B0C008FC754 /* URLScheme.swift */; };
 		10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */; };
 		10765BCF294BE3E5008FC754 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCE294BE3E5008FC754 /* OffsetKey.swift */; };
+		10765BD2294C04FA008FC754 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BD1294C04FA008FC754 /* Array.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -142,6 +143,7 @@
 		10765BCA294B6B0C008FC754 /* URLScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLScheme.swift; sourceTree = "<group>"; };
 		10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Image.swift"; sourceTree = "<group>"; };
 		10765BCE294BE3E5008FC754 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
+		10765BD1294C04FA008FC754 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				10DC18BD2943DABE009EB01C /* Decimal128.swift */,
 				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
 				10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */,
+				10765BD1294C04FA008FC754 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
 				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
+				10765BD2294C04FA008FC754 /* Array.swift in Sources */,
 				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
 				10765BC4294B45A9008FC754 /* StageStats.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
@@ -843,7 +847,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -882,7 +886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

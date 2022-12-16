@@ -17,10 +17,11 @@ extension Image {
             .frame(width: width)
     }
 
-    func scaledToFit(frame: CGSize) -> some View {
+    func scaledToFit(frame: CGSize, padding: CGFloat = .zero) -> some View {
         self
             .resizable()
             .scaledToFit()
+            .padding(.all, padding)
             .frame(width: frame.width, height: frame.height)
     }
 }

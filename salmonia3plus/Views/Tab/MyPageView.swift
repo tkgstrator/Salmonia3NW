@@ -19,11 +19,11 @@ struct MyPageView: View {
                         .padding(.bottom, 35)
                     LazyVGrid(columns: Array(repeating: .init(.flexible()), count: 3), content: {
                         let scale: CGFloat = (1.0 - (3 - 1) * 0.07) / 3.0
-                        SignInButton(contentId: .SP3)
+                        SignInButton(contentId: .SP2)
                             .frame(width: width * scale)
                         UserButton()
                             .frame(width: width * scale)
-                        SignInButton(contentId: .SP2)
+                        SignInButton(contentId: .SP3)
                             .frame(width: width * scale)
                     })
                     .padding(.horizontal)
