@@ -43,7 +43,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
     convenience init(content: CoopResult) {
         self.init()
         self.id = content.id
-        self.grade = content.grade
+        self.grade = content.gradeId
         self.gradePoint = content.gradePoint
         self.isClear = content.jobResult.isClear
         self.failureWave = content.jobResult.failureWave
@@ -54,10 +54,10 @@ final class RealmCoopResult: Object, Identifiable, Codable {
         self.goldenIkuraAssistNum = content.goldenIkuraAssistNum
         self.bossCounts.append(objectsIn: content.bossCounts)
         self.bossKillCounts.append(objectsIn: content.bossKillCounts)
-        self.dangerRate = (try? Decimal128(string: String(format: "%.3f", content.dangerRate))) ?? 0
+        self.dangerRate = Decimal128(number: content.dangerRate as NSDecimalNumber)
         self.jobRate = {
             if let jobRate = content.jobRate {
-                return try? Decimal128(string: String(format: "%.2f", jobRate))
+                return Decimal128(number: jobRate as NSDecimalNumber)
             }
             return nil
         }()

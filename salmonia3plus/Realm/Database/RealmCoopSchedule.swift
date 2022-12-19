@@ -47,7 +47,7 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
         }()
         self.startTime = content.startTime
         self.endTime = content.endTime
-        self.stageId = content.stage
+        self.stageId = content.stageId
         self.weaponList.append(objectsIn: content.weaponList)
         self.rareWeapon = nil
         self.rule = content.rule
@@ -107,7 +107,7 @@ extension Date {
 
 fileprivate extension CoopResult.Schedule {
     var hash: String {
-        SHA256.resultHash(stageId: self.stage, rule: self.rule, mode: self.mode, weaponList: self.weaponList)
+        SHA256.resultHash(stageId: self.stageId, rule: self.rule, mode: self.mode, weaponList: self.weaponList)
     }
 }
 

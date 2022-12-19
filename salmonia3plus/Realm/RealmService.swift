@@ -146,7 +146,7 @@ public actor RealmService: ObservableObject {
                     /// 本来は何もしなくてよいのだが、イカ研究所がスケジュールを変更した際にこの機能が必要になるため
                     if let result = realm.objects(RealmCoopSchedule.self).filter("startTime=%@ AND endTime=%@", startTime, endTime).first {
                         /// 重複するスケジュールがあればリザルト以外を更新する
-                        result.stageId = schedule.stage
+                        result.stageId = schedule.stageId
                         result.mode = schedule.mode
                         result.rule = schedule.rule
                         result.weaponList.removeAll()

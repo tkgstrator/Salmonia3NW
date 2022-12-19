@@ -56,6 +56,10 @@
 		10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */; };
 		10765BCF294BE3E5008FC754 /* OffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BCE294BE3E5008FC754 /* OffsetKey.swift */; };
 		10765BD2294C04FA008FC754 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BD1294C04FA008FC754 /* Array.swift */; };
+		10765BD4294C293E008FC754 /* ScheduleStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BD3294C293E008FC754 /* ScheduleStats.swift */; };
+		10765BD7294C298A008FC754 /* ChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BD6294C298A008FC754 /* ChartEntry.swift */; };
+		10765BDA294C798D008FC754 /* Discord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BD9294C798D008FC754 /* Discord.swift */; };
+		10765BDC294C799A008FC754 /* Notion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BDB294C799A008FC754 /* Notion.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
@@ -144,6 +148,10 @@
 		10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Image.swift"; sourceTree = "<group>"; };
 		10765BCE294BE3E5008FC754 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
 		10765BD1294C04FA008FC754 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		10765BD3294C293E008FC754 /* ScheduleStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleStats.swift; sourceTree = "<group>"; };
+		10765BD6294C298A008FC754 /* ChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEntry.swift; sourceTree = "<group>"; };
+		10765BD9294C798D008FC754 /* Discord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discord.swift; sourceTree = "<group>"; };
+		10765BDB294C799A008FC754 /* Notion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notion.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -344,6 +352,7 @@
 		104BAAF1292CBAFF00739B2C /* salmonia3plus */ = {
 			isa = PBXGroup;
 			children = (
+				10765BD8294C7982008FC754 /* Network */,
 				104BAB1C292CBC9B00739B2C /* Info.plist */,
 				10765BC2294B4593008FC754 /* Service */,
 				102F38E7293391A1001E1FD5 /* Assets */,
@@ -428,7 +437,9 @@
 		10765BC2294B4593008FC754 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				10765BD5294C297A008FC754 /* ChartEntry */,
 				10765BC3294B45A9008FC754 /* StageStats.swift */,
+				10765BD3294C293E008FC754 /* ScheduleStats.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -440,6 +451,23 @@
 				10765BCE294BE3E5008FC754 /* OffsetKey.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		10765BD5294C297A008FC754 /* ChartEntry */ = {
+			isa = PBXGroup;
+			children = (
+				10765BD6294C298A008FC754 /* ChartEntry.swift */,
+			);
+			path = ChartEntry;
+			sourceTree = "<group>";
+		};
+		10765BD8294C7982008FC754 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				10765BD9294C798D008FC754 /* Discord.swift */,
+				10765BDB294C799A008FC754 /* Notion.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		1077DD8B293CB93300786CD0 /* Shape */ = {
@@ -648,11 +676,13 @@
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
 				105B54B42940C8D000597A2D /* Version6.swift in Sources */,
 				10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */,
+				10765BD7294C298A008FC754 /* ChartEntry.swift in Sources */,
 				10DC189A294366AE009EB01C /* MenuButton.swift in Sources */,
 				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
 				1077DDA0293E606400786CD0 /* Secrets.swift in Sources */,
 				10DC18AE29437330009EB01C /* ThemeToggle.swift in Sources */,
 				10DC18A229436EAB009EB01C /* FAQLink.swift in Sources */,
+				10765BDA294C798D008FC754 /* Discord.swift in Sources */,
 				10DC18B429438220009EB01C /* FormatType.swift in Sources */,
 				10DC18AB294372AA009EB01C /* LanguageButton.swift in Sources */,
 				102F38DD29337A7C001E1FD5 /* ResultElement.swift in Sources */,
@@ -674,10 +704,12 @@
 				10F039AA293B9A2F00BAD41C /* Version8.swift in Sources */,
 				102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */,
 				102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */,
+				10765BD4294C293E008FC754 /* ScheduleStats.swift in Sources */,
 				102F38DF29337AF2001E1FD5 /* SwiftUI+View.swift in Sources */,
 				102F38E229337B36001E1FD5 /* FontType.swift in Sources */,
 				102F38F729339A1F001E1FD5 /* ManagementButton.swift in Sources */,
 				102F38F529339468001E1FD5 /* LogoType.swift in Sources */,
+				10765BDC294C799A008FC754 /* Notion.swift in Sources */,
 				10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */,
 				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
 				10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */,
@@ -847,7 +879,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -886,7 +918,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 52;
+				CURRENT_PROJECT_VERSION = 54;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

@@ -44,39 +44,6 @@ struct LogButton: View {
     }
 }
 
-enum Discord {
-    class Message: RequestType {
-        typealias ResponseType = Response
-        var method: Alamofire.HTTPMethod = .post
-        var parameters: Alamofire.Parameters?
-        var path: String = discordWebhookPath
-        var headers: [String: String]?
-        var baseURL: URL = URL(unsafeString: discordWebhookURL)
-
-        init(context: String) {
-            self.parameters = [
-                "content": context
-            ]
-        }
-
-        struct Response: Codable {}
-    }
-
-    class Attachments: RequestType {
-        typealias ResponseType = Response
-        var method: Alamofire.HTTPMethod = .post
-        var parameters: Alamofire.Parameters? = nil
-        var path: String = discordWebhookPath
-        var headers: [String : String]?
-        var baseURL: URL = URL(unsafeString: discordWebhookURL)
-
-        init() {}
-
-        struct Response: Codable {}
-
-    }
-}
-
 struct LogButton_Previews: PreviewProvider {
     static var previews: some View {
         InAppBrowser.WebView(contentId: .SP3)
