@@ -63,7 +63,7 @@ private struct _ResultElement: View {
     private func GradePoint() -> some View {
         HStack(alignment: .center, spacing: 2, content: {
             HStack(spacing: 8, content: {
-                Text(result.grade)
+                Text(result.gradeId)
                 Text(result.gradePoint)
                 Text(result.gradePointDiff.rawValue)
                     .foregroundColor(result.gradePointDiff.color)

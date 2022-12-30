@@ -168,7 +168,7 @@ private enum ScheduleType: Int, CaseIterable, Codable, Identifiable {
 
 extension RealmCoopSchedule {
     var maxGradeId: GradeId? {
-        guard let rawValue: Int = self.results.max(ofProperty: "grade") else {
+        guard let rawValue: Int = self.results.max(ofProperty: "gradeId") else {
             return nil
         }
         return GradeId(rawValue: rawValue)
@@ -178,7 +178,7 @@ extension RealmCoopSchedule {
         guard let maxGradeId: GradeId = self.maxGradeId else {
             return nil
         }
-        return results.filter("grade=%@", maxGradeId).max(ofProperty: "gradePoint")
+        return results.filter("gradeId=%@", maxGradeId).max(ofProperty: "gradePoint")
     }
 
     fileprivate var scheduleType: ScheduleType {

@@ -31,6 +31,7 @@ struct _MenuView: View {
                 Section(content: {
                     FileBackupButton()
                     FilePickerButton()
+                    UploadButton()
                 }, header: {
                     Text(bundle: .Custom_Data_Management)
                 })

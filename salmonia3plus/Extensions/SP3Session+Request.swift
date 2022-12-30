@@ -42,6 +42,12 @@ class Session: SP3Session {
         return schedules
     }
 
+    override func uploadAllCoopResultDetailQuery(results: [CoopResult] = [], completion: (Float, Float) -> Void) async throws -> [CoopStatsResultsQuery.Response] {
+        let results: [CoopStatsResultsQuery.Response] = try await super.uploadAllCoopResultDetailQuery(results: results, completion: completion)
+        try await RealmService.shared.updateSalmonId(results: results)
+        return results
+    }
+
     @discardableResult
     func upload(data: Data) async throws -> Discord.Attachments.Response {
         try await session.upload(multipartFormData: { multipartFormData in

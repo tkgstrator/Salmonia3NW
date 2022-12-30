@@ -44,6 +44,20 @@ public actor RealmService: ObservableObject {
         try? realm.commitWrite()
     }
 
+    public func exportData() throws -> [CoopResult] {
+        try realm.objects(RealmCoopResult.self).filter("salmonId=nil").map({ try $0.asCoopResult() })
+    }
+
+    public func updateSalmonId(results: [CoopStatsResultsQuery.Response]) throws {
+        try inWriteTransaction(transaction: {
+            results.forEach({ result in
+                if let object = realm.object(ofType: RealmCoopResult.self, forPrimaryKey: result.id) {
+                    object.salmonId = result.salmonId
+                }
+            })
+        })
+    }
+
     public func exportJSON(compress: Bool = true) throws -> URL {
         let fileManager: FileManager = FileManager.default
         let encoder: JSONEncoder = {

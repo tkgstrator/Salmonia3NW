@@ -120,7 +120,7 @@ private struct _ResultStatus: View {
     func ResultStatus() -> some View {
         VStack(alignment: .leading, spacing: 0, content: {
             HStack(spacing: 4, content: {
-                Text(result.grade)
+                Text(result.gradeId)
                 Text(result.gradePoint)
             })
             .font(systemName: .Splatfont2, size: 12)

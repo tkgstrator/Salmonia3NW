@@ -27,6 +27,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
     @Persisted var bossKillCounts: List<Int>
     @Persisted var specialCounts: List<Int>
     @Persisted var badges: List<BadgeId?>
+    @Persisted var textColor: List<Decimal128>
     @Persisted var background: NameplateId
     @Persisted var weaponList: List<WeaponId>
     @Persisted var uniform: SkinInfoId
@@ -55,6 +56,8 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
         self.bossKillCounts.append(objectsIn: content.bossKillCounts)
         self.bossKillCountsTotal = content.bossKillCountsTotal
         self.badges.append(objectsIn: content.nameplate.badges)
+        let textColor: Common.TextColor = content.nameplate.background.textColor
+        self.textColor.append(objectsIn: [textColor.r, textColor.g, textColor.b, textColor.a].map({ Decimal128(value: $0) }))
         self.background = content.nameplate.background.id
         self.uniform = content.uniform
         self.weaponList.append(objectsIn: content.weaponList)
@@ -78,6 +81,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
         case bossKillCounts
         case bossKillCountsTotal
         case badges
+        case textColor
         case background
         case uniform
         case weaponList
@@ -105,6 +109,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
         self.bossKillCountsTotal = try container.decode(Int.self, forKey: .bossKillCountsTotal)
         self.badges.append(objectsIn: try container.decode([BadgeId?].self, forKey: .badges))
         self.background = try container.decode(NameplateId.self, forKey: .background)
+        self.textColor.append(objectsIn: try container.decode([Decimal128].self, forKey: .textColor))
         self.uniform = try container.decode(SkinInfoId.self, forKey: .uniform)
         self.weaponList.append(objectsIn: try container.decode([WeaponId].self, forKey: .weaponList))
     }
@@ -130,6 +135,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
         try container.encode(badges, forKey: .badges)
         try container.encode(background, forKey: .background)
         try container.encode(uniform, forKey: .uniform)
+        try container.encode(textColor, forKey: .textColor)
         try container.encode(weaponList, forKey: .weaponList)
     }
 }

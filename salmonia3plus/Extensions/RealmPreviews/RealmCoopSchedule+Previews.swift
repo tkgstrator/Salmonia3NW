@@ -31,7 +31,7 @@ extension RealmCoopResult {
         let result = RealmCoopResult()
         result.id = ""
         result.gradePoint = 999
-        result.grade = .Eggsecutive_VP
+        result.gradeId = .Eggsecutive_VP
         result.isClear = true
         result.failureWave = nil
         result.bossId = .SakelienGiant

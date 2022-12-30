@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		102BE9E529557E93007DE862 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 102BE9E729557E93007DE862 /* Localizable.strings */; };
 		102BE9F52956A036007DE862 /* Version13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BE9F42956A036007DE862 /* Version13.swift */; };
 		102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */; };
 		102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38BC2933570F001E1FD5 /* SFSymbols.swift */; };
@@ -64,11 +63,13 @@
 		10765BDC294C799A008FC754 /* Notion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BDB294C799A008FC754 /* Notion.swift */; };
 		10765BE0295F2F2B008FC754 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BDF295F2F2B008FC754 /* Secrets.swift */; };
 		10765BE3295F3037008FC754 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10765BE5295F3037008FC754 /* Localizable.strings */; };
+		10765BF3295F54E5008FC754 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF2295F54E5008FC754 /* UploadButton.swift */; };
+		10765BF5295F5B99008FC754 /* Version14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF4295F5B99008FC754 /* Version14.swift */; };
+		10765BF7295F8106008FC754 /* CoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF6295F8106008FC754 /* CoopResult.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
-		10C1AC8229525550003AFBD5 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8129525550003AFBD5 /* Secrets.swift */; };
 		10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */; };
 		10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC87295267B1003AFBD5 /* StatsToggle.swift */; };
 		10C1AC8A29526973003AFBD5 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8929526973003AFBD5 /* AppStorage.swift */; };
@@ -106,19 +107,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		102BE9E629557E93007DE862 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9E829557E98007DE862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		102BE9E929557E99007DE862 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		102BE9EA29557E9A007DE862 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		102BE9EB29557E9A007DE862 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9EC29557E9B007DE862 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		102BE9ED29557E9C007DE862 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9EE29557E9C007DE862 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9EF29557E9D007DE862 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9F029557E9D007DE862 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9F129557E9E007DE862 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9F229557E9F007DE862 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		102BE9F329557EA0007DE862 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		102BE9F42956A036007DE862 /* Version13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version13.swift; sourceTree = "<group>"; };
 		102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		102F38BC2933570F001E1FD5 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
@@ -187,6 +175,9 @@
 		10765BEF295F3041008FC754 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10765BF0295F3042008FC754 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10765BF1295F3043008FC754 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		10765BF2295F54E5008FC754 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
+		10765BF4295F5B99008FC754 /* Version14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version14.swift; sourceTree = "<group>"; };
+		10765BF6295F8106008FC754 /* CoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopResult.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
@@ -273,6 +264,7 @@
 				10765BD1294C04FA008FC754 /* Array.swift */,
 				10C1AC8929526973003AFBD5 /* AppStorage.swift */,
 				10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */,
+				10765BF6295F8106008FC754 /* CoopResult.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +310,7 @@
 				10DC18B529439185009EB01C /* SettingButton.swift */,
 				10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */,
 				10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */,
+				10765BF2295F54E5008FC754 /* UploadButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -397,7 +390,6 @@
 				104BAAF6292CBB0000739B2C /* Assets.xcassets */,
 				104BAAF8292CBB0000739B2C /* Preview Content */,
 				10C1AC8129525550003AFBD5 /* Secrets.swift */,
-				102BE9E729557E93007DE862 /* Localizable.strings */,
 			);
 			path = salmonia3plus;
 			sourceTree = "<group>";
@@ -550,6 +542,7 @@
 				105B54B72940C9CC00597A2D /* Version11.swift */,
 				10DC18C529495BDC009EB01C /* Version12.swift */,
 				102BE9F42956A036007DE862 /* Version13.swift */,
+				10765BF4295F5B99008FC754 /* Version14.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -728,6 +721,7 @@
 			files = (
 				10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */,
 				10765BC1294B1912008FC754 /* LayoutType.swift in Sources */,
+				10765BF7295F8106008FC754 /* CoopResult.swift in Sources */,
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
 				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
 				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
@@ -770,12 +764,14 @@
 				10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */,
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
+				10765BF3295F54E5008FC754 /* UploadButton.swift in Sources */,
 				10DC18BC2943C590009EB01C /* RoleType.swift in Sources */,
 				10765BD2294C04FA008FC754 /* Array.swift in Sources */,
 				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
 				10765BC4294B45A9008FC754 /* StageStats.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
 				10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */,
+				10765BF5295F5B99008FC754 /* Version14.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
 				10F039AA293B9A2F00BAD41C /* Version8.swift in Sources */,
@@ -1059,7 +1055,7 @@
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
 				kind = exactVersion;
-				version = 10.33.0;
+				version = 10.32.3;
 			};
 		};
 		10765BC7294B4EB6008FC754 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
