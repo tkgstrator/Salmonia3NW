@@ -12,7 +12,7 @@ import RealmSwift
 import SplatNet3
 
 struct ResultView: View {
-    let result: RealmCoopResult
+    @Environment(\.coopResult) var result: RealmCoopResult
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
@@ -593,7 +593,8 @@ struct ResultView_Previews: PreviewProvider  {
     static let result: RealmCoopResult = RealmCoopResult.preview
 
     static var previews: some View {
-        ResultView(result: result)
+        ResultView()
+            .environment(\.coopResult, result)
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102BE9E529557E93007DE862 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 102BE9E729557E93007DE862 /* Localizable.strings */; };
+		102BE9F52956A036007DE862 /* Version13.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102BE9F42956A036007DE862 /* Version13.swift */; };
 		102F38B529334BCF001E1FD5 /* SplitNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */; };
 		102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38BC2933570F001E1FD5 /* SFSymbols.swift */; };
 		102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F38BF293357D4001E1FD5 /* SPButtonStyle.swift */; };
@@ -62,10 +64,13 @@
 		10765BDC294C799A008FC754 /* Notion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BDB294C799A008FC754 /* Notion.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
-		1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1077DD92293D3A4800786CD0 /* Localizable.strings */; };
-		1077DDA0293E606400786CD0 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD9F293E606400786CD0 /* Secrets.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
+		10C1AC8229525550003AFBD5 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8129525550003AFBD5 /* Secrets.swift */; };
+		10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */; };
+		10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC87295267B1003AFBD5 /* StatsToggle.swift */; };
+		10C1AC8A29526973003AFBD5 /* AppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8929526973003AFBD5 /* AppStorage.swift */; };
+		10C1AC8C2954ADD8003AFBD5 /* CustomActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */; };
 		10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C7C293BAC120098CC64 /* ScheduleButton.swift */; };
 		10D69C84293BDD770098CC64 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 10D69C83293BDD770098CC64 /* ZIPFoundation */; };
 		10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D69C85293BE12E0098CC64 /* ResultsButton.swift */; };
@@ -99,6 +104,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		102BE9E629557E93007DE862 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9E829557E98007DE862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		102BE9E929557E99007DE862 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		102BE9EA29557E9A007DE862 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		102BE9EB29557E9A007DE862 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9EC29557E9B007DE862 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		102BE9ED29557E9C007DE862 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9EE29557E9C007DE862 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9EF29557E9D007DE862 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9F029557E9D007DE862 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9F129557E9E007DE862 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9F229557E9F007DE862 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		102BE9F329557EA0007DE862 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		102BE9F42956A036007DE862 /* Version13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version13.swift; sourceTree = "<group>"; };
 		102F38B429334BCF001E1FD5 /* SplitNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitNavigationViewStyle.swift; sourceTree = "<group>"; };
 		102F38BC2933570F001E1FD5 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
 		102F38BF293357D4001E1FD5 /* SPButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPButtonStyle.swift; sourceTree = "<group>"; };
@@ -154,22 +173,13 @@
 		10765BDB294C799A008FC754 /* Notion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notion.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
-		1077DD91293D3A4800786CD0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD93293D3A4B00786CD0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1077DD94293D3A4C00786CD0 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1077DD95293D3A4D00786CD0 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1077DD96293D3A4D00786CD0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD97293D3A4E00786CD0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD98293D3A4F00786CD0 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1077DD99293D3A5200786CD0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD9A293D3A5200786CD0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD9B293D3A5300786CD0 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD9C293D3A5400786CD0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD9D293D3A5400786CD0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1077DD9E293D3A5400786CD0 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		1077DD9F293E606400786CD0 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
+		10C1AC8129525550003AFBD5 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewButton.swift; sourceTree = "<group>"; };
+		10C1AC87295267B1003AFBD5 /* StatsToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsToggle.swift; sourceTree = "<group>"; };
+		10C1AC8929526973003AFBD5 /* AppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorage.swift; sourceTree = "<group>"; };
+		10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityViewController.swift; sourceTree = "<group>"; };
 		10D69C7C293BAC120098CC64 /* ScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleButton.swift; sourceTree = "<group>"; };
 		10D69C85293BE12E0098CC64 /* ResultsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsButton.swift; sourceTree = "<group>"; };
 		10DC1899294366AE009EB01C /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -245,6 +255,8 @@
 				102F38DE29337AF2001E1FD5 /* SwiftUI+View.swift */,
 				10765BCC294BE3A4008FC754 /* SwiftUI+Image.swift */,
 				10765BD1294C04FA008FC754 /* Array.swift */,
+				10C1AC8929526973003AFBD5 /* AppStorage.swift */,
+				10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +301,7 @@
 				10DC18AA294372AA009EB01C /* LanguageButton.swift */,
 				10DC18B529439185009EB01C /* SettingButton.swift */,
 				10765BBE294AA9B6008FC754 /* LogDeleteButton.swift */,
+				10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -333,7 +346,6 @@
 		104BAAE6292CBAFF00739B2C = {
 			isa = PBXGroup;
 			children = (
-				1077DD92293D3A4800786CD0 /* Localizable.strings */,
 				102F38AE293349A7001E1FD5 /* Packages */,
 				104BAAF1292CBAFF00739B2C /* salmonia3plus */,
 				104BAAF0292CBAFF00739B2C /* Products */,
@@ -352,8 +364,8 @@
 		104BAAF1292CBAFF00739B2C /* salmonia3plus */ = {
 			isa = PBXGroup;
 			children = (
-				10765BD8294C7982008FC754 /* Network */,
 				104BAB1C292CBC9B00739B2C /* Info.plist */,
+				10765BD8294C7982008FC754 /* Network */,
 				10765BC2294B4593008FC754 /* Service */,
 				102F38E7293391A1001E1FD5 /* Assets */,
 				102F38E029337B2A001E1FD5 /* Enum */,
@@ -364,9 +376,10 @@
 				102F38D7293378C0001E1FD5 /* Components */,
 				104BAAF2292CBAFF00739B2C /* mainApp.swift */,
 				104BAAF4292CBAFF00739B2C /* ContentView.swift */,
-				1077DD9F293E606400786CD0 /* Secrets.swift */,
 				104BAAF6292CBB0000739B2C /* Assets.xcassets */,
 				104BAAF8292CBB0000739B2C /* Preview Content */,
+				10C1AC8129525550003AFBD5 /* Secrets.swift */,
+				102BE9E729557E93007DE862 /* Localizable.strings */,
 			);
 			path = salmonia3plus;
 			sourceTree = "<group>";
@@ -504,6 +517,7 @@
 			children = (
 				10DC18AD29437330009EB01C /* ThemeToggle.swift */,
 				10DC18AF294373A3009EB01C /* GamingToggle.swift */,
+				10C1AC87295267B1003AFBD5 /* StatsToggle.swift */,
 			);
 			path = Toggle;
 			sourceTree = "<group>";
@@ -517,6 +531,7 @@
 				10F039A9293B9A2F00BAD41C /* Version8.swift */,
 				105B54B72940C9CC00597A2D /* Version11.swift */,
 				10DC18C529495BDC009EB01C /* Version12.swift */,
+				102BE9F42956A036007DE862 /* Version13.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -637,7 +652,7 @@
 				102F38EF293391AE001E1FD5 /* splatoon2chzh.ttf in Resources */,
 				102F38F1293391AE001E1FD5 /* splatoon1chzh.ttf in Resources */,
 				102F38F2293391AE001E1FD5 /* splatoon2jpja.ttf in Resources */,
-				1077DD90293D3A4800786CD0 /* Localizable.strings in Resources */,
+				102BE9E529557E93007DE862 /* Localizable.strings in Resources */,
 				102F38F3293391AE001E1FD5 /* splatoon2twzh.ttf in Resources */,
 				104BAAF7292CBB0000739B2C /* Assets.xcassets in Resources */,
 				102F38EE293391AE001E1FD5 /* splatoon1twzh.ttf in Resources */,
@@ -668,18 +683,20 @@
 				104BAB28292CD7DF00739B2C /* FileBackupButton.swift in Sources */,
 				102F38DA293378E2001E1FD5 /* SignInButton.swift in Sources */,
 				10DC18A429437033009EB01C /* ListRow.swift in Sources */,
+				10C1AC8229525550003AFBD5 /* Secrets.swift in Sources */,
 				10DC18C42945B19C009EB01C /* ResultTabView.swift in Sources */,
 				105B54BD2940EFE500597A2D /* RealmCoopSchedule+Previews.swift in Sources */,
 				10DC18C629495BDC009EB01C /* Version12.swift in Sources */,
+				102BE9F52956A036007DE862 /* Version13.swift in Sources */,
 				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
 				10765BB9294A0D48008FC754 /* StageHeader.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
+				10C1AC8C2954ADD8003AFBD5 /* CustomActivityViewController.swift in Sources */,
 				105B54B42940C8D000597A2D /* Version6.swift in Sources */,
 				10F039A7293B6F7300BAD41C /* SHA256Hash.swift in Sources */,
 				10765BD7294C298A008FC754 /* ChartEntry.swift in Sources */,
 				10DC189A294366AE009EB01C /* MenuButton.swift in Sources */,
 				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
-				1077DDA0293E606400786CD0 /* Secrets.swift in Sources */,
 				10DC18AE29437330009EB01C /* ThemeToggle.swift in Sources */,
 				10DC18A229436EAB009EB01C /* FAQLink.swift in Sources */,
 				10765BDA294C798D008FC754 /* Discord.swift in Sources */,
@@ -699,6 +716,7 @@
 				10765BBB294A0F3E008FC754 /* StageView.swift in Sources */,
 				10765BC4294B45A9008FC754 /* StageStats.swift in Sources */,
 				105B54B82940C9CC00597A2D /* Version11.swift in Sources */,
+				10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */,
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
 				10F039AA293B9A2F00BAD41C /* Version8.swift in Sources */,
@@ -714,11 +732,13 @@
 				102F38C229336A80001E1FD5 /* MyPageView.swift in Sources */,
 				10DC18BE2943DABE009EB01C /* Decimal128.swift in Sources */,
 				10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */,
+				10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */,
 				10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
 				102F38C0293357D4001E1FD5 /* SPButtonStyle.swift in Sources */,
+				10C1AC8A29526973003AFBD5 /* AppStorage.swift in Sources */,
 				10DC189C29436954009EB01C /* UnlinkButton.swift in Sources */,
 				10DC18BA2943C4A3009EB01C /* UserType.swift in Sources */,
 				10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */,
@@ -733,22 +753,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1077DD92293D3A4800786CD0 /* Localizable.strings */ = {
+		102BE9E729557E93007DE862 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1077DD91293D3A4800786CD0 /* en */,
-				1077DD93293D3A4B00786CD0 /* zh-Hans */,
-				1077DD94293D3A4C00786CD0 /* zh-Hant */,
-				1077DD95293D3A4D00786CD0 /* en-GB */,
-				1077DD96293D3A4D00786CD0 /* fr */,
-				1077DD97293D3A4E00786CD0 /* ja */,
-				1077DD98293D3A4F00786CD0 /* fr-CA */,
-				1077DD99293D3A5200786CD0 /* de */,
-				1077DD9A293D3A5200786CD0 /* nl */,
-				1077DD9B293D3A5300786CD0 /* ko */,
-				1077DD9C293D3A5400786CD0 /* ru */,
-				1077DD9D293D3A5400786CD0 /* es */,
-				1077DD9E293D3A5400786CD0 /* es-MX */,
+				102BE9E629557E93007DE862 /* en */,
+				102BE9E829557E98007DE862 /* zh-Hans */,
+				102BE9E929557E99007DE862 /* zh-Hant */,
+				102BE9EA29557E9A007DE862 /* en-GB */,
+				102BE9EB29557E9A007DE862 /* nl */,
+				102BE9EC29557E9B007DE862 /* fr-CA */,
+				102BE9ED29557E9C007DE862 /* fr */,
+				102BE9EE29557E9C007DE862 /* ja */,
+				102BE9EF29557E9D007DE862 /* de */,
+				102BE9F029557E9D007DE862 /* ko */,
+				102BE9F129557E9E007DE862 /* ru */,
+				102BE9F229557E9F007DE862 /* es */,
+				102BE9F329557EA0007DE862 /* es-MX */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -879,7 +899,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -918,7 +938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -979,8 +999,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 10.33.0;
 			};
 		};
 		10765BC7294B4EB6008FC754 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {

@@ -15,7 +15,7 @@ struct ResultTabView: View {
     var body: some View {
         TabView(content: {
             ForEach(schedule.results.sorted(by: { $0.playTime > $1.playTime }), content: { result in
-                ResultView(result: result)
+                ResultView()
                     .id(result.id)
             })
         })

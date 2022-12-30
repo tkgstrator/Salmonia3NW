@@ -8,13 +8,16 @@
 
 import Foundation
 import SplatNet3
+import SwiftUI
 
 class Session: SP3Session {
+    @AppStorage(SceneKey.isResultUploadable.rawValue) var isResultUploadable: Bool = false
+
     override init() {
         super.init()
     }
     
-    override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
+    override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, upload: Bool = false, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
         let playTime: Date? = await RealmService.shared.lastPlayedTime()
         if let playTime = playTime {
             SwiftyLogger.info("ResultId: \(playTime)")
@@ -22,7 +25,7 @@ class Session: SP3Session {
             SwiftyLogger.info("ResultId: Not set")
         }
 
-        let results: [CoopResult] = try await super.getAllCoopHistoryDetailQuery(playTime: playTime, completion: { value, total in
+        let results: [CoopResult] = try await super.getAllCoopHistoryDetailQuery(playTime: playTime, upload: isResultUploadable, completion: { value, total in
             completion(value, total)
         })
         SwiftyLogger.info("Get results: \(results.count)")

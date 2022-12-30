@@ -17,12 +17,6 @@ private struct IsModalPresented: EnvironmentKey {
     static var defaultValue: Binding<Bool> = .constant(false)
 }
 
-private struct PreferredColorScheme: EnvironmentKey {
-    typealias Value = Binding<ColorScheme>
-
-    static var defaultValue: Binding<ColorScheme> = .constant(.dark)
-}
-
 private struct CoopResult: EnvironmentKey {
     typealias Value = RealmCoopResult
 
@@ -42,15 +36,6 @@ private struct CoopPlayer: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var preferredColorScheme: Binding<ColorScheme> {
-        get {
-            return self[PreferredColorScheme.self]
-        }
-        set {
-            self[PreferredColorScheme.self] = newValue
-        }
-    }
-
     var coopResult: RealmCoopResult {
         get {
             return self[CoopResult.self]

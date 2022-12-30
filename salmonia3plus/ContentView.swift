@@ -12,13 +12,13 @@ import Introspect
 
 struct ContentView: View {
     @EnvironmentObject var session: Session
-    @State private var isPresented: Bool = false
+    @State private var isModalPresented: Bool = false
 
     var body: some View {
         _ContentView()
-            .environment(\.isModalPresented, $isPresented)
+            .environment(\.isModalPresented, $isModalPresented)
             .edgesIgnoringSafeArea(.all)
-            .fullScreen(isPresented: $isPresented, session: session)
+            .fullScreen(isPresented: $isModalPresented, session: session)
     }
 }
 

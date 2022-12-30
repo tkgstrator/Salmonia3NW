@@ -10,13 +10,14 @@ import SwiftUI
 import SplatNet3
 
 struct ThemeToggle: View {
-    @Environment(\.preferredColorScheme) var colorScheme
+    @AppStorage(SceneKey.colorScheme.rawValue) var colorScheme: UIUserInterfaceStyle = .dark
 
     var body: some View {
-        Toggle(isOn: Binding(
-            get: { colorScheme.wrappedValue == .dark },
-            set: { colorScheme.wrappedValue = $0 ? .dark : .light }
-        ), label: {
+        Toggle(isOn: Binding(get: {
+            colorScheme == .dark
+        }, set: { newValue in
+            colorScheme = newValue ? .dark : .light
+        }), label: {
             Text(bundle: .Custom_Dark_Mode)
         })
     }

@@ -75,7 +75,8 @@ extension RealmCoopWave {
     }
 
     var specialUsage: [SpecialId] {
-        return result.specialUsage[self.id - 1]
+        return []
+//        return result.specialUsage[self.id - 1]
     }
 }
 

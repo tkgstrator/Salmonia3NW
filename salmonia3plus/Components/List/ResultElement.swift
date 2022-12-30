@@ -10,14 +10,14 @@ import SwiftUI
 import SplatNet3
 
 struct ResultElement: View {
-    let result: RealmCoopResult
+    @Environment(\.coopResult) var result: RealmCoopResult
 
     var body: some View {
         NavigationLinker(destination: {
-            ResultView(result: result)
-//                .environment(\.coopSchedule, result.schedule)
+            ResultView()
+                .environment(\.coopResult, result)
         }, label: {
-            _ResultElement(result: result)
+            _ResultElement()
         })
         .listRowInsets(EdgeInsets())
         .listRowSeparator(.hidden)
@@ -25,8 +25,7 @@ struct ResultElement: View {
 }
 
 private struct _ResultElement: View {
-    let result: RealmCoopResult
-
+    @Environment(\.coopResult) var result: RealmCoopResult
 
     fileprivate enum GradePointDiff: String, CaseIterable {
         case UP     = "↑"

@@ -76,7 +76,6 @@ private struct _StageHeaderTab: Identifiable, Hashable {
 }
 
 private struct _StageHeader: View {
-//    @ObservedResults(RealmCoopResult.self) var results
     @StateObject private var stats: StageStats = StageStats()
     let header: _StageHeaderTab
 

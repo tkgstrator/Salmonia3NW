@@ -104,13 +104,6 @@ extension RealmCoopPlayer {
 extension RealmCoopResult {
     var specialUsage: [[SpecialId]] {
         let usages: [(SpecialId, [Int])] = Array(zip(players.compactMap({ $0.specialId }), players.map({ Array($0.specialCounts) })))
-        var specialUsage: [[SpecialId]] = Array(repeating: [], count: waves.count)
-
-        for usage in usages {
-            for (index, count) in usage.1.enumerated() {
-                specialUsage[index].append(contentsOf: Array(repeating: usage.0, count: count))
-            }
-        }
-        return specialUsage.map({ $0.sorted(by: { $0.rawValue < $1.rawValue })})
+        return []
     }
 }

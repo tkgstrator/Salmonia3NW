@@ -32,7 +32,7 @@ struct FileBackupButton: View {
     }
 
     func exportJSON(compress: Bool) {
-        Task{
+        Task  {
             do {
                 let destination: URL = try await RealmService.shared.exportJSON(compress: compress)
                 let activity: UIActivityViewController = await UIActivityViewController(activityItems: [destination], applicationActivities: nil)

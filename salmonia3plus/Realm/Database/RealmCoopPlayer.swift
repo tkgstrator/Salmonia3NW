@@ -39,7 +39,7 @@ final class RealmCoopPlayer: Object, Identifiable, Codable {
     convenience init(content: CoopResult.PlayerResult) {
         self.init()
         self.id = content.id.description
-        self.uid = content.id
+        self.uid = content.pid
         self.name = content.name
         self.byname = content.byname
         self.nameId = content.nameId

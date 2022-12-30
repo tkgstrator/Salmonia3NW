@@ -16,7 +16,7 @@ struct ResultsView: View {
         filter: NSPredicate(format: "mode = %@", ModeType.REGULAR.rawValue),
         sortDescriptor: SortDescriptor(keyPath: "startTime", ascending: false)
     ) var schedules
-    @Environment(\.coopPlayerId) var playerId
+//    @Environment(\.coopPlayerId) var playerId
     @Environment(\.isModalPresented) var isPresented
 
     var body: some View {
@@ -25,7 +25,8 @@ struct ResultsView: View {
                 if !schedule.results.isEmpty {
                     ScheduleElement(schedule: schedule)
                     ForEach(schedule.results.sorted(by: { $0.playTime > $1.playTime }), content: { result in
-                        ResultElement(result: result)
+                        ResultElement()
+                            .environment(\.coopResult, result)
                     })
                 }
             })
@@ -36,10 +37,10 @@ struct ResultsView: View {
                 isPresented.wrappedValue.toggle()
             })
         })
-        .onAppear(perform: {
-            if let playerId = playerId {
-            }
-        })
+//        .onAppear(perform: {
+//            if let playerId = playerId {
+//            }
+//        })
         .showsScrollIndicators()
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(Text(bundle: .CoopHistory_History))

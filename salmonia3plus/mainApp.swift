@@ -15,15 +15,21 @@ import ZIPFoundation
 @main
 struct mainApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State var colorScheme: ColorScheme = .dark
+    @AppStorage(SceneKey.isGamingMode.rawValue) var isGamingMode: Bool = false
+    @AppStorage(SceneKey.colorScheme.rawValue) var colorScheme: UIUserInterfaceStyle = .dark
+    @AppStorage(SceneKey.isResultUploadable.rawValue) var isResultUploadable: Bool = false
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.realmConfiguration, RealmMigration.configuration)
                 .environmentObject(Session())
-                .environment(\.preferredColorScheme, $colorScheme)
-                .environment(\.colorScheme, colorScheme)
+                .onChange(of: colorScheme, perform: { newValue in
+                    UIApplication.shared.window?.overrideUserInterfaceStyle = newValue
+                })
+                .onAppear(perform: {
+                    UIApplication.shared.window?.overrideUserInterfaceStyle = colorScheme
+                })
         }
     }
 
