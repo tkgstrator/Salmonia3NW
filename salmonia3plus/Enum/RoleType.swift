@@ -14,6 +14,7 @@ enum RoleType: String, CaseIterable {
     case Tester
     case Debuger
     case Translator
+    case UIDesign
 }
 
 extension Text {
@@ -27,6 +28,8 @@ extension Text {
             self.init("デバッグ")
         case .Translator:
             self.init("翻訳")
+        case .UIDesign:
+            self.init("UI/UXデザイン")
         }
     }
 }

@@ -12,11 +12,14 @@ import SwiftUI
 enum UserType: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     case Tkgling
+    case Hi_tsume9646_yt
+    case Tondemo71zasso
+    case Hrk_iiiii
     case Chiroru
     case Momizi
     case Oshake0809
     case RapieriHue
-    case Tondemo71zasso
+    case Kumarila2003
 
     var name: String {
         switch self {
@@ -32,6 +35,12 @@ enum UserType: String, CaseIterable, Identifiable {
             return "@rapieriHue"
         case .Tondemo71zasso:
             return "@tondemo71_zasso"
+        case .Hrk_iiiii:
+            return "@hrk_iiiii"
+        case .Kumarila2003:
+            return "@KUMARILA2003"
+        case .Hi_tsume9646_yt:
+            return "@hi_tsume9646_YT"
         }
     }
 
@@ -39,8 +48,10 @@ enum UserType: String, CaseIterable, Identifiable {
         switch self {
         case .Tkgling:
             return .Developer
-        case .Chiroru, .Momizi, .Oshake0809, .RapieriHue, .Tondemo71zasso:
+        case .Chiroru, .Momizi, .Oshake0809, .RapieriHue, .Tondemo71zasso, .Hi_tsume9646_yt, .Kumarila2003:
             return .Tester
+        case .Hrk_iiiii:
+            return .UIDesign
         }
     }
 }
