@@ -44,8 +44,10 @@ public actor RealmService: ObservableObject {
         try? realm.commitWrite()
     }
 
-    public func exportData() throws -> [CoopResult] {
-        try realm.objects(RealmCoopResult.self).filter("salmonId=nil").map({ try $0.asCoopResult() })
+    func exportData() throws -> RealmSwift.Results<RealmCoopResult> {
+        let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("salmonId=nil")
+        print(results.count)
+        return results
     }
 
     public func updateSalmonId(results: [CoopStatsResultsQuery.Response]) throws {
@@ -99,6 +101,7 @@ public actor RealmService: ObservableObject {
         return realm.objects(RealmCoopResult.self).max(ofProperty: "playTime")
     }
 
+    /// ファイルからリストア
     public func openURL(url sourceURL: URL, format: FormatType) async throws -> Int {
         let decoder: JSONDecoder = {
             let decoder: JSONDecoder = JSONDecoder()
@@ -137,7 +140,9 @@ public actor RealmService: ObservableObject {
                 let results: [CoopHistoryDetailQuery.Response] = (try decoder.decode([CoopHistoryDetailQuery.Response].self, from: data)).filter({ $0.data.coopHistoryDetail.afterGrade != nil })
                 return []
             case .SALMONIA3:
-                return try decoder.decode([RealmCoopSchedule].self, from: data)
+                return try autoreleasepool(invoking: {
+                    return try decoder.decode([RealmCoopSchedule].self, from: data)
+                })
             }
         }()
 
@@ -235,13 +240,15 @@ public actor RealmService: ObservableObject {
 
     /// リザルト書き込み
     public func save(_ results: [CoopResult]) {
-        try? inWriteTransaction(transaction: {
-            /// スケジュール->リザルトの関係に変換する
-            let schedules: Set<CoopResult.Schedule> = Set(results.map({ $0.schedule }))
-            let results: [TransResult] = schedules.map({ schedule -> TransResult in
-                TransResult(schedule: schedule, results: results.filter({ $0.schedule == schedule }))
+        autoreleasepool(invoking: {
+            try? inWriteTransaction(transaction: {
+                /// スケジュール->リザルトの関係に変換する
+                let schedules: Set<CoopResult.Schedule> = Set(results.map({ $0.schedule }))
+                let results: [TransResult] = schedules.map({ schedule -> TransResult in
+                    TransResult(schedule: schedule, results: results.filter({ $0.schedule == schedule }))
+                })
+                self.save(results)
             })
-            self.save(results)
         })
     }
 

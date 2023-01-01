@@ -8,16 +8,18 @@
 
 import SwiftUI
 import SplatNet3
+import RealmSwift
 
 struct UploadButton: View {
     @EnvironmentObject var session: Session
 
     var body: some View {
         Button(action: {
-            Task(priority: .background, operation: {
-                let results: [CoopResult] = try await RealmService.shared.exportData()
-                let hosting: UIHostingController = UIHostingController(rootView: CoopResultUploadView(session: session, results: results))
-                UIApplication.shared.presentedViewController?.present(hosting, animated: true)
+            Task(operation: {
+                let results: RealmSwift.Results<RealmCoopResult> = try await RealmService.shared.exportData()
+//                print(results.count)
+                //                let hosting: UIHostingController = UIHostingController(rootView: CoopResultUploadView(session: session, results: results))
+//                UIApplication.shared.presentedViewController?.present(hosting, animated: true)
             })
         }, label: {
             Text("アップロード")

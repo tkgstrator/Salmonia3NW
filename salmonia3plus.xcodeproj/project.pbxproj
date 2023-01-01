@@ -66,6 +66,7 @@
 		10765BF3295F54E5008FC754 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF2295F54E5008FC754 /* UploadButton.swift */; };
 		10765BF5295F5B99008FC754 /* Version14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF4295F5B99008FC754 /* Version14.swift */; };
 		10765BF7295F8106008FC754 /* CoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF6295F8106008FC754 /* CoopResult.swift */; };
+		10765BF929609B2B008FC754 /* Version15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF829609B2B008FC754 /* Version15.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
@@ -178,6 +179,7 @@
 		10765BF2295F54E5008FC754 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
 		10765BF4295F5B99008FC754 /* Version14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version14.swift; sourceTree = "<group>"; };
 		10765BF6295F8106008FC754 /* CoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopResult.swift; sourceTree = "<group>"; };
+		10765BF829609B2B008FC754 /* Version15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version15.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				10DC18C529495BDC009EB01C /* Version12.swift */,
 				102BE9F42956A036007DE862 /* Version13.swift */,
 				10765BF4295F5B99008FC754 /* Version14.swift */,
+				10765BF829609B2B008FC754 /* Version15.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 				10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */,
 				10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */,
 				10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */,
+				10765BF929609B2B008FC754 /* Version15.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
@@ -954,7 +958,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -993,7 +997,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

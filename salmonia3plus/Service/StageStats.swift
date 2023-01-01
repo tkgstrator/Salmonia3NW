@@ -25,13 +25,13 @@ class StageStats: ObservableObject {
         let results: RealmSwift.Results<RealmCoopResult> = results.filter("ANY link.stageId = %@", stageId)
         self.stageId = stageId
         self.counts = results.count
-        let maxGrade: GradeId? = results.max(ofProperty: "grade")
+        let maxGrade: GradeId? = results.max(ofProperty: "gradeId")
         self.maxGrade = maxGrade
         self.maxGradePoint = {
             guard let maxGrade = maxGrade else {
                 return nil
             }
-            return results.filter("grade=%@", maxGrade).max(ofProperty: "gradePoint")
+            return results.filter("gradeId=%@", maxGrade).max(ofProperty: "gradePoint")
         }()
         self.maxGoldenIkuraNum = results.max(ofProperty: "goldenIkuraNum")
         self.maxIkuraNum = results.max(ofProperty: "ikuraNum")
