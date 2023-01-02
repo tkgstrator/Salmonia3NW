@@ -44,10 +44,8 @@ public class RealmService: ObservableObject {
         try? realm.commitWrite()
     }
 
-    func exportData() throws -> RealmSwift.Results<RealmCoopResult> {
-        let results: RealmSwift.Results<RealmCoopResult> = realm.objects(RealmCoopResult.self).filter("salmonId=nil")
-        print(results.count)
-        return results
+    func exportData() throws -> [CoopResult] {
+        try realm.objects(RealmCoopResult.self).filter("salmonId=nil").map({ try $0.asCoopResult() })
     }
 
     public func updateSalmonId(results: [CoopStatsResultsQuery.Response]) throws {

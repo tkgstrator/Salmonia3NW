@@ -18,7 +18,7 @@ class Session: SP3Session {
     }
     
     override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, upload: Bool = false, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
-        let playTime: Date? = await RealmService.shared.lastPlayedTime()
+        let playTime: Date? = RealmService.shared.lastPlayedTime()
         if let playTime = playTime {
             SwiftyLogger.info("ResultId: \(playTime)")
         } else {
@@ -30,7 +30,7 @@ class Session: SP3Session {
         })
         SwiftyLogger.info("Get results: \(results.count)")
 
-        await RealmService.shared.save(results)
+        RealmService.shared.save(results)
         return results
     }
 
@@ -38,13 +38,13 @@ class Session: SP3Session {
         let schedules: [CoopSchedule] = try await super.getCoopStageScheduleQuery()
         SwiftyLogger.info("Get schedules: \(schedules.count)")
 
-        await RealmService.shared.save(schedules)
+        RealmService.shared.save(schedules)
         return schedules
     }
 
     override func uploadAllCoopResultDetailQuery(results: [CoopResult] = [], completion: (Float, Float) -> Void) async throws -> [CoopStatsResultsQuery.Response] {
         let results: [CoopStatsResultsQuery.Response] = try await super.uploadAllCoopResultDetailQuery(results: results, completion: completion)
-        try await RealmService.shared.updateSalmonId(results: results)
+        try RealmService.shared.updateSalmonId(results: results)
         return results
     }
 
