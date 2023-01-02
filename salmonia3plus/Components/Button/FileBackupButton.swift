@@ -32,18 +32,21 @@ struct FileBackupButton: View {
     }
 
     func exportJSON(compress: Bool) {
-        Task  {
+        UIApplication.shared.startAnimating(completion: {
             do {
-                let destination: URL = try await RealmService.shared.exportJSON(compress: compress)
-                let activity: UIActivityViewController = await UIActivityViewController(activityItems: [destination], applicationActivities: nil)
-                await UIApplication.shared.presentedViewController?.popover(activity, animated: true)
-            } catch(let error) {
-                let alert: UIAlertController = await UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
-                let action: UIAlertAction = await UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
-                await alert.addAction(action)
-                await UIApplication.shared.presentedViewController?.present(alert, animated: true)
+                let destination: URL = try RealmService.shared.exportJSON(compress: compress)
+                let activity: UIActivityViewController = UIActivityViewController(activityItems: [destination], applicationActivities: nil)
+                activity.completionWithItemsHandler = { _,_,_,_ in
+                    deleteJSON()
+                }
+                UIApplication.shared.presentedViewController?.popover(activity, animated: true)
+            } catch {
+                let alert: UIAlertController = UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
+                let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
+                alert.addAction(action)
+                UIApplication.shared.presentedViewController?.present(alert, animated: true)
             }
-        }
+        })
     }
 
     var body: some View {
