@@ -117,7 +117,19 @@ private struct _ScheduleElement: View {
             return EmptyView()
                 .asAnyView()
         }
-        let offset: Int = maxGradePoint == 999 ? 3 : (maxGradePoint - 200) / 200
+        /// バッジがもらえるのは200, 400, 600, 999
+        let offset: Int = {
+            switch maxGradePoint {
+            case 999:
+                return 3
+            case 600...:
+                return 2
+            case 400...:
+                return 1
+            default:
+                return 0
+            }
+        }()
         guard let badgeId: BadgeId = BadgeId(rawValue: 5000000 + schedule.stageId.rawValue * 10 + offset) else {
             return EmptyView()
                 .asAnyView()
