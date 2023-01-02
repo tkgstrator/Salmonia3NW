@@ -68,15 +68,17 @@ public actor RealmService: ObservableObject {
             encoder.dateEncodingStrategy = .iso8601
             return encoder
         }()
-        let schedules: RealmSwift.Results<RealmCoopSchedule> = realm.objects(RealmCoopSchedule.self)
-        let data: Data = try encoder.encode(schedules)
+        
+        let data: Data = try Signer.sign(schedules: realm.objects(RealmCoopSchedule.self))
+
+        
         let fileName: String = {
             let formatter: DateFormatter = DateFormatter()
             formatter.dateFormat = "yyyyMMddHHmmss"
             return formatter.string(from: Date())
         }()
         guard let baseURL: URL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
-            throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Invalid URL"))
+            throw SPError.invalidURL
         }
         let source: URL = baseURL.appendingPathComponent(fileName).appendingPathExtension("json")
         try data.write(to: source, options: .atomic)
@@ -103,12 +105,8 @@ public actor RealmService: ObservableObject {
 
     /// ファイルからリストア
     public func openURL(url sourceURL: URL, format: FormatType) async throws -> Int {
-        let decoder: JSONDecoder = {
-            let decoder: JSONDecoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            decoder.dateDecodingStrategy = .iso8601
-            return decoder
-        }()
+        let decoder: SPDecoder = SPDecoder()
+
         let data: Data = try {
             switch UTType(filenameExtension: sourceURL.pathExtension) {
             case .some(let ext):
@@ -127,10 +125,10 @@ public actor RealmService: ObservableObject {
                         return try Data(contentsOf: destinationURL.appendingPathComponent(fileName, conformingTo: .json))
                     }
                 default:
-                    throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Given data "))
+                    throw SPError.invalidExtension
                 }
             case .none:
-                throw DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "Given data "))
+                throw SPError.invalidExtension
             }
         }()
         /// データの変換
@@ -140,9 +138,10 @@ public actor RealmService: ObservableObject {
                 let results: [CoopHistoryDetailQuery.Response] = (try decoder.decode([CoopHistoryDetailQuery.Response].self, from: data)).filter({ $0.data.coopHistoryDetail.afterGrade != nil })
                 return []
             case .SALMONIA3:
-                return try autoreleasepool(invoking: {
-                    return try decoder.decode([RealmCoopSchedule].self, from: data)
-                })
+                if !Signer.isValid(data: data) {
+                    throw SPError.invalidSignature
+                }
+                return try decoder.decode(SignedRealmCoopResult.self, from: data).schedules
             }
         }()
 

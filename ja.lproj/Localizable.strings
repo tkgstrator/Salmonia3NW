@@ -5,3 +5,9 @@
   Created by devonly on 2022/12/30.
   Copyright © 2022 Magi Corporation. All rights reserved.
 */
+
+"Given URL is invalid." = "指定されたファイルが存在しません。";
+"Digital signature did not match." = "署名が一致しませんでした。ファイルが改竄されている可能性があります。";
+"Unacceptable format." = "サポートしていない形式で保存されたファイルです。";
+"Decoder could not decode to specific type." = "指定された型にデータを変換できませんでした。";
+"Unacceptable extension." = "サポートしていないファイルです。";

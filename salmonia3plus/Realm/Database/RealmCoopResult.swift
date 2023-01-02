@@ -114,7 +114,7 @@ final class RealmCoopResult: Object, Identifiable, Codable {
             if let uuid: String = stringValue.capture(pattern: #"_([a-z0-9\-].*)"#, group: 1) {
                 return uuid
             }
-            throw DecodingError.dataCorrupted(.init(codingPath: container.codingPath, debugDescription: "Invalid ResultId."))
+            throw SPError.invalidResultId
         }()
         self.salmonId = try container.decodeIfPresent(Int.self, forKey: .salmonId)
         self.gradeId = try container.decodeIfPresent(GradeId.self, forKey: .gradeId)

@@ -5,3 +5,9 @@
   Created by devonly on 2022/12/30.
   Copyright © 2022 Magi Corporation. All rights reserved.
 */
+
+"Given URL is invalid." = "Given URL is invalid.";
+"Digital signature did not match." = "Digital signature did not match.";
+"Unacceptable format." = "Unacceptable format.";
+"Decoder could not decode to specific type." = "Decoder could not decode to specific type.";
+"Unacceptable extension." = "Unacceptable extension.";

@@ -67,6 +67,7 @@
 		10765BF5295F5B99008FC754 /* Version14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF4295F5B99008FC754 /* Version14.swift */; };
 		10765BF7295F8106008FC754 /* CoopResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF6295F8106008FC754 /* CoopResult.swift */; };
 		10765BF929609B2B008FC754 /* Version15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BF829609B2B008FC754 /* Version15.swift */; };
+		10765BFB2961B49C008FC754 /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BFA2961B49C008FC754 /* Signer.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
@@ -180,6 +181,7 @@
 		10765BF4295F5B99008FC754 /* Version14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version14.swift; sourceTree = "<group>"; };
 		10765BF6295F8106008FC754 /* CoopResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopResult.swift; sourceTree = "<group>"; };
 		10765BF829609B2B008FC754 /* Version15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version15.swift; sourceTree = "<group>"; };
+		10765BFA2961B49C008FC754 /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				10C1AC8929526973003AFBD5 /* AppStorage.swift */,
 				10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */,
 				10765BF6295F8106008FC754 /* CoopResult.swift */,
+				10765BFA2961B49C008FC754 /* Signer.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				10DC18BA2943C4A3009EB01C /* UserType.swift in Sources */,
 				10765BCD294BE3A4008FC754 /* SwiftUI+Image.swift in Sources */,
 				10D69C86293BE12E0098CC64 /* ResultsButton.swift in Sources */,
+				10765BFB2961B49C008FC754 /* Signer.swift in Sources */,
 				10765BCF294BE3E5008FC754 /* OffsetKey.swift in Sources */,
 				104BAB25292CCE3100739B2C /* FilePickerButton.swift in Sources */,
 				102F38D129336BF5001E1FD5 /* RealmCoopSchedule.swift in Sources */,
