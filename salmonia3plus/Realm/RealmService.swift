@@ -13,7 +13,7 @@ import SplatNet3
 import ZIPFoundation
 import UniformTypeIdentifiers
 
-public actor RealmService: ObservableObject {
+public class RealmService: ObservableObject {
     public static let shared: RealmService = RealmService()
     private var realm: Realm {
         try! Realm(configuration: RealmMigration.configuration)
@@ -104,7 +104,7 @@ public actor RealmService: ObservableObject {
     }
 
     /// ファイルからリストア
-    public func openURL(url sourceURL: URL, format: FormatType) async throws -> Int {
+    public func openURL(url sourceURL: URL, format: FormatType) throws -> Int {
         let decoder: SPDecoder = SPDecoder()
 
         let data: Data = try {

@@ -37,21 +37,22 @@ struct FilePickerButton: View {
         })
         .sheet(isPresented: $isSelected, content: {
             FilePickerView(fileType: [.json, .zip], onSelected: { url in
-                Task {
-                    do {
-                        let resultCounts: Int = try await RealmService.shared.openURL(url: url, format: dataFormatType)
-                        let alert: UIAlertController = UIAlertController(title: "*復元成功*", message: "*\(resultCounts)件のリザルト復元に成功した*", preferredStyle: .alert)
-                        let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
-                        alert.addAction(action)
-                        UIApplication.shared.presentedViewController?.present(alert, animated: true)
-                    } catch(let error) {
-                        SwiftyLogger.error(error)
-                        let alert: UIAlertController = UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
-                        let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
-                        alert.addAction(action)
-                        UIApplication.shared.presentedViewController?.present(alert, animated: true)
-                    }
-                }
+                UIApplication.shared.startAnimating(
+                    completion: {
+                        do {
+                            let resultCounts: Int = try RealmService.shared.openURL(url: url, format: dataFormatType)
+                            let alert: UIAlertController = UIAlertController(title: "*復元成功*", message: "*\(resultCounts)件のリザルト復元に成功した*", preferredStyle: .alert)
+                            let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
+                            alert.addAction(action)
+                            UIApplication.shared.presentedViewController?.present(alert, animated: true)
+                        } catch {
+                            SwiftyLogger.error(error)
+                            let alert: UIAlertController = UIAlertController(title: LocalizedType.Error_Error.localized, message: error.localizedDescription, preferredStyle: .alert)
+                            let action: UIAlertAction = UIAlertAction(title: LocalizedType.Common_Decide.localized, style: .default)
+                            alert.addAction(action)
+                            UIApplication.shared.presentedViewController?.present(alert, animated: true)
+                        }
+                    })
             })
         })
     }
