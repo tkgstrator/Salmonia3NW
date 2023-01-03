@@ -11,3 +11,5 @@
 "Unacceptable format." = "Unacceptable format.";
 "Decoder could not decode to specific type." = "Decoder could not decode to specific type.";
 "Unacceptable extension." = "Unacceptable extension.";
+"Common_Player_You" = "You";
+"Common_Player_Team" = "Team";

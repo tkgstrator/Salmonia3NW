@@ -14,12 +14,29 @@ import RealmSwift
 enum EnemyResultCategory: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     /// 個人記録
-    case Shift      = "Player"
+    case Player     = "Common_Player_You"
     /// チーム記録
-    case Team       = "Team"
-    //    / 個人累計
-    //    case Total      = "Total"
-    //    case Appear     = "Appear"
+    case Team       = "Common_Player_Team"
+
+    var localized: String {
+        NSLocalizedString(self.rawValue, bundle: .main, comment: "")
+    }
+}
+
+struct EnemyCount: Identifiable {
+    let id: UUID = UUID()
+    /// シフト
+    let shift: Int
+    /// 累計
+    let total: Int
+}
+
+struct EnemyKillCount: Identifiable {
+    let id: UUID = UUID()
+    /// 個人
+    let solo: Int
+    /// チーム
+    let team: Int
 }
 
 struct EnemyResultEntry: Identifiable {
@@ -31,14 +48,12 @@ struct EnemyResultEntry: Identifiable {
     let enemyKey: EnemyKey
     /// スケジュールID
     let scheduleId: Date
-    /// 累計の出現数
-    let bossCount: Int
-    /// シフトあたりの討伐数
-    let bossKillCount: Int
-    /// プレイヤーの累計の討伐数
-    let bossKillCountTotal: Int
-    /// チームの累計の討伐数
-    let teamBossKillCount: Int
+    /// オオモノ出現数
+    let bossCount: EnemyCount
+    /// オオモノ討伐数
+    let bossKillCount: EnemyKillCount
+    /// オオモノ累計討伐数
+    let bossKillTotal: EnemyKillCount
 }
 
 @available(iOS 16.0, *)
@@ -63,7 +78,7 @@ struct EnemyChartView: View {
     @State private var selectedElement: EnemyResultEntry? = nil
     @State private var enemyResults: [EnemyResultEntry] = []
     @State private var detailResults: [EnemyResultEntry] = []
-    @State private var action: EnemyResultCategory = .Shift
+    @State private var action: EnemyResultCategory = .Player
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -96,7 +111,7 @@ struct EnemyChartView: View {
     private var TypePicker: some View {
         Picker("Type", selection: $action.animation(.easeInOut), content: {
             ForEach(EnemyResultCategory.allCases, content: { category in
-                Text(category.rawValue)
+                Text(category.localized)
                     .tag(category)
             })
         })
@@ -125,12 +140,14 @@ struct EnemyChartView: View {
                     .gesture(
                         SpatialTapGesture()
                             .onEnded({ value in
-                                guard let element = findElement(location: value.location, proxy: proxy, geometry: geometry) else {
+                                guard let element: EnemyResultEntry = findElement(location: value.location, proxy: proxy, geometry: geometry) else {
                                     return
                                 }
+                                /// 同じところを選択したら何もしない
                                 if selectedElement?.scheduleId == element.scheduleId {
                                     selectedElement = nil
                                 } else {
+                                    /// 違うところを選択したら更新する
                                     self.detailResults = enemyResults.filter({ $0.scheduleId == element.scheduleId })
                                     selectedElement = element
                                 }
@@ -138,7 +155,12 @@ struct EnemyChartView: View {
                             .exclusively(
                                 before: DragGesture()
                                     .onChanged({ value in
-                                        selectedElement = findElement(location: value.location, proxy: proxy, geometry: geometry)
+                                        guard let element: EnemyResultEntry = findElement(location: value.location, proxy: proxy, geometry: geometry) else {
+                                            return
+                                        }
+                                        /// 違うところを選択したら更新する
+                                        self.detailResults = enemyResults.filter({ $0.scheduleId == element.scheduleId })
+                                        selectedElement = element
                                     }))
                     )
             })
@@ -196,16 +218,16 @@ struct EnemyChartView: View {
     private var DetailChart: some View {
         Chart(detailResults, content: { entry in
             BarMark(
-                x: .value("EnemyId", entry.enemyKey),
-                y: .value("Value", Int.random(in: 0...100))
+                x: .value("Value", entry.getDetailValue(action)),
+                y: .value("EnemyId", entry.enemyKey.localized)
             )
             .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-            //            .annotation(position: .overlay, alignment: .trailing, spacing: 5, content: {
-            //                Text(entry.getValue(action), format: .number)
-            //                    .font(.footnote)
-            //                    .foregroundColor(.white)
-            //                    .fontWeight(.bold)
-            //            })
+            .annotation(position: .overlay, alignment: .trailing, spacing: 5, content: {
+                Text(entry.getDetailValue(action), format: .number)
+                    .font(.footnote)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+            })
         })
         .chartLegend(.hidden)
         .chartXAxis(.hidden)
@@ -244,35 +266,39 @@ struct EnemyChartView: View {
 }
 
 extension EnemyResultEntry {
+    /// 累計
     func getValue(_ category: EnemyResultCategory) -> Int {
         switch category {
-        case .Shift:
-            return self.bossKillCountTotal
+        case .Player:
+            return self.bossKillTotal.solo
         case .Team:
-            return self.teamBossKillCount
+            return self.bossKillTotal.team
         }
     }
-    //
-    //    func getDetailValue(_ category: EnemyResultCategory) -> Int {
-    //        switch category {
-    //        case .Shift:
-    //            return self.bossKillCount
-    //        case .Team:
-    //            return self.teamBossKillCount
-    //        }
-    //    }
+
+    /// シフトあたり
+    func getDetailValue(_ category: EnemyResultCategory) -> Int {
+        switch category {
+        case .Player:
+            return self.bossKillCount.solo
+        case .Team:
+            return self.bossKillCount.team
+        }
+    }
 }
 
 extension Array where Element == RealmCoopSchedule {
     func enemyResults(limit: Int) -> [EnemyResultEntry] {
-        var bossCountsTotal: [Int] = EnemyKey.allCases.map({ _ in 0 })
-        var bossKillCountsTotal: [Int] = EnemyKey.allCases.map({ _ in 0 })
-        var teamBossKillCountsTotal: [Int] = EnemyKey.allCases.map({ _ in 0 })
+        /// オオモノ出現数
+        var bossTotal: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var bossKillTotal: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var bossTeamKillTotal: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
         return self.flatMap({ schedule -> [EnemyResultEntry] in
-            bossCountsTotal.add(schedule.bossCounts)
-            bossKillCountsTotal.add(schedule.bossKillCounts)
-            teamBossKillCountsTotal.add(schedule.teamBossKillCounts)
+            /// 累計オオモノ出現数
+            bossTotal.add(schedule.bossCounts)
+            bossKillTotal.add(schedule.bossKillCounts)
+            bossTeamKillTotal.add(schedule.teamBossKillCounts)
 
             guard let startTime: Date = schedule.startTime,
                   let index: Int = self.lastIndex(of: schedule)
@@ -284,16 +310,15 @@ extension Array where Element == RealmCoopSchedule {
             }
 
             /// チャートのエントリーを返す
-            return zip(EnemyKey.allCases, schedule.bossKillCounts ,bossKillCountsTotal, bossCountsTotal, teamBossKillCountsTotal).map({
-                enemyKey, solo, total, appear, team -> EnemyResultEntry in
-                EnemyResultEntry(
+            return zip(EnemyKey.allCases, bossTotal, bossKillTotal, bossTeamKillTotal).map({ enemyKey, bossCount, bossKillCount, teamBossKillCount -> EnemyResultEntry in
+                let index: Int = EnemyKey.allCases.firstIndex(of: enemyKey) ?? 0
+                return EnemyResultEntry(
                     schedule: schedule,
                     enemyKey: enemyKey,
                     scheduleId: startTime,
-                    bossCount: appear,
-                    bossKillCount: solo,
-                    bossKillCountTotal: total,
-                    teamBossKillCount: team
+                    bossCount: EnemyCount(shift: schedule.bossCounts[index], total: bossCount),
+                    bossKillCount: EnemyKillCount(solo: schedule.bossKillCounts[index], team: schedule.teamBossKillCounts[index]),
+                    bossKillTotal: EnemyKillCount(solo: bossKillCount, team: teamBossKillCount)
                 )
             })
         })
