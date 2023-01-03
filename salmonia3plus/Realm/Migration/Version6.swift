@@ -19,8 +19,7 @@ extension RealmMigration {
 
         migration.enumerateObjects(ofType: RealmCoopSchedule.className(), { oldValue, newValue in
             if let newValue: DynamicObject = newValue, let oldValue: DynamicObject = oldValue {
-                if let stageId: Int = oldValue["stageId"] as? Int,
-                   let startTime: Date = oldValue["startTime"] as? Date
+                if let startTime: Date = oldValue["startTime"] as? Date
                 {
                     if startTime >= limitTime {
                         migration.delete(newValue)

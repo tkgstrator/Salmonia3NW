@@ -18,8 +18,13 @@ class StageStats: ObservableObject {
     @Published var hitting999Counts: Int? = nil
     @Published var maxGoldenIkuraNum: Int? = nil
     @Published var maxIkuraNum: Int? = nil
+    @Published var enemyResults: [EnemyResultEntry] = []
 
-    init() {}
+    init(stageId: CoopStageId) {
+        let results = RealmService.shared.results(stageId: stageId)
+        print(stageId, results)
+        print(stageId, enemyResults)
+    }
 
     func calc(stageId: CoopStageId, results: RealmSwift.Results<RealmCoopResult>) {
         let results: RealmSwift.Results<RealmCoopResult> = results.filter("ANY link.stageId = %@", stageId)

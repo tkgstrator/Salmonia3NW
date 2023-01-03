@@ -25,6 +25,20 @@ public class RealmService: ObservableObject {
         case RESULT
     }
 
+    func schedules(mode: ModeType = .REGULAR) -> [RealmCoopSchedule] {
+        realm.objects(RealmCoopSchedule.self).sorted(byKeyPath: "startTime", ascending: true) .filter({ schedule in
+            !schedule.results.isEmpty && schedule.mode == mode
+        })
+    }
+
+    func results() -> RealmSwift.Results<RealmCoopResult> {
+        realm.objects(RealmCoopResult.self)
+    }
+
+    func results(stageId: CoopStageId) -> RealmSwift.Results<RealmCoopResult> {
+        realm.objects(RealmCoopResult.self).filter("ANY link.stageId = %@", stageId)
+    }
+
     func results(player: RealmCoopPlayer) -> RealmSwift.Results<RealmCoopSchedule> {
         realm.objects(RealmCoopSchedule.self).filter("ANY players = %@", player)
     }

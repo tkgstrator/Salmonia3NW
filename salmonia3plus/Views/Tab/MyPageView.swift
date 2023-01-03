@@ -40,6 +40,8 @@ struct MyPageView: View {
                         .frame(width: width * scale)
                     ReviewButton()
                         .frame(width: width * scale)
+                    ChartButton()
+                        .frame(width: width * scale)
                 })
                 .padding(.horizontal)
             })

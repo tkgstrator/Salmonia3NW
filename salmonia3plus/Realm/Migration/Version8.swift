@@ -15,8 +15,7 @@ extension RealmMigration {
     static func version8(_ migration: Migration) {
         /// プレイヤーのユニフォーム情報を設定
         migration.enumerateObjects(ofType: RealmCoopPlayer.className(), { oldValue, newValue in
-            if let newValue: DynamicObject = newValue,
-               let oldValue: DynamicObject = oldValue
+            if let newValue: DynamicObject = newValue
             {
                 newValue["uniform"] = 1
             }

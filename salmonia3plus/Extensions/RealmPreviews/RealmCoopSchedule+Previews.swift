@@ -13,15 +13,15 @@ import SplatNet3
 extension RealmCoopSchedule {
     static let preview: RealmCoopSchedule = {
         let schedule = RealmCoopSchedule()
-        let startTime: Date = Date(timeIntervalSince1970: 1667228400)
-        let endTime: Date = Date(timeIntervalSince1970: 1669820400)
+        let startTime: Date = Date(timeIntervalSince1970: 0)
+        let endTime: Date = Date(timeIntervalSince1970: 0)
         schedule.id = startTime.hash
-        schedule.stageId = .Shakedent
+        schedule.stageId = .Unknown
         schedule.startTime = startTime
         schedule.endTime = endTime
         schedule.rule = .REGULAR
         schedule.mode = .REGULAR
-        schedule.weaponList.append(objectsIn: WeaponId.allCases.suffix(4))
+        schedule.weaponList.append(objectsIn: [WeaponId.Random_Green, WeaponId.Random_Green, WeaponId.Random_Green, WeaponId.Random_Green])
         return schedule
     }()
 }
