@@ -70,6 +70,7 @@
 		10765BFB2961B49C008FC754 /* Signer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10765BFA2961B49C008FC754 /* Signer.swift */; };
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
+		1078FE8C29671FEF000D2427 /* Version16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1078FE8B29671FEF000D2427 /* Version16.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
 		10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */; };
@@ -186,6 +187,7 @@
 		10765BFA2961B49C008FC754 /* Signer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signer.swift; sourceTree = "<group>"; };
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
+		1078FE8B29671FEF000D2427 /* Version16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version16.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10C1AC8129525550003AFBD5 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				102BE9F42956A036007DE862 /* Version13.swift */,
 				10765BF4295F5B99008FC754 /* Version14.swift */,
 				10765BF829609B2B008FC754 /* Version15.swift */,
+				1078FE8B29671FEF000D2427 /* Version16.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
 				10E9A998296360CB00550A64 /* ChartButton.swift in Sources */,
 				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
+				1078FE8C29671FEF000D2427 /* Version16.swift in Sources */,
 				102F38D029336BF5001E1FD5 /* RealmCoopPlayer.swift in Sources */,
 				10765BCB294B6B0C008FC754 /* URLScheme.swift in Sources */,
 				10DC18B629439185009EB01C /* SettingButton.swift in Sources */,
@@ -978,7 +982,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1017,7 +1021,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_ASSET_PATHS = "\"salmonia3plus/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

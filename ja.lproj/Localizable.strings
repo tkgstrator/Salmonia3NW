@@ -13,3 +13,5 @@
 "Unacceptable extension." = "サポートしていないファイルです。";
 "Common_Player_You" = "あなた";
 "Common_Player_Team" = "チーム";
+"Common_Format_Number" = "討伐数";
+"Common_Format_Ratio" = "討伐率";

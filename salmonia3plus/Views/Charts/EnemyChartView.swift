@@ -11,12 +11,24 @@ import Charts
 import SplatNet3
 import RealmSwift
 
-enum EnemyResultCategory: String, CaseIterable, Identifiable {
+enum PlayerCategory: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     /// 個人記録
     case Player     = "Common_Player_You"
     /// チーム記録
     case Team       = "Common_Player_Team"
+
+    var localized: String {
+        NSLocalizedString(self.rawValue, bundle: .main, comment: "")
+    }
+}
+
+enum FormatCategory: String, CaseIterable, Identifiable {
+    var id: String { rawValue }
+    /// 割合
+    case Ratio      = "Common_Format_Ratio"
+    /// 数
+    case Number     = "Common_Format_Number"
 
     var localized: String {
         NSLocalizedString(self.rawValue, bundle: .main, comment: "")
@@ -41,7 +53,7 @@ struct EnemyKillCount: Identifiable {
 
 struct EnemyResultEntry: Identifiable {
     /// ID
-    var id: Date { scheduleId }
+    var id: UUID = UUID()
     /// スケジュール
     let schedule: RealmCoopSchedule
     /// オオモノID
@@ -54,6 +66,16 @@ struct EnemyResultEntry: Identifiable {
     let bossKillCount: EnemyKillCount
     /// オオモノ累計討伐数
     let bossKillTotal: EnemyKillCount
+}
+
+struct EnemyToggle: Equatable {
+    let enemyKey: EnemyKey
+    var isPresented: Bool
+
+    internal init(enemyKey: EnemyKey, isPresented: Bool) {
+        self.enemyKey = enemyKey
+        self.isPresented = isPresented
+    }
 }
 
 @available(iOS 16.0, *)
@@ -75,22 +97,26 @@ struct EmptySymbol: ChartSymbolShape {
 }
 
 struct EnemyChartView: View {
-    @State private var selectedElement: EnemyResultEntry? = nil
+    @State private var location: CGPoint? = nil
+    @State private var length: Int = 10
     @State private var enemyResults: [EnemyResultEntry] = []
-    @State private var detailResults: [EnemyResultEntry] = []
-    @State private var action: EnemyResultCategory = .Player
+    @State private var element: EnemyResultEntry? = nil
+    @State private var scale: CGFloat = 1
+    @State private var enemies: [EnemyToggle] = EnemyKey.allCases.map({ EnemyToggle(enemyKey: $0, isPresented: true) })
 
     var body: some View {
         if #available(iOS 16.0, *) {
             ScrollView(showsIndicators: false, content: {
-                Schedule
-                TypePicker
+//                Schedule
+//                TypePicker
+//                FormatPicker
                 EnemyChart
-                DetailChart
+                EnemyList
+//                DetailChart
             })
             .listStyle(.plain)
             .onAppear(perform: {
-                self.enemyResults = getEnemyResults(limit: 5)
+                self.enemyResults = getEnemyResults(limit: length)
             })
         } else {
             EmptyView()
@@ -101,188 +127,389 @@ struct EnemyChartView: View {
         RealmService.shared.schedules(mode: .REGULAR).enemyResults(limit: limit)
     }
 
-    @available(iOS 16.0, *)
-    private var Schedule: some View {
-        let schedule: RealmCoopSchedule = selectedElement?.schedule ?? RealmCoopSchedule.preview
-        return ScheduleElement(schedule: schedule).asAnyView()
-    }
+//    @available(iOS 16.0, *)
+//    private var Schedule: some View {
+//        let schedule: RealmCoopSchedule = selectedElement?.schedule ?? RealmCoopSchedule.preview
+//        return ScheduleElement(schedule: schedule).asAnyView()
+//    }
+
+//    @available(iOS 16.0, *)
+//    private var LengthStepper: some View {
+//        Stepper(value: $length, in: 5...100, step: 5, label: {
+//            Text(length, format: .number)
+//        })
+//    }
+//
+//    @available(iOS 16.0, *)
+//    private var LengthPicker: some View {
+//        HStack(content: {
+//            Text("履歴")
+//            Spacer()
+//            Picker("Type", selection: $length.animation(.easeInOut), content: {
+//                ForEach([5, 25, 50, 100], id: \.self, content: { length in
+//                    Text(length, format: .number)
+//                        .tag(length)
+//                })
+//            })
+//            .pickerStyle(.menu)
+//        })
+//        .onChange(of: length, perform: { value in
+//            UIApplication.shared.startAnimating(completion: {
+//                self.enemyResults = getEnemyResults(limit: length)
+//            })
+//        })
+//    }
+
+//    @available(iOS 16.0, *)
+//    private var TypePicker: some View {
+//        Picker("Type", selection: $action.animation(.easeInOut), content: {
+//            ForEach(PlayerCategory.allCases, content: { category in
+//                Text(category.localized)
+//                    .tag(category)
+//            })
+//        })
+//        .pickerStyle(.segmented)
+//    }
+//
+//    @available(iOS 16.0, *)
+//    private var FormatPicker: some View {
+//        Picker("Type", selection: $format.animation(.easeInOut), content: {
+//            ForEach(FormatCategory.allCases, content: { category in
+//                Text(category.localized)
+//                    .tag(category)
+//            })
+//        })
+//        .pickerStyle(.segmented)
+//    }
 
     @available(iOS 16.0, *)
-    private var TypePicker: some View {
-        Picker("Type", selection: $action.animation(.easeInOut), content: {
-            ForEach(EnemyResultCategory.allCases, content: { category in
-                Text(category.localized)
-                    .tag(category)
+    private var EnemyList: some View {
+        let entries: [EnemyResultEntry] = {
+            if let element = element {
+                return enemyResults.filter({ $0.scheduleId == element.scheduleId })
+            }
+            return []
+        }()
+
+        return LazyVGrid(columns: Array(repeating: .init(.flexible(), alignment: .leading), count: 3), alignment: .leading, content: {
+            ForEach(entries, content: { entry in
+                let index: Int = enemies.firstIndex(where: { $0.enemyKey == entry.enemyKey }) ?? 0
+                Button(action: {
+                    withAnimation(.easeInOut) {
+                        enemies[index].isPresented.toggle()
+                    }
+                }, label: {
+                    Label(title: {
+                        GeometryReader(content: { geometry in
+                            ZStack(alignment: .leading, content: {
+                                RoundedRectangle(cornerRadius: 6)
+                                    .fill(Color.primary.opacity(0.3))
+                                RoundedRectangle(cornerRadius: 6)
+                                    .fill(SPColor.SplatNet3.SPBlue)
+                                Text(entry.bossKillCount.solo, format: .number)
+                                    .font(.footnote)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal, 4)
+                            })
+                        })
+                    }, icon: {
+                        Image(entry.enemyKey)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 32)
+                    })
+                })
+                .buttonStyle(.plain)
+                .grayscale(enemies[index].isPresented ? 0.0 : 1.0)
             })
         })
-        .pickerStyle(.segmented)
     }
 
     @available(iOS 16.0, *)
     private var EnemyChart: some View {
-        Chart(enemyResults, content: { entry in
-            LineMark(
-                x: .value("Schedule", entry.scheduleId),
-                y: .value("Value", entry.getValue(action))
-            )
-            .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-            .accessibilityLabel(entry.scheduleId.formatted(date: .complete, time: .omitted))
-            .lineStyle(StrokeStyle(lineWidth: 2.0))
-            .foregroundStyle(Color.blue.gradient)
-            .interpolationMethod(.cardinal)
-            .symbol(by: .value("Symbol", entry.enemyKey))
-            .symbolSize(60)
+        let enemies: [EnemyKey] = enemies.filter({ $0.isPresented }).map({ $0.enemyKey })
+        let results: [EnemyResultEntry] = enemyResults.filter({ enemies.contains($0.enemyKey) })
+        let yMax: Int = results.map({ $0.bossCount.total }).max() ?? 0
+        let yMin: Int = results.map({ $0.bossCount.total }).min() ?? 0
+
+        return Chart(enemyResults, content: { entry in
+            if enemies.contains(entry.enemyKey) {
+                LineMark(
+                    x: .value("Schedule", entry.scheduleId),
+                    y: .value("Value", entry.bossCount.total)
+                )
+                .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
+                .lineStyle(StrokeStyle(lineWidth: 2.0))
+                .interpolationMethod(.cardinal)
+                .symbol(symbol: {
+                    Image(entry.enemyKey)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                })
+            }
         })
+        .chartYScale(domain: yMin ... yMax)
         .chartLegend(.hidden)
-        .chartOverlay(content: { proxy in
+        .chartForegroundStyleScale([
+            EnemyKey.SakelienBomber: SPColor.SplatNet3.SPBlue,
+            EnemyKey.SakelienCupTwins: SPColor.SplatNet3.SPCoop,
+            EnemyKey.SakelienShield: SPColor.SplatNet3.SPGreen,
+            EnemyKey.SakelienSnake: SPColor.SplatNet3.SPXMatch,
+            EnemyKey.SakelienTower: SPColor.SplatNet3.SPGesotown,
+            EnemyKey.Sakediver: SPColor.SplatNet3.SPBankara,
+            EnemyKey.Sakerocket: SPColor.SplatNet3.SPPink,
+            EnemyKey.SakePillar: SPColor.SplatNet3.SPSalmonOrangeDarker,
+            EnemyKey.SakeDolphin: SPColor.SplatNet3.SPOrange,
+            EnemyKey.SakeArtillery: SPColor.SplatNet3.SPSalmonGreen,
+            EnemyKey.SakeSaucer: SPColor.SplatNet3.SPRed,
+            EnemyKey.SakelienGolden: SPColor.SplatNet3.SPYellow,
+            EnemyKey.Sakedozer: SPColor.SplatNet3.SPLeague,
+            EnemyKey.SakeBigMouth: SPColor.SplatNet3.SPPrivate,
+            EnemyKey.SakelienGiant: .primary,
+        ])
+        .chartOverlayWithGesture(location: $location, scale: $scale, parameters: { x, y in
+            self.element = enemyResults.nearlest(x)
+        })
+        .chartBackgroundWithGesture(content: { proxy, geometry in
+            if let element: EnemyResultEntry = element,
+               let interval: DateInterval = Calendar.current.dateInterval(of: .hour, for: element.scheduleId),
+               let xValue: CGFloat = proxy.position(forX: interval.start) ?? 0
+            {
+                let height: CGFloat = geometry[proxy.plotAreaFrame].maxY
+
+                let entries: [EnemyResultEntry] = enemyResults.filter({ $0.scheduleId == element.scheduleId })
+                Rectangle()
+                    .fill(.red)
+                    .frame(width: 2, height: height)
+                    .position(x: xValue, y: height * 0.5)
+            }
+        })
+        .frame(height: 300)
+        .padding([.leading, .top])
+    }
+
+//    func findElement(_ axis: Axis, location: CGPoint) -> EnemyResultEntry? {
+//    }
+//    @available(iOS 16.0, *)
+//    private var DetailChart: some View {
+//        Chart(detailResults, content: { entry in
+//            let value: Double = entry.getDetailValue(action, format)
+//            if value != .zero {
+//                BarMark(
+//                    x: .value("Value", value),
+//                    y: .value("EnemyId", entry.enemyKey.localized)
+//                )
+//                .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
+//                .annotation(position: .overlay, alignment: .trailing, spacing: nil, content: {
+//                    let Annotation: Text = {
+//                        switch format {
+//                        case .Ratio:
+//                            return Text(Double(action == .Player ? entry.bossKillCount.solo : entry.bossKillCount.team) / Double(entry.bossCount.shift), format: .percent)
+//                        case .Number:
+//                            return Text(value, format: .number)
+//                        }
+//                    }()
+//                    Annotation
+//                        .font(.footnote)
+//                        .foregroundColor(.white)
+//                        .fontWeight(.bold)
+//                })
+//                .annotation(position: .trailing, alignment: .trailing, spacing: nil, content: {
+//                    let Annotation: Text = {
+//                        switch format {
+//                        case .Ratio:
+//                            switch action {
+//                            case .Player:
+//                                return Text(entry.bossKillCount.solo, format: .number)
+//                            case .Team:
+//                                return Text(entry.bossKillCount.team, format: .number)
+//                            }
+//                        case .Number:
+//                            return Text(Double(action == .Player ? entry.bossKillCount.solo : entry.bossKillCount.team) / Double(entry.bossCount.shift), format: .percent)
+//                        }
+//                    }()
+//                    Annotation
+//                        .font(.footnote)
+//                        .foregroundColor(.white)
+//                        .fontWeight(.bold)
+//                })
+//            }
+//        })
+//        .chartLegend(.hidden)
+//        .chartXAxis(.hidden)
+//        .chartOverlay(content: { proxy in
+//            GeometryReader(content: { geometry in
+//                Rectangle().fill(.clear).contentShape(Rectangle())
+//                    .gesture(SpatialTapGesture().onEnded({ value in
+//                        guard let element: EnemyResultEntry = findYElement(location: value.location, proxy: proxy, geometry: geometry) else {
+//                            return
+//                        }
+//                        print(element.enemyKey)
+//                    }))
+//            })
+//        })
+//        .frame(height: CGFloat(detailResults.filter({ $0.bossCount.shift != 0 }).count * 40))
+//    }
+
+//    @available(iOS 16.0, *)
+//    private func findYElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> EnemyResultEntry? {
+//        let relativeYPosition: CGFloat = location.y - geometry[proxy.plotAreaFrame].origin.y
+//        if let date: Date = proxy.value(atY: relativeYPosition) as Date? {
+//            var minDistance: TimeInterval = .infinity
+//            var index: Int? = nil
+//            for currentIndex in enemyResults.indices {
+//                let distance = enemyResults[currentIndex].scheduleId.distance(to: date)
+//                if abs(distance) < minDistance {
+//                    minDistance = abs(distance)
+//                    index = currentIndex
+//                }
+//            }
+//
+//            if let index {
+//                return enemyResults[index]
+//            }
+//        }
+//        return nil
+//    }
+
+//    @available(iOS 16.0, *)
+//    private func findXElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> EnemyResultEntry? {
+//        let relativeXPosition: CGFloat = location.x - geometry[proxy.plotAreaFrame].origin.x
+//        if let date: Date = proxy.value(atX: relativeXPosition) as Date? {
+//            var minDistance: TimeInterval = .infinity
+//            var index: Int? = nil
+//            for currentIndex in enemyResults.indices {
+//                let distance = enemyResults[currentIndex].scheduleId.distance(to: date)
+//                if abs(distance) < minDistance {
+//                    minDistance = abs(distance)
+//                    index = currentIndex
+//                }
+//            }
+//
+//            if let index {
+//                return enemyResults[index]
+//            }
+//        }
+//        return nil
+//    }
+}
+
+@available(iOS 16.0, *)
+extension View {
+    /// チャートのタップしたところの座標を返す
+    func chartOverlayWithGesture<H: Plottable, V: Plottable>(
+        location: Binding<CGPoint?>,
+        scale: Binding<CGFloat> = .constant(1.0),
+        horizontal: H.Type = Date.self,
+        vertical: V.Type = Double.self,
+        parameters: @escaping ((H, V) -> Void)
+    ) -> some View {
+        self.chartOverlay(content: { proxy in
             GeometryReader(content: { geometry in
                 Rectangle().fill(.clear).contentShape(Rectangle())
-                    .gesture(
-                        SpatialTapGesture()
-                            .onEnded({ value in
-                                guard let element: EnemyResultEntry = findElement(location: value.location, proxy: proxy, geometry: geometry) else {
-                                    return
-                                }
-                                /// 同じところを選択したら何もしない
-                                if selectedElement?.scheduleId == element.scheduleId {
-                                    selectedElement = nil
-                                } else {
-                                    /// 違うところを選択したら更新する
-                                    self.detailResults = enemyResults.filter({ $0.scheduleId == element.scheduleId })
-                                    selectedElement = element
-                                }
-                            })
+//                    .gesture(MagnificationGesture()
+//                        .onChanged({ value in
+//                            scale.wrappedValue = max(1.0, min(5.0, value.magnitude))
+//                        }))
+                    .gesture(SpatialTapGesture()
+                        .onEnded({ value in
+                            let origin: CGPoint = geometry[proxy.plotAreaFrame].origin
+                            let value: CGPoint = CGPoint(
+                                x: value.location.x - origin.x,
+                                y: value.location.y - origin.y
+                            )
+                            location.wrappedValue = value
+                            if let xValue: H = proxy.value(atX: value.x),
+                               let yValue: V = proxy.value(atY: value.y)
+                            {
+                                parameters(xValue, yValue)
+                            }
+                        })
                             .exclusively(
                                 before: DragGesture()
                                     .onChanged({ value in
-                                        guard let element: EnemyResultEntry = findElement(location: value.location, proxy: proxy, geometry: geometry) else {
-                                            return
+                                        let origin: CGPoint = geometry[proxy.plotAreaFrame].origin
+                                        let value: CGPoint = CGPoint(
+                                            x: value.location.x - origin.x,
+                                            y: value.location.y - origin.y
+                                        )
+                                        location.wrappedValue = value
+                                        if let xValue: H = proxy.value(atX: value.x),
+                                           let yValue: V = proxy.value(atY: value.y)
+                                        {
+                                            parameters(xValue, yValue)
                                         }
-                                        /// 違うところを選択したら更新する
-                                        self.detailResults = enemyResults.filter({ $0.scheduleId == element.scheduleId })
-                                        selectedElement = element
                                     }))
                     )
             })
         })
-        .chartBackground(content: { proxy in
-            ZStack(alignment: .topLeading, content: {
+    }
+
+    func chartBackgroundWithGesture<Content: View>(
+        @ViewBuilder content: @escaping ((ChartProxy, GeometryProxy) -> Content)
+    ) -> some View {
+        self.chartBackground(content: { proxy in
+            ZStack(content: {
                 GeometryReader(content: { geometry in
-                    if let element = selectedElement,
-                       let dateInterval: DateInterval = Calendar.current.dateInterval(of: .hour, for: element.scheduleId),
-                       let startPosition = proxy.position(forX: dateInterval.start)
-                    {
-
-                        let lineX = startPosition + geometry[proxy.plotAreaFrame].origin.x
-                        let lineHeight = geometry[proxy.plotAreaFrame].maxY
-                        let boxWidth: CGFloat = 100
-                        let boxOffset = max(0, min(geometry.size.width - boxWidth, lineX - boxWidth * 0.5))
-
-                        Rectangle()
-                            .fill(.red)
-                            .frame(width: 2, height: lineHeight)
-                            .position(x: lineX, y: lineHeight * 0.5)
-
-                        VStack(alignment: .center) {
-                            Text(element.scheduleId, format: .dateTime.month().day())
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
-                            //                            LazyVGrid(columns: Array(repeating: .init(.fixed(60)), count: 5), content: {
-                            //                                ForEach(Array(zip(EnemyId.allCases, element.)), id: \.0, content: { (enemyId, value) in
-                            //                                    Image(enemyId)
-                            //                                })
-                            //                            })
-                        }
-                        .accessibilityElement(children: .combine)
-                        .frame(width: boxWidth, alignment: .center)
-                        .background(content: {
-                            ZStack(content: {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.background)
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(.primary.opacity(0.2))
-                            })
-                            .padding(.horizontal, -8)
-                            .padding(.vertical, -4)
-                        })
-                        .offset(x: boxOffset)
-                    }
+                    content(proxy, geometry)
                 })
             })
         })
-        .frame(height: 300)
-        //        .frame(width: max(UIScreen.main.bounds.width, CGFloat(enemyResults.count / EnemyKey.allCases.count) * 50), height: 300)
     }
+}
 
-    @available(iOS 16.0, *)
-    private var DetailChart: some View {
-        Chart(detailResults, content: { entry in
-            BarMark(
-                x: .value("Value", entry.getDetailValue(action)),
-                y: .value("EnemyId", entry.enemyKey.localized)
-            )
-            .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-            .annotation(position: .overlay, alignment: .trailing, spacing: 5, content: {
-                Text(entry.getDetailValue(action), format: .number)
-                    .font(.footnote)
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-            })
-        })
-        .chartLegend(.hidden)
-        .chartXAxis(.hidden)
-        .frame(height: 300)
-    }
-
-    //    @available(iOS 16.0, *)
-    //    private func setEnemyChartEntry() {
-    //        guard let scheduleId: Date = selectedElement?.scheduleId else {
-    //            self.detailResults = []
-    //            return
-    //        }
-    //        self.detailResults = enemyResults.filter({ Calendar.current.isDate($0.scheduleId, inSameDayAs: scheduleId)})
-    //    }
-
-    @available(iOS 16.0, *)
-    private func findElement(location: CGPoint, proxy: ChartProxy, geometry: GeometryProxy) -> EnemyResultEntry? {
-        let relativeXPosition: CGFloat = location.x - geometry[proxy.plotAreaFrame].origin.x
-        if let date: Date = proxy.value(atX: relativeXPosition) as Date? {
-            var minDistance: TimeInterval = .infinity
-            var index: Int? = nil
-            for currentIndex in enemyResults.indices {
-                let distance = enemyResults[currentIndex].scheduleId.distance(to: date)
-                if abs(distance) < minDistance {
-                    minDistance = abs(distance)
-                    index = currentIndex
-                }
-            }
-
-            if let index {
-                return enemyResults[index]
-            }
+extension Array where Element == EnemyResultEntry {
+    func nearlest(_ date: Date) -> Element? {
+        /// スケジュールIDのセットを取得
+        let scheduleIds: Set<Date> = Set(self.map({ $0.scheduleId }))
+        /// 距離が最も小さい最初のエレメントを選択
+        guard let scheduleId: Date = scheduleIds.sorted(by: { abs($0.distance(to: date)) < abs($1.distance(to: date)) }).first,
+              let entry: Element = self.first(where: { $0.scheduleId == scheduleId })
+        else {
+            return nil
         }
-        return nil
+        return entry
     }
 }
 
 extension EnemyResultEntry {
+//    func bossKillRatio(_ category: PlayerCategory) -> CGFloat {
+//        switch category {
+//        case .Player:
+//            return
+//        case .Team:
+//            <#code#>
+//        }
+//    }
+
     /// 累計
-    func getValue(_ category: EnemyResultCategory) -> Int {
-        switch category {
-        case .Player:
-            return self.bossKillTotal.solo
-        case .Team:
-            return self.bossKillTotal.team
+    func getValue(_ category: PlayerCategory, _ format: FormatCategory) -> Double {
+        switch (category, format) {
+        case (.Player, .Number):
+            return Double(self.bossKillTotal.solo)
+        case (.Player, .Ratio):
+            return Double(self.bossKillTotal.solo) / Double(self.bossCount.total) * 100
+        case (.Team, .Number):
+            return Double(self.bossKillTotal.team)
+        case (.Team, .Ratio):
+            return Double(self.bossKillTotal.team) / Double(self.bossCount.total) * 100
         }
     }
 
     /// シフトあたり
-    func getDetailValue(_ category: EnemyResultCategory) -> Int {
-        switch category {
-        case .Player:
-            return self.bossKillCount.solo
-        case .Team:
-            return self.bossKillCount.team
+    func getDetailValue(_ category: PlayerCategory, _ format: FormatCategory) -> Double {
+        switch (category, format) {
+        case (.Player, .Number):
+            return Double(self.bossKillCount.solo)
+        case (.Player, .Ratio):
+            return Double(self.bossKillCount.solo)
+//            return Double(self.bossKillCount.solo) / Double(self.bossCount.total) * 100
+        case (.Team, .Number):
+            return Double(self.bossKillCount.team)
+        case (.Team, .Ratio):
+            return Double(self.bossKillCount.team)
+//            return Double(self.bossKillCount.team) / Double(self.bossCount.total) * 100
         }
     }
 }
@@ -347,6 +574,12 @@ extension RealmCoopSchedule {
             }()
             return bossKillCounts
         }).sum()
+    }
+}
+
+extension GeometryProxy {
+    var center: CGPoint {
+        CGPoint(x: self.frame(in: .local).midX, y: self.frame(in: .local).midY)
     }
 }
 

@@ -51,8 +51,9 @@ public class RealmService: ObservableObject {
                 realm.deleteAll()
             case .RESULT:
                 realm.delete(realm.objects(RealmCoopResult.self))
+                realm.delete(realm.objects(RealmCoopPlayer.self))
             case .SCHEDULE:
-                realm.delete(realm.objects(RealmCoopSchedule.self).filter("startTime!=nil"))
+                realm.delete(realm.objects(RealmCoopSchedule.self))
             }
         }
         try? realm.commitWrite()

@@ -12,7 +12,7 @@ import SplatNet3
 
 enum RealmMigration {
     static let configuration: Realm.Configuration = Realm.Configuration(
-        schemaVersion: 16,
+        schemaVersion: 17,
         migrationBlock: RealmMigration.migrationBlock(),
         deleteRealmIfMigrationNeeded: false
 //        shouldCompactOnLaunch: { totalBytes, usedBytes in
@@ -52,6 +52,9 @@ enum RealmMigration {
             }
             if schemaVersion <= 15 {
                 version15(migration)
+            }
+            if schemaVersion <= 16 {
+                version16(migration)
             }
         }
     }
