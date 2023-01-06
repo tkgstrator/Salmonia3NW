@@ -71,6 +71,13 @@
 		1077DD8A293CB6F200786CD0 /* InAppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD89293CB6F200786CD0 /* InAppButton.swift */; };
 		1077DD8D293CB93A00786CD0 /* SPCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1077DD8C293CB93A00786CD0 /* SPCircle.swift */; };
 		1078FE8C29671FEF000D2427 /* Version16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1078FE8B29671FEF000D2427 /* Version16.swift */; };
+		1078FE91296738EA000D2427 /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1078FE90296738EA000D2427 /* Benchmark.swift */; };
+		10A9A10929687B350041E116 /* RealmSwift+List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A10829687B350041E116 /* RealmSwift+List.swift */; };
+		10A9A10B29687B870041E116 /* Charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A10A29687B870041E116 /* Charts.swift */; };
+		10A9A10E29687BE10041E116 /* EnemyResultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A10D29687BE10041E116 /* EnemyResultEntry.swift */; };
+		10A9A11029687C1D0041E116 /* GeometryProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A10F29687C1D0041E116 /* GeometryProxy.swift */; };
+		10A9A11229687C570041E116 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A11129687C570041E116 /* Date.swift */; };
+		10A9A11429687E8F0041E116 /* Version17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A11329687E8F0041E116 /* Version17.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
 		10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */; };
@@ -188,6 +195,13 @@
 		1077DD89293CB6F200786CD0 /* InAppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButton.swift; sourceTree = "<group>"; };
 		1077DD8C293CB93A00786CD0 /* SPCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCircle.swift; sourceTree = "<group>"; };
 		1078FE8B29671FEF000D2427 /* Version16.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version16.swift; sourceTree = "<group>"; };
+		1078FE90296738EA000D2427 /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
+		10A9A10829687B350041E116 /* RealmSwift+List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmSwift+List.swift"; sourceTree = "<group>"; };
+		10A9A10A29687B870041E116 /* Charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Charts.swift; sourceTree = "<group>"; };
+		10A9A10D29687BE10041E116 /* EnemyResultEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyResultEntry.swift; sourceTree = "<group>"; };
+		10A9A10F29687C1D0041E116 /* GeometryProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryProxy.swift; sourceTree = "<group>"; };
+		10A9A11129687C570041E116 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		10A9A11329687E8F0041E116 /* Version17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version17.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10C1AC8129525550003AFBD5 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -276,6 +290,10 @@
 				10C1AC8B2954ADD8003AFBD5 /* CustomActivityViewController.swift */,
 				10765BF6295F8106008FC754 /* CoopResult.swift */,
 				10765BFA2961B49C008FC754 /* Signer.swift */,
+				10A9A10829687B350041E116 /* RealmSwift+List.swift */,
+				10A9A10A29687B870041E116 /* Charts.swift */,
+				10A9A10F29687C1D0041E116 /* GeometryProxy.swift */,
+				10A9A11129687C570041E116 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -386,6 +404,7 @@
 		104BAAF1292CBAFF00739B2C /* salmonia3plus */ = {
 			isa = PBXGroup;
 			children = (
+				10A9A10C29687BCE0041E116 /* Charts */,
 				104BAB1C292CBC9B00739B2C /* Info.plist */,
 				10765BD8294C7982008FC754 /* Network */,
 				10765BC2294B4593008FC754 /* Service */,
@@ -402,6 +421,7 @@
 				104BAAF6292CBB0000739B2C /* Assets.xcassets */,
 				104BAAF8292CBB0000739B2C /* Preview Content */,
 				10C1AC8129525550003AFBD5 /* Secrets.swift */,
+				1078FE90296738EA000D2427 /* Benchmark.swift */,
 			);
 			path = salmonia3plus;
 			sourceTree = "<group>";
@@ -514,6 +534,14 @@
 			path = Shape;
 			sourceTree = "<group>";
 		};
+		10A9A10C29687BCE0041E116 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				10A9A10D29687BE10041E116 /* EnemyResultEntry.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
 		10DC18982943669B009EB01C /* Link */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +594,7 @@
 				10765BF4295F5B99008FC754 /* Version14.swift */,
 				10765BF829609B2B008FC754 /* Version15.swift */,
 				1078FE8B29671FEF000D2427 /* Version16.swift */,
+				10A9A11329687E8F0041E116 /* Version17.swift */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -744,8 +773,10 @@
 			files = (
 				10765BC6294B4DE3008FC754 /* UserButton.swift in Sources */,
 				10765BC1294B1912008FC754 /* LayoutType.swift in Sources */,
+				10A9A11429687E8F0041E116 /* Version17.swift in Sources */,
 				10765BF7295F8106008FC754 /* CoopResult.swift in Sources */,
 				104BAAF5292CBAFF00739B2C /* ContentView.swift in Sources */,
+				10A9A10B29687B870041E116 /* Charts.swift in Sources */,
 				10DC18B0294373A3009EB01C /* GamingToggle.swift in Sources */,
 				10E9A998296360CB00550A64 /* ChartButton.swift in Sources */,
 				10DC18A62943711C009EB01C /* VersionLabel.swift in Sources */,
@@ -768,6 +799,7 @@
 				102BE9F52956A036007DE862 /* Version13.swift in Sources */,
 				10DC18C22944A6CB009EB01C /* CreditLink.swift in Sources */,
 				10E9A9962963408F00550A64 /* EnemyChartView.swift in Sources */,
+				10A9A11029687C1D0041E116 /* GeometryProxy.swift in Sources */,
 				10765BB9294A0D48008FC754 /* StageHeader.swift in Sources */,
 				105B54B62940C91A00597A2D /* Version7.swift in Sources */,
 				10C1AC8C2954ADD8003AFBD5 /* CustomActivityViewController.swift in Sources */,
@@ -777,6 +809,7 @@
 				10DC189A294366AE009EB01C /* MenuButton.swift in Sources */,
 				104BAAF3292CBAFF00739B2C /* mainApp.swift in Sources */,
 				10DC18AE29437330009EB01C /* ThemeToggle.swift in Sources */,
+				10A9A10E29687BE10041E116 /* EnemyResultEntry.swift in Sources */,
 				10DC18A229436EAB009EB01C /* FAQLink.swift in Sources */,
 				10765BDA294C798D008FC754 /* Discord.swift in Sources */,
 				10DC18B429438220009EB01C /* FormatType.swift in Sources */,
@@ -787,6 +820,7 @@
 				10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */,
 				105B54BA2940D08700597A2D /* LogButton.swift in Sources */,
 				10765BBF294AA9B6008FC754 /* LogDeleteButton.swift in Sources */,
+				10A9A10929687B350041E116 /* RealmSwift+List.swift in Sources */,
 				10F039A5293B4A9B00BAD41C /* EnvironmentValues.swift in Sources */,
 				105B54BF2940FBC200597A2D /* ResultView.swift in Sources */,
 				10DC18B82943B471009EB01C /* CreditView.swift in Sources */,
@@ -801,6 +835,7 @@
 				10E9B400293A5B0400779CB6 /* SP3Session+Request.swift in Sources */,
 				10DC18A029436E8B009EB01C /* SourceLink.swift in Sources */,
 				10F039AA293B9A2F00BAD41C /* Version8.swift in Sources */,
+				10A9A11229687C570041E116 /* Date.swift in Sources */,
 				102F38D229336BF5001E1FD5 /* RealmCoopResult.swift in Sources */,
 				102F38CF29336BF5001E1FD5 /* RealmCoopWave.swift in Sources */,
 				10765BD4294C293E008FC754 /* ScheduleStats.swift in Sources */,
@@ -816,6 +851,7 @@
 				10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */,
 				10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */,
 				10765BF929609B2B008FC754 /* Version15.swift in Sources */,
+				1078FE91296738EA000D2427 /* Benchmark.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,
 				102F38BD2933570F001E1FD5 /* SFSymbols.swift in Sources */,
 				10D69C7D293BAC120098CC64 /* ScheduleButton.swift in Sources */,
@@ -893,7 +929,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

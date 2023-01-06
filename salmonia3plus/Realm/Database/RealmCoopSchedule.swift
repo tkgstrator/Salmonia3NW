@@ -20,6 +20,9 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
     @Persisted var rareWeapon: WeaponId?
     @Persisted var rule: RuleType
     @Persisted var mode: ModeType
+    @Persisted var bossCounts: List<Int> = List<Int>(contentsOf: Array(repeating: 0, count: 15))
+    @Persisted var bossKillCounts: List<Int> = List<Int>(contentsOf: Array(repeating: 0, count: 15))
+    @Persisted var bossTeamCounts: List<Int> = List<Int>(contentsOf: Array(repeating: 0, count: 15))
 
     override init() {
         super.init()
