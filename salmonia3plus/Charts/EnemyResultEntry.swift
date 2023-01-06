@@ -24,4 +24,12 @@ struct EnemyResultEntry: Identifiable {
     let bossKillCount: EnemyKillCount
     /// オオモノ累計討伐数
     let bossKillTotal: EnemyKillCount
+
+    var bossKillRatio: Decimal {
+        if bossCount.shift == .zero {
+            return .zero
+        }
+        let stringValue: String = String(format: "%.3f", Double(bossKillCount.solo) / Double(bossCount.shift))
+        return Decimal(string: stringValue) ?? .zero
+    }
 }

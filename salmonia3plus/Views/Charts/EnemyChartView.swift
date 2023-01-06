@@ -17,15 +17,16 @@ struct EnemyChartView: View {
     @State private var enemyResults: [EnemyResultEntry] = []
     @State private var element: EnemyResultEntry? = nil
     @State private var scale: CGFloat = 1
-    @State private var enemies: [EnemyToggle] = EnemyKey.allCases.map({ EnemyToggle(enemyKey: $0, isPresented: true) })
+    @State private var enemies: [EnemyToggle] = EnemyKey.allCases.map({ EnemyToggle(enemyKey: $0, isPresented: false) })
+    @State private var format: FormatCategory = .Number
 
     var body: some View {
         if #available(iOS 16.0, *) {
             ScrollView(showsIndicators: false, content: {
 //                Schedule
 //                TypePicker
-//                FormatPicker
                 EnemyChart
+                FormatPicker
                 EnemyList
 //                DetailChart
             })
@@ -44,7 +45,7 @@ struct EnemyChartView: View {
         }
     }
 
-    private func getEnemyResults(limit: Int = 10) -> [EnemyResultEntry] {
+    private func getEnemyResults(limit: Int = 100) -> [EnemyResultEntry] {
         RealmService.shared.schedules(mode: .REGULAR).enemyResults(limit: limit)
     }
 
@@ -92,22 +93,25 @@ struct EnemyChartView: View {
 //        .pickerStyle(.segmented)
 //    }
 //
-//    @available(iOS 16.0, *)
-//    private var FormatPicker: some View {
-//        Picker("Type", selection: $format.animation(.easeInOut), content: {
-//            ForEach(FormatCategory.allCases, content: { category in
-//                Text(category.localized)
-//                    .tag(category)
-//            })
-//        })
-//        .pickerStyle(.segmented)
-//    }
+    @available(iOS 16.0, *)
+    private var FormatPicker: some View {
+        Picker("Type", selection: $format.animation(.easeInOut), content: {
+            ForEach(FormatCategory.allCases, content: { category in
+                Text(category.localized)
+                    .tag(category)
+            })
+        })
+        .pickerStyle(.segmented)
+    }
 
     @available(iOS 16.0, *)
     private var EnemyList: some View {
         let entries: [EnemyResultEntry] = {
             if let element = element {
                 return enemyResults.filter({ $0.scheduleId == element.scheduleId })
+            }
+            if let scheduleId: Date = enemyResults.sorted(by: { $0.scheduleId < $1.scheduleId }).first?.scheduleId {
+                return enemyResults.filter({ $0.scheduleId == scheduleId })
             }
             return []
         }()
@@ -122,15 +126,27 @@ struct EnemyChartView: View {
                 }, label: {
                     Label(title: {
                         GeometryReader(content: { geometry in
-                            ZStack(alignment: .leading, content: {
+                            ZStack(alignment: .trailing, content: {
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(Color.primary.opacity(0.3))
                                 RoundedRectangle(cornerRadius: 6)
                                     .fill(SPColor.SplatNet3.SPBlue)
-                                Text(entry.bossKillCount.solo, format: .number)
-                                    .font(.footnote)
-                                    .fontWeight(.bold)
-                                    .padding(.horizontal, 4)
+                                switch format {
+                                case .Ratio:
+                                    Text(entry.bossKillRatio, format: .percent)
+                                        .foregroundColor(.white)
+                                        .font(.footnote)
+                                        .monospacedDigit()
+                                        .fontWeight(.bold)
+                                        .padding(.horizontal, 4)
+                                case .Number:
+                                    Text(entry.bossKillTotal.solo, format: .number)
+                                        .foregroundColor(.white)
+                                        .font(.footnote)
+                                        .monospacedDigit()
+                                        .fontWeight(.bold)
+                                        .padding(.horizontal, 4)
+                                }
                             })
                         })
                     }, icon: {
@@ -144,34 +160,48 @@ struct EnemyChartView: View {
                 .grayscale(enemies[index].isPresented ? 0.0 : 1.0)
             })
         })
+        .padding(.horizontal)
     }
 
     @available(iOS 16.0, *)
     private var EnemyChart: some View {
         let enemies: [EnemyKey] = enemies.filter({ $0.isPresented }).map({ $0.enemyKey })
-        let results: [EnemyResultEntry] = enemyResults.filter({ enemies.contains($0.enemyKey) })
-        let yMax: CGFloat = CGFloat(results.map({ $0.bossCount.total }).max() ?? 0)
-        let yMin: CGFloat = CGFloat(results.map({ $0.bossCount.total }).min() ?? 0)
 
         return Chart(enemyResults, content: { entry in
             if enemies.contains(entry.enemyKey) {
-                LineMark(
-                    x: .value("Schedule", entry.scheduleId),
-                    y: .value("Value", entry.bossCount.total)
-                )
-                .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-                .lineStyle(StrokeStyle(lineWidth: 2.0))
-                .interpolationMethod(.cardinal)
-                .symbol(symbol: {
-                    Image(entry.enemyKey)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                })
+                switch format {
+                case .Ratio:
+                    LineMark(
+                        x: .value("Schedule", entry.scheduleId),
+                        y: .value("Value", entry.bossKillRatio * 100)
+                    )
+                    .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
+                    .lineStyle(StrokeStyle(lineWidth: 2.0))
+                    .interpolationMethod(.cardinal)
+                    .symbol(symbol: {
+                        Image(entry.enemyKey)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    })
+                case .Number:
+                    LineMark(
+                        x: .value("Schedule", entry.scheduleId),
+                        y: .value("Value", entry.bossKillTotal.solo)
+                    )
+                    .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
+                    .lineStyle(StrokeStyle(lineWidth: 2.0))
+                    .interpolationMethod(.cardinal)
+                    .symbol(symbol: {
+                        Image(entry.enemyKey)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                    })
+                }
             }
         })
-        .clipShape(Rectangle())
-        .chartYScale(domain: min(yMax, yMin * scale) ... yMax)
+        .chartYScale(domain: .automatic(includesZero: false, reversed: false))
         .chartLegend(.hidden)
         .chartForegroundStyleScale([
             EnemyKey.SakelienBomber: SPColor.SplatNet3.SPBlue,
@@ -199,8 +229,6 @@ struct EnemyChartView: View {
                let xValue: CGFloat = proxy.position(forX: interval.start) ?? 0
             {
                 let height: CGFloat = geometry[proxy.plotAreaFrame].maxY
-
-                let entries: [EnemyResultEntry] = enemyResults.filter({ $0.scheduleId == element.scheduleId })
                 Rectangle()
                     .fill(.red)
                     .frame(width: 2, height: height)
@@ -234,10 +262,10 @@ class EnemyResultCount {
 
     init() {}
 
-    func add(result: RealmCoopResult) {
-        self.bossCounts.add(contentsOf: result.bossCounts)
-        self.bossKillCounts.add(contentsOf: result.players.first?.bossKillCounts)
-        self.bossTeamCounts.add(contentsOf: result.bossKillCounts)
+    func add(schedule: RealmCoopSchedule) {
+        self.bossCounts.add(contentsOf: schedule.bossCounts)
+        self.bossKillCounts.add(contentsOf: schedule.bossKillCounts)
+        self.bossTeamCounts.add(contentsOf: schedule.bossTeamCounts)
     }
 }
 
@@ -246,28 +274,10 @@ extension Array where Element == RealmCoopSchedule {
         /// オオモノ出現数
         let enemyCounts: EnemyResultCount = EnemyResultCount()
         let length: Int = 100
-        print(self.prefix(length).flatMap({ $0.results }).count)
 
-        benchmark("Calculate Enemy Count", function: {
-            self.prefix(length).forEach({ schedule in
-                schedule.results.forEach({ result in
-                    enemyCounts.add(result: result)
-                })
-            })
-        })
-
-        //        return []
-//
         return self.flatMap({ schedule -> [EnemyResultEntry] in
             /// 累計オオモノ出現数
-//            self.prefix(length).forEach({ schedule in
-//                bossTotal.add((0..<15).map({ _ in Int.random(in: 0...50) }))
-//                bossKillTotal.add((0..<15).map({ _ in Int.random(in: 0...50) }))
-//                bossTeamKillTotal.add((0..<15).map({ _ in Int.random(in: 0...50) }))
-//            })
-//            bossTotal.add(schedule.bossCounts)
-//            bossKillTotal.add(schedule.bossKillCounts)
-//            bossTeamKillTotal.add(schedule.teamBossKillCounts)
+            enemyCounts.add(schedule: schedule)
 
             guard let startTime: Date = schedule.startTime,
                   let index: Int = self.lastIndex(of: schedule)
@@ -278,19 +288,19 @@ extension Array where Element == RealmCoopSchedule {
                 return []
             }
 
-            return []
             /// チャートのエントリーを返す
-//            return zip(EnemyKey.allCases, bossTotal, bossKillTotal, bossTeamKillTotal).map({ enemyKey, bossCount, bossKillCount, teamBossKillCount -> EnemyResultEntry in
-//                let index: Int = EnemyKey.allCases.firstIndex(of: enemyKey) ?? 0
-//                return EnemyResultEntry(
-////                    schedule: schedule,
-//                    enemyKey: enemyKey,
-//                    scheduleId: startTime,
-//                    bossCount: EnemyCount(shift: schedule.bossCounts[index], total: bossCount),
-//                    bossKillCount: EnemyKillCount(solo: schedule.bossKillCounts[index], team: schedule.teamBossKillCounts[index]),
-//                    bossKillTotal: EnemyKillCount(solo: bossKillCount, team: teamBossKillCount)
-//                )
-//            })
+            return zip(EnemyKey.allCases, enemyCounts.bossCounts, enemyCounts.bossKillCounts, enemyCounts.bossTeamCounts).map({
+                enemyKey, bossCount, bossKillCount, bossTeamCounts -> EnemyResultEntry in
+                let index: Int = EnemyKey.allCases.firstIndex(of: enemyKey) ?? 0
+                return EnemyResultEntry(
+                    //                    schedule: schedule,
+                    enemyKey: enemyKey,
+                    scheduleId: startTime,
+                    bossCount: EnemyCount(shift: schedule.bossCounts[index], total: bossCount),
+                    bossKillCount: EnemyKillCount(solo: schedule.bossKillCounts[index], team: schedule.bossTeamCounts[index]),
+                    bossKillTotal: EnemyKillCount(solo: bossKillCount, team: bossTeamCounts)
+                )
+            })
         })
     }
 }

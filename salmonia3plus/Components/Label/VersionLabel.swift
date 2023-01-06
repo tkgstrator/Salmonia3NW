@@ -14,12 +14,8 @@ struct VersionLabel: View {
     let build: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String) ?? "0"
 
     var body: some View {
-        HStack(content: {
-            Text(bundle: .Custom_Version)
-            Spacer()
-            Text(String(format: "%@(%@)", version, build))
-                .foregroundColor(.secondary)
-        })
+        Text(bundle: .Custom_Version)
+            .badge(Text(String(format: "%@(%@)", version, build)))
     }
 }
 

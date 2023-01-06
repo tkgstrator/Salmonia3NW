@@ -78,6 +78,7 @@
 		10A9A11029687C1D0041E116 /* GeometryProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A10F29687C1D0041E116 /* GeometryProxy.swift */; };
 		10A9A11229687C570041E116 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A11129687C570041E116 /* Date.swift */; };
 		10A9A11429687E8F0041E116 /* Version17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A11329687E8F0041E116 /* Version17.swift */; };
+		10A9A1162968B4E90041E116 /* RealmCoopUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A9A1152968B4E90041E116 /* RealmCoopUser.swift */; };
 		10BCCFD7293A955200093BC5 /* ScheduleElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD6293A955200093BC5 /* ScheduleElement.swift */; };
 		10BCCFD9293B255400093BC5 /* SchedulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BCCFD8293B255400093BC5 /* SchedulesView.swift */; };
 		10C1AC8429525CC3003AFBD5 /* ReviewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C1AC8329525CC3003AFBD5 /* ReviewButton.swift */; };
@@ -202,6 +203,7 @@
 		10A9A10F29687C1D0041E116 /* GeometryProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryProxy.swift; sourceTree = "<group>"; };
 		10A9A11129687C570041E116 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		10A9A11329687E8F0041E116 /* Version17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version17.swift; sourceTree = "<group>"; };
+		10A9A1152968B4E90041E116 /* RealmCoopUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCoopUser.swift; sourceTree = "<group>"; };
 		10BCCFD6293A955200093BC5 /* ScheduleElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleElement.swift; sourceTree = "<group>"; };
 		10BCCFD8293B255400093BC5 /* SchedulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesView.swift; sourceTree = "<group>"; };
 		10C1AC8129525550003AFBD5 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				102F38CE29336BF5001E1FD5 /* RealmCoopResult.swift */,
 				102F38CD29336BF5001E1FD5 /* RealmCoopSchedule.swift */,
 				102F38CB29336BF5001E1FD5 /* RealmCoopWave.swift */,
+				10A9A1152968B4E90041E116 /* RealmCoopUser.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				10DC18A9294371F9009EB01C /* ResultLabel.swift in Sources */,
 				10C1AC88295267B1003AFBD5 /* StatsToggle.swift in Sources */,
 				10765BBD294AA7AA008FC754 /* LogLabel.swift in Sources */,
+				10A9A1162968B4E90041E116 /* RealmCoopUser.swift in Sources */,
 				10765BF929609B2B008FC754 /* Version15.swift in Sources */,
 				1078FE91296738EA000D2427 /* Benchmark.swift in Sources */,
 				102F38E429337CC1001E1FD5 /* RealmService.swift in Sources */,

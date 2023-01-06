@@ -11,12 +11,8 @@ import SplatNet3
 
 struct LogLabel: View {
     var body: some View {
-        HStack(content: {
-            Text(bundle: .Custom_Size_Log)
-            Spacer()
-            Text(SwiftyLogger.sizeOfFile())
-                .foregroundColor(.secondary)
-        })
+        Text(bundle: .Custom_Size_Log)
+            .badge(Text(SwiftyLogger.sizeOfFile()))
     }
 }
 

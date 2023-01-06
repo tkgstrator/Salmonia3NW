@@ -13,12 +13,8 @@ struct ResultLabel: View {
     @ObservedResults(RealmCoopResult.self) var results
 
     var body: some View {
-        HStack(content: {
-            Text(bundle: .Custom_Results_Count)
-            Spacer()
-            Text(String(format: "%d", results.count))
-                .foregroundColor(.secondary)
-        })
+        Text(bundle: .Custom_Results_Count)
+            .badge(Text(String(format: "%d", results.count)))
     }
 }
 

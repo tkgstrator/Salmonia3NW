@@ -16,7 +16,15 @@ class Session: SP3Session {
     override init() {
         super.init()
     }
-    
+
+    override func getCoopHistoryQuery() async throws -> CoopHistoryQuery.CoopResult {
+        let response: CoopHistoryQuery.CoopResult = try await super.getCoopHistoryQuery()
+        if let id: String = account?.id {
+            RealmService.shared.save(uid: id, response.pointCard)
+        }
+        return response
+    }
+
     override func getAllCoopHistoryDetailQuery(playTime: Date? = nil, upload: Bool = false, completion: (Float, Float) -> Void) async throws -> [CoopResult] {
         let playTime: Date? = RealmService.shared.lastPlayedTime()
         if let playTime = playTime {

@@ -231,6 +231,11 @@ public class RealmService: ObservableObject {
         })
     }
 
+    public func save(uid: String, _ pointCard: CoopHistoryQuery.PointCard) {
+        try? inWriteTransaction(transaction: {
+            realm.add(RealmCoopUser(uid: uid, pointCard))
+        })
+    }
     /// スケジュール一括取得APIで取得したスケジュール書き込み
     public func update(_ schedules: [CoopSchedule]) {
         try? inWriteTransaction(transaction: {
@@ -264,6 +269,7 @@ public class RealmService: ObservableObject {
         })
     }
 
+    /// 常に正確に書き込みを行うためのコードブロック
     private func inWriteTransaction(transaction writeBlock: () throws -> Void) throws {
         if realm.isInWriteTransaction {
             try writeBlock()
