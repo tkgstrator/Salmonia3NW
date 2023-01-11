@@ -25,6 +25,18 @@ public class RealmService: ObservableObject {
         case RESULT
     }
 
+    public struct ShiftWorked {
+        let actual: Int
+        let saved: Int
+    }
+
+    /// イカリング3から取得したバイト回数
+    func shiftsWorked() -> ShiftWorked {
+        ShiftWorked(
+            actual: realm.objects(RealmCoopUser.self).first?.shiftsWorked ?? .zero,
+            saved: realm.objects(RealmCoopResult.self).filter("ANY link.mode=%@", ModeType.REGULAR).count)
+    }
+
     func schedules(mode: ModeType = .REGULAR) -> [RealmCoopSchedule] {
         realm.objects(RealmCoopSchedule.self).sorted(byKeyPath: "startTime", ascending: true) .filter({ schedule in
             !schedule.results.isEmpty && schedule.mode == mode
@@ -184,10 +196,17 @@ public class RealmService: ObservableObject {
                         result.weaponList.append(objectsIn: schedule.weaponList)
                         /// リザルトを追加
                         result.results.append(objectsIn: results)
+                        /// オオモノの出現数/討伐数を更新する
+                        result.bossCounts.add(contentsOf: results.bossCounts)
+                        result.bossKillCounts.add(contentsOf: results.bossKillCounts)
+                        result.bossTeamCounts.add(contentsOf: results.bossTeamCounts)
                     } else {
                         /// なければスケジュールを追加する
                         let schedule: RealmCoopSchedule = RealmCoopSchedule(content: schedule)
                         schedule.results.append(objectsIn: results)
+                        schedule.bossCounts.add(contentsOf: results.bossCounts)
+                        schedule.bossKillCounts.add(contentsOf: results.bossKillCounts)
+                        schedule.bossTeamCounts.add(contentsOf: results.bossTeamCounts)
                         realm.add(schedule, update: .all)
                     }
                 } else {
@@ -231,9 +250,10 @@ public class RealmService: ObservableObject {
         })
     }
 
+    /// ポイントカード書き込み
     public func save(uid: String, _ pointCard: CoopHistoryQuery.PointCard) {
         try? inWriteTransaction(transaction: {
-            realm.add(RealmCoopUser(uid: uid, pointCard))
+            realm.add(RealmCoopUser(uid: uid, pointCard), update: .all)
         })
     }
     /// スケジュール一括取得APIで取得したスケジュール書き込み
@@ -283,5 +303,19 @@ public class RealmService: ObservableObject {
     private struct TransResult {
         let schedule: CoopResult.Schedule
         let results: [CoopResult]
+    }
+}
+
+extension Collection where Element == RealmCoopResult {
+    var bossCounts: RealmSwift.List<Int> {
+        map({ $0.bossCounts }).sum()
+    }
+
+    var bossTeamCounts: RealmSwift.List<Int> {
+        map({ $0.bossKillCounts }).sum()
+    }
+
+    var bossKillCounts: RealmSwift.List<Int> {
+        compactMap({ $0.players.first?.bossKillCounts }).sum()
     }
 }

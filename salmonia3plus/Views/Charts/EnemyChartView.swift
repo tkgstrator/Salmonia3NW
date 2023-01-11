@@ -13,12 +13,13 @@ import RealmSwift
 
 struct EnemyChartView: View {
     @State private var location: CGPoint? = nil
-    @State private var length: Int = 10
+    @State private var length: Int = 100
     @State private var enemyResults: [EnemyResultEntry] = []
     @State private var element: EnemyResultEntry? = nil
     @State private var scale: CGFloat = 1
     @State private var enemies: [EnemyToggle] = EnemyKey.allCases.map({ EnemyToggle(enemyKey: $0, isPresented: false) })
     @State private var format: FormatCategory = .Number
+    let data: RealmService.ShiftWorked = RealmService.shared.shiftsWorked()
 
     var body: some View {
         if #available(iOS 16.0, *) {
@@ -27,6 +28,7 @@ struct EnemyChartView: View {
 //                TypePicker
                 EnemyChart
                 FormatPicker
+                ShiftWorkedCounts
                 EnemyList
 //                DetailChart
             })
@@ -46,53 +48,30 @@ struct EnemyChartView: View {
     }
 
     private func getEnemyResults(limit: Int = 100) -> [EnemyResultEntry] {
-        RealmService.shared.schedules(mode: .REGULAR).enemyResults(limit: limit)
+        return RealmService.shared.schedules(mode: .REGULAR).enemyResults(limit: limit)
     }
 
-//    @available(iOS 16.0, *)
-//    private var Schedule: some View {
-//        let schedule: RealmCoopSchedule = selectedElement?.schedule ?? RealmCoopSchedule.preview
-//        return ScheduleElement(schedule: schedule).asAnyView()
-//    }
+    @available(iOS 16.0, *)
+    private var ShiftWorkedCounts: some View {
+        return VStack(content: {
+            HStack(content: {
+                HStack(content: {
+                    Text("バイト回数")
+                    Spacer()
+                    Text(data.actual, format: .number)
+                        .foregroundColor(.secondary)
+                })
+                Spacer()
+                HStack(content: {
+                    Text("保存件数")
+                    Spacer()
+                    Text(data.saved, format: .number)
+                        .foregroundColor(.secondary)
+                })
+            })
+        })
+    }
 
-//    @available(iOS 16.0, *)
-//    private var LengthStepper: some View {
-//        Stepper(value: $length, in: 5...100, step: 5, label: {
-//            Text(length, format: .number)
-//        })
-//    }
-//
-//    @available(iOS 16.0, *)
-//    private var LengthPicker: some View {
-//        HStack(content: {
-//            Text("履歴")
-//            Spacer()
-//            Picker("Type", selection: $length.animation(.easeInOut), content: {
-//                ForEach([5, 25, 50, 100], id: \.self, content: { length in
-//                    Text(length, format: .number)
-//                        .tag(length)
-//                })
-//            })
-//            .pickerStyle(.menu)
-//        })
-//        .onChange(of: length, perform: { value in
-//            UIApplication.shared.startAnimating(completion: {
-//                self.enemyResults = getEnemyResults(limit: length)
-//            })
-//        })
-//    }
-
-//    @available(iOS 16.0, *)
-//    private var TypePicker: some View {
-//        Picker("Type", selection: $action.animation(.easeInOut), content: {
-//            ForEach(PlayerCategory.allCases, content: { category in
-//                Text(category.localized)
-//                    .tag(category)
-//            })
-//        })
-//        .pickerStyle(.segmented)
-//    }
-//
     @available(iOS 16.0, *)
     private var FormatPicker: some View {
         Picker("Type", selection: $format.animation(.easeInOut), content: {
@@ -166,42 +145,30 @@ struct EnemyChartView: View {
     @available(iOS 16.0, *)
     private var EnemyChart: some View {
         let enemies: [EnemyKey] = enemies.filter({ $0.isPresented }).map({ $0.enemyKey })
+        let scheduleIds: [Date] = Set(enemyResults.map({ $0.scheduleId })).sorted(by: { $0 < $1 })
+        let startTime: Date? = scheduleIds.first
+        let endTime: Date? = scheduleIds.last
 
         return Chart(enemyResults, content: { entry in
             if enemies.contains(entry.enemyKey) {
-                switch format {
-                case .Ratio:
-                    LineMark(
-                        x: .value("Schedule", entry.scheduleId),
-                        y: .value("Value", entry.bossKillRatio * 100)
-                    )
-                    .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-                    .lineStyle(StrokeStyle(lineWidth: 2.0))
-                    .interpolationMethod(.cardinal)
-                    .symbol(symbol: {
+                LineMark(
+                    x: .value("Schedule", entry.scheduleId),
+                    y: .value("Value", entry.bossKillTotal.solo)
+                )
+                .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
+                .lineStyle(StrokeStyle(lineWidth: 2.0))
+                .interpolationMethod(InterpolationMethod.linear)
+                .symbol(symbol: {
+                    if let startTime = startTime, let endTime = endTime, [startTime, endTime].contains(entry.scheduleId) {
                         Image(entry.enemyKey)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20)
-                    })
-                case .Number:
-                    LineMark(
-                        x: .value("Schedule", entry.scheduleId),
-                        y: .value("Value", entry.bossKillTotal.solo)
-                    )
-                    .foregroundStyle(by: .value("EnemyId", entry.enemyKey))
-                    .lineStyle(StrokeStyle(lineWidth: 2.0))
-                    .interpolationMethod(.cardinal)
-                    .symbol(symbol: {
-                        Image(entry.enemyKey)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20)
-                    })
-                }
+                    }
+                })
             }
         })
-        .chartYScale(domain: .automatic(includesZero: false, reversed: false))
+        .chartYScale(type: .linear)
         .chartLegend(.hidden)
         .chartForegroundStyleScale([
             EnemyKey.SakelienBomber: SPColor.SplatNet3.SPBlue,

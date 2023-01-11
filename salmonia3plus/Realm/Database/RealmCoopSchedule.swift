@@ -67,6 +67,9 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
         case rule
         case mode
         case results
+        case bossCounts
+        case bossKillCounts
+        case bossTeamCounts
     }
 
     public required init(from decoder: Decoder) throws {
@@ -82,6 +85,9 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
         self.rareWeapon = try container.decodeIfPresent(WeaponId.self, forKey: .rareWeapon)
         self.rule = try container.decode(RuleType.self, forKey: .rule)
         self.mode = try container.decode(ModeType.self, forKey: .mode)
+        self.bossCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossCounts))
+        self.bossKillCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossKillCounts))
+        self.bossTeamCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossTeamCounts))
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -96,6 +102,9 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
         try container.encode(rule, forKey: .rule)
         try container.encode(mode, forKey: .mode)
         try container.encode(results, forKey: .results)
+        try container.encode(bossCounts, forKey: .bossCounts)
+        try container.encode(bossTeamCounts, forKey: .bossTeamCounts)
+        try container.encode(bossKillCounts, forKey: .bossKillCounts)
     }
 }
 
