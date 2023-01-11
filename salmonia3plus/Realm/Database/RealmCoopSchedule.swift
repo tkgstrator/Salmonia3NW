@@ -85,9 +85,9 @@ class RealmCoopSchedule: Object, Codable, Identifiable {
         self.rareWeapon = try container.decodeIfPresent(WeaponId.self, forKey: .rareWeapon)
         self.rule = try container.decode(RuleType.self, forKey: .rule)
         self.mode = try container.decode(ModeType.self, forKey: .mode)
-        self.bossCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossCounts))
-        self.bossKillCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossKillCounts))
-        self.bossTeamCounts.append(objectsIn: try container.decode([Int].self, forKey: .bossTeamCounts))
+        self.bossCounts = List<Int>(contentsOf: try container.decode([Int].self, forKey: .bossCounts))
+        self.bossKillCounts = List<Int>(contentsOf: try container.decode([Int].self, forKey: .bossKillCounts))
+        self.bossTeamCounts = List<Int>(contentsOf: try container.decode([Int].self, forKey: .bossTeamCounts))
     }
 
     public func encode(to encoder: Encoder) throws {
